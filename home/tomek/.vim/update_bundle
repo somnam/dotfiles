@@ -1,0 +1,16 @@
+#!/bin/bash
+BUNDLE=$HOME/.vim/bundle/
+cd $BUNDLE
+for dir in *; do
+    PLUGIN="$BUNDLE$dir"
+    cd $PLUGIN
+    echo "Updating $dir"
+    
+    if [ -d "$PLUGIN"/.git ]
+    then
+        git stash;
+        git pull;
+        git stash pop;
+    fi
+    echo ""
+done
