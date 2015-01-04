@@ -1,0 +1,3 @@
+# Enable SATA ALPM link power management.
+SATA_ALPM_ENABLE=true
+
