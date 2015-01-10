@@ -5,6 +5,9 @@ SUBSYSTEM=="leds", ACTION=="add", KERNEL=="asus::kbd_backlight", ATTR{brightness
 # PCI runtime power management
 SUBSYSTEM=="pci", ACTION=="add", TEST=="power/control", ATTR{power/control}="auto"
 
+# WiFi power management
+ACTION=="add", SUBSYSTEM=="net", KERNEL=="wlan*", RUN+="/usr/bin/iw dev %k set power_save on"
+
 # USB autosuspend
 SUBSYSTEM=="usb", ACTION=="add", TEST=="power/control", ATTR{power/control}="auto"
 SUBSYSTEM=="usb", ACTION=="add", TEST=="power/control", ATTR{product}=="USB Optical Mouse", ATTR{power/control}="on"
