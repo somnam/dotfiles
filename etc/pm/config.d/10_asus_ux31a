@@ -1,3 +1,6 @@
 # Enable SATA ALPM link power management.
 SATA_ALPM_ENABLE=true
 
+# Unload touchscreen module.
+SUSPEND_MODULES="hid_multitouch"
+
