@@ -10,12 +10,13 @@ https://github.com/vim-scripts/SyntaxComplete.git
 https://github.com/vim-scripts/tComment
 git://github.com/tomtom/tlib_vim.git
 https://github.com/MarcWeber/vim-addon-mw-utils.git
+https://github.com/bling/vim-airline.git
 https://github.com/othree/vim-autocomplpop
 https://github.com/junegunn/vim-easy-align
 git://github.com/tpope/vim-fugitive.git
+git://github.com/airblade/vim-gitgutter.git
 https://github.com/vim-scripts/L9.git
 git://github.com/tpope/vim-pathogen
-https://github.com/Lokaltog/vim-powerline
 git://github.com/garbas/vim-snipmate
 https://github.com/lukaszb/vim-web-indent.git
 https://github.com/jnurmine/Zenburn

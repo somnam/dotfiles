@@ -126,9 +126,15 @@ command! LS BufExplorer
 command! LH BufExplorerHorizontalSplit
 command! LV BufExplorerVerticalSplit
 
-" Powerline
-" Remove git branch segment
-call Pl#Theme#RemoveSegment('fugitive:branch')
+" Airline
+let g:airline_theme='sol'
+let g:airline#extensions#hunks#enabled = 0
+let g:airline#extensions#branch#enabled = 0
+let g:airline#extensions#whitespace#checks = ['indent']
+
+" Gitgutter
+let g:gitgutter_realtime = 0
+let g:gitgutter_escape_grep = 1
 
 " CtrlP
 " Search only by filename
@@ -151,7 +157,6 @@ let g:ctrlp_user_command = {
     \ }
 
 " SyntaxComplete
-
 if has("autocmd") && exists("+omnifunc")
     autocmd Filetype *
         \	if &omnifunc == "" |
