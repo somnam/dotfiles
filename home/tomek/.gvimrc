@@ -4,9 +4,10 @@
 " set gfn=Terminus\ 10
 
 " Light theme
-colorscheme slushnpoppies
-set gfn=DejaVu\ Sans\ Mono\ 10
-let g:Powerline_colorscheme = 'solarized256'
+colorscheme pyte
+set gfn=DejaVu\ Sans\ Mono\ 9
+let g:airline_theme='lucius'
+:AirlineRefresh
 
 " Remove toolbar
 set guioptions-=T
