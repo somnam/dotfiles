@@ -20,3 +20,12 @@ fi
 if [ -d "$HOME/bin" ] ; then
     PATH="$HOME/bin:$PATH"
 fi
+
+# set PATH so it includes user's private bin if it exists
+if [ -d "$HOME/.local/bin" ] ; then
+    PATH="$HOME/.local/bin:$PATH"
+fi
+
+# Clutter env.
+export CLUTTER_PAINT=disable-clipped-redraws:disable-culling 
+export CLUTTER_VBLANK=True
