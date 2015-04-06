@@ -23,6 +23,7 @@ set encoding=utf8
 
 " Light background.
 set background=light
+colo pyte
 
 " Set 256 color themes
 set t_Co=256
@@ -33,7 +34,10 @@ set vb t_vb=""
 " Set vertical column
 if exists('+colorcolumn')
     set colorcolumn=80
-    highlight ColorColumn ctermbg=254
+endif
+" Set line highlight
+if exists('+cursorline')
+    set cursorline
 endif
 
 " Set backup directory
@@ -63,7 +67,7 @@ if has("autocmd")
     autocmd FileType lisp,scheme setlocal shiftwidth=2 tabstop=8 softtabstop=2
 
     " Disable automatic comment insertion
-    autocmd FileType javascript,java,lisp,scheme,perl,python,ruby,vim setlocal formatoptions-=cro
+    autocmd FileType javascript,java,lisp,scheme,perl,python,ruby,vim,c setlocal formatoptions-=cro
 
     " Python - don't show docs in preview window
     autocmd FileType python setlocal completeopt-=preview nosmartindent
