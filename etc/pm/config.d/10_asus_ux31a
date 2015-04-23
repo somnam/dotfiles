@@ -1,6 +1,0 @@
-# Enable SATA ALPM link power management.
-SATA_ALPM_ENABLE=true
-
-# Unload touchscreen module. Seems to flood Xorg.log with errors.
-# SUSPEND_MODULES="hid_multitouch"
-
