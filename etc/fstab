@@ -6,16 +6,16 @@
 #
 # <file system> <mount point>   <type>  <options>       <dump>  <pass>
 # / was on /dev/sda3 during installation
-UUID=280b05e4-45b8-4271-9d98-3df7505bdab1 /               ext4    discard,noatime,errors=remount-ro 0       1
+UUID=280b05e4-45b8-4271-9d98-3df7505bdab1 /               ext4    noatime,errors=remount-ro 0       1
 # /boot/efi was on /dev/sda1 during installation
 UUID=4D56-46B1  /boot/efi       vfat    defaults        0       1
 # /home was on /dev/sda4 during installation
-UUID=b7e0abdf-947a-4b6f-9edd-0db4b6a8f200 /home           ext4    defaults,discard,noatime        0       2
+UUID=b7e0abdf-947a-4b6f-9edd-0db4b6a8f200 /home           ext4    defaults,noatime        0       2
 # swap was on /dev/sda2 during installation
 UUID=752cea51-7c8a-4df2-af45-e1742d8de869 none            swap    sw              0       0
 
 # /tmp in ram.
-tmpfs /tmp tmpfs defaults,noatime,nosuid,nodev,noexec,mode=1777,size=512M 0 0
+tmpfs /tmp tmpfs defaults,noatime,nosuid,nodev,mode=1777,size=512M 0 0
 
 # Windows partitions.
 # UUID="2820BF6120BF3522" /mnt/ntfs/c ntfs-3g rw,uid=1000,gid=1000,dmask=022,fmask=133 0 0
