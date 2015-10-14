@@ -1,5 +1,5 @@
 diff --git a/colors/pyte.vim b/colors/pyte.vim
-index 7f173c4..1db0ff4 100644
+index 7f173c4..f0236b5 100644
 --- a/colors/pyte.vim
 +++ b/colors/pyte.vim
 @@ -9,7 +9,7 @@ endif

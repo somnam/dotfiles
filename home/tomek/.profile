@@ -29,3 +29,6 @@ fi
 # Clutter env.
 export CLUTTER_PAINT=disable-clipped-redraws:disable-culling 
 export CLUTTER_VBLANK=True
+
+# Quiet AT warnings
+export NO_AT_BRIDGE=1

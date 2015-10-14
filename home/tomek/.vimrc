@@ -67,13 +67,13 @@ if has("autocmd")
     autocmd FileType lisp,scheme setlocal shiftwidth=2 tabstop=8 softtabstop=2
 
     " Disable automatic comment insertion
-    autocmd FileType javascript,java,lisp,scheme,perl,python,ruby,vim,c setlocal formatoptions-=cro
+    autocmd FileType javascript,java,lisp,scheme,perl,python,ruby,vim,c setlocal formatoptions-=c formatoptions-=r formatoptions-=o
 
     " Python - don't show docs in preview window
     autocmd FileType python setlocal completeopt-=preview nosmartindent
 
-    " JS indent - no logging
-    let g:js_indent_log = 0
+    " Wrapping in CSV
+    autocmd FileType csv setlocal wrap
 endif
 
 " The following are commented out as they cause vim to behave a lot
@@ -102,6 +102,7 @@ set laststatus=2    " Always display statusbar
 set spl=pl          " Use PL dictionary for spelling
 set fdm=marker      " Set folding method
 set hidden          " Hide buffer instead of closing it
+set lazyredraw      " Don't redraw the screen when not needed
 set list                                      " Display whitespace info
 set listchars=tab:>.,trail:.,extends:#,nbsp:. " Display tab characters, trailing
                                               " whitespace, visible spaces and
@@ -120,6 +121,10 @@ map <C-l> <C-W>l
 map <S-Left> :tabp<Enter>
 map <S-Right> :tabn<Enter>
 
+" Move vertically by visual line
+nnoremap j gj
+nnoremap k gk
+
 " Session
 command! SS SessionSave
 command! SC SessionClose
@@ -136,13 +141,11 @@ let g:airline#extensions#hunks#enabled = 0
 let g:airline#extensions#branch#enabled = 0
 let g:airline#extensions#whitespace#checks = ['indent']
 
-" Gitgutter
-let g:gitgutter_realtime = 0
-let g:gitgutter_escape_grep = 1
-
 " CtrlP
 " Search only by filename
 let g:ctrlp_by_filename = 1
+" Search path
+let g:ctrlp_working_path_mode = 'ra'
 " Search in regexp mode
 let g:ctrlp_regexp = 1
 " Results window height
@@ -168,12 +171,20 @@ if has("autocmd") && exists("+omnifunc")
         \	endif
 endif
 
+" JS indent - no logging
+let g:js_indent_log = 0
+
 " CSV
 let g:csv_highlight_column = 'y'
 
+" EasyAlign
 " Start interactive EasyAlign in visual mode (e.g. vip<Enter>)
 vmap <Enter> <Plug>(EasyAlign)
 
 " Start interactive EasyAlign for a motion/text object (e.g. <Leader>aip)
 nmap <Leader>a <Plug>(EasyAlign)
 
+" Gitgutter
+let g:gitgutter_realtime = 0
+let g:gitgutter_escape_grep = 1
+let g:gitgutter_max_signs = 3000
