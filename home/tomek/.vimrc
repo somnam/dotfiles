@@ -26,7 +26,11 @@ set background=light
 colo pyte
 
 " Set 256 color themes
-set t_Co=256
+if $TERM == "xterm-256color"
+    set t_Co=256
+else
+    set t_Co=16
+endif
 
 " Be quiet
 set vb t_vb=""

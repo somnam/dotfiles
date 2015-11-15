@@ -26,7 +26,7 @@ if [ -d "$HOME/.local/bin" ] ; then
     PATH="$HOME/.local/bin:$PATH"
 fi
 
-# Clutter env.
+# Clutter disable tearing.
 export CLUTTER_PAINT=disable-clipped-redraws:disable-culling 
 export CLUTTER_VBLANK=True
 

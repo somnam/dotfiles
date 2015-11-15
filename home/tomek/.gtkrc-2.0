@@ -22,6 +22,14 @@ style "xfwm-tabwin-custom"
 
 widget "xfwm4-tabwin*"			style "xfwm-tabwin-custom"
 
+style "window-buttons-custom"
+{
+	engine "murrine" {
+		gradient_shades	= { 1.0, 1.0, 1.0, 1.0 }
+	}
+}
+
+widget "*XfceTasklist*"			style "window-buttons-custom"
 
 style "power-manager-custom"
 {
