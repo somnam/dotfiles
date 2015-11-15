@@ -8,36 +8,6 @@ Xft.autohint:   false
 Xft.hintstyle:  hintslight
 Xft.lcdfilter:  lcddefault
 
-! XSCREENSAVER
-
-!font settings
-xscreensaver.Dialog.headingFont:        -*-fixed-medium-r-*-*-10-*-*-*-*-*-*-*
-xscreensaver.Dialog.bodyFont:           -*-fixed-medium-r-*-*-10-*-*-*-*-*-*-*
-xscreensaver.Dialog.labelFont:          -*-fixed-medium-r-*-*-10-*-*-*-*-*-*-*
-xscreensaver.Dialog.unameFont:          -*-fixed-medium-r-*-*-10-*-*-*-*-*-*-*
-xscreensaver.Dialog.buttonFont:         -*-fixed-medium-r-*-*-10-*-*-*-*-*-*-*
-xscreensaver.Dialog.dateFont:           -*-fixed-medium-r-*-*-10-*-*-*-*-*-*-*
-xscreensaver.passwd.passwdFont:         -*-fixed-medium-r-*-*-10-*-*-*-*-*-*-*
-!general dialog box (affects main hostname, username, password text)
-xscreensaver.Dialog.foreground:         #EDEDED
-xscreensaver.Dialog.background:         #202020
-xscreensaver.Dialog.topShadowColor:     #202024
-xscreensaver.Dialog.bottomShadowColor:  #202024
-xscreensaver.Dialog.Button.foreground:  #EDEDFF
-xscreensaver.Dialog.Button.background:  #444
-!username/password input box and date text colour
-xscreensaver.Dialog.text.foreground:    #EDEDFF
-xscreensaver.Dialog.text.background:    #444
-xscreensaver.Dialog.internalBorderWidth:24
-xscreensaver.Dialog.borderWidth:        20
-xscreensaver.Dialog.shadowThickness:    2
-!timeout bar (background is actually determined by Dialog.text.background)
-xscreensaver.passwd.thermometer.foreground:  #A9B7C4
-xscreensaver.passwd.thermometer.background:  #202020
-xscreensaver.passwd.thermometer.width:       8
-!datestamp format--see the strftime(3) manual page for details
-xscreensaver.dateFormat:    %I:%M%P %a %b %d, %Y
-
 ! XTERM
 
 ! Basic stuff
@@ -106,58 +76,35 @@ xterm*color14:      #00ddd9
 xterm*color7:       #d3d7cf
 xterm*color15:      #eeeeec
 
-! URXVT
+! XSCREENSAVER
 
-! Basic stuff
-URxvt*loginShell:           true
-URxvt*scrollBar:            true
-URxvt*scrollstyle:          plain
-URxvt*scrollBar_right:      true
-URxvt*secondaryScroll:      true
-URxvt*cursorBlink:          false
-URxvt.saveLines:            8192
-URxvt.scrollTtyOutput:      False
-URxvt.scrollTtyKeypress:    True
-URxvt.scrollWithBuffer:     True
+! font settings
+xscreensaver.Dialog.headingFont:            -misc-fixed-medium-r-*-*-20-*-*-*-*-*-iso10646-*
+xscreensaver.Dialog.bodyFont:               -misc-fixed-medium-r-*-*-20-*-*-*-*-*-iso10646-*
+xscreensaver.Dialog.labelFont:              -misc-fixed-medium-r-*-*-20-*-*-*-*-*-iso10646-*
+xscreensaver.Dialog.unameFont:              -misc-fixed-medium-r-*-*-20-*-*-*-*-*-iso10646-*
+xscreensaver.Dialog.buttonFont:             -misc-fixed-medium-r-*-*-20-*-*-*-*-*-iso10646-*
+xscreensaver.Dialog.dateFont:               -misc-fixed-medium-r-*-*-20-*-*-*-*-*-iso10646-*
+xscreensaver.passwd.passwdFont:             -misc-fixed-medium-r-*-*-20-*-*-*-*-*-iso10646-* 
 
-! Keybindings
-URxvt.keysym.C-Left: \033[1;5D
-URxvt.keysym.C-Right: \033[1;5C
-URxvt.keysym.C-Up: \033[1;5B
-URxvt.keysym.C-Down: \033[1;5A
+! general dialog box (affects main hostname, username, password text)
+xscreensaver.Dialog.foreground:             #ededed
+xscreensaver.Dialog.background:             #2a2a2a
+xscreensaver.Dialog.topShadowColor:         #2c2c2c
+xscreensaver.Dialog.bottomShadowColor:      #2c2c2c
+xscreensaver.Dialog.Button.foreground:      #ededff
+xscreensaver.Dialog.Button.background:      #444444
 
-! Appearance
-URxvt.font:                 xft:terminus:size=10
-URxvt.depth:                32
-URxvt.iconFile:             /usr/share/icons/Faenza/apps/scalable/Terminal.svg
+! username/password input box and date text colour
+xscreensaver.Dialog.text.foreground:        #ededff
+xscreensaver.Dialog.text.background:        #444444
+xscreensaver.Dialog.internalBorderWidth:    64
+xscreensaver.Dialog.borderWidth:            6
+xscreensaver.Dialog.shadowThickness:        4
 
-! Color theme
-URxvt*cursorColor: #DCDCCC
-!URxvt*background:  #202020
-URxvt.background:  rgba:0000/0000/0000/DEDE
-URxvt*foreground:  #e5e5e5
-URxvt*color0:      #1E2320
-URxvt*color1:      #705050
-URxvt*color2:      #60b48a
-URxvt*color3:      #dfaf8f
-URxvt*color4:      #506070
-URxvt*color5:      #dc8cc3
-URxvt*color6:      #8cd0d3
-URxvt*color7:      #dcdccc
-URxvt*color8:      #709080
-URxvt*color9:      #dca3a3
-URxvt*color10:     #c3bf9f
-URxvt*color11:     #f0dfaf
-URxvt*color12:     #94bff3
-URxvt*color13:     #9879d0
-URxvt*color14:     #93e0e3
-URxvt*color15:     #ffffff
-
-! Perl extensions
-URxvt.perl-ext:
-URxvt.perl-ext-common:
-! URL launcher
-!URxvt.perl-ext-common:  default,matcher
-!URxvt.urlLauncher:      /usr/bin/firefox
-!URxvt.matcher.button:   1
-
+! timeout bar (background is actually determined by Dialog.text.background)
+xscreensaver.passwd.thermometer.foreground: #00aade
+xscreensaver.passwd.thermometer.background: #2a2a2a
+xscreensaver.passwd.thermometer.width:      16
+! datestamp format--see the strftime(3) manual page for details
+xscreensaver.dateFormat:                    %I:%M%P %a %b %d, %Y
