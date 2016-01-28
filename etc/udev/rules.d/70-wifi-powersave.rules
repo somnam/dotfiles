@@ -1,0 +1,4 @@
+# WiFi power management
+SUBSYSTEM=="net", ACTION=="add", KERNEL=="wlan*", RUN+="/sbin/iw dev %k set power_save on"
+SUBSYSTEM=="net", ACTION=="add", KERNEL=="eth*", RUN+="/sbin/ethtool -s %k wol d"
+# SUBSYSTEM=="pci", ACTION=="add", KERNEL=="0000:00:1c.1", RUN+="/sbin/iw dev wlan0 set power_save on"

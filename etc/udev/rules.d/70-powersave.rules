@@ -7,12 +7,10 @@ SUBSYSTEM=="pci", ACTION=="add", TEST=="power/control", ATTR{power/control}="aut
 SUBSYSTEM=="pci", ACTION=="add", KERNEL=="0000:00:1a.0", TEST=="power/control", ATTR{power/control}="on"
 SUBSYSTEM=="pci", ACTION=="add", KERNEL=="0000:00:1d.0", TEST=="power/control", ATTR{power/control}="on"
 
-# WiFi power management
-ACTION=="add", SUBSYSTEM=="net", KERNEL=="wlan*", RUN+="/usr/bin/iw dev %k set power_save on"
-
 # USB autosuspend
 SUBSYSTEM=="usb", ACTION=="add", TEST=="power/control", ATTR{power/control}="auto"
 SUBSYSTEM=="usb", ACTION=="add", TEST=="power/control", ATTR{product}=="USB Optical Mouse", ATTR{power/control}="on"
+SUBSYSTEM=="usb", ACTION=="add", TEST=="power/control", ATTR{product}=="USB OPTICAL MOUSE", ATTR{power/control}="on"
 SUBSYSTEM=="usb", ACTION=="add", TEST=="power/control", ATTR{product}=="USB Composite Device", ATTR{power/control}="on"
 
 # SATA link power management

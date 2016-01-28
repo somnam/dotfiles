@@ -23,7 +23,7 @@ set encoding=utf8
 
 " Light background.
 set background=light
-colo pyte
+colorscheme pyte
 
 " Set 256 color themes
 if $TERM == "xterm-256color"
@@ -192,3 +192,4 @@ nmap <Leader>a <Plug>(EasyAlign)
 let g:gitgutter_realtime = 0
 let g:gitgutter_escape_grep = 1
 let g:gitgutter_max_signs = 3000
+let g:gitgutter_override_sign_column_highlight = 0

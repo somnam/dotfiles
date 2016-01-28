@@ -1,13 +1,20 @@
 " Dark scheme
-" let g:zenburn_old_Visual = 1
-" colorscheme zenburn
-" set gfn=Terminus\ 10
+" set background=dark
+" let g:gruvbox_contrast_dark='soft'
+" colorscheme gruvbox
+" let g:airline_theme='gruvbox'
+" :AirlineRefresh
+" set gfn=Monospace\ 9
 
 " Light theme
-colorscheme pyte
-set gfn=DejaVu\ Sans\ Mono\ 9
-let g:airline_theme='lucius'
+set background=light
+" colorscheme pyte
+" let g:airline_theme='lucius'
+let g:gruvbox_contrast_light='hard'
+colorscheme gruvbox
+let g:airline_theme='gruvbox'
 :AirlineRefresh
+set gfn=Monospace\ 9
 
 " Remove toolbar
 set guioptions-=T
