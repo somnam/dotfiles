@@ -3,8 +3,9 @@
 style "xfwm-tabwin-custom"
 {
 	Xfwm4TabwinWidget::listview-icon-size = 48
-        Xfwm4TabwinWidget::preview-size = 512
-        Xfwm4TabwinWidget::icon-size = 128
+	Xfwm4TabwinWidget::border-radius = 0
+	Xfwm4TabwinWidget::preview-size = 512
+	Xfwm4TabwinWidget::icon-size = 96
 
     # No mouse hoover, not selected
 	bg[NORMAL]	= shade (0.25, "#686868")
@@ -16,10 +17,10 @@ style "xfwm-tabwin-custom"
 	bg[ACTIVE]	= shade (0.85, "#398ee7")
 
 	engine "murrine" {
+		roundness	    = 0
 		gradient_shades     = {1.0,1.0,1.0,1.0}
     }
 }
-
 widget "xfwm4-tabwin*"			style "xfwm-tabwin-custom"
 
 style "window-buttons-custom"
@@ -28,7 +29,6 @@ style "window-buttons-custom"
 		gradient_shades	= { 1.0, 1.0, 1.0, 1.0 }
 	}
 }
-
 widget "*XfceTasklist*"			style "window-buttons-custom"
 
 style "power-manager-custom"
@@ -36,5 +36,4 @@ style "power-manager-custom"
 	xthickness	= 2
 	ythickness	= 2
 }
-
 widget "*power*manager*"			style "power-manager-custom"
