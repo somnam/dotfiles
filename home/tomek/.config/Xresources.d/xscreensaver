@@ -1,0 +1,32 @@
+! font settings
+xscreensaver.Dialog.headingFont:            -misc-fixed-medium-r-*-*-20-*-*-*-*-*-iso10646-*
+xscreensaver.Dialog.bodyFont:               -misc-fixed-medium-r-*-*-20-*-*-*-*-*-iso10646-*
+xscreensaver.Dialog.labelFont:              -misc-fixed-medium-r-*-*-20-*-*-*-*-*-iso10646-*
+xscreensaver.Dialog.unameFont:              -misc-fixed-medium-r-*-*-20-*-*-*-*-*-iso10646-*
+xscreensaver.Dialog.buttonFont:             -misc-fixed-medium-r-*-*-20-*-*-*-*-*-iso10646-*
+xscreensaver.Dialog.dateFont:               -misc-fixed-medium-r-*-*-20-*-*-*-*-*-iso10646-*
+xscreensaver.passwd.passwdFont:             -misc-fixed-medium-r-*-*-20-*-*-*-*-*-iso10646-* 
+
+! general dialog box (affects main hostname, username, password text)
+xscreensaver.Dialog.foreground:             #ededed
+xscreensaver.Dialog.background:             #2a2a2a
+xscreensaver.Dialog.topShadowColor:         #2c2c2c
+xscreensaver.Dialog.bottomShadowColor:      #2c2c2c
+xscreensaver.Dialog.Button.foreground:      #ededff
+xscreensaver.Dialog.Button.background:      #444444
+
+! username/password input box and date text colour
+xscreensaver.Dialog.text.foreground:        #ededff
+xscreensaver.Dialog.text.background:        #444444
+xscreensaver.Dialog.internalBorderWidth:    64
+xscreensaver.Dialog.borderWidth:            6
+xscreensaver.Dialog.shadowThickness:        4
+
+! timeout bar (background is actually determined by Dialog.text.background)
+xscreensaver.passwd.thermometer.foreground: #00aade
+xscreensaver.passwd.thermometer.background: #2a2a2a
+xscreensaver.passwd.thermometer.width:      16
+! datestamp format--see the strftime(3) manual page for details
+xscreensaver.dateFormat:                    %I:%M%P %a %b %d, %Y
+
+! vim:ft=xdefaults:
