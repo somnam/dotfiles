@@ -1,0 +1,69 @@
+! Basic stuff
+URxvt*loginShell:           true
+URxvt*scrollBar:            true
+URxvt*scrollstyle:          plain
+URxvt*scrollBar_right:      true
+URxvt*secondaryScroll:      true
+URxvt*cursorBlink:          false
+URxvt.saveLines:            8192
+URxvt.scrollTtyOutput:      False
+URxvt.scrollTtyKeypress:    True
+URxvt.scrollWithBuffer:     True
+
+! Appearance
+! URxvt.font:                 -xos4-terminus-medium-r-normal-*-14-*-*-*-c-*-iso10646-1
+URxvt*font:                 xft:dejavu sans mono:size=9:antialias=true:hinting=true:hintstyle=hintmedium
+URxvt.boldFont:             xft:dejavu sans mono:bold:size=9:antialias=true:hinting=true:hintstyle=hintmedium
+URxvt.letterSpace:          -1
+URxvt.depth:                32
+URxvt.iconFile:             /usr/share/icons/gnome/scalable/apps/utilities-terminal.svg
+
+! Dark color theme
+! URxvt*foreground: #c5beba
+! URxvt*background: #383634
+! URxvt*color0: #363432
+! URxvt*color1: #be503e
+! URxvt*color2: #7bb292
+! URxvt*color3: #d7ae38
+! URxvt*color4: #628b97
+! URxvt*color5: #c7a095
+! URxvt*color6: #88a2a4
+! URxvt*color7: #c5beba
+! URxvt*color8: #645d59
+! URxvt*color9: #f0a4af
+! URxvt*color10: #9ad1bc
+! URxvt*color11: #c4c18b
+! URxvt*color12: #bad4f5
+! URxvt*color13: #e7c6be
+! URxvt*color14: #a8c1c5
+! URxvt*color15: #e4e4e4
+
+! Light color theme
+URxvt*background:   #eaeaea
+URxvt*foreground:   #323232
+URxvt*color0:       #2e3436
+URxvt*color8:       #555753
+URxvt*color1:       #cc0000
+URxvt*color9:       #ef2929
+URxvt*color2:       #4e9a06
+URxvt*color10:      #8ae234
+URxvt*color3:       #c4a000
+URxvt*color11:      #d2c73c
+URxvt*color4:       #3465a4
+URxvt*color12:      #729fcf
+URxvt*color5:       #75507b
+URxvt*color13:      #ad7fa8
+URxvt*color6:       #0b939b
+URxvt*color14:      #00ddd9
+URxvt*color7:       #d3d7cf
+URxvt*color15:      #eeeeec
+
+! Perl extensions
+! URxvt.perl-ext:
+! URxvt.perl-ext-common:
+! URL launcher
+URxvt.perl-ext-common:  default,matcher
+URxvt.urlLauncher:      /usr/bin/firefoxH
+URxvt.matcher.button:   1
+
+! vim:ft=xdefaults:

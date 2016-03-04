@@ -1,0 +1,67 @@
+! Basic stuff
+!xterm*internalBorder:        0
+xterm*loginShell:         true
+xterm*scrollBar:          true
+xterm*rightScrollBar:     true
+xterm*cursorBlink:       false
+!xterm*geometry:         80x26
+xterm*saveLines:          5000
+xterm*dynamicColors:        on
+xterm*highlightSelection: true
+xterm*metaSendsEscape:    true
+
+! Appearance
+xterm*utf8:             true
+xterm*eightBitInput:    true
+
+! Font
+xterm*faceName:     Monospace
+xterm*faceSize:     10
+xterm*scaleHeight:  1.00
+
+! Dark color theme
+! xterm*cursorColor: #DCDCCC
+! xterm*background:  #232323
+! xterm*foreground:  #e5e5e5
+! xterm*color0:      #1E2320
+! xterm*color1:      #705050
+! xterm*color2:      #60b48a
+! xterm*color3:      #dfaf8f
+! xterm*color4:      #506070
+! xterm*color5:      #dc8cc3
+! xterm*color6:      #8cd0d3
+! !xterm*color6:      #418179
+! xterm*color7:      #dcdccc
+! xterm*color8:      #709080
+! xterm*color9:      #dca3a3
+! xterm*color10:     #c3bf9f
+! xterm*color11:     #f0dfaf
+! xterm*color12:     #94bff3
+! !xterm*color13:     #ec93d3
+! xterm*color13:     #9879d0
+! xterm*color14:     #93e0e3
+! xterm*color15:     #ffffff
+
+! Light color theme
+xterm*background:   #efefef
+xterm*foreground:   #323232
+xterm*color0:       #2e3436
+xterm*color8:       #555753
+xterm*color1:       #cc0000
+xterm*color9:       #ef2929
+xterm*color2:       #4e9a06
+xterm*color10:      #8ae234
+xterm*color3:       #c4a000
+! xterm*color11:      #fce94f
+xterm*color11:      #d2c73c
+xterm*color4:       #3465a4
+xterm*color12:      #628ece
+xterm*color5:       #75507b
+xterm*color13:      #ad7fa8
+xterm*color6:       #0b939b
+! xterm*color14:      #00f5e9
+xterm*color14:      #00ddd9
+xterm*color7:       #d3d7cf
+xterm*color15:      #eeeeec
+
+! vim:ft=xdefaults:
