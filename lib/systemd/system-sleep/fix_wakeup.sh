@@ -12,7 +12,11 @@ case $1/$2 in
         ;;
     post/hibernate)
         # Restore keyboard brightness level on hibernation.
-        value=$(cat /var/lib/systemd/backlight/platform-asus-nb-wmi\:leds\:asus\:\:kbd_backlight)
+        value=$(dbus-send --type=method_call --print-reply=literal --system         \
+                    --dest='org.freedesktop.UPower'                                 \
+                    '/org/freedesktop/UPower/KbdBacklight'                          \
+                    'org.freedesktop.UPower.KbdBacklight.GetBrightness'             \
+                    | awk '{print $2}')
         dbus-send --type=method_call --print-reply=literal --system       \
             --dest='org.freedesktop.UPower'                               \
             '/org/freedesktop/UPower/KbdBacklight'                        \
