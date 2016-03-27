@@ -1,6 +1,6 @@
 # Set Backlight
-SUBSYSTEM=="backlight", ACTION=="add", KERNEL=="acpi_video0", ATTR{brightness}="0"
-SUBSYSTEM=="leds", ACTION=="add", KERNEL=="asus::kbd_backlight", ATTR{brightness}="0"
+SUBSYSTEM=="power_supply", ENV{POWER_SUPPLY_ONLINE}=="0", RUN+="/usr/local/bin/toggle_brightness battery"
+SUBSYSTEM=="power_supply", ENV{POWER_SUPPLY_ONLINE}=="1", RUN+="/usr/local/bin/toggle_brightness ac"
 
 # PCI runtime power management
 SUBSYSTEM=="pci", ACTION=="add", TEST=="power/control", ATTR{power/control}="auto"
