@@ -32,3 +32,17 @@ export CLUTTER_VBLANK=True
 
 # Quiet AT warnings
 export NO_AT_BRIDGE=1
+
+# Colored GCC warnings and errors
+# export GCC_COLORS='error=01;31:warning=01;35:note=01;36:caret=01;32:locus=01:quote=01'
+
+# Android
+# export ANDROID_HOME=/home/tomek/.local/opt/android-sdk-linux
+# export PATH=$PATH:$ANDROID_HOME/tools:$ANDROID_HOME/platform-tools
+
+# Python
+# export PYTHONPATH=$PYTHONPATH:/home/tomek/.local/lib/python2.7/site-packages
+# export PYTHONSTARTUP=/home/tomek/.pystartup
+
+# Nodejs
+# export NODE_PATH=$NODE_PATH:$(npm root -g)
