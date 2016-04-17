@@ -6,17 +6,16 @@
 #
 # <file system> <mount point>   <type>  <options>       <dump>  <pass>
 # / was on /dev/sda3 during installation
-UUID=280b05e4-45b8-4271-9d98-3df7505bdab1 /               ext4    noatime,errors=remount-ro 0       1
+UUID=8bbb1237-769b-4a65-904e-c027d445e88b /               ext4    noatime,errors=remount-ro 0       1
 # /boot/efi was on /dev/sda1 during installation
-UUID=4D56-46B1  /boot/efi       vfat    defaults        0       1
+UUID=9F46-5363  /boot/efi       vfat    umask=0077      0       1
 # /home was on /dev/sda4 during installation
-UUID=b7e0abdf-947a-4b6f-9edd-0db4b6a8f200 /home           ext4    defaults,noatime        0       2
+UUID=db4c8e92-83c4-4ab9-be6a-a37c27f31055 /home           ext4    noatime,defaults        0       2
 # swap was on /dev/sda2 during installation
-UUID=752cea51-7c8a-4df2-af45-e1742d8de869 none            swap    sw              0       0
+UUID=654c86ff-695f-41a4-98db-bca76c772f4e none            swap    sw              0       0
 
 # /tmp in ram.
-tmpfs /tmp tmpfs defaults,noatime,nosuid,nodev,mode=1777,size=512M 0 0
+tmpfs /tmp tmpfs defaults,noatime,nosuid,nodev,mode=1777,size=1024M 0 0
 
-# Windows partitions.
-# UUID="2820BF6120BF3522" /mnt/ntfs/c ntfs-3g rw,uid=1000,gid=1000,dmask=022,fmask=133 0 0
-# UUID="01CE07B9859F5900" /mnt/ntfs/d ntfs-3g rw,_netdev,uid=1000,gid=1000,dmask=022,fmask=133 0 0
+# Readonly efivars.
+efivarfs    /sys/firmware/efi/efivars    efivarfs    ro,nosuid,nodev,noexec,noatime 0 0

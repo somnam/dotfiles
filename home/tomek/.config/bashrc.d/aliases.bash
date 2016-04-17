@@ -29,8 +29,8 @@ alias rscreen="screen -d -r"
 alias bc="bc ~/.bcrc"
 alias info="info --vi-keys"
 alias sudo="sudo -E"
-alias apt-up='sudo apt-get update && sudo apt-get dist-upgrade && sudo apt-get --purge autoremove && sudo apt-get autoclean'
-alias apt-clean='sudo apt-get --purge autoremove && sudo apt-get autoclean'
+alias apt-up='sudo apt update && sudo apt full-upgrade && sudo apt --purge autoremove && sudo apt-get autoclean'
+alias apt-clean='sudo apt --purge autoremove && sudo apt-get autoclean'
 alias mpvf="mpv --sub-auto=fuzzy --monitorpixelaspect=1 --osd-scale=1 --sub-ass --sub-text-color=#ffffff --sub-text-shadow-color=#000000 --sub-text-border-color=#000000 --sub-text-border-size=2 --sub-text-shadow-offset=2.25 --sub-text-font-size=48 1>/dev/null 2>/dev/null"
 
 # Power management
