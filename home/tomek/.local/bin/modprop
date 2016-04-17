@@ -1,12 +1,22 @@
-#!/bin/sh
+print_modules()
+{
+    for module in "$@"; do
+        echo "Module: $module";
+        if [ -d "/sys/module/$module/parameters" ]; then
+            ls /sys/module/$module/parameters/ | while read parameter; do
+                echo -n "Parameter: $parameter --> ";
+                sudo cat /sys/module/$module/parameters/$parameter;
+            done;
+        fi;
+        echo;
+    done | less -R
+}
 
-sudo cat /proc/modules | cut -f 1 -d " " | while read module; do \
- echo "Module: $module"; \
- if [ -d "/sys/module/$module/parameters" ]; then \
-  ls /sys/module/$module/parameters/ | while read parameter; do \
-   echo -n "Parameter: $parameter --> "; \
-   sudo cat /sys/module/$module/parameters/$parameter; \
-  done; \
- fi; \
- echo; \
-done | less -R
+if test $# -eq 0 ; then
+    modules=$(cat /proc/modules | cut -f 1 -d " ")
+else
+    modules="$@"
+fi
+
+print_modules "${modules}"
+

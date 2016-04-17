@@ -8,13 +8,11 @@
 
 " Light theme
 set background=light
-" colorscheme pyte
-" let g:airline_theme='lucius'
 let g:gruvbox_contrast_light='hard'
 colorscheme gruvbox
 let g:airline_theme='gruvbox'
 :AirlineRefresh
-set gfn=Monospace\ 9
+set gfn=Ubuntu\ Mono\ 11
 
 " Remove toolbar
 set guioptions-=T
@@ -31,3 +29,6 @@ set guioptions-=m
 
 " Be quiet
 set vb t_vb=""
+
+" Disable Cursor blink
+set guicursor+=a:blinkon0
