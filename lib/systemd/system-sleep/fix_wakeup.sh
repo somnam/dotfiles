@@ -1,6 +1,9 @@
 #!/bin/bash
 set -e
 
+function wifi_off { nmcli radio wifi off; } # Suspend wifi
+function wifi_on  { nmcli radio wifi on; }  # Enable wifi
+
 case $1/$2 in
     pre/suspend)
         # Don't wake up immediately when suspending.
@@ -10,6 +13,14 @@ case $1/$2 in
                 echo $device > /proc/acpi/wakeup
             fi
         done
+
+        wifi_off
+        ;;
+    pre/hibernate)
+        wifi_off
+        ;;
+    post/suspend)
+        wifi_on
         ;;
     post/hibernate)
         # Restore keyboard brightness level on hibernation.
@@ -23,5 +34,8 @@ case $1/$2 in
             '/org/freedesktop/UPower/KbdBacklight'                        \
             'org.freedesktop.UPower.KbdBacklight.SetBrightness'           \
             "int32:${value}}"
+
+        wifi_on
         ;;
 esac
+
