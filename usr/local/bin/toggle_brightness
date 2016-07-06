@@ -1,4 +1,5 @@
 #!/bin/bash
+set -e
 
 BACKLIGHT_AC=2
 BACKLIGHT_BATTERY=1
