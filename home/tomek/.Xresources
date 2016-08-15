@@ -1,7 +1,7 @@
-#include ".config/Xresources.d/xft"
-#include ".config/Xresources.d/xterm"
-#include ".config/Xresources.d/urxvt"
-#include ".config/Xresources.d/urxvt.keysym"
-#include ".config/Xresources.d/xscreensaver"
+#include "/home/tomek/.config/Xresources.d/xft"
+#include "/home/tomek/.config/Xresources.d/xterm"
+#include "/home/tomek/.config/Xresources.d/urxvt"
+#include "/home/tomek/.config/Xresources.d/urxvt.keysym"
+#include "/home/tomek/.config/Xresources.d/xscreensaver"
 
 ! vim:ft=xdefaults

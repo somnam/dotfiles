@@ -15,8 +15,8 @@ xterm*utf8:             true
 xterm*eightBitInput:    true
 
 ! Font
-xterm*faceName:     Monospace
-xterm*faceSize:     10
+xterm*faceName:     Ubuntu Mono
+xterm*faceSize:     11
 xterm*scaleHeight:  1.00
 
 ! Dark color theme
@@ -43,25 +43,66 @@ xterm*scaleHeight:  1.00
 ! xterm*color15:     #ffffff
 
 ! Light color theme
-xterm*background:   #efefef
-xterm*foreground:   #323232
-xterm*color0:       #2e3436
-xterm*color8:       #555753
-xterm*color1:       #cc0000
-xterm*color9:       #ef2929
-xterm*color2:       #4e9a06
-xterm*color10:      #8ae234
-xterm*color3:       #c4a000
-! xterm*color11:      #fce94f
-xterm*color11:      #d2c73c
-xterm*color4:       #3465a4
-xterm*color12:      #628ece
-xterm*color5:       #75507b
-xterm*color13:      #ad7fa8
-xterm*color6:       #0b939b
-! xterm*color14:      #00f5e9
-xterm*color14:      #00ddd9
-xterm*color7:       #d3d7cf
-xterm*color15:      #eeeeec
+! xterm*background:   #eaeaea
+! xterm*foreground:   #323232
+! xterm*color0:       #2e3436
+! xterm*color8:       #555753
+! xterm*color1:       #cc0000
+! xterm*color9:       #ef2929
+! xterm*color2:       #4e9a06
+! xterm*color10:      #8ae234
+! xterm*color3:       #c4a000
+! ! xterm*color11:      #fce94f
+! xterm*color11:      #d2c73c
+! xterm*color4:       #3465a4
+! xterm*color12:      #628ece
+! xterm*color5:       #75507b
+! xterm*color13:      #ad7fa8
+! xterm*color6:       #0b939b
+! ! xterm*color14:      #00f5e9
+! xterm*color14:      #00ddd9
+! xterm*color7:       #d3d7cf
+! xterm*color15:      #eeeeec
+
+#define S_base03        #002b36
+#define S_base02        #073642
+#define S_base01        #586e75
+#define S_base00        #657b83
+#define S_base0         #839496
+#define S_base1         #93a1a1
+#define S_base2         #eee8d5
+#define S_base3         #fdf6e3
+
+xterm*background:            S_base3
+xterm*foreground:            S_base00
+xterm*fadeColor:             S_base3
+xterm*cursorColor:           S_base01
+xterm*pointerColorBackground:S_base1
+xterm*pointerColorForeground:S_base01
+
+#define S_yellow        #b58900
+#define S_orange        #cb4b16
+#define S_red           #dc322f
+#define S_magenta       #d33682
+#define S_violet        #6c71c4
+#define S_blue          #268bd2
+#define S_cyan          #2aa198
+#define S_green         #859900
+xterm*color0:   S_base02
+xterm*color8:   S_base03
+xterm*color1:   S_red
+xterm*color9:   S_orange
+xterm*color2:   S_green
+xterm*color10:  S_base01
+xterm*color3:   S_yellow
+xterm*color11:  S_base00
+xterm*color4:   S_blue
+xterm*color12:  S_base0
+xterm*color5:   S_magenta
+xterm*color13:  S_violet
+xterm*color6:   S_cyan
+xterm*color14:  S_base1
+xterm*color7:   S_base2
+xterm*color15:  S_base3
 
 ! vim:ft=xdefaults:

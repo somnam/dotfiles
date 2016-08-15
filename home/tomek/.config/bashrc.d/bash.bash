@@ -3,8 +3,10 @@
 
 # set a fancy prompt (non-color, unless we know we "want" color)
 case "$TERM" in
+    xterm|screen) export TERM="xterm-256color";;
+esac
+case "$TERM" in
     xterm-color|*-256color) color_prompt=yes;;
-    xterm) export TERM="xterm-256color";;
 esac
 
 # uncomment for a colored prompt, if the terminal has the capability; turned

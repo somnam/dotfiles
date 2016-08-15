@@ -1,0 +1,5 @@
+#!/bin/bash
+set -e
+LNK_ERRFILE="$HOME/.xsession-errors"
+rm $(readlink $LNK_ERRFILE)
+rm $LNK_ERRFILE
