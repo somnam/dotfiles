@@ -27,6 +27,7 @@ alias h="htop"
 alias ack="ack-grep"
 alias rscreen="screen -d -r"
 alias bc="bc ~/.bcrc"
+alias mc="mc -b"
 alias info="info --vi-keys"
 alias sudo="sudo -E"
 alias apt-up='sudo apt update && sudo apt full-upgrade && sudo apt autoremove --purge && sudo apt autoclean'

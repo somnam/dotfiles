@@ -17,5 +17,5 @@ UUID=654c86ff-695f-41a4-98db-bca76c772f4e none            swap    sw            
 # /tmp in ram.
 tmpfs /tmp tmpfs defaults,noatime,nosuid,nodev,mode=1777,size=1024M 0 0
 
-# Readonly efivars.
-efivarfs    /sys/firmware/efi/efivars    efivarfs    ro,nosuid,nodev,noexec,noatime 0 0
+# Efivars.
+efivarfs    /sys/firmware/efi/efivars    efivarfs    rw,nosuid,nodev,noexec,noatime 0 0
