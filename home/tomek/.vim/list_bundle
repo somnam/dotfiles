@@ -3,7 +3,6 @@ https://github.com/vim-scripts/bufkill.vim
 https://github.com/chrisbra/csv.vim
 https://github.com/ctrlpvim/ctrlp.vim
 https://github.com/vim-scripts/django.vim
-https://github.com/morhetz/gruvbox
 https://github.com/vim-scripts/indentpython.vim
 https://github.com/somnam/pyte.git
 https://github.com/vim-scripts/sessionman.vim
@@ -14,9 +13,11 @@ https://github.com/MarcWeber/vim-addon-mw-utils.git
 https://github.com/bling/vim-airline.git
 https://github.com/vim-airline/vim-airline-themes.git
 https://github.com/othree/vim-autocomplpop
+git://github.com/altercation/vim-colors-solarized.git
 https://github.com/junegunn/vim-easy-align
 git://github.com/tpope/vim-fugitive.git
 git://github.com/airblade/vim-gitgutter.git
+git://github.com/nathanaelkane/vim-indent-guides.git
 https://github.com/vim-scripts/L9.git
 git://github.com/tpope/vim-pathogen
 https://github.com/lukaszb/vim-web-indent.git

@@ -4,11 +4,11 @@ ERRFILE=$HOME/.xsession-errors
 ERRFILE_OLD=$HOME/.xsession-errors.old
 
 # Symlink errors file to temporary file.
-if TMP_ERRFILE=$(tempfile 2> /dev/null); then
+if TMP_ERRFILE=$(tempfile 2>/dev/null); then
     # Report the change to the log file before switching
     echo "info: Redirecting xsession messages to $TMP_ERRFILE."
     ln -sf "$TMP_ERRFILE" "$ERRFILE"
-    exec >>"$TMP_ERRFILE" 2>&1
+    exec >>"$TMP_ERRFILE" 2>/dev/null
 fi
 
 # Clear old errors file.

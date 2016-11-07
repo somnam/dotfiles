@@ -1,18 +1,15 @@
-" Dark scheme
+" Dark background
 " set background=dark
-" let g:gruvbox_contrast_dark='soft'
-" colorscheme gruvbox
-" let g:airline_theme='gruvbox'
-" :AirlineRefresh
-" set gfn=Monospace\ 9
 
-" Light theme
+" Light background
 set background=light
-let g:gruvbox_contrast_light='hard'
-colorscheme gruvbox
-let g:airline_theme='gruvbox'
+
+" Theme
+let g:solarized_contrast='high'
+colorscheme solarized
+let g:airline_theme='solarized'
 :AirlineRefresh
-set gfn=Ubuntu\ Mono\ 11
+set gfn=Hack\ 10
 
 " Remove toolbar
 set guioptions-=T

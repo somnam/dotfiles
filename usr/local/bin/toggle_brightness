@@ -18,14 +18,14 @@ backlight_get()
 backlight_change()
 {
     # Set calculated backlight value.
-    value=$(( ${1} * $(backlight_get_step) ))
+    local value=$(( ${1} * $(backlight_get_step) ))
     echo -n ${value} >| /sys/class/backlight/intel_backlight/brightness
 }
 
 main()
 {
     # Get current brightness.
-    current=$( backlight_get )
+    local current=$( backlight_get )
 
     case $1 in
         # Set brightness to min. BACKLIGHT_AC.
