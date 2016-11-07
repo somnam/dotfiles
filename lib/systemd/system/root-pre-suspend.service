@@ -1,12 +1,10 @@
 [Unit]
 Description=Don't wake up immediately when suspending
-Before=suspend.target
-Before=hybrid-sleep.target
+Before=sleep.target
 
 [Service]
 Type=oneshot
 ExecStart=/bin/bash /usr/local/bin/fix_sleep
 
 [Install]
-WantedBy=suspend.target
-WantedBy=hybrid-sleep.target
+WantedBy=sleep.target

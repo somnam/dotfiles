@@ -23,7 +23,9 @@ set encoding=utf8
 
 " Light background.
 set background=light
-colorscheme pyte
+
+" Colorscheme
+colo solarized
 
 " Set 256 color themes
 if $TERM == "xterm-256color"
@@ -122,8 +124,8 @@ map <C-h> <C-W>h
 map <C-l> <C-W>l
 
 " Tabs
-map <S-Left> :tabp<Enter>
-map <S-Right> :tabn<Enter>
+map <A-Left> :tabp<Enter>
+map <A-Right> :tabn<Enter>
 
 " Move vertically by visual line
 nnoremap j gj
@@ -192,4 +194,4 @@ nmap <Leader>a <Plug>(EasyAlign)
 let g:gitgutter_realtime = 0
 let g:gitgutter_escape_grep = 1
 let g:gitgutter_max_signs = 3000
-let g:gitgutter_override_sign_column_highlight = 0
+let g:gitgutter_override_sign_column_highlight = 1

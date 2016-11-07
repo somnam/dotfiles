@@ -1,0 +1,48 @@
+#!/bin/bash
+BUNDLE=$HOME/.vim/bundle/
+BUNDLE_LIST=$HOME/.vim/list_bundle
+GIT=$(which git)
+
+install ()
+{
+    [ -f "$BUNDLE_LIST" ] || return 0
+
+    cd $BUNDLE
+    for url in $(cat "$BUNDLE_LIST"); do
+        echo "Cloning $url"
+        $GIT clone "$url"
+    done
+}
+
+update ()
+{
+    cd $BUNDLE
+    for dir in *; do
+        PLUGIN="$BUNDLE$dir"
+        cd $PLUGIN
+        echo "Updating $dir"
+
+        if [ -d "$PLUGIN/.git" ]
+        then
+            $GIT stash;
+            $GIT pull;
+            $GIT stash pop;
+        fi
+        echo ""
+    done
+}
+
+main ()
+{
+    [ "$GIT" ] || return 0;
+
+    [ -d $BUNDLE ] || mkdir -p $BUNDLE
+
+    case "$1" in
+        "") echo "Usage: ${0##*/} install|update"; exit;;
+        "install") install; exit;;
+        "update") update; exit;;
+    esac
+}
+
+main $@
