@@ -18,20 +18,14 @@ filetype indent on
 " Set utf-8 encoding
 set encoding=utf8
 
-" Dark background.
-" set background=dark
-
-" Light background.
-set background=light
-
-" Colorscheme
-colo solarized
-
 " Set 256 color themes
 if $TERM == "xterm-256color"
     set t_Co=256
-else
-    set t_Co=16
+    set background=light
+    colo solarized
+elseif $TERM == "linux"
+    set t_Co=8
+    set background=dark
 endif
 
 " Be quiet

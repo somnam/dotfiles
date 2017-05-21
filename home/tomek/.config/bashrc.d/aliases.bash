@@ -15,10 +15,6 @@ alias ll='ls -ahlF'
 alias la='ls -A'
 alias l='ls -CF'
 
-# Add an "alert" alias for long running commands.  Use like so:
-#   sleep 10; alert
-alias alert='notify-send --urgency=low -i "$([ $? = 0 ] && echo terminal || echo error)" "$(history|tail -n1|sed -e '\''s/^\s*[0-9]\+\s*//;s/[;&|]\s*alert$//'\'')"'
-
 # Utils
 alias c="clear"
 alias g="gvim --remote-silent"
@@ -27,12 +23,10 @@ alias h="htop"
 alias ack="ack-grep"
 alias rscreen="screen -d -r"
 alias bc="bc ~/.bcrc"
-alias mc="mc -b"
 alias info="info --vi-keys"
 alias sudo="sudo -E"
 alias apt-up='sudo apt update && sudo apt full-upgrade && sudo apt autoremove --purge && sudo apt autoclean'
 alias apt-clean='sudo apt autoremove --purge && sudo apt autoclean'
-alias mpvf="mpv --sub-auto=fuzzy --monitorpixelaspect=1 --osd-scale=1 --sub-ass --sub-text-color=#ffffff --sub-text-shadow-color=#000000 --sub-text-border-color=#000000 --sub-text-border-size=2 --sub-text-shadow-offset=2.25 --sub-text-font-size=48 1>/dev/null 2>/dev/null"
 
 # Power management
 alias Suspend='systemctl suspend';

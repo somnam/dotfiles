@@ -9,7 +9,7 @@ let g:solarized_contrast='high'
 colorscheme solarized
 let g:airline_theme='solarized'
 :AirlineRefresh
-set gfn=Hack\ 10
+set gfn=Hack\ 9
 
 " Remove toolbar
 set guioptions-=T
