@@ -15,3 +15,19 @@
 # If you want to use XFCE config tools...
 #
 #xfce-mcs-manager &
+
+/usr/bin/lxpolkit &
+
+/usr/bin/nitrogen --restore
+
+/usr/bin/compton -b
+
+/usr/bin/tint2 &
+
+/usr/bin/volti &
+
+pcmanfm --no-desktop --daemon-mode &
+
+/usr/bin/rofi &
+
+/usr/bin/xdg-user-dirs-gtk-update &
