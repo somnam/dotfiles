@@ -5,8 +5,10 @@ GIT=$(which git)
 
 install ()
 {
+    # Check if urls file exists.
     [ -f "$BUNDLE_LIST" ] || return 0
 
+    # Install all listed plugins.
     cd $BUNDLE
     for url in $(cat "$BUNDLE_LIST"); do
         echo "Cloning $url"
@@ -16,6 +18,7 @@ install ()
 
 update ()
 {
+    # Update all installed plugins.
     cd $BUNDLE
     for dir in *; do
         PLUGIN="$BUNDLE$dir"
@@ -32,6 +35,27 @@ update ()
     done
 }
 
+save()
+{
+    # Clear current bundle list file.
+    if [ -f "$BUNDLE_LIST" ]
+    then
+        >| "$BUNDLE_LIST"
+    fi
+
+    # Update file with git repo urls.
+    cd $BUNDLE
+    for dir in *; do
+        PLUGIN="$BUNDLE$dir"
+        cd $PLUGIN
+
+        if [ -d "$PLUGIN/.git" ]
+        then
+            echo `$GIT url` >> "$BUNDLE_LIST"
+        fi
+    done
+}
+
 main ()
 {
     [ "$GIT" ] || return 0;
@@ -39,9 +63,10 @@ main ()
     [ -d $BUNDLE ] || mkdir -p $BUNDLE
 
     case "$1" in
-        "") echo "Usage: ${0##*/} install|update"; exit;;
+        "") echo "Usage: ${0##*/} install|update|save"; exit;;
         "install") install; exit;;
         "update") update; exit;;
+        "save") save; exit;;
     esac
 }
 
