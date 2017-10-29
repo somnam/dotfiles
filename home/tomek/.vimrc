@@ -19,10 +19,16 @@ filetype indent on
 set encoding=utf8
 
 " Set 256 color themes
-if $TERM == "xterm-256color"
+if ($TERM == "xterm-256color" || $TERM == "screen")
     set t_Co=256
     set background=light
     colo solarized
+" Regular color theme
+elseif $TERM == "xterm"
+    set t_Co=8
+    set background=light
+    colo default
+" Fallback for tty terminals
 elseif $TERM == "linux"
     set t_Co=8
     set background=dark
@@ -55,8 +61,8 @@ if has("autocmd")
     autocmd BufReadPost * if line("'\"") > 1 && line("'\"") <= line("$") | exe "normal! g'\"" | endif
 
     " Open PDF files
-    autocmd BufReadPost *.pdf silent %!pdftotext -nopgbrk "%" - |fmt -csw80
-    autocmd FileType pdf setlocal ro nowrap syntax=text
+    " autocmd BufReadPost *.pdf silent %!pdftotext -nopgbrk "%" - |fmt -csw80
+    " autocmd FileType pdf setlocal ro nowrap syntax=text
 
     " Indentation settings:
     "     tabstop     : n-space tab width
@@ -78,7 +84,6 @@ endif
 
 " The following are commented out as they cause vim to behave a lot
 " differently from regular Vi. They are highly recommended though.
-" set nohlsearch      " Don't highlight search results
 set hlsearch        " Highlight search results.
 set nu              " Display line numbers
 set showcmd         " Show (partial) command in status line.
@@ -97,7 +102,7 @@ set nowrapscan      " Search wrapping
 set smartindent     " Try to be smart with indenting
 set autoindent      " Set global autoindent on
 set wildmenu        " Use wildmenu
-set wildmode=list:longest    
+set wildmode=list:longest
 set laststatus=2    " Always display statusbar
 set spl=pl          " Use PL dictionary for spelling
 set fdm=marker      " Set folding method
@@ -142,10 +147,10 @@ let g:airline#extensions#branch#enabled = 0
 let g:airline#extensions#whitespace#checks = ['indent']
 
 " CtrlP
+" Files limit
+let g:ctrlp_max_files = 100000
 " Search only by filename
 let g:ctrlp_by_filename = 1
-" Search path
-let g:ctrlp_working_path_mode = 'ra'
 " Search in regexp mode
 let g:ctrlp_regexp = 1
 " Results window height
@@ -155,7 +160,6 @@ let g:ctrlp_custom_ignore = '\v[\/]\.(git|hg|svn)$'
 " Custom update
 let g:ctrlp_lazy_update = 1
 " Custom search command
-"let g:ctrlp_user_command = 'find %s -type f'
 let g:ctrlp_user_command = {
     \ 'types': {
         \ 1: ['.git', 'cd %s && git ls-files'],
@@ -163,24 +167,12 @@ let g:ctrlp_user_command = {
     \ 'fallback': 'find %s -type f'
     \ }
 
-" SyntaxComplete
-if has("autocmd") && exists("+omnifunc")
-    autocmd Filetype *
-        \	if &omnifunc == "" |
-        \		setlocal omnifunc=syntaxcomplete#Complete |
-        \	endif
-endif
-
-" JS indent - no logging
-let g:js_indent_log = 0
-
 " CSV
 let g:csv_highlight_column = 'y'
 
 " EasyAlign
 " Start interactive EasyAlign in visual mode (e.g. vip<Enter>)
 vmap <Enter> <Plug>(EasyAlign)
-
 " Start interactive EasyAlign for a motion/text object (e.g. <Leader>aip)
 nmap <Leader>a <Plug>(EasyAlign)
 
