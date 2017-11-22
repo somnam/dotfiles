@@ -2,6 +2,7 @@ https://github.com/jlanzarotta/bufexplorer.git
 https://github.com/chrisbra/csv.vim
 https://github.com/ctrlpvim/ctrlp.vim
 https://github.com/vim-scripts/django.vim
+https://github.com/Shougo/neocomplete.vim.git
 https://github.com/somnam/pyte.git
 https://github.com/vim-scripts/sessionman.vim
 https://github.com/bling/vim-airline.git
@@ -15,4 +16,3 @@ git://github.com/airblade/vim-gitgutter.git
 https://github.com/jelera/vim-javascript-syntax.git
 git://github.com/tpope/vim-pathogen
 https://github.com/Vimjas/vim-python-pep8-indent.git
-https://github.com/maxboisvert/vim-simple-complete.git

@@ -19,7 +19,7 @@ filetype indent on
 set encoding=utf8
 
 " Set 256 color themes
-if ($TERM == "xterm-256color" || $TERM == "screen")
+if ($TERM =~ "256color" || $TERM == "screen")
     set t_Co=256
     set background=light
     colo solarized
