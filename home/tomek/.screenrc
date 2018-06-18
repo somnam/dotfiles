@@ -107,6 +107,8 @@ termcapinfo xterm*|xterms*|xs*|rxvt* ti@:te@
 # Enable non-blocking mode to better cope with flaky ssh connections.
 defnonblock 5
 
+term "screen-256color"
+
 # ------------------------------------------------------------------------------
 # STARTUP SCREENS
 # ------------------------------------------------------------------------------

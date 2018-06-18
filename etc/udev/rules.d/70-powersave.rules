@@ -1,6 +1,6 @@
 # Set Backlight
-SUBSYSTEM=="power_supply", ENV{POWER_SUPPLY_ONLINE}=="0", RUN+="/usr/local/bin/toggle_brightness battery"
-SUBSYSTEM=="power_supply", ENV{POWER_SUPPLY_ONLINE}=="1", RUN+="/usr/local/bin/toggle_brightness ac"
+# SUBSYSTEM=="power_supply", ENV{POWER_SUPPLY_ONLINE}=="0", RUN+="/usr/local/bin/toggle_brightness battery"
+# SUBSYSTEM=="power_supply", ENV{POWER_SUPPLY_ONLINE}=="1", RUN+="/usr/local/bin/toggle_brightness ac"
 
 # PCI runtime power management
 SUBSYSTEM=="pci", ACTION=="add", TEST=="power/control", ATTR{power/control}="auto"
@@ -12,6 +12,7 @@ SUBSYSTEM=="usb", ACTION=="add", TEST=="power/control", ATTR{power/control}="aut
 SUBSYSTEM=="usb", ACTION=="add", TEST=="power/control", ATTR{product}=="USB Optical Mouse", ATTR{power/control}="on"
 SUBSYSTEM=="usb", ACTION=="add", TEST=="power/control", ATTR{product}=="USB OPTICAL MOUSE", ATTR{power/control}="on"
 SUBSYSTEM=="usb", ACTION=="add", TEST=="power/control", ATTR{product}=="USB Composite Device", ATTR{power/control}="on"
+SUBSYSTEM=="usb", ACTION=="add", TEST=="power/control", ATTR{product}=="Microsoft® Nano Transceiver v2.0", ATTR{power/control}="on"
 
 # SATA link power management
 SUBSYSTEM=="scsi_host", KERNEL=="host*", ATTR{link_power_management_policy}="min_power"
