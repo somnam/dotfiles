@@ -21,17 +21,17 @@ set encoding=utf8
 " Set 256 color themes
 if ($TERM =~ "256color" || $TERM == "screen")
     set t_Co=256
-    set background=light
-    colo solarized
 " Regular color theme
-elseif $TERM == "xterm"
+elseif ($TERM == "xterm" || $TERM == "linux")
     set t_Co=8
-    set background=light
-    colo default
-" Fallback for tty terminals
-elseif $TERM == "linux"
-    set t_Co=8
-    set background=dark
+endif
+
+" Set more readable diff colors in terminals
+if !has('gui_running')
+    highlight DiffAdd    cterm=bold ctermfg=42 ctermbg=24
+    highlight DiffDelete cterm=bold ctermfg=42 ctermbg=24
+    highlight DiffChange cterm=bold ctermfg=42 ctermbg=24
+    highlight DiffText   cterm=bold ctermfg=42 ctermbg=126
 endif
 
 " Be quiet
@@ -149,10 +149,6 @@ let g:airline#extensions#whitespace#checks = ['indent']
 " CtrlP
 " Files limit
 let g:ctrlp_max_files = 100000
-" Search only by filename
-let g:ctrlp_by_filename = 1
-" Search in regexp mode
-let g:ctrlp_regexp = 1
 " Results window height
 let g:ctrlp_max_height = 15
 " Ignore vcs folders
@@ -166,6 +162,15 @@ let g:ctrlp_user_command = {
         \ },
     \ 'fallback': 'find %s -type f'
     \ }
+
+" Use neocomplete.
+let g:neocomplete#enable_at_startup = 1
+" Use smartcase.
+let g:neocomplete#enable_smart_case = 1
+" AutoComplPop like behavior.
+let g:neocomplete#enable_auto_select = 1
+" <CR>: close popup and save indent.
+inoremap <expr><CR> pumvisible() ? "\<C-y>" : "\<CR>"
 
 " CSV
 let g:csv_highlight_column = 'y'
