@@ -8,7 +8,7 @@ https://github.com/somnam/pyte.git
 https://github.com/vim-scripts/sessionman.vim
 https://github.com/bling/vim-airline.git
 https://github.com/vim-airline/vim-airline-themes.git
-https://github.com/qpkorr/vim-bufkill.git
+https://github.com/moll/vim-bbye.git
 git://github.com/altercation/vim-colors-solarized.git
 https://github.com/tpope/vim-commentary.git
 https://github.com/junegunn/vim-easy-align
@@ -17,3 +17,4 @@ git://github.com/airblade/vim-gitgutter.git
 https://github.com/jelera/vim-javascript-syntax.git
 git://github.com/tpope/vim-pathogen
 https://github.com/Vimjas/vim-python-pep8-indent.git
+https://github.com/peterhoeg/vim-qml.git

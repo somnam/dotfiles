@@ -1,0 +1,13 @@
+[Unit]
+Description=Tweak cooling profile to keep fan quiet when laptop is idle on hibernation.
+After=hibernate.target
+After=hybrid-sleep.target
+
+[Service]
+Type=oneshot
+ExecStart=/usr/bin/python /usr/local/bin/set_cooling_profile.py quiet
+StandardOutput=journal
+
+[Install]
+WantedBy=hibernate.target
+WantedBy=hybrid-sleep.target

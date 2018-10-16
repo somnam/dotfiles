@@ -14,8 +14,8 @@ SUBSYSTEM=="usb", ACTION=="add", TEST=="power/control", ATTR{product}=="USB OPTI
 SUBSYSTEM=="usb", ACTION=="add", TEST=="power/control", ATTR{product}=="USB Composite Device", ATTR{power/control}="on"
 SUBSYSTEM=="usb", ACTION=="add", TEST=="power/control", ATTR{product}=="Microsoft® Nano Transceiver v2.0", ATTR{power/control}="on"
 
-# SATA link power management
-SUBSYSTEM=="scsi_host", KERNEL=="host*", ATTR{link_power_management_policy}="min_power"
+# Set scheduler to "deadline" for SSD drives
+ACTION=="add|change", KERNEL=="sd[a-z]", ATTR{queue/rotational}=="0", ATTR{queue/scheduler}="deadline"
 
 # Disable Bluetooth
 SUBSYSTEM=="rfkill", ATTR{type}=="bluetooth", ATTR{state}="0"

@@ -107,7 +107,7 @@ termcapinfo xterm*|xterms*|xs*|rxvt* ti@:te@
 # Enable non-blocking mode to better cope with flaky ssh connections.
 defnonblock 5
 
-term "screen-256color"
+term "xterm-256color"
 
 # ------------------------------------------------------------------------------
 # STARTUP SCREENS
@@ -123,5 +123,5 @@ term "screen-256color"
 # screen -t monkey ssh monkey
 # screen -t mail 8 mutt
 # screen -t daemon 9 tail -f /var/log/daemon.log
-screen -t sudo sudo -E -s
-screen 
+screen
+screen
