@@ -11,12 +11,15 @@ set shortmess+=I
 syntax on
 
 " Uncomment the following to have Vim load indentation rules and plugins
-" according to the detected filetype.     
+" according to the detected filetype.
 filetype plugin on
 filetype indent on
 
 " Set utf-8 encoding
 set encoding=utf8
+
+" Use current background color
+set t_ut=""
 
 " Set 256 color themes
 if ($TERM =~ "256color" || $TERM == "screen")
@@ -80,6 +83,10 @@ if has("autocmd")
 
     " Wrapping in CSV
     autocmd FileType csv setlocal wrap
+
+    " QT config files syntax
+    autocmd BufRead,BufNewFile *.qrc set filetype=xml
+    autocmd BufRead,BufNewFile *.conf set filetype=config
 endif
 
 " The following are commented out as they cause vim to behave a lot
@@ -130,10 +137,19 @@ map <A-Right> :tabn<Enter>
 nnoremap j gj
 nnoremap k gk
 
+" Netrw
+let g:netrw_banner = 0
+let g:netrw_browse_split = 2  " open in vertical window
+let g:netrw_altv = 1          " splits to the right
+let g:netrw_liststyle = 3     " tree view
+
 " Session
 command! SS SessionSave
 command! SC SessionClose
 command! SL SessionList
+
+" Buffer Bye
+command! BD Bdelete
 
 " BufferExpolorer
 command! LS BufExplorer

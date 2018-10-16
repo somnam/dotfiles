@@ -1,0 +1,14 @@
+[Unit]
+Description=Tweak cooling profile to keep fan quiet when laptop is idle.
+After=multi-user.target
+Before=shutdown.target
+
+[Service]
+Type=oneshot
+ExecStart=/usr/bin/python /usr/local/bin/set_cooling_profile.py quiet
+ExecStop=/usr/bin/python /usr/local/bin/set_cooling_profile.py default
+RemainAfterExit=true
+StandardOutput=journal
+
+[Install]
+WantedBy=multi-user.target
