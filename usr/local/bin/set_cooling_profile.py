@@ -1,11 +1,10 @@
 #!/usr/bin/env python
-import os, sys, logging
+import os, sys, time, logging
 
 """Tweak cooling profile to keep cooling fan quiet when laptop is idle.
 Do this by rewriting thermal tipping points in Embedded Controller memory via ACPI.
 Requires "acpi_call" kernel module to be loaded.
 """
-
 def call_acpi(command):
     with open('/proc/acpi/call', 'w') as acpi_call:
         logging.info(command)
@@ -33,8 +32,15 @@ def set_default_profile():
     default_tipping_points = [35, 40, 45, 50, 55, 60, 65, 80]
     update_table(default_tipping_points)
 
-def main():
+def check_acpi_call_exists():
+    retry_wait = 10
+    while not os.path.exists('/proc/acpi/call') and retry_wait:
+        time.sleep(0.5)
+        retry_wait -= 1
     assert os.path.isfile('/proc/acpi/call')
+
+def main():
+    check_acpi_call_exists()
 
     profile = 'quiet' if len(sys.argv) < 2 else sys.argv[1]
     assert profile in ['quiet', 'default']
