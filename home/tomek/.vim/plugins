@@ -12,9 +12,10 @@ https://github.com/moll/vim-bbye.git
 git://github.com/altercation/vim-colors-solarized.git
 https://github.com/tpope/vim-commentary.git
 https://github.com/junegunn/vim-easy-align
+https://github.com/nvie/vim-flake8
 git://github.com/tpope/vim-fugitive.git
 git://github.com/airblade/vim-gitgutter.git
 https://github.com/jelera/vim-javascript-syntax.git
-git://github.com/tpope/vim-pathogen
 https://github.com/Vimjas/vim-python-pep8-indent.git
 https://github.com/peterhoeg/vim-qml.git
+https://github.com/wlangstroth/vim-racket.git

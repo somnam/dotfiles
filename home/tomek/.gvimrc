@@ -1,15 +1,21 @@
-" Dark background
-" set background=dark
+" Background style
+set background=dark
+" set background=light
 
-" Light background
-set background=light
+" Dark theme
+colorscheme onedark
+let g:airline_theme='onedark'
 
-" Theme
-let g:solarized_contrast='high'
-colorscheme solarized
-let g:airline_theme='solarized'
+" Light theme
+" let g:solarized_contrast='high'
+" colorscheme solarized
+" let g:airline_theme='solarized'
+
+" Refresh airline
 :AirlineRefresh
-set gfn=Hack\ 9
+
+" Set font
+set gfn=Hack\ 10
 
 " Remove toolbar
 set guioptions-=T

@@ -26,15 +26,3 @@ if [ -d "$HOME/.local/bin" ] ; then
     PATH="$HOME/.local/bin:$PATH"
 fi
 
-# Clutter disable tearing.
-export CLUTTER_PAINT=disable-clipped-redraws:disable-culling 
-export CLUTTER_VBLANK=True
-
-# Quiet AT warnings
-export NO_AT_BRIDGE=1
-
-# Python
-# export PYTHONSTARTUP=/home/tomek/.pystartup
-
-# Nodejs
-# export NODE_PATH=$NODE_PATH:$(npm root -g)

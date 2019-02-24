@@ -1,17 +1,20 @@
 #!/bin/bash
-BUNDLE=$HOME/.vim/bundle/
-BUNDLE_LIST=$HOME/.vim/list_bundle
+PACK="$HOME/.vim/pack/git-plugins/start/"
+PACK_LIST="$HOME/.vim/plugins"
 GIT=$(which git)
 
 install ()
 {
     # Check if urls file exists.
-    [ -f "$BUNDLE_LIST" ] || return 0
+    [ -f "$PACK_LIST" ] || return 0
 
     # Install all listed plugins.
-    cd $BUNDLE
-    for url in $(cat "$BUNDLE_LIST"); do
-        echo "Cloning $url"
+    cd $PACK
+    for url in $(cat "$PACK_LIST"); do
+        CLONE_DIR=$(echo "$url" | sed -e 's/^.*\///' -e 's/\.git//')
+        [ -d $CLONE_DIR ] && continue
+
+        echo "Cloning $url into $CLONE_DIR"
         $GIT clone "$url"
     done
 }
@@ -19,18 +22,14 @@ install ()
 update ()
 {
     # Update all installed plugins.
-    cd $BUNDLE
+    cd $PACK
     for dir in *; do
-        PLUGIN="$BUNDLE$dir"
-        cd $PLUGIN
-        echo "Updating $dir"
+        PLUGIN="$PACK$dir"
+        [ -d "$PLUGIN/.git" ] || continue
 
-        if [ -d "$PLUGIN/.git" ]
-        then
-            $GIT stash;
-            $GIT pull;
-            $GIT stash pop;
-        fi
+        echo "Updating $dir"
+        cd $PLUGIN
+        $GIT stash; $GIT pull; $GIT stash pop;
         echo ""
     done
 }
@@ -38,20 +37,20 @@ update ()
 save()
 {
     # Clear current bundle list file.
-    if [ -f "$BUNDLE_LIST" ]
+    if [ -f "$PACK_LIST" ]
     then
-        >| "$BUNDLE_LIST"
+        >| "$PACK_LIST"
     fi
 
     # Update file with git repo urls.
-    cd $BUNDLE
+    cd $PACK
     for dir in *; do
-        PLUGIN="$BUNDLE$dir"
+        PLUGIN="$PACK$dir"
         cd $PLUGIN
 
         if [ -d "$PLUGIN/.git" ]
         then
-            echo `$GIT url` >> "$BUNDLE_LIST"
+            echo `$GIT url` >> "$PACK_LIST"
         fi
     done
 }
@@ -60,7 +59,7 @@ main ()
 {
     [ "$GIT" ] || return 0;
 
-    [ -d $BUNDLE ] || mkdir -p $BUNDLE
+    [ -d $PACK ] || mkdir -p $PACK
 
     case "$1" in
         "") echo "Usage: ${0##*/} install|update|save"; exit;;
