@@ -10,3 +10,6 @@ export GIT_PS1_SHOWUPSTREAM='auto'
 
 # Automatically trim long paths in the prompt (requires Bash 4.x)
 PROMPT_DIRTRIM=3
+
+# Python
+export PYTHONSTARTUP=$HOME/.pystartup
