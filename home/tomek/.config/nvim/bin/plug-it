@@ -1,0 +1,84 @@
+#!/bin/bash
+set -e
+
+git=$(which git)
+curl=$(which curl)
+nvim=$(which nvim)
+nvim=${nvim:-~/.local/bin/nvim}
+
+install ()
+{
+    install_nvim
+    install_plugins
+}
+
+update ()
+{
+    download_nvim
+    update_plugins
+}
+
+install_nvim ()
+{
+    [[ -f ~/.local/bin/nvim ]] && return
+
+    download_nvim
+}
+
+install_plugins ()
+{
+
+    fetch_plugin_manager
+    manage_plugins 'PlugInstall --sync'
+}
+
+update_plugins ()
+{
+    manage_plugins 'PlugUpdate --sync'
+}
+
+download_nvim ()
+{
+    url=$($curl -s https://api.github.com/repos/neovim/neovim/releases/latest |\
+            grep browser_download_url |\
+            grep appimage |\
+            head -n 1 |\
+            cut -d '"' -f 4)
+    [[ $url ]] || return
+
+    local wget=$(which wget)
+    $wget --quiet $url --output-document $nvim && chmod 755 $nvim
+}
+
+fetch_plugin_manager ()
+{
+    local plugin_manager=~/.local/share/nvim/site/autoload/plug.vim
+    if [[ ! -f $plugin_manager  ]]
+    then
+        $curl -fLo $plugin_manager \
+              --create-dirs https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
+    fi
+}
+
+manage_plugins ()
+{
+    local plugins=~/.config/nvim/rc.d/plugins.vim
+    [[ -f $plugins ]] || return
+
+    # Install/Update all installed plugins.
+    local konsole_fix='set guicursor='
+    $nvim -u $plugins +$konsole_fix +"$1" +qa && echo 'Done'
+}
+
+main ()
+{
+    [[ $git && $curl ]] || return 0;
+
+    case "$1" in
+        "") echo "Usage: ${0##*/} install|update"; exit;;
+        "install") install; exit;;
+        "update") update; exit;;
+    esac
+}
+
+main $@
