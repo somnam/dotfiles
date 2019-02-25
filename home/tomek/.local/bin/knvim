@@ -1,0 +1,7 @@
+#!/bin/bash
+
+# Disable Ctrl-S
+stty stop '' -ixoff
+
+unset VTE_VERSION
+konsole --separate --dograb --hide-menubar --hide-tabbar --notransparency -e nvim "$@"
