@@ -4,15 +4,10 @@ set background=dark
 
 " Dark theme
 colorscheme onedark
-let g:airline_theme='onedark'
 
 " Light theme
 " let g:solarized_contrast='high'
 " colorscheme solarized
-" let g:airline_theme='solarized'
-
-" Refresh airline
-:AirlineRefresh
 
 " Set font
 set gfn=Hack\ 10

@@ -1,65 +1,69 @@
 #!/bin/bash
-PACK="$HOME/.vim/pack/git-plugins/start/"
-PACK_LIST="$HOME/.vim/plugins"
-GIT=$(which git)
+
+pack="$HOME/.vim/pack/git-plugins"
+pack_list="$HOME/.vim/plugins"
+git=$(which git)
 
 install ()
 {
     # Check if urls file exists.
-    [ -f "$PACK_LIST" ] || return 0
+    [[ -f $pack_list ]] || return 0
 
     # Install all listed plugins.
-    cd $PACK
-    for url in $(cat "$PACK_LIST"); do
-        CLONE_DIR=$(echo "$url" | sed -e 's/^.*\///' -e 's/\.git//')
-        [ -d $CLONE_DIR ] && continue
+    for subtype_and_url in $(cat "$pack_list"); do
+        IFS=: read subtype url <<< "$subtype_and_url"
 
-        echo "Cloning $url into $CLONE_DIR"
-        $GIT clone "$url"
+        clone_dir=$(echo "$url" | sed -e 's/^.*\///' -e 's/\.git//')
+        clone_path="$pack/$subtype/$clone_dir"
+        [[ -d $clone_path ]] && continue
+
+        echo "Cloning $url into $subtype/$clone_dir"
+        $git clone "$url" "$clone_path"
     done
+    echo "Plugins installed."
 }
 
 update ()
 {
     # Update all installed plugins.
-    cd $PACK
-    for dir in *; do
-        PLUGIN="$PACK$dir"
-        [ -d "$PLUGIN/.git" ] || continue
+    for subtype in start opt; do
+        for dir in $pack/$subtype/*; do
+            [[ -d $dir/.git ]] || continue
 
-        echo "Updating $dir"
-        cd $PLUGIN
-        $GIT stash; $GIT pull; $GIT stash pop;
-        echo ""
+            echo "Updating $dir"
+            cd $dir
+            $git stash; $git pull; $git stash pop;
+            echo ""
+        done
     done
+    echo "Plugins updated."
 }
 
 save()
 {
     # Clear current bundle list file.
-    if [ -f "$PACK_LIST" ]
-    then
-        >| "$PACK_LIST"
-    fi
+    [[ -f $pack_list ]] && >| "$pack_list"
 
     # Update file with git repo urls.
-    cd $PACK
-    for dir in *; do
-        PLUGIN="$PACK$dir"
-        cd $PLUGIN
-
-        if [ -d "$PLUGIN/.git" ]
-        then
-            echo `$GIT url` >> "$PACK_LIST"
-        fi
+    for subtype in start opt; do
+        for dir in $pack/$subtype/*; do
+            if [[ -d $dir/.git ]]
+            then
+                cd $dir
+                url=$($git url)
+                echo "$subtype:$url" >> "$pack_list"
+            fi
+        done
     done
+    echo "Plugins saved to file."
 }
 
 main ()
 {
-    [ "$GIT" ] || return 0;
+    [[ $git ]] || return 0;
 
-    [ -d $PACK ] || mkdir -p $PACK
+    [[ -d $pack/start ]] || mkdir -p "$pack/start"
+    [[ -d $pack/opt ]] || mkdir -p "$pack/opt"
 
     case "$1" in
         "") echo "Usage: ${0##*/} install|update|save"; exit;;

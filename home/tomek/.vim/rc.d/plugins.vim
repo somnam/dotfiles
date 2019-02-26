@@ -1,3 +1,14 @@
+" Generate help for plugins
+helptags ~/.vim/pack/git-plugins/start/bufexplorer/doc
+helptags ~/.vim/pack/git-plugins/start/ctrlp.vim/doc
+helptags ~/.vim/pack/git-plugins/start/neocomplete.vim/doc
+helptags ~/.vim/pack/git-plugins/start/vim-colors-solarized/doc
+helptags ~/.vim/pack/git-plugins/start/vim-commentary/doc
+helptags ~/.vim/pack/git-plugins/start/vim-easy-align/doc
+helptags ~/.vim/pack/git-plugins/start/vim-fugitive/doc
+helptags ~/.vim/pack/git-plugins/start/vim-signify/doc
+helptags ~/.vim/pack/git-plugins/opt/csv.vim/doc
+
 " Session
 command! SS SessionSave
 command! SC SessionClose
@@ -11,11 +22,10 @@ command! LS BufExplorer
 command! LH BufExplorerHorizontalSplit
 command! LV BufExplorerVerticalSplit
 
-" Airline
-let g:airline_theme='sol'
-let g:airline#extensions#hunks#enabled = 0
-let g:airline#extensions#branch#enabled = 0
-let g:airline#extensions#whitespace#checks = ['indent']
+" Lightline
+let g:lightline = {
+      \ 'colorscheme': 'nord',
+      \ }
 
 " CtrlP
 " Files limit
@@ -42,8 +52,6 @@ let g:neocomplete#enable_at_startup = 1
 let g:neocomplete#enable_smart_case = 1
 " AutoComplPop like behavior.
 let g:neocomplete#enable_auto_select = 1
-" <CR>: close popup and save indent.
-inoremap <expr><CR> pumvisible() ? "\<C-y>" : "\<CR>"
 
 " CSV
 let g:csv_highlight_column = 'y'
@@ -54,11 +62,8 @@ vmap <Enter> <Plug>(EasyAlign)
 " Start interactive EasyAlign for a motion/text object (e.g. <Leader>aip)
 nmap <Leader>a <Plug>(EasyAlign)
 
-" Gitgutter
-let g:gitgutter_realtime = 0
-let g:gitgutter_escape_grep = 1
-let g:gitgutter_max_signs = 3000
-let g:gitgutter_override_sign_column_highlight = 1
+" Signify
+let g:signify_vcs_list = [ 'git' ]
 
 " Flake8
 let g:flake8_show_in_gutter = 1

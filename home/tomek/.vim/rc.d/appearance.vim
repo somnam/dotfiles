@@ -23,6 +23,17 @@ if !has('gui_running')
     highlight DiffText   cterm=bold ctermfg=42 ctermbg=126
 endif
 
+" Signify diff colors
+if !has('gui_running')
+    highlight SignColumn        ctermbg=NONE cterm=NONE
+    highlight DiffAdd           cterm=bold ctermbg=none ctermfg=119
+    highlight DiffDelete        cterm=bold ctermbg=none ctermfg=167
+    highlight DiffChange        cterm=bold ctermbg=none ctermfg=227
+    highlight SignifySignAdd    cterm=bold ctermbg=none ctermfg=119
+    highlight SignifySignDelete cterm=bold ctermbg=none ctermfg=167
+    highlight SignifySignChange cterm=bold ctermbg=none ctermfg=227
+endif
+
 " Set vertical column
 if exists('+colorcolumn')
     set colorcolumn=80
