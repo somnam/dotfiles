@@ -1,6 +1,6 @@
 start:https://github.com/jlanzarotta/bufexplorer.git
+start:https://github.com/maralla/completor.vim.git
 start:https://github.com/ctrlpvim/ctrlp.vim
-start:https://github.com/Shougo/neocomplete.vim.git
 start:https://github.com/joshdick/onedark.vim.git
 start:https://github.com/somnam/pyte.git
 start:https://github.com/vim-scripts/sessionman.vim
@@ -15,7 +15,6 @@ start:https://github.com/pangloss/vim-javascript.git
 start:https://github.com/Vimjas/vim-python-pep8-indent.git
 start:https://github.com/wlangstroth/vim-racket.git
 start:https://github.com/mhinz/vim-signify.git
-start:https://github.com/itchyny/lightline.vim.git
 opt:https://github.com/chrisbra/csv.vim
 opt:https://github.com/vim-scripts/django.vim
 opt:https://github.com/peterhoeg/vim-qml.git

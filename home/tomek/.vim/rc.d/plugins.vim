@@ -1,7 +1,7 @@
 " Generate help for plugins
 helptags ~/.vim/pack/git-plugins/start/bufexplorer/doc
 helptags ~/.vim/pack/git-plugins/start/ctrlp.vim/doc
-helptags ~/.vim/pack/git-plugins/start/neocomplete.vim/doc
+helptags ~/.vim/pack/git-plugins/start/completor.vim/doc
 helptags ~/.vim/pack/git-plugins/start/vim-colors-solarized/doc
 helptags ~/.vim/pack/git-plugins/start/vim-commentary/doc
 helptags ~/.vim/pack/git-plugins/start/vim-easy-align/doc
@@ -22,11 +22,6 @@ command! LS BufExplorer
 command! LH BufExplorerHorizontalSplit
 command! LV BufExplorerVerticalSplit
 
-" Lightline
-let g:lightline = {
-      \ 'colorscheme': 'nord',
-      \ }
-
 " CtrlP
 " Files limit
 let g:ctrlp_max_files = 1000000
@@ -46,12 +41,10 @@ let g:ctrlp_user_command = {
     \ 'fallback': 'find %s -type f'
     \ }
 
-" Use neocomplete.
-let g:neocomplete#enable_at_startup = 1
-" Use smartcase.
-let g:neocomplete#enable_smart_case = 1
-" AutoComplPop like behavior.
-let g:neocomplete#enable_auto_select = 1
+" Use completor
+let g:completor_python_binary = '/usr/bin/python3'
+let g:completor_complete_options = 'menuone,noselect'
+let g:completor_completion_delay = 100
 
 " CSV
 let g:csv_highlight_column = 'y'
