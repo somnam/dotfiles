@@ -19,6 +19,7 @@ install ()
 
         echo "Cloning $url into $subtype/$clone_dir"
         $git clone "$url" "$clone_path"
+        echo ""
     done
     echo "Plugins installed."
 }
