@@ -17,21 +17,27 @@ colorscheme default
 
 " Set more readable diff colors in terminals
 if !has('gui_running')
-    highlight DiffAdd    cterm=bold ctermfg=42 ctermbg=24
-    highlight DiffDelete cterm=bold ctermfg=42 ctermbg=24
-    highlight DiffChange cterm=bold ctermfg=42 ctermbg=24
-    highlight DiffText   cterm=bold ctermfg=42 ctermbg=126
+    highlight CursorColumn term=reverse ctermbg=8
+    highlight DiffAdd      term=bold ctermfg=42 ctermbg=24
+    highlight DiffDelete   term=bold ctermfg=42 ctermbg=24
+    highlight DiffChange   term=bold ctermfg=42 ctermbg=24
+    highlight DiffText     term=bold ctermfg=42 ctermbg=126
 endif
 
-" Signify diff colors
-if !has('gui_running')
+" Signify colors for dark theme
+if (&background == 'dark')
     highlight SignColumn        ctermbg=NONE cterm=NONE
-    highlight DiffAdd           cterm=bold ctermbg=none ctermfg=119
-    highlight DiffDelete        cterm=bold ctermbg=none ctermfg=167
-    highlight DiffChange        cterm=bold ctermbg=none ctermfg=227
     highlight SignifySignAdd    cterm=bold ctermbg=none ctermfg=119
     highlight SignifySignDelete cterm=bold ctermbg=none ctermfg=167
     highlight SignifySignChange cterm=bold ctermbg=none ctermfg=227
+endif
+
+" Signify colors for light theme
+if (&background == 'light')
+    highlight SignColumn        ctermbg=NONE cterm=NONE
+    highlight SignifySignAdd    cterm=bold ctermbg=NONE ctermfg=28
+    highlight SignifySignDelete cterm=bold ctermbg=NONE ctermfg=124
+    highlight SignifySignChange cterm=bold ctermbg=NONE ctermfg=166
 endif
 
 " Set vertical column
