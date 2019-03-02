@@ -43,7 +43,7 @@ let g:ctrlp_user_command = {
 
 " Use completor
 let g:completor_python_binary = '/usr/bin/python3'
-let g:completor_complete_options = 'menuone,noselect'
+let g:completor_complete_options = 'menuone,noinsert'
 let g:completor_completion_delay = 100
 
 " CSV
