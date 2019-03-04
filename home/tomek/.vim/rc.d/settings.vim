@@ -74,8 +74,6 @@ autocmd FileType javascript,java,lisp,scheme,perl,python,ruby,vim,c setlocal for
 autocmd FileType python setlocal completeopt-=preview nosmartindent
 " Autocomplete for python3 environment
 autocmd FileType python setlocal omnifunc=python3complete#Complete
-" Validate file using flake8 after each save.
-autocmd FileType python autocmd! BufWritePost <buffer> call Flake8()
 
 " Wrapping in CSV
 autocmd FileType csv setlocal wrap

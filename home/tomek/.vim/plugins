@@ -1,7 +1,7 @@
 start:https://github.com/jlanzarotta/bufexplorer.git
 start:https://github.com/maralla/completor.vim.git
 start:https://github.com/ctrlpvim/ctrlp.vim
-start:https://github.com/joshdick/onedark.vim.git
+start:https://github.com/rakr/vim-one.git
 start:https://github.com/somnam/pyte.git
 start:https://github.com/vim-scripts/sessionman.vim
 start:https://github.com/moll/vim-bbye.git

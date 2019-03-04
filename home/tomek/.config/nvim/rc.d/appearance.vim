@@ -1,21 +1,29 @@
-" Vim5 and later versions support syntax highlighting. Uncommenting the
-" following enables syntax highlighting by default.
-syntax on
-
-" Uncomment the following to have Vim load indentation rules and plugins
-" according to the detected filetype.
-filetype plugin on
-filetype indent on
-
 " Set default colorscheme
 colorscheme default
 
 " Set more readable diff colors in terminals
 if !has('gui_running')
-    highlight DiffAdd    cterm=bold ctermfg=42 ctermbg=24
-    highlight DiffDelete cterm=bold ctermfg=42 ctermbg=24
-    highlight DiffChange cterm=bold ctermfg=42 ctermbg=24
-    highlight DiffText   cterm=bold ctermfg=42 ctermbg=126
+    highlight CursorColumn term=reverse ctermbg=8
+    highlight DiffAdd      term=bold ctermfg=42 ctermbg=24
+    highlight DiffDelete   term=bold ctermfg=42 ctermbg=24
+    highlight DiffChange   term=bold ctermfg=42 ctermbg=24
+    highlight DiffText     term=bold ctermfg=42 ctermbg=126
+endif
+
+" Signify colors for dark theme
+if (&background == 'dark')
+    highlight SignColumn        ctermbg=NONE cterm=NONE
+    highlight SignifySignAdd    cterm=bold ctermbg=none ctermfg=119
+    highlight SignifySignDelete cterm=bold ctermbg=none ctermfg=167
+    highlight SignifySignChange cterm=bold ctermbg=none ctermfg=227
+endif
+
+" Signify colors for light theme
+if (&background == 'light')
+    highlight SignColumn        ctermbg=NONE cterm=NONE
+    highlight SignifySignAdd    cterm=bold ctermbg=NONE ctermfg=28
+    highlight SignifySignDelete cterm=bold ctermbg=NONE ctermfg=124
+    highlight SignifySignChange cterm=bold ctermbg=NONE ctermfg=166
 endif
 
 " Set vertical column
@@ -27,5 +35,13 @@ if exists('+cursorline')
     set cursorline
 endif
 
-" Set airline theme
-let g:airline_theme='onedark'
+" Statusline config
+set statusline=
+set statusline+=%f
+set statusline+=%m
+set statusline+=%=
+set statusline+=\ %y
+set statusline+=\ [%{&fileencoding?&fileencoding:&encoding}]
+set statusline+=\ [%{&fileformat}\]
+set statusline+=\ %p%%
+set statusline+=\ %l:%c

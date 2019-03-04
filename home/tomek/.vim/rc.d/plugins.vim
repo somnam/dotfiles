@@ -60,3 +60,5 @@ let g:signify_vcs_list = [ 'git' ]
 
 " Flake8
 let g:flake8_show_in_gutter = 1
+" Validate file using flake8 after each save.
+autocmd FileType python autocmd! BufWritePost <buffer> call Flake8()
