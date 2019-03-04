@@ -4,19 +4,10 @@ set background=dark
 
 " Dark theme
 if (&background == 'dark')
-    colorscheme onedark
+    colorscheme one
 " Light theme
 elseif (&background == 'light')
     colorscheme PaperColor
-endif
-
-" Diff colors for dark theme.
-if (&background == 'dark')
-    highlight CursorColumn guibg=#303030
-    highlight DiffAdd      guifg=#87d700 guibg=#005f00
-    highlight DiffDelete   guifg=#af005f guibg=#5f0000
-    highlight DiffChange   guifg=#d0d0d0 guibg=#005f5f
-    highlight DiffText     guifg=#5fffff guibg=#008787
 endif
 
 " Signify colors for light theme

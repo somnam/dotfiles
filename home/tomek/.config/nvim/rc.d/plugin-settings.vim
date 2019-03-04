@@ -1,16 +1,3 @@
-" NCM2 settings
-" Enable ncm2 for all buffers
-autocmd BufEnter * call ncm2#enable_for_buffer()
-" IMPORTANT: :help Ncm2PopupOpen for more information
-set completeopt=noinsert,menuone,noselect
-" Suppress the annoying 'match x of y', 'The only match' and 'Pattern not
-" found' messages
-set shortmess+=c
-" When the <Enter> key is pressed while the popup menu is visible, it only
-" hides the menu. Use this mapping to close the menu and also start a new
-" line.
-inoremap <expr> <CR> (pumvisible() ? "\<c-y>" : "\<CR>")
-
 " Buffer Bye
 command! BD Bdelete
 
@@ -18,11 +5,6 @@ command! BD Bdelete
 command! LS BufExplorer
 command! LH BufExplorerHorizontalSplit
 command! LV BufExplorerVerticalSplit
-
-" Airline
-let g:airline#extensions#hunks#enabled = 0
-let g:airline#extensions#branch#enabled = 0
-let g:airline#extensions#whitespace#checks = ['indent']
 
 " CtrlP
 " Files limit
@@ -43,8 +25,18 @@ let g:ctrlp_user_command = {
     \ 'fallback': 'find %s -type f'
     \ }
 
-" CSV
-let g:csv_highlight_column = 'y'
+" NCM2 settings
+" Enable ncm2 for all buffers
+autocmd BufEnter * call ncm2#enable_for_buffer()
+" IMPORTANT: :help Ncm2PopupOpen for more information
+set completeopt=menuone,noinsert
+" Suppress the annoying 'match x of y', 'The only match' and 'Pattern not
+" found' messages
+set shortmess+=c
+" When the <Enter> key is pressed while the popup menu is visible, it only
+" hides the menu. Use this mapping to close the menu and also start a new
+" line.
+inoremap <expr> <CR> (pumvisible() ? "\<c-y>" : "\<CR>")
 
 " EasyAlign
 " Start interactive EasyAlign in visual mode (e.g. vip<Enter>)
@@ -52,11 +44,8 @@ vmap <Enter> <Plug>(EasyAlign)
 " Start interactive EasyAlign for a motion/text object (e.g. <Leader>aip)
 nmap <Leader>a <Plug>(EasyAlign)
 
-" Gitgutter
-let g:gitgutter_realtime = 0
-let g:gitgutter_escape_grep = 1
-let g:gitgutter_max_signs = 3000
-let g:gitgutter_override_sign_column_highlight = 1
+" Signify
+let g:signify_vcs_list = [ 'git' ]
 
 " Flake8
 let g:flake8_show_in_gutter = 1

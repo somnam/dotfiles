@@ -1,6 +1,15 @@
 " Disable intro message
 set shortmess+=I
 
+" Vim5 and later versions support syntax highlighting. Uncommenting the
+" following enables syntax highlighting by default.
+syntax on
+
+" Uncomment the following to have Vim load indentation rules and plugins
+" according to the detected filetype.
+filetype plugin on
+filetype indent on
+
 " Set utf-8 encoding
 set encoding=utf8
 
