@@ -7,15 +7,7 @@ if (&background == 'dark')
     colorscheme one
 " Light theme
 elseif (&background == 'light')
-    colorscheme PaperColor
-endif
-
-" Signify colors for light theme
-if (&background == 'light')
-    highlight SignColumn        gui=NONE guibg=NONE
-    highlight SignifySignAdd    gui=bold guibg=NONE guifg=#008700
-    highlight SignifySignDelete gui=bold guibg=NONE guifg=#af0000
-    highlight SignifySignChange gui=bold guibg=NONE guifg=#d75f00
+    colorscheme pyte
 endif
 
 " Set font
