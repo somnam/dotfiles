@@ -46,6 +46,7 @@ nmap <Leader>a <Plug>(EasyAlign)
 
 " Signify
 let g:signify_vcs_list = [ 'git' ]
+let g:signify_update_on_bufenter = 1
 
 " Flake8
 let g:flake8_show_in_gutter = 1

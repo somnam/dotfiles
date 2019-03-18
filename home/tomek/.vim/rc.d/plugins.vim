@@ -2,17 +2,11 @@
 helptags ~/.vim/pack/git-plugins/start/bufexplorer/doc
 helptags ~/.vim/pack/git-plugins/start/ctrlp.vim/doc
 helptags ~/.vim/pack/git-plugins/start/completor.vim/doc
-helptags ~/.vim/pack/git-plugins/start/vim-colors-solarized/doc
 helptags ~/.vim/pack/git-plugins/start/vim-commentary/doc
 helptags ~/.vim/pack/git-plugins/start/vim-easy-align/doc
 helptags ~/.vim/pack/git-plugins/start/vim-fugitive/doc
 helptags ~/.vim/pack/git-plugins/start/vim-signify/doc
 helptags ~/.vim/pack/git-plugins/opt/csv.vim/doc
-
-" Session
-command! SS SessionSave
-command! SC SessionClose
-command! SL SessionList
 
 " Buffer Bye
 command! BD Bdelete
@@ -57,6 +51,7 @@ nmap <Leader>a <Plug>(EasyAlign)
 
 " Signify
 let g:signify_vcs_list = [ 'git' ]
+let g:signify_update_on_bufenter = 1
 
 " Flake8
 let g:flake8_show_in_gutter = 1

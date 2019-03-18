@@ -8,25 +8,37 @@
 # Note that PYTHONSTARTUP does *not* expand "~", so you have to put in the
 # full path to your home directory.
 
-import atexit
-import os
-import readline
-import rlcompleter
-import sys
 
-# change autocomplete to tab
-readline.parse_and_bind("\C-space: complete")
+def setup_readline():
+    try:
+        import readline  # noqa
+    except ImportError:
+        print('Code completion and history not available.')
+    else:
+        enable_code_completion()
 
-historyPath = os.path.expanduser("/home/tomek/.pyhistory")
 
-def save_history(historyPath=historyPath):
+def enable_code_completion():
+    import os
+    import atexit
     import readline
-    readline.write_history_file(historyPath)
+    import rlcompleter
 
-if os.path.exists(historyPath):
-    readline.read_history_file(historyPath)
+    # Use Tab for code completion.
+    readline.parse_and_bind("tab: complete")
 
-atexit.register(save_history)
+    # Enable reading commands history.
+    history_path = os.path.expanduser("~/.pyhistory")
+    if os.path.exists(history_path):
+        readline.read_history_file(history_path)
 
-# anything not deleted (sys and os) will remain in the interpreter session
-del atexit, readline, rlcompleter, save_history, historyPath
+    # Enable writing commands history.
+    def save_history(history_path):
+        import readline
+        readline.write_history_file(history_path)
+    atexit.register(save_history, history_path)
+
+    del atexit, readline, rlcompleter, history_path, save_history
+
+
+setup_readline()

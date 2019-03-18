@@ -1,7 +1,7 @@
 # enable color support of ls and also add handy aliases
 if [ -x /usr/bin/dircolors ]; then
     test -r ~/.dircolors && eval "$(dircolors -b ~/.dircolors)" || eval "$(dircolors -b)"
-    alias ls='ls --color=auto'
+    alias ls='ls --group-directories-first --color=auto'
     alias dir='dir --color=auto'
     alias vdir='vdir --color=auto'
 
@@ -26,6 +26,7 @@ alias info="info --vi-keys"
 alias sudo="sudo -E"
 alias apt-up='sudo apt update && sudo apt full-upgrade && sudo apt autoremove --purge && sudo apt autoclean'
 alias apt-clean='sudo apt autoremove --purge && sudo apt autoclean'
+alias swapr='sync && sudo /sbin/sysctl vm.drop_caches=3 && sudo swapoff -a && sudo swapon -a'
 
 # Power management
 alias Suspend='systemctl suspend';
