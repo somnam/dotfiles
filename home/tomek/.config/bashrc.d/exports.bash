@@ -13,6 +13,10 @@ PROMPT_DIRTRIM=3
 
 # Python
 export PYTHONSTARTUP=$HOME/.pystartup
+
+# Append Pyenv to path
+[[ ":$PATH:" != *":${HOME}/.pyenv/bin:"* ]] && PATH="${HOME}/.pyenv/bin:${PATH}"
+
 # Initialize pyenv
 eval "$(pyenv init -)"
 eval "$(pyenv virtualenv-init -)"
