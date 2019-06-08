@@ -7,7 +7,7 @@ if (&background == 'dark')
     colorscheme one
 " Light theme
 elseif (&background == 'light')
-    colorscheme pyte
+    colorscheme one
 endif
 
 " Set font

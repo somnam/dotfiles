@@ -44,10 +44,6 @@ endif
 if exists('+colorcolumn')
     set colorcolumn=80
 endif
-" Set line highlight
-if exists('+cursorline')
-    set cursorline
-endif
 
 " Statusline config
 set statusline=

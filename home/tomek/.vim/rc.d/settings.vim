@@ -30,7 +30,7 @@ set smartcase       " Do smart case matching
 set incsearch       " Incremental search
 set autowrite       " Automatically save before commands like :next and :make
 set ruler           " Show cursor position all the time
-set history=200     " Keep 100 lines of command line history
+set history=200     " Keep n lines of command line history
 set wrap            " Line wrapping
 set linebreak       " Wrap long lines at a linebreak character
 set nowrapscan      " Search wrapping
@@ -43,6 +43,9 @@ set spl=pl          " Use PL dictionary for spelling
 set fdm=marker      " Set folding method
 set hidden          " Hide buffer instead of closing it
 set lazyredraw      " Don't redraw the screen when not needed
+set ttyfast         " Faster scrolling
+set ttimeout        " Time waited for key press(es) to complete, faster key response
+set ttimeoutlen=100 "
 set list                                      " Display whitespace info
 set listchars=tab:>.,trail:.,extends:#,nbsp:. " Display tab characters, trailing
                                               " whitespace, visible spaces and
@@ -50,6 +53,19 @@ set listchars=tab:>.,trail:.,extends:#,nbsp:. " Display tab characters, trailing
 set shiftwidth=4 tabstop=4 softtabstop=4 " Set default tabs behavior
 set expandtab                            " Expand tabs to spaces
 set smarttab                             " Smart tab
+set regexpengine=1                       " Use older regexp engine
+set synmaxcol=512                        " Be forgiving with long lines
+set nomodeline                           " Don't run arbitrary modeline code
+
+" Shut off completion messages
+set shortmess+=c
+" Prevent a condition where vim lags due to searching include files
+set complete-=i
+
+" Slows down scroll in vim >= 8.0.
+set nocursorcolumn
+set nocursorline
+set norelativenumber
 
 " Uncomment the following to have Vim jump to the last position when
 " reopening a file
