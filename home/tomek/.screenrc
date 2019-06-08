@@ -20,26 +20,21 @@
 # SCREEN SETTINGS
 # ------------------------------------------------------------------------------
 
+startup_message off
 #nethack on
 
 #defflow on # will force screen to process ^S/^Q
 deflogin on
 #autodetach off
 
-# Define a bigger scrollback, default is 100 lines
-defscrollback 8192
-
-# Disable startup msg
-startup_message off
-
-# Disable bell
+# turn visual bell off
 vbell off
 
-# Clear screen after closing programs
-altscreen on
+# define a bigger scrollback, default is 100 lines
+defscrollback 10000
 
-# Tab-bar
-caption always '%{b dd}[%H] %?%{d}%-w%?%{r}(%{d}%n %t%? {%u}%?%{r})%{d}%?%+w%?%=[%c]'
+# clear screen after closing programs
+altscreen on
 
 # ------------------------------------------------------------------------------
 # SCREEN KEYBINDINGS
@@ -47,6 +42,7 @@ caption always '%{b dd}[%H] %?%{d}%-w%?%{r}(%{d}%n %t%? {%u}%?%{r})%{d}%?%+w%?%=
 
 # Remove some stupid / dangerous key bindings
 bind ^k
+#bind L
 bind ^\
 bind ^s
 bind s
@@ -57,12 +53,8 @@ bind I login on
 bind O login off
 bind } history
 # Bind keys
-# Xterm
-bindkey ^[[1;2D prev
-bindkey ^[[1;2C next
-# URxvt
-#bindkey ^[[d prev
-#bindkey ^[[c next
+bindkey ^[[1;3D prev
+bindkey ^[[1;3C next
 
 # An example of a "screen scraper" which will launch urlview on the current
 # screen window
@@ -81,13 +73,14 @@ hardstatus off
 # Set the hardstatus prop on gui terms to set the titlebar/icon title
 termcapinfo xterm*|rxvt*|kterm*|Eterm* hs:ts=\E]0;:fs=\007:ds=\E]0;\007
 # use this for the hard status string
-hardstatus string "%h%? users: %u%?"
+#hardstatus string "%h%? users: %u%?"
 
 # An alternative hardstatus to display a bar at the bottom listing the
 # windownames and highlighting the current windowname in blue. (This is only
 # enabled if there is no hardstatus setting for your terminal)
 #
 #hardstatus lastline "%-Lw%{= BW}%50>%n%f* %t%{-}%+Lw%<"
+hardstatus alwayslastline '%{b dd}[%H] %?%{d}%-w%?%{r}(%{d}%n %t%? {%u}%?%{r})%{d}%?%+w%?%=[%c]'
 
 # set these terminals up to be 'optimal' instead of vt100
 termcapinfo xterm*|linux*|rxvt*|Eterm* OP
@@ -107,7 +100,8 @@ termcapinfo xterm*|xterms*|xs*|rxvt* ti@:te@
 # Enable non-blocking mode to better cope with flaky ssh connections.
 defnonblock 5
 
-term "xterm-256color"
+# Set $TERM
+term xterm-256color
 
 # ------------------------------------------------------------------------------
 # STARTUP SCREENS

@@ -48,8 +48,7 @@ save()
     # Update file with git repo urls.
     for subtype in start opt; do
         for dir in $pack/$subtype/*; do
-            if [[ -d $dir/.git ]]
-            then
+            if [[ -d $dir/.git ]]; then
                 cd $dir
                 url=$($git url)
                 echo "$subtype:$url" >> "$pack_list"
@@ -57,6 +56,27 @@ save()
         done
     done
     echo "Plugins saved to file."
+}
+
+init()
+{
+    for dir in "backup" "swap" "sessions"; do
+        dir_path="$HOME/.vim/$dir"
+        if [[ ! -d $dir_path ]]; then
+            mkdir $dir_path
+            echo "Creating directory $dir_path"
+        fi
+    done
+
+    for dir in "opt" "start"; do
+        dir_path="$HOME/.vim/pack/git-plugins/$dir"
+        if [[ ! -d $dir_path ]]; then
+            mkdir -p $dir_path
+            echo "Creating directory $dir_path"
+        fi
+    done
+
+    echo "All directories created"
 }
 
 main ()
@@ -67,7 +87,8 @@ main ()
     [[ -d $pack/opt ]] || mkdir -p "$pack/opt"
 
     case "$1" in
-        "") echo "Usage: ${0##*/} install|update|save"; exit;;
+        "") echo "Usage: ${0##*/} init|install|update|save"; exit;;
+        "init") init; exit;;
         "install") install; exit;;
         "update") update; exit;;
         "save") save; exit;;
