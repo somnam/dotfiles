@@ -45,6 +45,22 @@ if exists('+colorcolumn')
     set colorcolumn=80
 endif
 
+" Smooth scroll
+nnoremap <silent> <c-u> :call <sid>smoothScroll(1)<cr>
+nnoremap <silent> <c-d> :call <sid>smoothScroll(0)<cr>
+
+fun! s:smoothScroll(up)
+  execute "normal " . (a:up ? "\<c-y>" : "\<c-e>")
+  redraw
+  for l:count in range(3, &scroll, 2)
+    sleep 5m
+    execute "normal " . (a:up ? "\<c-y>" : "\<c-e>")
+    redraw
+  endfor
+  " bring the cursor in the middle of screen 
+  execute "normal M"
+endf
+
 " Statusline config
 set statusline=
 set statusline+=%f
