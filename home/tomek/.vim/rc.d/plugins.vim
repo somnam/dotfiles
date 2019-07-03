@@ -58,6 +58,7 @@ let g:signify_vcs_list = [ 'git' ]
 let g:signify_update_on_bufenter = 1
 
 " Python - syntax highlighting
+let g:python_highlight_file_headers_as_comments = 0
 let g:python_highlight_class_vars = 0
 let g:python_highlight_all = 1
 let g:python_slow_sync = 0

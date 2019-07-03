@@ -53,6 +53,7 @@ set listchars=tab:>.,trail:.,extends:#,nbsp:. " Display tab characters, trailing
 set shiftwidth=4 tabstop=4 softtabstop=4 " Set default tabs behavior
 set expandtab                            " Expand tabs to spaces
 set smarttab                             " Smart tab
+set backspace=indent,eol,start           " Make backspace work like in most programs
 set regexpengine=1                       " Use older regexp engine
 set synmaxcol=512                        " Be forgiving with long lines
 set nomodeline                           " Don't run arbitrary modeline code
