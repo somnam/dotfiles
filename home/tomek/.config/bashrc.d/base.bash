@@ -1,10 +1,12 @@
 # make less more friendly for non-text input files, see lesspipe(1)
 [ -x /usr/bin/lesspipe ] && eval "$(SHELL=/bin/sh lesspipe)"
 
+# set variable identifying the chroot you work in (used in the prompt below)
+if [ -z "${debian_chroot:-}" ] && [ -r /etc/debian_chroot ]; then
+    debian_chroot=$(cat /etc/debian_chroot)
+fi
+
 # set a fancy prompt (non-color, unless we know we "want" color)
-case "$TERM" in
-    xterm|screen) export TERM="xterm-256color";;
-esac
 case "$TERM" in
     xterm-color|*-256color) color_prompt=yes;;
 esac
@@ -12,7 +14,7 @@ esac
 # uncomment for a colored prompt, if the terminal has the capability; turned
 # off by default to not distract the user: the focus in a terminal window
 # should be on the output of commands, not on the prompt
-force_color_prompt=yes
+#force_color_prompt=yes
 
 if [ -n "$force_color_prompt" ]; then
     if [ -x /usr/bin/tput ] && tput setaf 1 >&/dev/null; then
@@ -23,11 +25,6 @@ if [ -n "$force_color_prompt" ]; then
     else
 	color_prompt=
     fi
-fi
-
-# set variable identifying the chroot you work in (used in the prompt below)
-if [ -z "${debian_chroot:-}" ] && [ -r /etc/debian_chroot ]; then
-    debian_chroot=$(cat /etc/debian_chroot)
 fi
 
 if [ "$color_prompt" = yes ]; then
@@ -57,4 +54,3 @@ if ! shopt -oq posix; then
     . /etc/bash_completion
   fi
 fi
-

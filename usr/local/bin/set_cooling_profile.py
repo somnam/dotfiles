@@ -72,8 +72,10 @@ def main():
 
     if action == 'quiet':
         set_quiet_profile()
+        read_current_profile()
     elif action == 'default':
         set_default_profile()
+        read_current_profile()
     elif action == 'read':
         read_current_profile()
 

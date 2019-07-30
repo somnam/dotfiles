@@ -10,10 +10,11 @@ esac
 
 # Load user-specific config.
 config_files=(
-    ~/.config/bashrc.d/sensible.bash \
-    ~/.config/bashrc.d/bash.bash \
     ~/.config/bashrc.d/aliases.bash \
+    ~/.config/bashrc.d/base.bash \
     ~/.config/bashrc.d/exports.bash
+    ~/.config/bashrc.d/history.bash \
+    ~/.config/bashrc.d/navigation.bash
 )
 for file in ${config_files[@]}; do
     if [ -f "$file" ]; then . "$file"; fi
