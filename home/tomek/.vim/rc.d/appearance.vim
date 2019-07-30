@@ -9,11 +9,8 @@ if ($TERM =~ "256color" || $TERM == "screen")
     set t_Co=256
 " Fallback for tty terminals
 elseif ($TERM == "xterm" || $TERM == "linux")
-    set t_Co=8
+    set t_Co=16
 endif
-
-" Set default colorscheme
-colorscheme default
 
 " Set more readable diff colors in terminals
 if !has('gui_running')

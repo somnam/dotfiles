@@ -8,15 +8,14 @@ export GIT_PS1_SHOWUNTRACKEDFILES='y'
 export GIT_PS1_DESCRIBE_STYLE='contains'
 export GIT_PS1_SHOWUPSTREAM='auto'
 
-# Automatically trim long paths in the prompt (requires Bash 4.x)
-PROMPT_DIRTRIM=3
-
 # Python
 export PYTHONSTARTUP=$HOME/.pystartup
 
 # Append Pyenv to path
-[[ ":$PATH:" != *":${HOME}/.pyenv/bin:"* ]] && PATH="${HOME}/.pyenv/bin:${PATH}"
+if [ -x ${HOME}/.pyenv/bin/pyenv ]; then
+    [[ ":$PATH:" != *":${HOME}/.pyenv/bin:"* ]] && PATH="${HOME}/.pyenv/bin:${PATH}"
 
-# Initialize pyenv
-eval "$(pyenv init -)"
-eval "$(pyenv virtualenv-init -)"
+    # Initialize pyenv
+    eval "$(pyenv init -)"
+    eval "$(pyenv virtualenv-init -)"
+fi
