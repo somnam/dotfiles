@@ -68,6 +68,10 @@ set nocursorcolumn
 set nocursorline
 set norelativenumber
 
+" Diff settings
+set diffopt+=algorithm:patience
+set diffopt+=indent-heuristic
+
 " Uncomment the following to have Vim jump to the last position when
 " reopening a file
 autocmd BufReadPost * if line("'\"") > 1 && line("'\"") <= line("$") | exe "normal! g'\"" | endif
