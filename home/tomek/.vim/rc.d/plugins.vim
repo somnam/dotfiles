@@ -1,7 +1,6 @@
 " Generate help for plugins
 helptags ~/.vim/pack/git-plugins/start/bufexplorer/doc
 helptags ~/.vim/pack/git-plugins/start/ctrlp.vim/doc
-" helptags ~/.vim/pack/git-plugins/start/completor.vim/doc
 helptags ~/.vim/pack/git-plugins/start/vim-commentary/doc
 helptags ~/.vim/pack/git-plugins/start/vim-easy-align/doc
 helptags ~/.vim/pack/git-plugins/start/vim-fugitive/doc
@@ -34,11 +33,6 @@ let g:ctrlp_user_command = {
     \ 'fallback': 'find %s -type f'
     \ }
 
-" Use completor
-" let g:completor_python_binary = $HOME . "/.pyenv/versions/vim/bin/python3.7"
-" let g:completor_complete_options = 'menuone,noinsert'
-" let g:completor_completion_delay = 100
-
 " Use simple complete
 let g:vsc_tab_complete = 0
 let g:vsc_complete_options = 'menu,preview,menuone,noinsert'
@@ -55,7 +49,6 @@ nmap <Leader>a <Plug>(EasyAlign)
 
 " Signify
 let g:signify_vcs_list = [ 'git' ]
-let g:signify_update_on_bufenter = 1
 
 " Python - syntax highlighting
 let g:python_highlight_file_headers_as_comments = 0
@@ -64,7 +57,10 @@ let g:python_highlight_all = 1
 let g:python_slow_sync = 0
 
 " Flake8
-let g:flake8_show_in_gutter = 1
-let g:flake8_cmd = $HOME . "/.pyenv/versions/vim/bin/flake8"
-" Validate file using flake8 after each save.
-autocmd FileType python autocmd! BufWritePost <buffer> call Flake8()
+let s:flake8_cmd = $HOME . "/.venv/vim/bin/flake8"
+if filereadable(s:flake8_cmd)
+    let g:flake8_show_in_gutter = 1
+    let g:flake8_cmd = s:flake8_cmd
+    " Validate file using flake8 after each save.
+    autocmd FileType python autocmd! BufWritePost <buffer> call Flake8()
+endif
