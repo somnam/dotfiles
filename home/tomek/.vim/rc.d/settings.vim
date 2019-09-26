@@ -62,6 +62,9 @@ set nomodeline                           " Don't run arbitrary modeline code
 set shortmess+=c
 " Prevent a condition where vim lags due to searching include files
 set complete-=i
+" Completion options
+set completeopt=menu,menuone,noinsert
+set pumheight=15
 
 " Slows down scroll in vim >= 8.0.
 set nocursorcolumn
