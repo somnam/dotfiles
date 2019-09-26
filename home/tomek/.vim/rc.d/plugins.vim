@@ -1,11 +1,3 @@
-" Generate help for plugins
-helptags ~/.vim/pack/git-plugins/start/bufexplorer/doc
-helptags ~/.vim/pack/git-plugins/start/ctrlp.vim/doc
-helptags ~/.vim/pack/git-plugins/start/vim-commentary/doc
-helptags ~/.vim/pack/git-plugins/start/vim-easy-align/doc
-helptags ~/.vim/pack/git-plugins/start/vim-fugitive/doc
-helptags ~/.vim/pack/git-plugins/start/vim-signify/doc
-
 " Buffer Bye
 command! BD Bdelete
 
@@ -33,10 +25,12 @@ let g:ctrlp_user_command = {
     \ 'fallback': 'find %s -type f'
     \ }
 
-" Use simple complete
-let g:vsc_tab_complete = 0
-let g:vsc_complete_options = 'menu,preview,menuone,noinsert'
-let g:vsc_pumheight = 15
+" Use mucomplete
+let g:mucomplete#enable_auto_at_startup = 1
+let g:mucomplete#chains = {}
+let g:mucomplete#chains.default  = ['c-n', 'path', 'omni', 'keyn', 'dict', 'uspl']
+let g:mucomplete#chains.vim      = ['c-n', 'path', 'cmd', 'keyn']
+
 
 " CSV
 let g:csv_highlight_column = 'y'
@@ -52,7 +46,6 @@ let g:signify_vcs_list = [ 'git' ]
 
 " Python - syntax highlighting
 let g:python_highlight_file_headers_as_comments = 0
-let g:python_highlight_class_vars = 0
 let g:python_highlight_all = 1
 let g:python_slow_sync = 0
 

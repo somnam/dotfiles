@@ -11,7 +11,7 @@
     remote = yellow
 [color "status"]
     added = green
-    changed = magenta
+    changed = yellow
     untracked = red
 [push]
     default = upstream

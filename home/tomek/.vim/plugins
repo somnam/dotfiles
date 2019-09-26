@@ -3,14 +3,15 @@ start:https://github.com/ctrlpvim/ctrlp.vim
 start:https://github.com/somnam/pyte.git
 start:https://github.com/vim-python/python-syntax.git
 start:https://github.com/moll/vim-bbye.git
+start:https://github.com/rhysd/vim-color-spring-night.git
 start:https://github.com/tpope/vim-commentary.git
 start:https://github.com/junegunn/vim-easy-align
 start:https://github.com/nvie/vim-flake8
 start:git://github.com/tpope/vim-fugitive.git
 start:https://github.com/pangloss/vim-javascript.git
+start:https://github.com/lifepillar/vim-mucomplete
 start:https://github.com/rakr/vim-one.git
 start:https://github.com/Vimjas/vim-python-pep8-indent.git
 start:https://github.com/mhinz/vim-signify.git
-start:https://github.com/somnam/vim-simple-complete.git
 opt:https://github.com/peterhoeg/vim-qml.git
 opt:https://github.com/wlangstroth/vim-racket.git
