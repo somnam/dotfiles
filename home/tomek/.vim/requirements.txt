@@ -1,1 +1,3 @@
+wheel
 flake8
+python-language-server

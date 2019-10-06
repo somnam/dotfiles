@@ -31,6 +31,16 @@ let g:mucomplete#chains = {}
 let g:mucomplete#chains.default  = ['c-n', 'path', 'omni', 'keyn', 'dict', 'uspl']
 let g:mucomplete#chains.vim      = ['c-n', 'path', 'cmd', 'keyn']
 
+" Use a language server for Python omnifunc completions.
+let s:python_lsp_cmd = $HOME . "/.venv/vim/bin/pyls"
+if executable(s:python_lsp_cmd)
+    " pip install python-language-server
+    autocmd User lsp_setup call lsp#register_server({
+                \ 'name': 'pyls',
+                \ 'cmd': {server_info->[s:python_lsp_cmd]},
+                \ 'whitelist': ['python'],
+                \ })
+endif
 
 " CSV
 let g:csv_highlight_column = 'y'
