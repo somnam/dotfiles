@@ -97,7 +97,7 @@ autocmd FileType javascript,java,lisp,scheme,perl,python,ruby,vim,c setlocal for
 " Python - don't show docs in preview window
 autocmd FileType python setlocal completeopt-=preview nosmartindent
 " Autocomplete for python3 environment
-autocmd FileType python setlocal omnifunc=python3complete#Complete
+autocmd FileType python setlocal omnifunc=lsp#complete
 
 " Wrapping in CSV
 autocmd FileType csv setlocal wrap
