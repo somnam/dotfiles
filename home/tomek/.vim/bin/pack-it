@@ -11,14 +11,14 @@ install ()
 
     # Install all listed plugins.
     for subtype_and_url in $(cat "$pack_list"); do
-        IFS=, read subtype url args <<< "$subtype_and_url"
+        IFS=, read subtype url <<< "$subtype_and_url"
 
         clone_dir=$(echo "$url" | sed -e 's/^.*\///' -e 's/\.git//')
         clone_path="$pack/$subtype/$clone_dir"
         [[ -d $clone_path ]] && continue
 
         echo "Cloning $url into $subtype/$clone_dir"
-        $git clone "$args" "$url" "$clone_path"
+        $git clone "$url" "$clone_path"
         echo ""
     done
     echo "Plugins installed."
