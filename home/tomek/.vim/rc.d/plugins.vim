@@ -27,6 +27,7 @@ let g:ctrlp_user_command = {
 
 " Use mucomplete
 let g:mucomplete#enable_auto_at_startup = 1
+let g:mucomplete#minimum_prefix_length = 3
 let g:mucomplete#chains = {}
 let g:mucomplete#chains.default  = ['c-n', 'path', 'omni', 'keyn', 'dict', 'uspl']
 let g:mucomplete#chains.vim      = ['c-n', 'path', 'cmd', 'keyn']
@@ -39,6 +40,16 @@ if executable(s:python_lsp_cmd)
                 \ 'name': 'pyls',
                 \ 'cmd': {server_info->[s:python_lsp_cmd]},
                 \ 'whitelist': ['python'],
+                \ 'workspace_config': {'pyls': {'plugins': {
+                    \'jedi_completion': {'include_params': v:false},
+                    \'jedi_signature_help': {'enabled': v:false},
+                    \'jedi_hover': {'enabled': v:false},
+                    \'flake8': {'enabled': v:false},
+                    \'pycodestyle': {'enabled': v:false},
+                    \'pydocstyle': {'enabled': v:false},
+                    \'pyflakes': {'enabled': v:false},
+                    \'yapf': {'enabled': v:false},
+                \}}},
                 \ })
 endif
 

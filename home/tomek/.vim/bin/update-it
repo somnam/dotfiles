@@ -1,0 +1,32 @@
+#!/bin/bash
+
+
+main ()
+{
+    # Ensure bin folder exists
+    local bin_path="$HOME/.local/bin"
+    [[ -d $bin_path ]] || mkdir -p "$bin_path"
+
+    echo "Fetching AppImage download url"
+    local download_url=$(
+        wget -q -O- https://api.github.com/repos/vim/vim-appimage/releases/latest \
+            | grep browser_download_url \
+            | sed -e 's/^.*\(http.*AppImage\).*$/\1/'
+    )
+
+    if [[ -n $download_url ]]; then
+        local gvim_path="$bin_path/gvim"
+        local vim_path="$bin_path/vim"
+
+        echo "Downloading latest AppImage"
+        wget -q --progress=bar --show-progress "$download_url" -O "$gvim_path" \
+            && chmod 755 "$gvim_path" \
+            && ln -sf "$gvim_path" "$vim_path"
+
+        echo "Vim updated"
+    else
+        echo 'AppImage download url not found'
+    fi
+}
+
+main
