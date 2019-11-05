@@ -1,16 +1,14 @@
+" Use builtin terminal type and set 256 colors.
+if ($TERM =~ "xterm" || $TERM =~ "screen")
+    set term=xterm
+    set t_Co=256
+endif
+
 " Use current background color
 set t_ut=""
 
 " Be quiet
 set vb t_vb=""
-
-" Setup 256 color terminals
-if ($TERM =~ "256color" || $TERM == "screen")
-    set t_Co=256
-" Fallback for tty terminals
-elseif ($TERM == "xterm" || $TERM == "linux")
-    set t_Co=16
-endif
 
 " Set vertical column
 if exists('+colorcolumn')
