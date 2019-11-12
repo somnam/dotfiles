@@ -33,25 +33,25 @@ let g:mucomplete#chains.default  = ['c-n', 'path', 'omni', 'keyn', 'dict', 'uspl
 let g:mucomplete#chains.vim      = ['c-n', 'path', 'cmd', 'keyn']
 
 " Use a language server for Python omnifunc completions.
+" pip install python-language-server
 let s:python_lsp_cmd = $HOME . "/.venv/vim/bin/pyls"
-if executable(s:python_lsp_cmd)
-    " pip install python-language-server
-    autocmd User lsp_setup call lsp#register_server({
-                \ 'name': 'pyls',
-                \ 'cmd': {server_info->[s:python_lsp_cmd]},
-                \ 'whitelist': ['python'],
-                \ 'workspace_config': {'pyls': {'plugins': {
-                    \'jedi_completion': {'include_params': v:false},
-                    \'jedi_signature_help': {'enabled': v:false},
-                    \'jedi_hover': {'enabled': v:false},
-                    \'flake8': {'enabled': v:false},
-                    \'pycodestyle': {'enabled': v:false},
-                    \'pydocstyle': {'enabled': v:false},
-                    \'pyflakes': {'enabled': v:false},
-                    \'yapf': {'enabled': v:false},
-                \}}},
-                \ })
-endif
+let g:lsc_server_commands = {
+            \    'python' : {
+            \        'name': 'pyls',
+            \        'command': s:python_lsp_cmd,
+            \        'log_level': -1,
+            \        'suppress_stderr': v:true,
+            \    }
+            \}
+let g:lsc_auto_map = {
+            \'defaults': v:true,
+            \'Completion': 'omnifunc',
+            \}
+let g:lsc_enable_autocomplete  = v:false
+let g:lsc_auto_completeopt     = v:false
+let g:lsc_enable_diagnostics   = v:false
+let g:lsc_reference_highlights = v:false
+let g:lsc_trace_level          = 'off'
 
 " CSV
 let g:csv_highlight_column = 'y'
