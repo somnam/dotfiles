@@ -1,7 +1,6 @@
 #!/bin/bash
 
-
-main ()
+update-vim ()
 {
     # Ensure bin folder exists
     local bin_path="$HOME/.local/bin"
@@ -27,6 +26,36 @@ main ()
     else
         echo 'AppImage download url not found'
     fi
+}
+
+update-vim-plugins ()
+{
+    echo "Updating vim plugins"
+    local update_cmd="$HOME/.vim/bin/pack-it"
+    if [[ -f "$update_cmd" ]]; then
+        $update_cmd update
+    else
+        echo "Plugins not updated"
+    fi
+}
+
+update-python-requirements ()
+{
+    echo "Updating python requirements"
+    local python_cmd="$HOME/.venv/vim/bin/python"
+    local requirements_file="$HOME/.vim/requirements.txt"
+    if [[ -f "$python_cmd" && -f "$requirements_file" ]]; then
+        $python_cmd -mpip install -U -r "$requirements_file"
+    else
+        echo "Python requirements not updated"
+    fi
+}
+
+main ()
+{
+    update-vim
+    update-vim-plugins
+    update-python-requirements
 }
 
 main
