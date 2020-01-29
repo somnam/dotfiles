@@ -65,6 +65,8 @@ set complete-=i
 " Completion options
 set completeopt=menu,menuone,noinsert
 set pumheight=15
+" Disable SQL dynamic completion
+let g:omni_sql_no_default_maps = 1
 
 " Slows down scroll in vim >= 8.0.
 set nocursorcolumn

@@ -29,20 +29,24 @@ let g:ctrlp_user_command = {
 let g:mucomplete#enable_auto_at_startup = 1
 let g:mucomplete#minimum_prefix_length = 3
 let g:mucomplete#chains = {}
-let g:mucomplete#chains.default  = ['c-n', 'path', 'omni', 'keyn', 'dict', 'uspl']
-let g:mucomplete#chains.vim      = ['c-n', 'path', 'cmd', 'keyn']
+let g:mucomplete#chains.default  = ['path', 'c-n', 'tags', 'omni', 'dict', 'uspl']
+let g:mucomplete#chains.sql      = ['path','c-n', 'tags',  'dict', 'uspl']
+let g:mucomplete#chains.vim      = ['path', 'cmd','c-n', 'tags']
 
+" Use vim-lsc
+let g:lsc_server_commands = {}
 " Use a language server for Python omnifunc completions.
 " pip install python-language-server
 let s:python_lsp_cmd = $HOME . "/.venv/vim/bin/pyls"
-let g:lsc_server_commands = {
-            \    'python' : {
-            \        'name': 'pyls',
-            \        'command': s:python_lsp_cmd,
-            \        'log_level': -1,
-            \        'suppress_stderr': v:true,
-            \    }
-            \}
+if filereadable(s:python_lsp_cmd)
+    let g:lsc_server_commands.python = {
+                \        'name': 'pyls',
+                \        'command': s:python_lsp_cmd,
+                \        'log_level': -1,
+                \        'suppress_stderr': v:true,
+                \    }
+endif
+
 let g:lsc_auto_map = {
             \'defaults': v:true,
             \'Completion': 'omnifunc',
