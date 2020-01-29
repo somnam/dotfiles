@@ -15,4 +15,3 @@ start,https://github.com/rakr/vim-one.git
 start,https://github.com/Vimjas/vim-python-pep8-indent.git
 start,https://github.com/mhinz/vim-signify.git
 opt,https://github.com/peterhoeg/vim-qml.git
-opt,https://github.com/wlangstroth/vim-racket.git
