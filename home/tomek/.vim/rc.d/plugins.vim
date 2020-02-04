@@ -28,10 +28,12 @@ let g:ctrlp_user_command = {
 " Use mucomplete
 let g:mucomplete#enable_auto_at_startup = 1
 let g:mucomplete#minimum_prefix_length = 3
+let g:mucomplete#completion_delay = 100
+let g:mucomplete#reopen_immediately = 0
 let g:mucomplete#chains = {}
 let g:mucomplete#chains.default  = ['path', 'c-n', 'tags', 'omni', 'dict', 'uspl']
-let g:mucomplete#chains.sql      = ['path','c-n', 'tags',  'dict', 'uspl']
-let g:mucomplete#chains.vim      = ['path', 'cmd','c-n', 'tags']
+let g:mucomplete#chains.sql      = ['path', 'c-n', 'tags', 'dict', 'uspl']
+let g:mucomplete#chains.vim      = ['path', 'cmd', 'c-n', 'tags']
 
 " Use vim-lsc
 let g:lsc_server_commands = {}
@@ -49,6 +51,8 @@ endif
 
 let g:lsc_auto_map = {
             \'defaults': v:true,
+            \'NextReference': '',
+            \'PreviousReference': '',
             \'Completion': 'omnifunc',
             \}
 let g:lsc_enable_autocomplete  = v:false

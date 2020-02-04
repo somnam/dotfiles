@@ -9,13 +9,15 @@ case $- in
 esac
 
 # Load user-specific config.
-config_files=(
-    ~/.config/bashrc.d/aliases.bash \
-    ~/.config/bashrc.d/base.bash \
-    ~/.config/bashrc.d/exports.bash
-    ~/.config/bashrc.d/history.bash \
-    ~/.config/bashrc.d/navigation.bash
-)
-for file in ${config_files[@]}; do
-    if [ -f "$file" ]; then . "$file"; fi
-done
+load-user-config-files ()
+{
+    local config_path="$HOME/.config/bashrc.d"
+    [[ -d $config_path ]] || return
+
+    for file in "${config_path}"/*.bash; do
+        [[ -f "$file" ]] && . "$file"
+    done
+}
+
+
+load-user-config-files
