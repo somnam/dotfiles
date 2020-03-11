@@ -4,6 +4,7 @@ set background=dark
 
 " Dark theme
 if (&background == 'dark')
+    let g:spring_night_kill_italic = 1
     colorscheme spring-night
 " Light theme
 elseif (&background == 'light')
@@ -11,7 +12,7 @@ elseif (&background == 'light')
 endif
 
 " Set font
-set gfn=Hack\ 10
+set gfn=JetBrains\ Mono\ 10
 
 " Be quiet
 set vb t_vb=""
