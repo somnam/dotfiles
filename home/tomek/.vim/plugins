@@ -1,3 +1,4 @@
+start,https://github.com/prabirshrestha/async.vim
 start,https://github.com/jlanzarotta/bufexplorer.git
 start,https://github.com/ctrlpvim/ctrlp.vim
 start,https://github.com/somnam/pyte.git
@@ -9,7 +10,7 @@ start,https://github.com/junegunn/vim-easy-align
 start,https://github.com/nvie/vim-flake8
 start,git://github.com/tpope/vim-fugitive.git
 start,https://github.com/pangloss/vim-javascript.git
-start,https://github.com/natebosch/vim-lsc.git
+start,https://github.com/prabirshrestha/vim-lsp.git
 start,https://github.com/lifepillar/vim-mucomplete
 start,https://github.com/rakr/vim-one.git
 start,https://github.com/Vimjas/vim-python-pep8-indent.git

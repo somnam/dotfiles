@@ -20,7 +20,7 @@ let g:ctrlp_lazy_update = 1
 " Custom search command
 let g:ctrlp_user_command = {
     \ 'types': {
-        \ 1: ['.git', 'cd %s && git ls-files'],
+        \ 1: ['.git', 'cd %s && git ls-files -cm'],
         \ },
     \ 'fallback': 'find %s -type f'
     \ }
@@ -35,31 +35,55 @@ let g:mucomplete#chains.default  = ['path', 'c-n', 'tags', 'omni', 'dict', 'uspl
 let g:mucomplete#chains.sql      = ['path', 'c-n', 'tags', 'dict', 'uspl']
 let g:mucomplete#chains.vim      = ['path', 'cmd', 'c-n', 'tags']
 
-" Use vim-lsc
-let g:lsc_server_commands = {}
 " Use a language server for Python omnifunc completions.
 " pip install python-language-server
 let s:python_lsp_cmd = $HOME . "/.venv/vim/bin/pyls"
-if filereadable(s:python_lsp_cmd)
-    let g:lsc_server_commands.python = {
-                \        'name': 'pyls',
-                \        'command': s:python_lsp_cmd,
-                \        'log_level': -1,
-                \        'suppress_stderr': v:true,
-                \    }
+
+" Use vim-lsp
+if executable(s:python_lsp_cmd)
+    autocmd User lsp_setup call lsp#register_server({
+                \ 'name': 'pyls',
+                \ 'cmd': {server_info->[s:python_lsp_cmd]},
+                \ 'whitelist': ['python'],
+                \ 'workspace_config': {'pyls': {'plugins': {
+                    \'jedi_completion': {'include_params': v:true},
+                    \'jedi_hover': {'enabled': v:true},
+                    \'jedi_signature_help': {'enabled': v:true},
+                    \'flake8': {'enabled': v:false},
+                    \'pycodestyle': {'enabled': v:false},
+                    \'pydocstyle': {'enabled': v:false},
+                    \'pyflakes': {'enabled': v:false},
+                    \'pylint': {'enabled': v:false},
+                    \'yapf': {'enabled': v:false},
+                    \'rope_completion': {'enabled': v:false},
+                \}}},
+                \ })
 endif
 
-let g:lsc_auto_map = {
-            \'defaults': v:true,
-            \'NextReference': '',
-            \'PreviousReference': '',
-            \'Completion': 'omnifunc',
-            \}
-let g:lsc_enable_autocomplete  = v:false
-let g:lsc_auto_completeopt     = v:false
-let g:lsc_enable_diagnostics   = v:false
-let g:lsc_reference_highlights = v:false
-let g:lsc_trace_level          = 'off'
+
+function! s:on_lsp_buffer_enabled() abort
+    setlocal omnifunc=lsp#complete
+    nmap <buffer> <C-]> <plug>(lsp-definition)
+    nmap <buffer> gr <plug>(lsp-references)
+    nmap <buffer> gR <plug>(lsp-rename)
+    nmap <buffer> go <plug>(lsp-document-symbol)
+    nmap <buffer> gm <plug>(lsp-signature-help)
+    nmap <buffer> K <plug>(lsp-hover)
+endfunction
+
+augroup lsp_install
+    au!
+    " call only for languages that have the server registered.
+    autocmd User lsp_buffer_enabled call s:on_lsp_buffer_enabled()
+augroup END
+
+" Closes the preview window on the second call to preview (e.g. (lsp-hover))
+let g:lsp_preview_doubletap = [function('lsp#ui#vim#output#closepreview')]
+let g:lsp_diagnostics_enabled = 0
+let g:lsp_signs_enabled = 0
+let g:lsp_highlights_enabled = 0
+let g:lsp_highlight_references_enabled = 0
+let g:lsp_log_verbose = 0
 
 " CSV
 let g:csv_highlight_column = 'y'
