@@ -50,9 +50,14 @@ if executable(s:python_lsp_cmd)
                     \'jedi_hover': {'enabled': v:true},
                     \'jedi_signature_help': {'enabled': v:true},
                     \'flake8': {'enabled': v:false},
-                    \'pycodestyle': {'enabled': v:false},
+                    \'mccabe': {'enabled': v:false},
+                    \'pycodestyle': {
+                        \'enabled': v:true,
+                        \'maxLineLength': 120,
+                        \'ignore': 'W503,W504',
+                        \},
                     \'pydocstyle': {'enabled': v:false},
-                    \'pyflakes': {'enabled': v:false},
+                    \'pyflakes': {'enabled': v:true},
                     \'pylint': {'enabled': v:false},
                     \'yapf': {'enabled': v:false},
                     \'rope_completion': {'enabled': v:false},
@@ -79,7 +84,7 @@ augroup END
 
 " Closes the preview window on the second call to preview (e.g. (lsp-hover))
 let g:lsp_preview_doubletap = [function('lsp#ui#vim#output#closepreview')]
-let g:lsp_diagnostics_enabled = 0
+let g:lsp_diagnostics_enabled = 1
 let g:lsp_signs_enabled = 0
 let g:lsp_highlights_enabled = 0
 let g:lsp_highlight_references_enabled = 0
@@ -101,12 +106,3 @@ let g:signify_vcs_list = [ 'git' ]
 let g:python_highlight_file_headers_as_comments = 0
 let g:python_highlight_all = 1
 let g:python_slow_sync = 0
-
-" Flake8
-let s:flake8_cmd = $HOME . "/.venv/vim/bin/flake8"
-if filereadable(s:flake8_cmd)
-    let g:flake8_show_in_gutter = 1
-    let g:flake8_cmd = s:flake8_cmd
-    " Validate file using flake8 after each save.
-    autocmd FileType python autocmd! BufWritePost <buffer> call Flake8()
-endif
