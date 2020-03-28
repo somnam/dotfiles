@@ -61,6 +61,7 @@ set nomodeline                           " Don't run arbitrary modeline code
 set shortmess+=c
 " Prevent a condition where vim lags due to searching include files
 set complete-=i
+set complete-=t
 " Completion options
 set completeopt=menu,menuone,noinsert
 set pumheight=15
@@ -94,9 +95,6 @@ autocmd FileType go setlocal listchars=tab:\│\ ,trail:-,extends:>,precedes:<,n
 
 " Disable automatic comment insertion
 autocmd FileType javascript,java,lisp,scheme,perl,python,ruby,vim,c setlocal formatoptions-=c formatoptions-=r formatoptions-=o
-
-" Python - don't show docs in preview window
-autocmd FileType python setlocal completeopt-=preview nosmartindent
 
 " Wrapping in CSV
 autocmd FileType csv setlocal wrap

@@ -13,6 +13,7 @@ endif
 
 " Set font
 set gfn=JetBrains\ Mono\ 10
+set linespace=-1
 
 " Be quiet
 set vb t_vb=""
