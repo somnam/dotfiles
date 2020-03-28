@@ -15,7 +15,7 @@ if exists('+colorcolumn')
     set colorcolumn=80
 endif
 
-fun! s:updateTerminalColors()
+fun! s:updateTerminalColors() abort
     if has('gui_running')
         return
     endif
@@ -55,10 +55,10 @@ augroup END
 
 
 " Smooth scroll
-nnoremap <silent> <c-u> :call <sid>smoothScroll(1)<cr>
-nnoremap <silent> <c-d> :call <sid>smoothScroll(0)<cr>
+" nnoremap <silent> <c-u> :call <sid>smoothScroll(1)<cr>
+" nnoremap <silent> <c-d> :call <sid>smoothScroll(0)<cr>
 
-fun! s:smoothScroll(up)
+fun! s:smoothScroll(up) abort
   execute "normal " . (a:up ? "\<c-y>" : "\<c-e>")
   redraw
   for l:count in range(3, &scroll, 2)
