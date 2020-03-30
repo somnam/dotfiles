@@ -28,7 +28,7 @@ let g:ctrlp_user_command = {
 " Use mucomplete
 let g:mucomplete#enable_auto_at_startup = 1
 let g:mucomplete#minimum_prefix_length = 3
-let g:mucomplete#completion_delay = 125
+let g:mucomplete#completion_delay = 10
 let g:mucomplete#reopen_immediately = 0
 let g:mucomplete#chains = {}
 let g:mucomplete#chains.default  = ['c-n', 'omni', 'dict', 'path']
@@ -72,12 +72,13 @@ endif
 
 fun! s:on_lsp_buffer_enabled() abort
     setlocal omnifunc=ale#completion#OmniFunc
-    nmap <buffer> <A-d> :ALEGoToDefinition<cr>
-    nmap <buffer> <A-r> :ALEFindReferences<cr>
-    nmap <buffer> <A-R> :ALERename<cr>
-    nmap <buffer> <A-]> :ALENext<cr>
-    nmap <buffer> <A-[> :ALEPrevious<cr>
-    nmap <buffer> <A-k> :ALEHover<cr>
+    nmap <buffer> cd :ALEGoToDefinition<cr>
+    nmap <buffer> cD :ALEGoToDefinitionInSplit<cr>
+    nmap <buffer> cr :ALEFindReferences<cr>
+    nmap <buffer> cR :ALERename<cr>
+    nmap <buffer> c] :ALENext<cr>
+    nmap <buffer> c[ :ALEPrevious<cr>
+    nmap <buffer> ck :ALEHover<cr>
 endfun
 
 " CSV
