@@ -1,12 +1,10 @@
 start,https://github.com/dense-analysis/ale.git
 start,https://github.com/jlanzarotta/bufexplorer.git
 start,https://github.com/ctrlpvim/ctrlp.vim
-start,https://github.com/somnam/pyte.git
 start,https://github.com/vim-python/python-syntax.git
 start,https://github.com/moll/vim-bbye.git
 start,https://github.com/rhysd/vim-color-spring-night.git
 start,https://github.com/tpope/vim-commentary.git
-start,https://github.com/junegunn/vim-easy-align
 start,git://github.com/tpope/vim-fugitive.git
 start,https://github.com/pangloss/vim-javascript.git
 start,https://github.com/lifepillar/vim-mucomplete
@@ -14,4 +12,6 @@ start,https://github.com/rakr/vim-one.git
 start,https://github.com/Vimjas/vim-python-pep8-indent.git
 start,https://github.com/mhinz/vim-signify.git
 opt,https://github.com/prabirshrestha/async.vim
+opt,https://github.com/somnam/pyte.git
+opt,https://github.com/junegunn/vim-easy-align
 opt,https://github.com/prabirshrestha/vim-lsp.git
