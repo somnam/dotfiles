@@ -86,9 +86,12 @@ let g:csv_highlight_column = 'y'
 let g:signify_vcs_list = [ 'git' ]
 
 " Python - syntax highlighting
-let g:python_highlight_file_headers_as_comments = 0
-let g:python_highlight_all = 1
+let g:python_highlight_builtins = 1
+let g:python_highlight_exceptions = 1
+let g:python_highlight_func_calls = 1
+let g:python_highlight_class_vars = 1
+let g:python_highlight_operators = 1
 let g:python_slow_sync = 0
 
 " Generate helptags for all plugins
-helptags ALL
+silent! helptags ALL

@@ -1,43 +1,26 @@
 " Disable intro message
 set shortmess+=I
 
-" Vim5 and later versions support syntax highlighting. Uncommenting the
-" following enables syntax highlighting by default.
-syntax on
-
-" Uncomment the following to have Vim load indentation rules and plugins
-" according to the detected filetype.
-filetype plugin on
-filetype indent on
-
 " Set utf-8 encoding
 set encoding=utf8
 
 " Set backup directory
-set backupdir=~/.vim/backup,/var/tmp
+set backupdir=~/.local/share/nvim/backup,/var/tmp
 
 " Set swap dir
-set directory=~/.vim/swap,/var/tmp
+set directory=~/.local/share/nvim/swap,/var/tmp
 
-" The following are commented out as they cause vim to behave a lot
-" differently from regular Vi. They are highly recommended though.
-set hlsearch        " Highlight search results.
+" Default settings
 set nu              " Display line numbers
-set showcmd         " Show (partial) command in status line.
 set ignorecase      " Do case insensitive matching
 set smartcase       " Do smart case matching
-set incsearch       " Incremental search
 set autowrite       " Automatically save before commands like :next and :make
-set ruler           " Show cursor position all the time
-set history=200     " Keep n lines of command line history
-set wrap            " Line wrapping
+set history=2000    " Keep n lines of command line history
 set linebreak       " Wrap long lines at a linebreak character
 set nowrapscan      " Search wrapping
 set smartindent     " Try to be smart with indenting
 set autoindent      " Set global autoindent on
-set wildmenu        " Use wildmenu
 set wildmode=list:longest
-set laststatus=2    " Always display statusbar
 set fdm=marker      " Set folding method
 set hidden          " Hide buffer instead of closing it
 set lazyredraw      " Don't redraw the screen when not needed
@@ -47,23 +30,19 @@ set timeout         " Setting for mappings
 set timeoutlen=1000 " Set to default value
 set ttimeout        " Setting for key codes
 set ttimeoutlen=10  " Set to unnoticeable small value
-set autoread        " Read file when modified outside Vim
 set list                                      " Display whitespace info
 set listchars=tab:>.,trail:.,extends:#,nbsp:. " Display tab characters, trailing
                                               " whitespace, visible spaces and
                                               " mark lines that extend off-screen
 set shiftwidth=4 tabstop=4 softtabstop=4 " Set default tabs behavior
 set expandtab                            " Expand tabs to spaces
-set smarttab                             " Smart tab
-set backspace=indent,eol,start           " Make backspace work like in most programs
 set regexpengine=1                       " Use older regexp engine
 set synmaxcol=512                        " Be forgiving with long lines
 set nomodeline                           " Don't run arbitrary modeline code
 
 " Shut off completion messages
 set shortmess+=c
-" Prevent a condition where vim lags due to searching include files
-set complete-=i
+" Prevent a condition where vim lags due to searching tags
 set complete-=t
 " Completion options
 set completeopt=menu,menuone,noinsert
