@@ -1,0 +1,63 @@
+#!/bin/bash
+set -e
+
+download_nvim ()
+{
+    echo 'Downloading nvin appimage'
+
+    local wget=$(which wget)
+    local mkdir=$(which mkdir)
+    local appimage_url='https://github.com/neovim/neovim/releases/download/stable/nvim.appimage'
+    local user_bin_dir=~/.local/bin
+    local nvim_bin="$user_bin_dir/nvim"
+
+    $mkdir -p "$user_bin_dir" &&\
+        $wget -q --progress=bar --show-progress "$appimage_url" -O "$nvim_bin" &&\
+        chmod u+x "$nvim_bin"
+}
+
+download_plugin_manager ()
+{
+    echo 'Downloading plugin manager'
+
+    local wget=$(which wget)
+    local mkdir=$(which mkdir)
+    local plugin_manager_url='https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim'
+    local nvim_autoload_dir=~/.local/share/nvim/site/autoload
+    local plugin_manager="$nvim_autoload_dir/plug.vim"
+
+    $mkdir -p "$nvim_autoload_dir" && $wget -q "$plugin_manager_url" --output-document "$plugin_manager"
+}
+
+sync_plugins ()
+{
+    echo 'Installing / Updating all plugins'
+    manage_plugins 'PlugUpdate!'
+
+    echo 'Clearing removed plugins'
+    manage_plugins 'PlugClean!'
+}
+
+manage_plugins ()
+{
+    local plugins=~/.config/nvim/settings/04_plugins.vim
+    [[ -f $plugins ]] || return
+
+    local nvim=$(which nvim)
+    local nvim=${nvim:-~/.local/bin/nvim}
+
+    # Install/Update all installed plugins.
+    local konsole_fix='set guicursor='
+    $nvim -u "$plugins" +$konsole_fix +"$1" +qa
+}
+
+main ()
+{
+    [[ $(which wget) ]] || return 0;
+
+    download_nvim
+    download_plugin_manager
+    sync_plugins
+}
+
+main $@
