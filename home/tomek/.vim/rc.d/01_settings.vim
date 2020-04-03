@@ -44,7 +44,11 @@ set hidden          " Hide buffer instead of closing it
 set lazyredraw      " Don't redraw the screen when not needed
 set ttyfast         " Faster scrolling
 set ttimeout        " Time waited for key press(es) to complete, faster key response
-set ttimeoutlen=100 "
+set timeout         " Setting for mappings
+set timeoutlen=1000 " Set to default value
+set ttimeout        " Setting for key codes
+set ttimeoutlen=10  " Set to unnoticeable small value
+set autoread        " Read file when modified outside Vim
 set list                                      " Display whitespace info
 set listchars=tab:>.,trail:.,extends:#,nbsp:. " Display tab characters, trailing
                                               " whitespace, visible spaces and
