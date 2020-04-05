@@ -1,0 +1,87 @@
+#!/bin/bash
+set -e
+
+update-vim ()
+{
+    local wget=$(which wget)
+    local grep=$(which grep)
+    local sed=$(which sed)
+
+    echo "Fetching appimage download url"
+    local appimage_url=$(
+        $wget -q -O- https://api.github.com/repos/vim/vim-appimage/releases/latest \
+            | $grep browser_download_url \
+            | $sed -e 's/^.*\(http.*AppImage\).*$/\1/'
+    )
+
+    if [[ -n $appimage_url ]]; then
+        local mkdir=$(which mkdir)
+        local chmod=$(which chmod)
+        local ln=$(which ln)
+        local bin_path="$HOME/.local/bin"
+        local gvim_path="$bin_path/gvim"
+        local vim_path="$bin_path/vim"
+
+        echo "Downloading latest appimage"
+        $mkdir -p "$bin_path" &&\
+            $wget -q --progress=bar --show-progress "$appimage_url" -O "$gvim_path" &&\
+            $chmod u+x "$gvim_path" &&\
+            $ln -sf "$gvim_path" "$vim_path"
+    else
+        echo 'AppImage download url not found'
+    fi
+}
+
+sync-vim-plugins ()
+{
+    echo 'Synchronizing plugins'
+
+    download-plugin-manager
+    manage-plugins 'PlugUpdate!'
+    manage-plugins 'PlugClean!'
+}
+
+download-plugin-manager ()
+{
+    local wget=$(which wget)
+    local mkdir=$(which mkdir)
+    local plugin_manager_url='https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim'
+    local vim_autoload_dir="$HOME/.vim/autoload"
+    local plugin_manager="$vim_autoload_dir/plug.vim"
+
+    $mkdir -p "$vim_autoload_dir" && $wget -q "$plugin_manager_url" --output-document "$plugin_manager"
+}
+
+manage-plugins ()
+{
+    local plugins="$HOME/.vim/rc.d/04_plugins.vim"
+    [[ -f $plugins ]] || return
+
+    local vim=$(which vim)
+    local vim=${vim:-"$HOME/.local/bin/vim"}
+
+    # Install/Update all installed plugins.
+    local konsole_fix='set guicursor='
+    $vim -u $plugins -N +$konsole_fix +$options +$1 +qa
+}
+
+update-python-requirements ()
+{
+    local python_cmd="$HOME/.venv/vim/bin/python"
+    local requirements_file="$HOME/.vim/requirements.txt"
+    if [[ -f "$python_cmd" && -f "$requirements_file" ]]; then
+        echo "Updating python requirements"
+        $python_cmd -mpip install -U -r "$requirements_file"
+    else
+        echo "Python requirements not updated"
+    fi
+}
+
+main ()
+{
+    # update-vim
+    sync-vim-plugins
+    update-python-requirements
+}
+
+main

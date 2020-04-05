@@ -1,2 +1,2 @@
 " Load configuration files.
-runtime! rc.d/*.vim
+runtime! settings/*.vim
