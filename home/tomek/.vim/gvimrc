@@ -8,7 +8,7 @@ if (&background == 'dark')
     colorscheme spring-night
 " Light theme
 elseif (&background == 'light')
-    colorscheme pyte
+    colorscheme one
 endif
 
 " Set font
