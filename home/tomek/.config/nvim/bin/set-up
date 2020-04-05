@@ -1,59 +1,74 @@
 #!/bin/bash
 set -e
 
-download_nvim ()
+update-nvim ()
 {
+    echo 'Downloading latest appimage'
+
     local wget=$(which wget)
     local mkdir=$(which mkdir)
+    local chmod=$(which chmod)
     local appimage_url='https://github.com/neovim/neovim/releases/download/stable/nvim.appimage'
-    local user_bin_dir=~/.local/bin
-    local nvim_bin="$user_bin_dir/nvim"
+    local bin_path="$HOME/.local/bin"
+    local nvim_path="$bin_path/nvim"
 
-    $mkdir -p "$user_bin_dir" &&\
-        $wget -q --progress=bar --show-progress "$appimage_url" -O "$nvim_bin" &&\
-        chmod u+x "$nvim_bin"
+    $mkdir -p "$bin_path" &&\
+        $wget -q --progress=bar --show-progress "$appimage_url" -O "$nvim_path" &&\
+        $chmod u+x "$nvim_path"
 }
 
-download_plugin_manager ()
+sync-nvim-plugins ()
+{
+    echo 'Synchronizing plugins'
+
+    download-plugin-manager
+    manage-plugins 'PlugUpdate!'
+    manage-plugins 'PlugClean!'
+}
+
+download-plugin-manager ()
 {
     local wget=$(which wget)
     local mkdir=$(which mkdir)
     local plugin_manager_url='https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim'
-    local nvim_autoload_dir=~/.local/share/nvim/site/autoload
+    local nvim_autoload_dir="$HOME/.local/share/nvim/site/autoload"
     local plugin_manager="$nvim_autoload_dir/plug.vim"
 
-    $mkdir -p "$nvim_autoload_dir" && $wget -q "$plugin_manager_url" --output-document "$plugin_manager"
+    $mkdir -p "$nvim_autoload_dir" && $wget -q "$plugin_manager_url" -O "$plugin_manager"
 }
 
-sync_plugins ()
+manage-plugins ()
 {
-    download_plugin_manager
-    manage_plugins 'PlugUpdate!'
-    manage_plugins 'PlugClean!'
-}
-
-manage_plugins ()
-{
-    local plugins=~/.config/nvim/settings/04_plugins.vim
+    local plugins="$HOME/.config/nvim/settings/04_plugins.vim"
     [[ -f $plugins ]] || return
 
     local nvim=$(which nvim)
-    local nvim=${nvim:-~/.local/bin/nvim}
+    local nvim=${nvim:-"$HOME/.local/bin/nvim"}
 
     # Install/Update all installed plugins.
     local konsole_fix='set guicursor='
     $nvim -u "$plugins" +$konsole_fix +"$1" +qa
 }
 
+update-python-requirements ()
+{
+    local python_cmd="$HOME/.venv/nvim/bin/python"
+    local requirements="$HOME/.config/nvim/requirements.txt"
+    if [[ -f "$python_cmd" && -f "$requirements" ]]; then
+        echo 'Updating python requirements'
+        $python_cmd -mpip install -U -r "$requirements"
+    else
+        echo "Python requirements not updated"
+    fi
+}
+
 main ()
 {
     [[ $(which wget) ]] || return 0;
 
-    echo 'Downloading nvin appimage'
-    download_nvim
-
-    echo 'Synchronizing plugins'
-    sync_plugins
+    update-nvim
+    sync-nvim-plugins
+    update-python-requirements
 }
 
 main $@
