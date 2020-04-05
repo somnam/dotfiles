@@ -49,12 +49,12 @@ download-plugin-manager ()
     local vim_autoload_dir="$HOME/.vim/autoload"
     local plugin_manager="$vim_autoload_dir/plug.vim"
 
-    $mkdir -p "$vim_autoload_dir" && $wget -q "$plugin_manager_url" --output-document "$plugin_manager"
+    $mkdir -p "$vim_autoload_dir" && $wget -q "$plugin_manager_url" -O "$plugin_manager"
 }
 
 manage-plugins ()
 {
-    local plugins="$HOME/.vim/rc.d/04_plugins.vim"
+    local plugins="$HOME/.vim/settings/04_plugins.vim"
     [[ -f $plugins ]] || return
 
     local vim=$(which vim)
@@ -79,7 +79,7 @@ update-python-requirements ()
 
 main ()
 {
-    # update-vim
+    update-vim
     sync-vim-plugins
     update-python-requirements
 }
