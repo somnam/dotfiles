@@ -15,4 +15,4 @@ Plug 'rakr/vim-one'
 call plug#end()
 
 " Generate helptags for all plugins
-silent! helptags ALL
+autocmd VimEnter * silent! helptags ALL

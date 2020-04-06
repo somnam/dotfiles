@@ -30,6 +30,7 @@ set timeout         " Setting for mappings
 set timeoutlen=1000 " Set to default value
 set ttimeout        " Setting for key codes
 set ttimeoutlen=10  " Set to unnoticeable small value
+set formatoptions-=cro                        " Disable automatic comment insertion
 set list                                      " Display whitespace info
 set listchars=tab:>.,trail:.,extends:#,nbsp:. " Display tab characters, trailing
                                               " whitespace, visible spaces and
@@ -68,15 +69,10 @@ autocmd BufReadPost * if line("'\"") > 1 && line("'\"") <= line("$") | exe "norm
 "     shiftwidth  : shift width with < and > for VISUAL indenting
 "     softtabstop : count n spaces when DELETE or <BS> is used
 autocmd FileType html,htmldjango,xhtml,xml,xslt,eruby,ruby,haml,yaml,erb setlocal shiftwidth=2 tabstop=2 softtabstop=2
-autocmd FileType c,cpp,h,perl,python,css,javascript,java setlocal shiftwidth=4 tabstop=4 softtabstop=4
 autocmd FileType lisp,scheme setlocal shiftwidth=2 tabstop=8 softtabstop=2
 
 " Go tabs setup and formatting
-autocmd FileType go setlocal shiftwidth=4 tabstop=4 softtabstop=0 noexpandtab
-autocmd FileType go setlocal listchars=tab:\│\ ,trail:-,extends:>,precedes:<,nbsp:+
-
-" Disable automatic comment insertion
-autocmd FileType javascript,java,lisp,scheme,perl,python,ruby,vim,c setlocal formatoptions-=c formatoptions-=r formatoptions-=o
+autocmd FileType go setlocal shiftwidth=4 tabstop=4 softtabstop=0 noexpandtab listchars=tab:\│\ ,trail:-,extends:>,precedes:<,nbsp:+
 
 " Wrapping in CSV
 autocmd FileType csv setlocal wrap
