@@ -36,10 +36,10 @@ if executable(s:python_lsp_cmd)
 endif
 
 " Set keyboard shortcuts
-nmap <buffer> <Leader>n :ALENext<Enter>
-nmap <buffer> <Leader>p :ALEPrevious<Enter>
-nmap <buffer> <Leader>d :ALEGoToDefinition<cr>
-nmap <buffer> <Leader>D :ALEGoToDefinitionInSplit<cr>
-nmap <buffer> <Leader>r :ALEFindReferences<cr>
-nmap <buffer> <Leader>R :ALERename<cr>
-nmap <buffer> <Leader>k :ALEHover<cr>
+map <Leader>] :ALENext<Enter>
+map <Leader>[ :ALEPrevious<Enter>
+map <Leader>d :ALEGoToDefinition<Enter>
+map <Leader>D :ALEGoToDefinitionInSplit<Enter>
+map <Leader>r :ALEFindReferences<Enter>
+map <Leader>R :ALERename<Enter>
+map <Leader>k :ALEHover<Enter>

@@ -20,6 +20,7 @@ let g:ale_hover_to_preview = 1
 let g:ale_echo_msg_format = '[%severity%] %s'
 let g:ale_virtualenv_dir_names = ['.venv/vim', '.env', '.venv', 'env', 'virtualenv', 'venv']
 let g:ale_linters = {'python': ['flake8']}
+
 let s:python_lsp_cmd = $HOME . "/.venv/vim/bin/pyls"
 if executable(s:python_lsp_cmd)
     let g:ale_linters = {'python': ['flake8', 'pyls']}
@@ -39,11 +40,12 @@ if executable(s:python_lsp_cmd)
                 \}}}
     autocmd FileType python setlocal omnifunc=ale#completion#OmniFunc
 endif
+
 " Set keyboard shortcuts
-nmap <buffer> <Leader>n :ALENext<Enter>
-nmap <buffer> <Leader>p :ALEPrevious<Enter>
-nmap <buffer> <Leader>d :ALEGoToDefinition<cr>
-nmap <buffer> <Leader>D :ALEGoToDefinitionInSplit<cr>
-nmap <buffer> <Leader>r :ALEFindReferences<cr>
-nmap <buffer> <Leader>R :ALERename<cr>
-nmap <buffer> <Leader>k :ALEHover<cr>
+map <Leader>] :ALENext<Enter>
+map <Leader>[ :ALEPrevious<Enter>
+map <Leader>d :ALEGoToDefinition<Enter>
+map <Leader>D :ALEGoToDefinitionInSplit<Enter>
+map <Leader>r :ALEFindReferences<Enter>
+map <Leader>R :ALERename<Enter>
+map <Leader>k :ALEHover<Enter>
