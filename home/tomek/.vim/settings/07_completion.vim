@@ -20,34 +20,6 @@ let g:ale_echo_msg_format = '[%severity%] %s'
 let g:ale_virtualenv_dir_names = ['.venv/vim', '.env', '.venv', 'env', 'virtualenv', 'venv']
 let g:ale_linters = {'python': ['flake8']}
 
-" let s:python_lsp_cmd = $HOME . "/.venv/vim/bin/pyls"
-" if executable(s:python_lsp_cmd)
-"     " Configure language server
-"     let g:ale_linters = {'python': ['flake8', 'pyls']}
-"     let g:ale_linters_ignore = ['pyls']
-"     let g:ale_python_pyls_config = {'pyls': {'plugins': {
-"                 \'jedi_completion': {'include_params': v:true},
-"                 \'jedi_hover': {'enabled': v:true},
-"                 \'jedi_signature_help': {'enabled': v:false},
-"                 \'pycodestyle': {'enabled': v:false},
-"                 \'pyflakes': {'enabled': v:false},
-"                 \'flake8': {'enabled': v:false},
-"                 \'mccabe': {'enabled': v:false},
-"                 \'pydocstyle': {'enabled': v:false},
-"                 \'pylint': {'enabled': v:false},
-"                 \'yapf': {'enabled': v:false},
-"                 \'rope_completion': {'enabled': v:false},
-"                 \}}}
-"     autocmd FileType python setlocal omnifunc=ale#completion#OmniFunc
-
-"     " Set keyboard shortcuts
-"     map <Leader>d :ALEGoToDefinition<Enter>
-"     map <Leader>D :ALEGoToDefinitionInSplit<Enter>
-"     map <Leader>r :ALEFindReferences<Enter>
-"     map <Leader>R :ALERename<Enter>
-"     map <Leader>k :ALEHover<Enter>
-" endif
-
 " Set keyboard shortcuts
 map <Leader>] :ALENext<Enter>
 map <Leader>[ :ALEPrevious<Enter>

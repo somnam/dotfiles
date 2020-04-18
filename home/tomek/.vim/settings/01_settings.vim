@@ -19,6 +19,9 @@ set backupdir=~/.vim/backup,/var/tmp
 " Set swap dir
 set directory=~/.vim/swap,/var/tmp
 
+" Set undo dir
+set undodir=~/.vim/undo,/var/tmp
+
 " The following are commented out as they cause vim to behave a lot
 " differently from regular Vi. They are highly recommended though.
 set hlsearch        " Highlight search results.
@@ -36,7 +39,7 @@ set nowrapscan      " Search wrapping
 set smartindent     " Try to be smart with indenting
 set autoindent      " Set global autoindent on
 set wildmenu        " Use wildmenu
-set wildmode=list:longest
+set wildmode=full:longest
 set laststatus=2    " Always display statusbar
 set fdm=marker      " Set folding method
 set hidden          " Hide buffer instead of closing it
@@ -60,6 +63,8 @@ set backspace=indent,eol,start           " Make backspace work like in most prog
 set regexpengine=1                       " Use older regexp engine
 set synmaxcol=512                        " Be forgiving with long lines
 set nomodeline                           " Don't run arbitrary modeline code
+set undofile                             " Enable persistent undo
+set clipboard+=unnamedplus               " Use the "global" buffer for copy and paste
 
 " Shut off completion messages
 set shortmess+=c
