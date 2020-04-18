@@ -5,8 +5,8 @@ nmap <C-h> <C-W>h
 nmap <C-l> <C-W>l
 
 " Tabs
-map <A-Left> :tabp<Enter>
-map <A-Right> :tabn<Enter>
+map <C-Left> :tabp<Enter>
+map <C-Right> :tabn<Enter>
 
 " Move vertically by visual line
 nmap j gj

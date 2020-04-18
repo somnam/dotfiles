@@ -10,6 +10,9 @@ set backupdir=~/.local/share/nvim/backup,/var/tmp
 " Set swap dir
 set directory=~/.local/share/nvim/swap,/var/tmp
 
+" Set undo dir
+set undodir=~/.local/share/nvim/undo,/var/tmp
+
 " Default settings
 set nu              " Display line numbers
 set ignorecase      " Do case insensitive matching
@@ -20,7 +23,7 @@ set linebreak       " Wrap long lines at a linebreak character
 set nowrapscan      " Search wrapping
 set smartindent     " Try to be smart with indenting
 set autoindent      " Set global autoindent on
-set wildmode=list:longest
+set wildmode=full:longest
 set fdm=marker      " Set folding method
 set hidden          " Hide buffer instead of closing it
 set lazyredraw      " Don't redraw the screen when not needed
@@ -40,6 +43,8 @@ set expandtab                            " Expand tabs to spaces
 set regexpengine=1                       " Use older regexp engine
 set synmaxcol=512                        " Be forgiving with long lines
 set nomodeline                           " Don't run arbitrary modeline code
+set undofile                             " Enable persistent undo
+set clipboard+=unnamedplus               " Use the "global" buffer for copy and paste
 
 " Shut off completion messages
 set shortmess+=c
