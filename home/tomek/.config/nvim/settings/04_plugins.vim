@@ -1,7 +1,7 @@
 " Disable python2 support
 let g:loaded_python_provider = 0
 " Set python3 path
-let g:python3_host_prog = $HOME . "/.venv/nvim/bin/python3"
+let g:python3_host_prog = $HOME . "/.config/nvim/python/bin/python"
 
 call plug#begin()
 Plug 'dense-analysis/ale'
