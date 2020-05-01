@@ -17,7 +17,7 @@ let g:ale_lint_on_insert_leave = 0
 let g:ale_completion_enabled = 0
 let g:ale_hover_to_preview = 1
 let g:ale_echo_msg_format = '[%severity%] %s'
-let g:ale_virtualenv_dir_names = ['.venv/vim', '.env', '.venv', 'env', 'virtualenv', 'venv']
+let g:ale_virtualenv_dir_names = ['.vim/python', '.env', '.venv', 'env', 'virtualenv', 'venv']
 let g:ale_linters = {'python': ['flake8']}
 
 " Set keyboard shortcuts

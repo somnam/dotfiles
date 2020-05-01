@@ -50,6 +50,7 @@ set timeout         " Setting for mappings
 set timeoutlen=1000 " Set to default value
 set ttimeout        " Setting for key codes
 set ttimeoutlen=10  " Set to unnoticeable small value
+set updatetime=300  " Longer update time leads to noticeable delays
 set autoread        " Read file when modified outside Vim
 set formatoptions-=cro                        " Disable automatic comment insertion
 set list                                      " Display whitespace info

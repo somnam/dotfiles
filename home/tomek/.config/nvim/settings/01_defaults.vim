@@ -4,15 +4,6 @@ set shortmess+=I
 " Set utf-8 encoding
 set encoding=utf8
 
-" Set backup directory
-set backupdir=~/.local/share/nvim/backup,/var/tmp
-
-" Set swap dir
-set directory=~/.local/share/nvim/swap,/var/tmp
-
-" Set undo dir
-set undodir=~/.local/share/nvim/undo,/var/tmp
-
 " Default settings
 set nu              " Display line numbers
 set ignorecase      " Do case insensitive matching

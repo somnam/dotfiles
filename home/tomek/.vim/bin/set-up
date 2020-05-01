@@ -67,9 +67,9 @@ manage-plugins ()
 
 update-python-requirements ()
 {
-    local python_cmd="$HOME/.venv/vim/bin/python"
+    local python_cmd="$HOME/.vim/python/bin/python"
     local requirements_file="$HOME/.vim/requirements.txt"
-    if [[ -f "$python_cmd" && -f "$requirements_file" ]]; then
+    if [[ -x "$python_cmd" && -f "$requirements_file" ]]; then
         echo "Updating python requirements"
         $python_cmd -mpip install -U -r "$requirements_file"
     else
