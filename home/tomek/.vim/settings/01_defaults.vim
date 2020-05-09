@@ -24,12 +24,12 @@ set undodir=~/.vim/undo,/var/tmp
 
 " The following are commented out as they cause vim to behave a lot
 " differently from regular Vi. They are highly recommended though.
+set incsearch       " Incremental search
 set hlsearch        " Highlight search results.
 set nu              " Display line numbers
 set showcmd         " Show (partial) command in status line.
 set ignorecase      " Do case insensitive matching
 set smartcase       " Do smart case matching
-set incsearch       " Incremental search
 set autowrite       " Automatically save before commands like :next and :make
 set ruler           " Show cursor position all the time
 set history=2000    " Keep n lines of command line history
@@ -97,6 +97,9 @@ autocmd BufReadPost * if line("'\"") > 1 && line("'\"") <= line("$") | exe "norm
 "     softtabstop : count n spaces when DELETE or <BS> is used
 autocmd FileType html,htmldjango,xhtml,xml,xslt,eruby,ruby,haml,yaml,erb setlocal shiftwidth=2 tabstop=2 softtabstop=2
 autocmd FileType lisp,scheme setlocal shiftwidth=2 tabstop=8 softtabstop=2
+
+" Disable automatic comment insertion
+autocmd FileType vim setlocal formatoptions-=cro
 
 " Go tabs setup and formatting
 autocmd FileType go setlocal shiftwidth=4 tabstop=4 softtabstop=0 noexpandtab listchars=tab:\│\ ,trail:-,extends:>,precedes:<,nbsp:+

@@ -5,6 +5,8 @@ set shortmess+=I
 set encoding=utf8
 
 " Default settings
+set incsearch       " Incremental search
+set hlsearch        " Highlight search results.
 set nu              " Display line numbers
 set ignorecase      " Do case insensitive matching
 set smartcase       " Do smart case matching
@@ -25,6 +27,7 @@ set timeoutlen=1000 " Set to default value
 set ttimeout        " Setting for key codes
 set ttimeoutlen=10  " Set to unnoticeable small value
 set updatetime=300  " Longer update time leads to noticeable delays
+set autoread        " Read file when modified outside Vim
 set formatoptions-=cro                        " Disable automatic comment insertion
 set list                                      " Display whitespace info
 set listchars=tab:>.,trail:.,extends:#,nbsp:. " Display tab characters, trailing
@@ -67,6 +70,9 @@ autocmd BufReadPost * if line("'\"") > 1 && line("'\"") <= line("$") | exe "norm
 "     softtabstop : count n spaces when DELETE or <BS> is used
 autocmd FileType html,htmldjango,xhtml,xml,xslt,eruby,ruby,haml,yaml,erb setlocal shiftwidth=2 tabstop=2 softtabstop=2
 autocmd FileType lisp,scheme setlocal shiftwidth=2 tabstop=8 softtabstop=2
+
+" Disable automatic comment insertion
+autocmd FileType vim setlocal formatoptions-=cro
 
 " Go tabs setup and formatting
 autocmd FileType go setlocal shiftwidth=4 tabstop=4 softtabstop=0 noexpandtab listchars=tab:\│\ ,trail:-,extends:>,precedes:<,nbsp:+
