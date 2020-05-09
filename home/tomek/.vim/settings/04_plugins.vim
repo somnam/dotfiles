@@ -12,6 +12,7 @@ Plug 'pangloss/vim-javascript'
 Plug 'mhinz/vim-signify'
 Plug 'rhysd/vim-color-spring-night'
 Plug 'rakr/vim-one'
+Plug 'wincent/ferret'
 call plug#end()
 
 " Generate helptags for all plugins

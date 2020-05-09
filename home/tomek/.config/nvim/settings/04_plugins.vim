@@ -16,6 +16,7 @@ Plug 'vim-python/python-syntax'
 Plug 'Vimjas/vim-python-pep8-indent'
 Plug 'pangloss/vim-javascript'
 Plug 'mhinz/vim-signify'
+Plug 'wincent/ferret'
 call plug#end()
 
 " Generate helptags for all plugins
