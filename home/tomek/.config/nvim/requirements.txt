@@ -1,2 +1,3 @@
 pynvim
-python-language-server[autopep8,flake8]
+flake8
+jedi

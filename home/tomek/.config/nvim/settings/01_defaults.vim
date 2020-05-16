@@ -8,15 +8,21 @@ set encoding=utf8
 set incsearch       " Incremental search
 set hlsearch        " Highlight search results.
 set nu              " Display line numbers
+set showcmd         " Show (partial) command in status line.
 set ignorecase      " Do case insensitive matching
 set smartcase       " Do smart case matching
 set autowrite       " Automatically save before commands like :next and :make
+set ruler           " Show cursor position all the time
 set history=2000    " Keep n lines of command line history
+set wrap            " Line wrapping
 set linebreak       " Wrap long lines at a linebreak character
 set nowrapscan      " Search wrapping
 set smartindent     " Try to be smart with indenting
 set autoindent      " Set global autoindent on
+set wildmenu        " Use wildmenu
 set wildmode=full:longest
+set wildoptions=tagfile
+set laststatus=2    " Always display statusbar
 set fdm=marker      " Set folding method
 set hidden          " Hide buffer instead of closing it
 set lazyredraw      " Don't redraw the screen when not needed
@@ -35,15 +41,19 @@ set listchars=tab:>.,trail:.,extends:#,nbsp:. " Display tab characters, trailing
                                               " mark lines that extend off-screen
 set shiftwidth=4 tabstop=4 softtabstop=4 " Set default tabs behavior
 set expandtab                            " Expand tabs to spaces
+set smarttab                             " Smart tab
+set backspace=indent,eol,start           " Make backspace work like in most programs
 set regexpengine=1                       " Use older regexp engine
 set synmaxcol=512                        " Be forgiving with long lines
 set nomodeline                           " Don't run arbitrary modeline code
 set undofile                             " Enable persistent undo
 set clipboard+=unnamedplus               " Use the "global" buffer for copy and paste
+set inccommand=nosplit                   " Shows the effects of a command incrementally.
 
 " Shut off completion messages
 set shortmess+=c
-" Prevent a condition where vim lags due to searching tags
+" Prevent a condition where vim lags due to searching include files and tags
+set complete-=i
 set complete-=t
 " Completion options
 set completeopt=menu,menuone,noinsert
