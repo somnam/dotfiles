@@ -10,7 +10,7 @@ let g:ctrlp_lazy_update = 1
 " Custom search command
 let g:ctrlp_user_command = {
     \ 'types': {
-        \ 1: ['.git', 'cd %s && git ls-files -cmo --exclude-standard'],
+        \ 1: ['.git', 'cd %s && git ls-files -co --exclude-standard'],
         \ },
     \ 'fallback': 'find %s -type f'
     \ }
