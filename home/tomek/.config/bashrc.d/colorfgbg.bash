@@ -1,6 +1,6 @@
 guess-colorfgbg ()
 {
-    if [ -n "$VTE_VERSION" -a -z "$COLORFGBG" ]; then
+    if [ -z "$COLORFGBG" ]; then
         local prefix
         local bg
         stty -echo
