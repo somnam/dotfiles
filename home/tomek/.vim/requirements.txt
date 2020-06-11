@@ -1,1 +1,1 @@
-flake8
+python-language-server[autopep8,flake8]
