@@ -31,7 +31,7 @@ def update_table(tipping_points):
 
 def set_quiet_profile():
     logging.info('Setting quiet cooling profile. It may take a few minutes for it to become active.')
-    quiet_tipping_points = [42, 47, 52, 57, 62, 67, 72, 80]
+    quiet_tipping_points = [40, 45, 50, 55, 60, 65, 70, 80]
     update_table(quiet_tipping_points)
 
 

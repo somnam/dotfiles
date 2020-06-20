@@ -12,7 +12,7 @@ elseif (&background == 'light')
 endif
 
 " Set font
-set gfn=JetBrains\ Mono\ 10
+set gfn=JetBrains\ Mono\ 11
 set linespace=-1
 
 " Be quiet

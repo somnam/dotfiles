@@ -54,7 +54,7 @@ download-plugin-manager ()
 
 manage-plugins ()
 {
-    local plugins="$HOME/.vim/settings/04_plugins.vim"
+    local plugins="$HOME/.vim/settings/02_plugins.vim"
     [[ -f $plugins ]] || return
 
     local vim=$(which vim)
