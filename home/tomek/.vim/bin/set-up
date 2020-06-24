@@ -6,11 +6,13 @@ update-vim ()
     local wget=$(which wget)
     local grep=$(which grep)
     local sed=$(which sed)
+    local head=$(which head)
 
     echo "Fetching appimage download url"
     local appimage_url=$(
         $wget -q -O- https://api.github.com/repos/vim/vim-appimage/releases/latest \
             | $grep browser_download_url \
+            | $head -n 1 \
             | $sed -e 's/^.*\(http.*AppImage\).*$/\1/'
     )
 
