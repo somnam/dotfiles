@@ -24,10 +24,15 @@ let g:ale_hover_to_preview = 0
 let g:ale_echo_msg_format = '[%severity%] %s'
 let g:ale_virtualenv_dir_names = ['.vim/python', '.env', '.venv', 'env', 'virtualenv', 'venv']
 let g:ale_linters = {'python': ['flake8']}
+let g:ale_fixers = {
+            \'*': ['remove_trailing_lines', 'trim_whitespace'],
+            \'python': ['autopep8'],
+            \}
 
 " Set keyboard shortcuts
 map <Leader>] :ALENext<Enter>
 map <Leader>[ :ALEPrevious<Enter>
+map <Leader>f :ALEFix<Enter>
 
 let s:python_lsp_cmd = $HOME . "/.vim/python/bin/pyls"
 if executable(s:python_lsp_cmd)
@@ -37,12 +42,12 @@ if executable(s:python_lsp_cmd)
     let g:ale_python_pyls_config = {'pyls': {'plugins': {
                 \'jedi_completion': {'include_params': v:true},
                 \'jedi_hover': {'enabled': v:false},
-                \'jedi_signature_help': {'enabled': v:false},
+                \'jedi_signature_help': {'enabled': v:true},
+                \'pydocstyle': {'enabled': v:false},
                 \'pycodestyle': {'enabled': v:false},
                 \'pyflakes': {'enabled': v:false},
                 \'flake8': {'enabled': v:false},
                 \'mccabe': {'enabled': v:false},
-                \'pydocstyle': {'enabled': v:false},
                 \'pylint': {'enabled': v:false},
                 \'yapf': {'enabled': v:false},
                 \'rope_completion': {'enabled': v:false},
