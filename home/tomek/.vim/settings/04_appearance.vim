@@ -1,5 +1,5 @@
-" Use builtin terminal type and set 256 colors.
 if ($TERM =~ "xterm" || $TERM =~ "screen")
+    " Use builtin terminal type and set 256 colors.
     set term=xterm
     set t_Co=256
 endif
