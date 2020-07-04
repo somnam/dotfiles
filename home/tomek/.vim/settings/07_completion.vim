@@ -13,8 +13,10 @@ let g:mucomplete#chains.vim      = ['cmd', 'keyn', 'c-n', 'path']
 
 " Python omni completion regex.
 let s:omni_py = { t -> t =~# '\m\%(\k\.\|^\s*from\s.\+import\s\k\)$' }
+let s:omni_rust = { t -> t =~# '\m\%(\k::\|\.\)$' }
 let g:mucomplete#can_complete = {}
 let g:mucomplete#can_complete.python = { 'omni': s:omni_py }
+let g:mucomplete#can_complete.rust = { 'omni': s:omni_rust }
 
 " Ale
 let g:ale_lint_on_text_changed = 0
@@ -23,21 +25,25 @@ let g:ale_completion_enabled = 0
 let g:ale_hover_to_preview = 0
 let g:ale_echo_msg_format = '[%severity%] %s'
 let g:ale_virtualenv_dir_names = ['.vim/python', '.env', '.venv', 'env', 'virtualenv', 'venv']
-let g:ale_linters = {'python': ['flake8']}
-let g:ale_fixers = {
-            \'*': ['remove_trailing_lines', 'trim_whitespace'],
-            \'python': ['autopep8'],
-            \}
+
+let g:ale_linters = {}
+let g:ale_fixers = {'*': ['remove_trailing_lines', 'trim_whitespace']}
 
 " Set keyboard shortcuts
 map <Leader>] :ALENext<Enter>
 map <Leader>[ :ALEPrevious<Enter>
 map <Leader>f :ALEFix<Enter>
+map <Leader>d :ALEGoToDefinition<Enter>
+map <Leader>D :ALEGoToDefinitionInSplit<Enter>
+map <Leader>r :ALEFindReferences<Enter>
+map <Leader>R :ALERename<Enter>
+map <Leader>k :ALEHover<Enter>
 
 let s:python_lsp_cmd = $HOME . "/.vim/python/bin/pyls"
 if executable(s:python_lsp_cmd)
     " Configure language server
-    let g:ale_linters = {'python': ['flake8', 'pyls']}
+    let g:ale_linters.python = ['flake8', 'pyls']
+    let g:ale_fixers.python = ['autopep8']
     let g:ale_linters_ignore = ['pyls']
     let g:ale_python_pyls_config = {'pyls': {'plugins': {
                 \'jedi_completion': {'include_params': v:true},
@@ -53,11 +59,15 @@ if executable(s:python_lsp_cmd)
                 \'rope_completion': {'enabled': v:false},
                 \}}}
     autocmd FileType python setlocal omnifunc=ale#completion#OmniFunc
+endif
 
-    " Set keyboard shortcuts
-    map <Leader>d :ALEGoToDefinition<Enter>
-    map <Leader>D :ALEGoToDefinitionInSplit<Enter>
-    map <Leader>r :ALEFindReferences<Enter>
-    map <Leader>R :ALERename<Enter>
-    map <Leader>k :ALEHover<Enter>
+
+let s:rust_lsp_cmd = $HOME . "/.cargo/bin/rls"
+if executable(s:rust_lsp_cmd)
+    let g:ale_linters.rust = ['rls']
+    let g:ale_fixers.rust = ['rustfmt']
+    let g:ale_rust_rls_executable = s:rust_lsp_cmd
+    let g:ale_rust_rls_toolchain = 'stable'
+
+    autocmd FileType rust setlocal omnifunc=ale#completion#OmniFunc
 endif
