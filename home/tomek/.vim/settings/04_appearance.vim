@@ -15,6 +15,17 @@ if exists('+colorcolumn')
     set colorcolumn=80
 endif
 
+" Set colorscheme
+if (&t_Co == 256)
+    set termguicolors
+
+    " Dark theme
+    if (&background == 'dark')
+        let g:spring_night_high_contrast = 0
+        colorscheme spring-night
+    endif
+endif
+
 fun! s:updateTerminalColors() abort
     if has('gui_running')
         return
