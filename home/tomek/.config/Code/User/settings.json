@@ -1,0 +1,39 @@
+{
+    "telemetry.enableCrashReporter": false,
+    "telemetry.enableTelemetry": false,
+    "editor.cursorBlinking": "solid",
+    "editor.minimap.enabled": false,
+    "editor.lineHeight": 18,
+    "editor.quickSuggestions": {
+        "other": true,
+        "comments": false,
+        "strings": true
+    },
+    "editor.suggest.localityBonus": true,
+    "python.pythonPath": "/home/tomek/.vscode/python/bin/python",
+    "python.linting.pylintEnabled": false,
+    "python.linting.flake8Enabled": true,
+    "python.linting.enabled": true,
+    "window.titleBarStyle": "custom",
+    "window.newWindowDimensions": "maximized",
+    "workbench.editor.showTabs": false,
+    "workbench.enableExperiments": false,
+    "workbench.editor.revealIfOpen": true,
+    "workbench.activityBar.visible": false,
+    "workbench.editor.enablePreview": false,
+    "workbench.colorCustomizations": {
+        "[Default Dark+]": {
+            "editor.foreground": "#efefef",
+            "editor.background": "#2f2f2f"
+        },
+        "[Default Light+]": {
+            "editor.foreground": "#2f2f2f",
+            "editor.background": "#efefef"
+        }
+    },
+    "workbench.startupEditor": "none",
+    "editor.detectIndentation": false,
+    "editor.fontFamily": "'JetBrains Mono NL', 'Droid Sans Mono', 'monospace', monospace, 'Droid Sans Fallback'",
+    "editor.fontLigatures": true,
+    "workbench.colorTheme": "Default Light+"
+}
