@@ -39,7 +39,7 @@ download-plugin-manager ()
 
 manage-plugins ()
 {
-    local plugins="$HOME/.config/nvim/settings/04_plugins.vim"
+    local plugins="$HOME/.config/nvim/settings/02_plugins.vim"
     [[ -f $plugins ]] || return
 
     local nvim=$(which nvim)

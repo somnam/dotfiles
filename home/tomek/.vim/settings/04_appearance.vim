@@ -11,9 +11,7 @@ set t_ut=""
 set vb t_vb=""
 
 " Set vertical column
-if exists('+colorcolumn')
-    set colorcolumn=80
-endif
+set colorcolumn=80
 
 fun! s:updateTerminalColors() abort
     if has('gui_running')
@@ -70,10 +68,24 @@ fun! s:smoothScroll(up) abort
   execute "normal M"
 endf
 
+fun! LinterStatus() abort
+    let l:counts = ale#statusline#Count(bufnr(''))
+
+    let l:all_errors = l:counts.error + l:counts.style_error
+    let l:all_non_errors = l:counts.total - l:all_errors
+
+    return l:counts.total == 0 ? 'OK' : printf(
+    \   '%dW %dE',
+    \   all_non_errors,
+    \   all_errors
+    \)
+endfunction
+
 " Statusline config
 set statusline=
 set statusline+=%f
 set statusline+=%m
+set statusline+=\ %{LinterStatus()}
 set statusline+=%=
 set statusline+=\ %y
 set statusline+=\ [%{&fileencoding?&fileencoding:&encoding}]

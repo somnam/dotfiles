@@ -10,7 +10,7 @@ Plug 'vim-python/python-syntax'
 Plug 'Vimjas/vim-python-pep8-indent'
 Plug 'pangloss/vim-javascript'
 Plug 'mhinz/vim-signify'
-Plug 'rhysd/vim-color-spring-night'
+Plug 'hzchirs/vim-material'
 Plug 'wincent/ferret'
 call plug#end()
 

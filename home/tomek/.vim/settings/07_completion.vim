@@ -22,9 +22,9 @@ let g:mucomplete#can_complete.rust = { 'omni': s:omni_rust }
 let g:ale_lint_on_text_changed = 0
 let g:ale_lint_on_insert_leave = 0
 let g:ale_completion_enabled = 0
+let g:ale_set_balloons = 0
 let g:ale_hover_to_preview = 0
 let g:ale_echo_msg_format = '[%severity%] %s'
-let g:ale_virtualenv_dir_names = ['.vim/python', '.env', '.venv', 'env', 'virtualenv', 'venv']
 
 let g:ale_linters = {}
 let g:ale_fixers = {'*': ['remove_trailing_lines', 'trim_whitespace']}
@@ -39,16 +39,27 @@ map <Leader>r :ALEFindReferences<Enter>
 map <Leader>R :ALERename<Enter>
 map <Leader>k :ALEHover<Enter>
 
-let s:python_lsp_cmd = $HOME . "/.vim/python/bin/pyls"
+" Ale Python
+let s:python_virtualenv_dir = $HOME . '/.vim/python'
+if filewritable(s:python_virtualenv_dir)
+    let g:ale_virtualenv_dir_names = [s:python_virtualenv_dir]
+    let g:ale_linters.python = ['flake8']
+    let g:ale_fixers.python = ['autopep8']
+endif
+
+" Ale Python LSP
+let s:python_lsp_cmd = s:python_virtualenv_dir . "/bin/pyls"
 if executable(s:python_lsp_cmd)
     " Configure language server
     let g:ale_linters.python = ['flake8', 'pyls']
     let g:ale_fixers.python = ['autopep8']
     let g:ale_linters_ignore = ['pyls']
+    let s:python_extra_paths = [".venv/lib/python3.7/site-packages"]
     let g:ale_python_pyls_config = {'pyls': {'plugins': {
+                \'jedi': {'extra_paths': s:python_extra_paths},
                 \'jedi_completion': {'include_params': v:true},
-                \'jedi_hover': {'enabled': v:false},
-                \'jedi_signature_help': {'enabled': v:true},
+                \'jedi_hover': {'enabled': v:true},
+                \'jedi_signature_help': {'enabled': v:false},
                 \'pydocstyle': {'enabled': v:false},
                 \'pycodestyle': {'enabled': v:false},
                 \'pyflakes': {'enabled': v:false},
@@ -62,6 +73,7 @@ if executable(s:python_lsp_cmd)
 endif
 
 
+" Ale Rust LSP
 let s:rust_lsp_cmd = $HOME . "/.cargo/bin/rls"
 if executable(s:rust_lsp_cmd)
     let g:ale_linters.rust = ['rls']
