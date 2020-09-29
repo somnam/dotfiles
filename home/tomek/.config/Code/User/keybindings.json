@@ -1,15 +1,12 @@
 // Place your key bindings in this file to override the defaultsauto[]
 [
     {
-        "key": "alt+k alt+left",
-        "command": "deleteAllLeft"
+        "key": "ctrl+shift+j",
+        "command": "editor.action.joinLines",
+        "when": "editorTextFocus && !editorReadonly"
     },
     {
-        "key": "alt+k alt+right",
-        "command": "deleteAllRight"
-    },
-    {
-        "key": "ctrl+k ctrl+a",
+        "key": "ctrl+k a",
         "command": "workbench.action.toggleActivityBarVisibility"
     }
 ]

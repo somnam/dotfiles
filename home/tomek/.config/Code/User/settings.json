@@ -4,18 +4,27 @@
     "editor.cursorBlinking": "solid",
     "editor.minimap.enabled": false,
     "editor.lineHeight": 18,
+    "editor.fontSize": 14,
     "editor.quickSuggestions": {
         "other": true,
         "comments": false,
         "strings": true
     },
     "editor.suggest.localityBonus": true,
-    "python.pythonPath": "/home/tomek/.vscode/python/bin/python",
+    "editor.fontFamily": "'JetBrains Mono NL', 'Droid Sans Mono', 'monospace', monospace, 'Droid Sans Fallback'",
+    "editor.formatOnSave": true,
+    "editor.formatOnSaveMode": "modifications",
+    "editor.wordWrap": "on",
+    "python.formatting.provider": "autopep8",
+    "python.formatting.autopep8Path": "/home/tomek/.vscode/python/bin/autopep8",
+    "python.linting.flake8Path": "/home/tomek/.vscode/python/bin/flake8",
     "python.linting.pylintEnabled": false,
     "python.linting.flake8Enabled": true,
     "python.linting.enabled": true,
+    "python.showStartPage": false,
     "window.titleBarStyle": "custom",
     "window.newWindowDimensions": "maximized",
+    "window.zoomLevel": 0,
     "workbench.editor.showTabs": false,
     "workbench.enableExperiments": false,
     "workbench.editor.revealIfOpen": true,
@@ -23,17 +32,15 @@
     "workbench.editor.enablePreview": false,
     "workbench.colorCustomizations": {
         "[Default Dark+]": {
-            "editor.foreground": "#efefef",
-            "editor.background": "#2f2f2f"
+            "editor.foreground": "#eeeeee",
+            "editor.background": "#2e2e2e"
         },
         "[Default Light+]": {
-            "editor.foreground": "#2f2f2f",
-            "editor.background": "#efefef"
+            "editor.foreground": "#2e2e2e",
+            "editor.background": "#eeeeee"
         }
     },
     "workbench.startupEditor": "none",
-    "editor.detectIndentation": false,
-    "editor.fontFamily": "'JetBrains Mono NL', 'Droid Sans Mono', 'monospace', monospace, 'Droid Sans Fallback'",
-    "editor.fontLigatures": true,
-    "workbench.colorTheme": "Default Light+"
+    "files.trimTrailingWhitespace": true,
+    "workbench.colorTheme": "Tomorrow Night Blue"
 }
