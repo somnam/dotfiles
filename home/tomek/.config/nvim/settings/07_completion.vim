@@ -4,6 +4,7 @@ call deoplete#custom#option({
     \ 'num_processes': 2,
     \ 'auto_complete_delay': 10,
     \ 'refresh_always': v:false,
+    \ 'ignore_sources': {'_': ['ale']},
     \ })
 call deoplete#custom#var('omni', 'input_patterns', {
     \ 'python': '[^. \t0-9]\.\w*$' . '|^\s*@\w*$' . '|^\s*from\s.+import \w*' . '|^\s*from \w*' . '|^\s*import \w*',
