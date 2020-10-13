@@ -10,6 +10,7 @@ Plug 'moll/vim-bbye'
 Plug 'ctrlpvim/ctrlp.vim'
 Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
 Plug 'deoplete-plugins/deoplete-jedi'
+Plug 'prabirshrestha/vim-lsp'
 Plug 'tpope/vim-commentary'
 Plug 'tpope/vim-fugitive'
 Plug 'vim-python/python-syntax'
