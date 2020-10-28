@@ -1,7 +1,6 @@
 " Deoplete
 let g:deoplete#enable_at_startup = 1
 call deoplete#custom#option({
-    \ 'num_processes': 2,
     \ 'auto_complete_delay': 10,
     \ 'refresh_always': v:false,
     \ 'ignore_sources': {'_': ['ale'], 'python': ['omni']},
