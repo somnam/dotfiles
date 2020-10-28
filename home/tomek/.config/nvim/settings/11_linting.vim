@@ -5,6 +5,7 @@ let g:ale_completion_enabled = 0
 let g:ale_set_balloons = 0
 let g:ale_hover_to_preview = 0
 let g:ale_echo_msg_format = '[%severity%] %s'
+let g:ale_disable_lsp = 1
 
 let g:ale_linters = {}
 let g:ale_fixers = {'*': ['remove_trailing_lines', 'trim_whitespace']}
