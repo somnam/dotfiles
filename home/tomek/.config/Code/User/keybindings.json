@@ -1,4 +1,4 @@
-// Place your key bindings in this file to override the defaultsauto[]
+// Place your key bindings in this file to override the defaults
 [
     {
         "key": "ctrl+shift+j",
@@ -8,5 +8,25 @@
     {
         "key": "ctrl+k a",
         "command": "workbench.action.toggleActivityBarVisibility"
+    },
+    {
+        "key": "alt+a",
+        "command": "cursorLineStart",
+        "when": "editorTextFocus"
+    },
+    {
+        "key": "alt+e",
+        "command": "cursorLineEnd",
+        "when": "editorTextFocus"
+    },
+    {
+        "key": "alt+u",
+        "command": "scrollPageUp",
+        "when": "editorTextFocus"
+    },
+    {
+        "key": "alt+d",
+        "command": "scrollPageDown",
+        "when": "editorTextFocus"
     }
 ]
