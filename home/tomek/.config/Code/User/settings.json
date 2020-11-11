@@ -2,7 +2,8 @@
     "telemetry.enableCrashReporter": false,
     "telemetry.enableTelemetry": false,
     "editor.cursorBlinking": "solid",
-    "editor.minimap.enabled": false,
+    "editor.minimap.enabled": true,
+    "editor.minimap.renderCharacters": false,
     "editor.lineHeight": 18,
     "editor.fontSize": 14,
     "editor.quickSuggestions": {
@@ -15,6 +16,8 @@
     "editor.formatOnSave": true,
     "editor.formatOnSaveMode": "modifications",
     "editor.wordWrap": "on",
+    "editor.scrollBeyondLastLine": false,
+    "editor.rulers": [80],
     "python.formatting.provider": "autopep8",
     "python.formatting.autopep8Path": "/home/tomek/.vscode/python/bin/autopep8",
     "python.linting.flake8Path": "/home/tomek/.vscode/python/bin/flake8",
@@ -33,14 +36,16 @@
     "workbench.colorCustomizations": {
         "[Default Dark+]": {
             "editor.foreground": "#eeeeee",
-            "editor.background": "#2e2e2e"
+            "editor.background": "#2e2e2e",
+            "editor.lineHighlightBackground": "#282828"
         },
         "[Default Light+]": {
             "editor.foreground": "#2e2e2e",
-            "editor.background": "#eeeeee"
+            "editor.background": "#eeeeee",
+            "editor.lineHighlightBackground": "#e8e8e8"
         }
     },
     "workbench.startupEditor": "none",
     "files.trimTrailingWhitespace": true,
-    "workbench.colorTheme": "Tomorrow Night Blue"
+    "extensions.showRecommendationsOnlyOnDemand": true
 }
