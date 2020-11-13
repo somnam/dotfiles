@@ -10,23 +10,23 @@
         "command": "workbench.action.toggleActivityBarVisibility"
     },
     {
-        "key": "alt+a",
-        "command": "cursorLineStart",
+        "key": "ctrl+meta+up",
+        "command": "cursorPageUp",
         "when": "editorTextFocus"
     },
     {
-        "key": "alt+e",
-        "command": "cursorLineEnd",
+        "key": "ctrl+meta+down",
+        "command": "cursorPageDown",
         "when": "editorTextFocus"
     },
     {
-        "key": "alt+u",
-        "command": "scrollPageUp",
+        "key": "ctrl+meta+left",
+        "command": "cursorHome",
         "when": "editorTextFocus"
     },
     {
-        "key": "alt+d",
-        "command": "scrollPageDown",
+        "key": "ctrl+meta+right",
+        "command": "cursorEnd",
         "when": "editorTextFocus"
-    }
+    },
 ]

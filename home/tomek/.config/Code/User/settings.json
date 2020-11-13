@@ -2,7 +2,7 @@
     "telemetry.enableCrashReporter": false,
     "telemetry.enableTelemetry": false,
     "editor.cursorBlinking": "solid",
-    "editor.minimap.enabled": true,
+    "editor.minimap.enabled": false,
     "editor.minimap.renderCharacters": false,
     "editor.lineHeight": 18,
     "editor.fontSize": 14,
@@ -47,5 +47,5 @@
     },
     "workbench.startupEditor": "none",
     "files.trimTrailingWhitespace": true,
-    "extensions.showRecommendationsOnlyOnDemand": true
+    "extensions.showRecommendationsOnlyOnDemand": true,
 }
