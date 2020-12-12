@@ -1,5 +1,6 @@
 // Place your key bindings in this file to override the defaults
-[ {
+[
+    {
         "key": "ctrl+k a",
         "command": "workbench.action.toggleActivityBarVisibility"
     },
@@ -29,27 +30,27 @@
         "when": "editorHasSelection && editorTextFocus"
     },
     {
-        "key": "ctrl+alt+a",
+        "key": "ctrl+alt+b",
         "command": "cursorHome",
         "when": "!editorHasSelection && editorTextFocus"
     },
     {
-        "key": "ctrl+alt+a",
+        "key": "ctrl+alt+b",
         "command": "cursorHomeSelect",
         "when": "editorHasSelection && editorTextFocus"
     },
     {
-        "key": "ctrl+alt+e",
+        "key": "ctrl+alt+f",
         "command": "cursorEnd",
         "when": "!editorHasSelection && editorTextFocus"
     },
     {
-        "key": "ctrl+alt+e",
+        "key": "ctrl+alt+f",
         "command": "cursorEndSelect",
         "when": "editorHasSelection && editorTextFocus"
     },
     {
-        "key": "ctrl+alt+s",
+        "key": "ctrl+alt+r",
         "command":"deleteAllRight",
         "when": "editorTextFocus && !editorReadonly"
     },
