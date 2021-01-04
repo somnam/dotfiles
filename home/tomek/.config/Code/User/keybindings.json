@@ -5,53 +5,12 @@
         "command": "workbench.action.toggleActivityBarVisibility"
     },
     {
-        "key": "ctrl+alt+j",
+        "key": "ctrl+shift+j",
         "command": "editor.action.joinLines",
         "when": "editorTextFocus && !editorReadonly"
     },
     {
-        "key": "ctrl+alt+u",
-        "command": "cursorPageUp",
-        "when": "!editorHasSelection && editorTextFocus"
-    },
-    {
-        "key": "ctrl+alt+u",
-        "command": "cursorPageUpSelect",
-        "when": "editorHasSelection && editorTextFocus"
-    },
-    {
-        "key": "ctrl+alt+d",
-        "command": "cursorPageDown",
-        "when": "!editorHasSelection && editorTextFocus"
-    },
-    {
-        "key": "ctrl+alt+d",
-        "command": "cursorPageDownSelect",
-        "when": "editorHasSelection && editorTextFocus"
-    },
-    {
-        "key": "ctrl+alt+b",
-        "command": "cursorHome",
-        "when": "!editorHasSelection && editorTextFocus"
-    },
-    {
-        "key": "ctrl+alt+b",
-        "command": "cursorHomeSelect",
-        "when": "editorHasSelection && editorTextFocus"
-    },
-    {
-        "key": "ctrl+alt+f",
-        "command": "cursorEnd",
-        "when": "!editorHasSelection && editorTextFocus"
-    },
-    {
-        "key": "ctrl+alt+f",
-        "command": "cursorEndSelect",
-        "when": "editorHasSelection && editorTextFocus"
-    },
-    {
-        "key": "ctrl+alt+r",
-        "command":"deleteAllRight",
-        "when": "editorTextFocus && !editorReadonly"
+        "key": "ctrl+shift+alt+i",
+        "command": "editor.action.formatChanges"
     },
 ]
