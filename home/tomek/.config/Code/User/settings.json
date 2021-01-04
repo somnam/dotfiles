@@ -13,8 +13,6 @@
     },
     "editor.suggest.localityBonus": true,
     "editor.fontFamily": "'JetBrains Mono NL', 'Droid Sans Mono', 'monospace', monospace, 'Droid Sans Fallback'",
-    "editor.formatOnSave": true,
-    "editor.formatOnSaveMode": "modifications",
     "editor.wordWrap": "on",
     "editor.scrollBeyondLastLine": false,
     "editor.rulers": [80],
@@ -51,5 +49,11 @@
     },
     "workbench.startupEditor": "none",
     "files.trimTrailingWhitespace": true,
-    "extensions.showRecommendationsOnlyOnDemand": true,
+    "extensions.ignoreRecommendations": true,
+    "files.watcherExclude": {
+        "**/venv/**": true
+    },
+    "search.exclude": {
+        "**/venv/**": true
+    },
 }
