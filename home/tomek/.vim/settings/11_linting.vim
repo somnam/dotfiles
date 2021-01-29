@@ -15,7 +15,7 @@ map <Leader>[ :ALEPrevious<Enter>
 map <Leader>f :ALEFix<Enter>
 
 " Ale Python
-let s:python_virtualenv_dir = $HOME . '/.config/nvim/python'
+let s:python_virtualenv_dir = $HOME . '/.vim/python'
 if filewritable(s:python_virtualenv_dir)
     let g:ale_virtualenv_dir_names = [s:python_virtualenv_dir]
     let g:ale_linters = get(g:, 'ale_linters', {})
@@ -26,5 +26,7 @@ endif
 " Ale Rust
 let s:rust_fmt_cmd = $HOME . "/.cargo/bin/rustfmt"
 if executable(s:rust_fmt_cmd)
+    let g:ale_linters = get(g:, 'ale_linters', {})
+    let g:ale_linters.rust = ['rls']
     let g:ale_fixers.rust = ['rustfmt']
 endif

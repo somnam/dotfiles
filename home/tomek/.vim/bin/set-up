@@ -3,6 +3,7 @@ set -e
 
 update-vim ()
 {
+    # Update vim to latest version.
     local wget=$(which wget)
     local grep=$(which grep)
     local sed=$(which sed)
@@ -79,11 +80,28 @@ update-python-requirements ()
     fi
 }
 
+require-update-vim ()
+{
+    # Check if update is required.
+    local update=false
+
+    while getopts :u flag; do
+        case "${flag}" in
+            u) update=true;;
+        esac
+    done
+
+    echo "$update"
+}
+
 main ()
 {
-    update-vim
+
+    if [[ "$(require-update-vim $@)" == true ]]; then
+        update-vim
+    fi
     sync-vim-plugins
     update-python-requirements
 }
 
-main
+main $@

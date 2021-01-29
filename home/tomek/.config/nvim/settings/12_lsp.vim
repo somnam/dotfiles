@@ -5,6 +5,7 @@ let g:lsp_diagnostics_enabled = 0
 let g:lsp_signs_enabled = 0
 let g:lsp_highlights_enabled = 0
 let g:lsp_highlight_references_enabled = 0
+let g:lsp_signature_help_enabled = 0
 let g:lsp_log_verbose = 0
 
 " Set keyboard shortcuts

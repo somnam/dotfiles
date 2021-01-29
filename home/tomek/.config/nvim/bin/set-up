@@ -62,11 +62,27 @@ update-python-requirements ()
     fi
 }
 
+require-update-nvim ()
+{
+    # Check if update is required.
+    local update=false
+
+    while getopts :u flag; do
+        case "${flag}" in
+            u) update=true;;
+        esac
+    done
+
+    echo "$update"
+}
+
 main ()
 {
     [[ $(which wget) ]] || return 0;
 
-    update-nvim
+    if [[ "$(require-update-nvim $@)" == true ]]; then
+        update-nvim
+    fi
     sync-nvim-plugins
     update-python-requirements
 }
