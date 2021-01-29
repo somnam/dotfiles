@@ -11,6 +11,7 @@ Plug 'Vimjas/vim-python-pep8-indent'
 Plug 'pangloss/vim-javascript'
 Plug 'mhinz/vim-signify'
 Plug 'hzchirs/vim-material'
+Plug 'mhinz/vim-startify'
 Plug 'wincent/ferret'
 call plug#end()
 
