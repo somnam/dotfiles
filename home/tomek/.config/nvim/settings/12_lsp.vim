@@ -1,6 +1,6 @@
 " LSP
 let g:lsp_preview_float = 0
-let g:lsp_documentation_float = 0
+let g:lsp_completion_documentation_enabled = 0
 let g:lsp_diagnostics_enabled = 0
 let g:lsp_signs_enabled = 0
 let g:lsp_highlights_enabled = 0
