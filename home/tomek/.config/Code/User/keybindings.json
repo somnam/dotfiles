@@ -10,6 +10,16 @@
         "when": "editorTextFocus && !editorReadonly"
     },
     {
+        "key": "ctrl+j",
+        "command": "selectNextSuggestion",
+        "when": "suggestWidgetMultipleSuggestions && suggestWidgetVisible && textInputFocus"
+    },
+    {
+        "key": "ctrl+k",
+        "command": "selectPrevSuggestion",
+        "when": "suggestWidgetMultipleSuggestions && suggestWidgetVisible && textInputFocus"
+    },
+    {
         "key": "ctrl+shift+alt+i",
         "command": "editor.action.formatChanges"
     },
