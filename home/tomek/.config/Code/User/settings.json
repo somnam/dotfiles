@@ -15,13 +15,14 @@
     "editor.fontFamily": "'JetBrains Mono NL', 'Droid Sans Mono', 'monospace', monospace, 'Droid Sans Fallback'",
     "editor.wordWrap": "on",
     "editor.scrollBeyondLastLine": false,
-    "editor.rulers": [80],
+    "editor.rulers": [120],
     "editor.cursorSurroundingLines": 2,
     "editor.find.autoFindInSelection": "multiline",
     "editor.accessibilitySupport": "off",
     "python.formatting.provider": "autopep8",
     "python.formatting.autopep8Path": "/home/tomek/.vscode/python/bin/autopep8",
     "python.linting.flake8Path": "/home/tomek/.vscode/python/bin/flake8",
+    "python.linting.flake8Args": ["--max-line-length", "120"],
     "python.linting.pylintEnabled": false,
     "python.linting.flake8Enabled": true,
     "python.linting.enabled": true,
@@ -56,4 +57,5 @@
     "search.exclude": {
         "**/venv/**": true
     },
+    "workbench.editorAssociations": [],
 }
