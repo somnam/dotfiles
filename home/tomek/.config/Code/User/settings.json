@@ -21,20 +21,21 @@
     "editor.accessibilitySupport": "off",
     "python.formatting.provider": "autopep8",
     "python.formatting.autopep8Path": "/home/tomek/.vscode/python/bin/autopep8",
+    "python.linting.flake8Enabled": true,
     "python.linting.flake8Path": "/home/tomek/.vscode/python/bin/flake8",
     "python.linting.flake8Args": ["--max-line-length", "120"],
     "python.linting.pylintEnabled": false,
-    "python.linting.flake8Enabled": true,
+    "python.linting.mypyEnabled": true,
     "python.linting.enabled": true,
     "python.showStartPage": false,
+    "python.sortImports.path": "/home/tomek/.vscode/python/bin/isort",
+    "python.linting.mypyPath": "/home/tomek/.vscode/python/bin/mypy",
     "typescript.disableAutomaticTypeAcquisition": true,
     "window.titleBarStyle": "custom",
     "window.newWindowDimensions": "maximized",
-    "window.zoomLevel": 0,
     "workbench.editor.showTabs": false,
     "workbench.enableExperiments": false,
     "workbench.editor.revealIfOpen": true,
-    "workbench.activityBar.visible": false,
     "workbench.editor.enablePreview": false,
     "workbench.colorCustomizations": {
         "[Default Dark+]": {
@@ -45,17 +46,23 @@
         "[Default Light+]": {
             "editor.foreground": "#282828",
             "editor.background": "#eeeeee",
-            "editor.lineHighlightBackground": "#e1e1e1"
-        }
+            "editor.lineHighlightBackground": "#e1e1e1",
+            "editorGroup.border": "#aeaeae",
+            "editorGroupHeader.border": "#aeaeae",
+        },
     },
     "workbench.startupEditor": "none",
+    "workbench.activityBar.visible": false,
     "files.trimTrailingWhitespace": true,
     "extensions.ignoreRecommendations": true,
     "files.watcherExclude": {
-        "**/venv/**": true
+        "**/.venv/**": true,
     },
     "search.exclude": {
-        "**/venv/**": true
+        "**/.venv/**": true,
     },
-    "workbench.editorAssociations": [],
+    "workbench.editorAssociations": {
+        "*.ipynb": "jupyter.notebook.ipynb"
+    },
+    "editor.suggestSelection": "first",
 }
