@@ -6,15 +6,31 @@ update-nvim ()
     echo 'Downloading latest appimage'
 
     local wget=$(which wget)
-    local mkdir=$(which mkdir)
-    local chmod=$(which chmod)
-    local appimage_url='https://github.com/neovim/neovim/releases/download/stable/nvim.appimage'
-    local bin_path="$HOME/.local/bin"
-    local nvim_path="$bin_path/nvim"
+    local grep=$(which grep)
+    local sed=$(which sed)
+    local head=$(which head)
 
-    $mkdir -p "$bin_path" &&\
-        $wget -q --progress=bar --show-progress "$appimage_url" -O "$nvim_path" &&\
-        $chmod u+x "$nvim_path"
+    echo "Fetching appimage download url"
+    local appimage_url=$(
+        $wget -q -O- https://api.github.com/repos/neovim/neovim/releases/latest \
+            | $grep 'browser_download_url.*.appimage' \
+            | $head -n 1 \
+            | $sed -e 's/^.*\(http.*appimage\).*$/\1/'
+    )
+
+    if [[ -n $appimage_url ]]; then
+        local mkdir=$(which mkdir)
+        local chmod=$(which chmod)
+
+        local bin_path="$HOME/.local/bin"
+        local nvim_path="$bin_path/nvim"
+
+        $mkdir -p "$bin_path" &&\
+            $wget -q --progress=bar --show-progress "$appimage_url" -O "$nvim_path" &&\
+            $chmod u+x "$nvim_path"
+    else
+        echo 'AppImage download url not found'
+    fi
 }
 
 sync-nvim-plugins ()
