@@ -10,33 +10,26 @@
         "when": "editorTextFocus && !editorReadonly"
     },
     {
-        "key": "ctrl+j",
-        "command": "selectNextSuggestion",
-        "when": "suggestWidgetMultipleSuggestions && suggestWidgetVisible && textInputFocus"
-    },
-    {
-        "key": "ctrl+k",
-        "command": "selectPrevSuggestion",
-        "when": "suggestWidgetMultipleSuggestions && suggestWidgetVisible && textInputFocus"
+        "key": "ctrl+shift+alt+s",
+        "command": "python.sortImports",
+        "when": "editorTextFocus && !editorReadonly"
     },
     {
         "key": "ctrl+shift+alt+i",
-        "command": "editor.action.formatChanges"
-    },
-    {
-        "key": "ctrl+alt+.",
-        "command": "workbench.action.moveEditorToNextGroup"
-    },
-    {
-        "key": "ctrl+alt+,",
-        "command": "workbench.action.moveEditorToPreviousGroup"
-    },
-    {
-        "key": "ctrl+alt+[Backslash]",
-        "command": "workbench.action.splitEditorDown"
+        "command": "editor.action.formatChanges",
+        "when": "editorTextFocus && !editorReadonly"
     },
     {
         "key": "ctrl+k ctrl+k",
-        "command": "deleteAllRight"
+        "command": "deleteAllRight",
+        "when": "editorTextFocus && !editorReadonly"
+    },
+    {
+        "key": "ctrl+k ctrl+shift+right",
+        "command": "workbench.action.moveEditorToNextGroup"
+    },
+    {
+        "key": "ctrl+k ctrl+shift+left",
+        "command": "workbench.action.moveEditorToPreviousGroup"
     },
 ]
