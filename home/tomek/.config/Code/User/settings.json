@@ -27,7 +27,6 @@
     "python.linting.pylintEnabled": false,
     "python.linting.mypyEnabled": true,
     "python.linting.enabled": true,
-    "python.showStartPage": false,
     "python.sortImports.path": "/home/tomek/.vscode/python/bin/isort",
     "python.linting.mypyPath": "/home/tomek/.vscode/python/bin/mypy",
     "typescript.disableAutomaticTypeAcquisition": true,
@@ -52,7 +51,6 @@
         },
     },
     "workbench.startupEditor": "none",
-    "workbench.activityBar.visible": false,
     "files.trimTrailingWhitespace": true,
     "extensions.ignoreRecommendations": true,
     "files.watcherExclude": {
@@ -62,7 +60,12 @@
         "**/.venv/**": true,
     },
     "workbench.editorAssociations": {
-        "*.ipynb": "jupyter.notebook.ipynb"
+        "*.ipynb": "jupyter-notebook"
     },
     "editor.suggestSelection": "first",
+    "notebook.cellToolbarLocation": {
+        "default": "right",
+        "jupyter-notebook": "left"
+    },
+    "workbench.activityBar.visible": false,
 }
