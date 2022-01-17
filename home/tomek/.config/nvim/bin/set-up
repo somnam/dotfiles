@@ -68,7 +68,7 @@ manage-plugins ()
 
 update-python-requirements ()
 {
-    local python_cmd="$HOME/.config/nvim/python/bin/python"
+    local python_cmd="$HOME/.local/share/nvim/python/bin/python"
     local requirements="$HOME/.config/nvim/requirements.txt"
     if [[ -f "$python_cmd" && -f "$requirements" ]]; then
         echo 'Updating python requirements'

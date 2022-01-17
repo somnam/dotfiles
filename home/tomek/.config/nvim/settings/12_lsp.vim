@@ -1,53 +1,46 @@
 " LSP
-let g:lsp_preview_float = 0
-let g:lsp_completion_documentation_enabled = 0
+
+" Disable diagnostics support
 let g:lsp_diagnostics_enabled = 0
-let g:lsp_signs_enabled = 0
-let g:lsp_highlights_enabled = 0
-let g:lsp_highlight_references_enabled = 0
-let g:lsp_signature_help_enabled = 0
+let g:lsp_document_code_action_signs_enabled = 0
+
+" Disable logging.
 let g:lsp_log_verbose = 0
 
+" Timeout for sync format cancel.
+let g:lsp_format_sync_timeout = 1000
+
 " Set keyboard shortcuts
-function! s:on_lsp_buffer_enabled() abort
+fun! s:on_lsp_buffer_enabled() abort
+    setlocal omnifunc=lsp#complete
+
+    if exists('+tagfunc')
+        setlocal tagfunc=lsp#tagfunc
+    endif
+
     nmap <buffer> <Leader>d <plug>(lsp-definition)
-    nmap <buffer> <Leader>i <plug>(lsp-implementation)
-    nmap <buffer> <Leader>t <plug>(lsp-type-definition)
     nmap <buffer> <Leader>r <plug>(lsp-references)
     nmap <buffer> <Leader>R <plug>(lsp-rename)
     nmap <buffer> <Leader>o <plug>(lsp-document-symbol)
     nmap <buffer> <Leader>m <plug>(lsp-signature-help)
     nmap <buffer> <Leader>k <plug>(lsp-hover)
-endfunction
+endfun
 
 " Load for enabled buffers.
 augroup lsp_install
     au!
-    autocmd User lsp_buffer_enabled call s:on_lsp_buffer_enabled()
+    au User lsp_buffer_enabled call s:on_lsp_buffer_enabled()
 augroup END
 
 " Python LSP
-let s:python_virtualenv_dir = $HOME . '/.config/nvim/python'
-let s:python_lsp_cmd = s:python_virtualenv_dir . "/bin/pyls"
+let s:python_virtualenv_dir = $HOME . '/.local/share/nvim/python'
+let s:python_lsp_cmd = s:python_virtualenv_dir . "/bin/jedi-language-server"
 if executable(s:python_lsp_cmd)
     autocmd User lsp_setup call lsp#register_server({
-                \'name': 'pyls',
+                \'name': 'jedi-language-server',
                 \'cmd': {server_info->[s:python_lsp_cmd]},
                 \'whitelist': ['python'],
-                \'workspace_config': {'pyls': {'plugins': {
-                    \'jedi_completion': {'enabled': v:false},
-                    \'jedi_hover': {'enabled': v:false},
-                    \'jedi_signature_help': {'enabled': v:false},
-                    \'pydocstyle': {'enabled': v:false},
-                    \'pycodestyle': {'enabled': v:false},
-                    \'pyflakes': {'enabled': v:false},
-                    \'flake8': {'enabled': v:false},
-                    \'mccabe': {'enabled': v:false},
-                    \'pylint': {'enabled': v:false},
-                    \'yapf': {'enabled': v:false},
-                    \'rope_completion': {'enabled': v:false},
-                \}}},
-                \ })
+                \})
 endif
 
 " Rust LSP
@@ -58,5 +51,4 @@ if executable(s:rust_lsp_cmd)
                 \'cmd': {server_info->[s:rust_lsp_cmd, 'run', 'stable', 'rls']},
                 \'whitelist': ['rust'],
                 \ })
-
 endif

@@ -1,15 +1,15 @@
 " Disable python2 support
 let g:loaded_python_provider = 0
 " Set python3 path
-let g:python3_host_prog = $HOME . "/.config/nvim/python/bin/python"
+let g:python3_host_prog = $HOME . "/.local/share/nvim/python/bin/python"
 
 call plug#begin()
 Plug 'dense-analysis/ale'
 Plug 'jlanzarotta/bufexplorer'
-Plug 'moll/vim-bbye'
+Plug 'MenBrial/vim-bbye'
 Plug 'ctrlpvim/ctrlp.vim'
 Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
-Plug 'deoplete-plugins/deoplete-jedi'
+Plug 'lighttiger2505/deoplete-vim-lsp'
 Plug 'prabirshrestha/vim-lsp'
 Plug 'tpope/vim-commentary'
 Plug 'tpope/vim-fugitive'
@@ -17,8 +17,7 @@ Plug 'vim-python/python-syntax'
 Plug 'Vimjas/vim-python-pep8-indent'
 Plug 'pangloss/vim-javascript'
 Plug 'mhinz/vim-signify'
-Plug 'hzchirs/vim-material'
-Plug 'dracula/vim'
+Plug 'dracula/vim', { 'as': 'vim-dracula' }
 Plug 'mhinz/vim-startify'
 Plug 'wincent/ferret'
 call plug#end()
