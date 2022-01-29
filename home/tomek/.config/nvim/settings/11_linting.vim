@@ -25,8 +25,7 @@ let s:python_virtualenv_dir = $HOME . '/.local/share/nvim/python'
 if filewritable(s:python_virtualenv_dir)
     let g:ale_virtualenv_dir_names = [s:python_virtualenv_dir]
     let g:ale_linters = get(g:, 'ale_linters', {})
-    let g:ale_linters.python = ['flake8']
-    " let g:ale_fixers.python = ['autopep8', 'isort']
+    let g:ale_linters.python = ['flake8', 'mypy']
     let g:ale_fixers.python = ['isort']
 endif
 
@@ -34,4 +33,9 @@ endif
 let s:rust_fmt_cmd = $HOME . "/.cargo/bin/rustfmt"
 if executable(s:rust_fmt_cmd)
     let g:ale_fixers.rust = ['rustfmt']
+endif
+let s:rust_lint_cmd = $HOME . "/.cargo/bin/cargo"
+if executable(s:rust_lint_cmd)
+    let g:ale_linters = get(g:, 'ale_linters', {})
+    let g:ale_linters.rust = ['cargo']
 endif

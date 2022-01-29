@@ -87,6 +87,3 @@ autocmd FileType csv setlocal wrap
 
 " Netrw
 let g:netrw_banner = 0
-let g:netrw_browse_split = 2  " open in vertical window
-let g:netrw_altv = 1          " splits to the right
-let g:netrw_liststyle = 3     " tree view
