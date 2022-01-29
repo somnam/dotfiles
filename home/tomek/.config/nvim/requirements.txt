@@ -3,4 +3,4 @@ pynvim
 jedi-language-server
 isort
 flake8
-autopep8
+mypy
