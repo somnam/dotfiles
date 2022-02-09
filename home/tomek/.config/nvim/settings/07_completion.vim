@@ -12,9 +12,9 @@ call deoplete#custom#option({
 augroup deoplete_buffer_opt
     au!
     au FileType python call deoplete#custom#buffer_option({
-        \ 'skip_chars': ['(', ')', '{', '}', '[', ']', '"', "'", ':', ","],
+        \ 'skip_chars': ['(', ')', '{', '}', '[', ']', '"', "'", ':', '\', ','],
         \ })
     au FileType rust call deoplete#custom#buffer_option({
-        \ 'skip_chars': ['(', ')', '{', '}', '[', ']', '"', "'", ";", ","],
+        \ 'skip_chars': ['(', ')', '{', '}', '[', ']', '"', "'", ';', ','],
         \ })
 augroup END
