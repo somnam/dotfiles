@@ -1,6 +1,5 @@
 {
-    "telemetry.enableCrashReporter": false,
-    "telemetry.enableTelemetry": false,
+    "telemetry.telemetryLevel": "off",
     "editor.cursorBlinking": "solid",
     "editor.minimap.enabled": false,
     "editor.minimap.renderCharacters": false,
@@ -32,7 +31,6 @@
     "typescript.disableAutomaticTypeAcquisition": true,
     "window.titleBarStyle": "custom",
     "window.newWindowDimensions": "maximized",
-    "workbench.editor.showTabs": false,
     "workbench.enableExperiments": false,
     "workbench.editor.revealIfOpen": true,
     "workbench.editor.enablePreview": false,
@@ -67,5 +65,6 @@
         "default": "right",
         "jupyter-notebook": "left"
     },
+    "workbench.editor.showTabs": false,
     "workbench.activityBar.visible": false,
 }

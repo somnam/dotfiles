@@ -26,7 +26,6 @@ set undodir=~/.vim/undo,/var/tmp
 " differently from regular Vi. They are highly recommended though.
 set incsearch       " Incremental search
 set hlsearch        " Highlight search results.
-set nu              " Display line numbers
 set showcmd         " Show (partial) command in status line.
 set ignorecase      " Do case insensitive matching
 set smartcase       " Do smart case matching
@@ -40,6 +39,7 @@ set smartindent     " Try to be smart with indenting
 set autoindent      " Set global autoindent on
 set wildmenu        " Use wildmenu
 set wildmode=full:longest
+set wildoptions=tagfile
 set laststatus=2    " Always display statusbar
 set fdm=marker      " Set folding method
 set hidden          " Hide buffer instead of closing it
@@ -72,11 +72,6 @@ set shortmess+=c
 " Prevent a condition where vim lags due to searching include files and tags
 set complete-=i
 set complete-=t
-" Completion options
-set completeopt=menu,menuone,noinsert
-set pumheight=15
-" Disable SQL dynamic completion
-let g:omni_sql_no_default_maps = 1
 
 " Slows down scroll in vim >= 8.0.
 set nocursorcolumn
@@ -109,6 +104,3 @@ autocmd FileType csv setlocal wrap
 
 " Netrw
 let g:netrw_banner = 0
-let g:netrw_browse_split = 2  " open in vertical window
-let g:netrw_altv = 1          " splits to the right
-let g:netrw_liststyle = 3     " tree view

@@ -1,2 +1,4 @@
-python-language-server[autopep8,flake8]
+jedi-language-server
 isort
+flake8
+mypy

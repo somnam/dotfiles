@@ -74,6 +74,7 @@ update-python-requirements ()
     local requirements_file="$HOME/.vim/requirements.txt"
     if [[ -x "$python_cmd" && -f "$requirements_file" ]]; then
         echo "Updating python requirements"
+        $python_cmd -mpip install -U setuptools pip wheel
         $python_cmd -mpip install -U -r "$requirements_file"
     else
         echo "Python requirements not updated"

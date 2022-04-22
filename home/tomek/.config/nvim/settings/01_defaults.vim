@@ -7,7 +7,6 @@ set encoding=utf8
 " Default settings
 set incsearch       " Incremental search
 set hlsearch        " Highlight search results.
-set nu              " Display line numbers
 set showcmd         " Show (partial) command in status line.
 set ignorecase      " Do case insensitive matching
 set smartcase       " Do smart case matching

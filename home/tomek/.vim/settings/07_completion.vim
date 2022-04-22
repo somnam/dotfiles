@@ -1,3 +1,7 @@
+" Completion options
+set completeopt=menu,menuone,noinsert
+set pumheight=15
+
 " Mucomplete
 let g:mucomplete#enable_auto_at_startup = 1
 let g:mucomplete#completion_delay = 50
