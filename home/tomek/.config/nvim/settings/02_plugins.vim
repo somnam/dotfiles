@@ -20,6 +20,7 @@ Plug 'mhinz/vim-signify'
 Plug 'dracula/vim', { 'as': 'vim-dracula' }
 Plug 'mhinz/vim-startify'
 Plug 'wincent/ferret'
+Plug 'LunarWatcher/auto-pairs'
 call plug#end()
 
 " Generate helptags for all plugins

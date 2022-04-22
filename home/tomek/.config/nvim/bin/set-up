@@ -72,6 +72,7 @@ update-python-requirements ()
     local requirements="$HOME/.config/nvim/requirements.txt"
     if [[ -f "$python_cmd" && -f "$requirements" ]]; then
         echo 'Updating python requirements'
+        $python_cmd -mpip install -U setuptools pip wheel
         $python_cmd -mpip install -U -r "$requirements"
     else
         echo "Python requirements not updated"

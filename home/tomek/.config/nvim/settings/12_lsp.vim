@@ -35,7 +35,7 @@ augroup END
 
 " Python LSP
 let s:python_virtualenv_dir = $HOME . '/.local/share/nvim/python'
-let s:python_lsp_cmd = s:python_virtualenv_dir . "/bin/jedi-language-server"
+let s:python_lsp_cmd = s:python_virtualenv_dir . '/bin/jedi-language-server'
 if executable(s:python_lsp_cmd)
     autocmd User lsp_setup call lsp#register_server({
                 \'name': 'jedi-language-server',

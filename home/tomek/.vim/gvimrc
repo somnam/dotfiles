@@ -1,14 +1,6 @@
-" Background style
-set background=dark
-" set background=light
-
 " Dark theme
-if (&background == 'dark')
-    colorscheme vim-material
-" Light theme
-elseif (&background == 'light')
-    colorscheme vim-material
-endif
+set background=dark
+colorscheme dracula
 
 " Set font
 set gfn=JetBrains\ Mono\ NL\ 11
