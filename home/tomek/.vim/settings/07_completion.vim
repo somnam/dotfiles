@@ -21,3 +21,7 @@ let s:omni_rust = { t -> t =~# '\m\%(\k::\|\.\)$' }
 let g:mucomplete#can_complete = {}
 let g:mucomplete#can_complete.python = { 'omni': s:omni_py }
 let g:mucomplete#can_complete.rust = { 'omni': s:omni_rust }
+
+" AutoPairs
+let g:AutoPairsCompleteOnlyOnSpace = 1
+let g:AutoPairsShortcutToggle = ''
