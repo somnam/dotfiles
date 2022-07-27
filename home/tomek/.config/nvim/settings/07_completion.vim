@@ -18,3 +18,7 @@ augroup deoplete_buffer_opt
         \ 'skip_chars': ['(', ')', '{', '}', '[', ']', '"', "'", ';', ','],
         \ })
 augroup END
+
+" AutoPairs
+let g:AutoPairsCompleteOnlyOnSpace = 1
+let g:AutoPairsShortcutToggle = ''

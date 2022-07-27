@@ -26,7 +26,7 @@ if filewritable(s:python_virtualenv_dir)
     let g:ale_virtualenv_dir_names = [s:python_virtualenv_dir]
     let g:ale_linters = get(g:, 'ale_linters', {})
     let g:ale_linters.python = ['flake8', 'mypy']
-    let g:ale_fixers.python = ['isort']
+    let g:ale_fixers.python = ['isort', 'black']
 endif
 
 " Ale Rust
