@@ -38,33 +38,35 @@ sync-nvim-plugins ()
     echo 'Synchronizing plugins'
 
     download-plugin-manager
-    manage-plugins 'PlugUpdate!'
-    manage-plugins 'PlugClean!'
+    sync-plugins
 }
 
 download-plugin-manager ()
 {
-    local wget=$(which wget)
+    local git=$(which git)
     local mkdir=$(which mkdir)
-    local plugin_manager_url='https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim'
-    local nvim_autoload_dir="$HOME/.local/share/nvim/site/autoload"
-    local plugin_manager="$nvim_autoload_dir/plug.vim"
+    local plugin_manager_url='https://github.com/wbthomason/packer.nvim'
+    local nvim_plugin_dir="$HOME/.local/share/nvim/site/pack/packer/start"
+    local plugin_manager="$nvim_plugin_dir/packer.nvim"
 
-    $mkdir -p "$nvim_autoload_dir" && $wget -q "$plugin_manager_url" -O "$plugin_manager"
+    [[ -d "$plugin_manager" ]] && return
+
+    $mkdir -p "$nvim_plugin_dir" && $git clone --depth 1 "$plugin_manager_url" "$plugin_manager"
 }
 
-manage-plugins ()
+
+sync-plugins ()
 {
-    local plugins="$HOME/.config/nvim/settings/02_plugins.vim"
+    local plugins="$HOME/.config/nvim/lua/plugins.lua"
     [[ -f $plugins ]] || return
+
 
     local nvim=$(which nvim)
     local nvim=${nvim:-"$HOME/.local/bin/nvim"}
 
-    # Install/Update all installed plugins.
-    local konsole_fix='set guicursor='
-    $nvim -u "$plugins" +$konsole_fix +"$1" +qa
+    $nvim -u "$plugins" --headless -c 'autocmd User PackerComplete quitall' -c 'PackerSync'
 }
+
 
 update-python-requirements ()
 {
