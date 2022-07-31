@@ -1,3 +1,6 @@
+local available, _ = pcall(require, "formatter")
+if not available then return end
+
 -- Set python fixers list.
 local python_fixers = {}
 
@@ -24,3 +27,7 @@ require("formatter").setup({
         }
     }
 })
+
+local opts = {noremap = true, silent = true}
+vim.keymap.set('n', '<leader>lf', ":Format<Enter>", opts)
+vim.keymap.set('n', '<leader>lF', ":FormatWrite<Enter>", opts)

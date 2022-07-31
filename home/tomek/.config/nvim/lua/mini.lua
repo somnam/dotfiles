@@ -1,3 +1,6 @@
+local available, _ = pcall(require, "mini.starter")
+if not available then return end
+
 require('mini.bufremove').setup()
 vim.api.nvim_command(":command! BD lua MiniBufremove.delete()")
 vim.api.nvim_command(":command! BW lua MiniBufremove.wipeout()")
@@ -7,13 +10,22 @@ require('mini.comment').setup()
 
 require('mini.completion').setup({
   set_vim_settings = false,
+  lsp_completion = {
+    process_items = require('mini.fuzzy').process_lsp_items,
+  }
 })
 
-require('mini.cursorword').setup()
+require('mini.cursorword').setup({
+  delay = 100
+})
 
-require('mini.indentscope').setup()
-
-require('mini.jump').setup()
+-- require('mini.indentscope').setup({
+--   symbol = '|',
+--   draw = {
+--     delay = 200,
+--     animation = require('mini.indentscope').gen_animation('none'),
+--   }
+-- })
 
 require('mini.pairs').setup()
 
@@ -26,7 +38,7 @@ starter.setup({
   evaluate_single = true,
   items = {
     starter.sections.builtin_actions(),
-    starter.sections.recent_files(10, false),
+    starter.sections.recent_files(15, false),
     starter.sections.sessions(5, true)
   },
   content_hooks = {
@@ -37,9 +49,5 @@ starter.setup({
 })
 
 require('mini.surround').setup()
-
-require('mini.tabline').setup({
-  show_icons = false,
-})
 
 require('mini.trailspace').setup()

@@ -1,3 +1,6 @@
+local available, _ = pcall(require, "guess-indent")
+if not available then return end
+
 require('guess-indent').setup({
   auto_cmd = true,
   -- A list of filetypes for which the auto command gets disabled

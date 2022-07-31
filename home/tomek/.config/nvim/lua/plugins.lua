@@ -1,4 +1,5 @@
--- Plugins
+local available, _ = pcall(require, "packer")
+if not available then return end
 
 require('packer').startup(function()
   use 'wbthomason/packer.nvim'
@@ -13,4 +14,8 @@ require('packer').startup(function()
   use 'mfussenegger/nvim-lint'
   use 'mhartington/formatter.nvim'
   use 'nvim-lualine/lualine.nvim'
+  use {
+    'nvim-telescope/telescope.nvim',
+    requires = { {'nvim-lua/plenary.nvim'} }
+  }
 end)

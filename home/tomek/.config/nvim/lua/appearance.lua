@@ -1,6 +1,6 @@
 vim.cmd([[
     fun! s:updateTermColors() abort
-        if &termguicolors
+        if &termguicolors || &background != 'dark'
             return
         endif
 
@@ -22,9 +22,9 @@ vim.cmd([[
 
         " Set status line colors
         highlight StatusLine    cterm=bold ctermbg=238
-        highlight StatusLineNC  cterm=bold ctermbg=236
+        highlight StatusLineNC  cterm=none ctermbg=237
         highlight StatusLineTerm    cterm=bold ctermbg=238
-        highlight StatusLineTermNC  cterm=bold ctermbg=236
+        highlight StatusLineTermNC  cterm=none ctermbg=237
     endfun
 
     augroup color_scheme

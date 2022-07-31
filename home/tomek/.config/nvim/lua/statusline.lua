@@ -1,3 +1,6 @@
+local available, _ = pcall(require, "lualine")
+if not available then return end
+
 require('lualine').setup({
   options = {
     icons_enabled = false,

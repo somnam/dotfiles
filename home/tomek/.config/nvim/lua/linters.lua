@@ -1,3 +1,6 @@
+local available, _ = pcall(require, "lint")
+if not available then return end
+
 -- Set python linters list.
 local python_linters = {}
 
@@ -19,7 +22,7 @@ require('lint').linters_by_ft = {
 }
 
 -- Trigger linting on file save.
-vim.api.nvim_create_autocmd({ "BufWritePost" }, {
+vim.api.nvim_create_autocmd({"BufWinEnter", "BufWritePost"}, {
   callback = function()
     require("lint").try_lint()
   end,

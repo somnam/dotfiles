@@ -64,7 +64,7 @@ sync-plugins ()
     local nvim=$(which nvim)
     local nvim=${nvim:-"$HOME/.local/bin/nvim"}
 
-    $nvim -u "$plugins" --headless -c 'autocmd User PackerComplete quitall' -c 'PackerSync'
+    $nvim -u "$plugins" -c 'autocmd User PackerComplete quitall' -c 'PackerSync'
 }
 
 

@@ -36,6 +36,9 @@ defscrollback 10000
 # clear screen after closing programs
 altscreen on
 
+# timeout value
+maptimeout 10
+
 # ------------------------------------------------------------------------------
 # SCREEN KEYBINDINGS
 # ------------------------------------------------------------------------------
@@ -53,8 +56,8 @@ bind I login on
 bind O login off
 bind } history
 # Bind keys
-bindkey ^[[1;3D prev
-bindkey ^[[1;3C next
+bindkey ^[[1;2D prev
+bindkey ^[[1;2C next
 
 # An example of a "screen scraper" which will launch urlview on the current
 # screen window
@@ -94,14 +97,13 @@ termcapinfo xterm 'is=\E[r\E[m\E[2J\E[H\E[?7h\E[?1;4;6l'
 # following termcapinfo line which tells xterm to use the normal screen buffer
 # (which has scrollback), not the alternate screen buffer.
 #
-#termcapinfo xterm|xterms|xs|rxvt ti@:te@
 termcapinfo xterm*|xterms*|xs*|rxvt* ti@:te@
 
 # Enable non-blocking mode to better cope with flaky ssh connections.
 defnonblock 5
 
 # Set $TERM
-term xterm-256color
+term screen.xterm-256color
 
 # ------------------------------------------------------------------------------
 # STARTUP SCREENS
