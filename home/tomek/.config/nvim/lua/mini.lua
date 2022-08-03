@@ -8,26 +8,23 @@ vim.api.nvim_command(":command! BU lua MiniBufremove.unshow()")
 
 require('mini.comment').setup()
 
-require('mini.completion').setup({
-  set_vim_settings = false,
-  lsp_completion = {
-    process_items = require('mini.fuzzy').process_lsp_items,
-  }
-})
-
 require('mini.cursorword').setup({
   delay = 100
 })
 
--- require('mini.indentscope').setup({
---   symbol = '|',
---   draw = {
---     delay = 200,
---     animation = require('mini.indentscope').gen_animation('none'),
---   }
--- })
-
-require('mini.pairs').setup()
+require('mini.pairs').setup({
+  mappings = {
+    ['('] = { neigh_pattern = '.[^%w\\]' },
+    [')'] = { neigh_pattern = '.[^%w\\]' },
+    ['['] = { neigh_pattern = '.[^%w\\]' },
+    [']'] = { neigh_pattern = '.[^%w\\]' },
+    ['{'] = { neigh_pattern = '.[^%w\\]' },
+    ['}'] = { neigh_pattern = '.[^%w\\]' },
+    ['"'] = { neigh_pattern = '.[^%w\\]' },
+    ["'"] = { neigh_pattern = '.[^%w\\]' },
+    ['`'] = { neigh_pattern = '.[^%w\\]', },
+  }
+})
 
 require('mini.sessions').setup({
   directory = ''

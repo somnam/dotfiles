@@ -1,7 +1,7 @@
-local available, _ = pcall(require, "packer")
+local available, packer = pcall(require, "packer")
 if not available then return end
 
-require('packer').startup(function()
+packer.startup(function()
   use 'wbthomason/packer.nvim'
   use 'echasnovski/mini.nvim'
   use 'nmac427/guess-indent.nvim'
@@ -17,5 +17,13 @@ require('packer').startup(function()
   use {
     'nvim-telescope/telescope.nvim',
     requires = { {'nvim-lua/plenary.nvim'} }
+  }
+  use {
+    'hrsh7th/nvim-cmp',
+    requires = {
+      {'hrsh7th/cmp-nvim-lsp'},
+      {'hrsh7th/cmp-buffer'},
+      {'hrsh7th/cmp-path'},
+    }
   }
 end)
