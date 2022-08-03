@@ -1,7 +1,7 @@
-local available, _ = pcall(require, "guess-indent")
+local available, guess_indent = pcall(require, "guess-indent")
 if not available then return end
 
-require('guess-indent').setup({
+guess_indent.setup({
   auto_cmd = true,
   -- A list of filetypes for which the auto command gets disabled
   filetype_exclude = {"netrw", "tutor"},

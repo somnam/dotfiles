@@ -1,4 +1,4 @@
-local available, _ = pcall(require, "formatter")
+local available, formatter = pcall(require, "formatter")
 if not available then return end
 
 -- Set python fixers list.
@@ -18,16 +18,20 @@ if vim.fn.executable(python_black_cmd) == 1 then
     table.insert(python_fixers, function() return black end)
 end
 
-require("formatter").setup({
+-- Set short form of --in-place flag for sed.
+local remove_trailing_whitespace = require("formatter.filetypes.any").remove_trailing_whitespace()
+remove_trailing_whitespace.args[1] = "-i ''"
+
+formatter.setup({
     filetype = {
         python = python_fixers,
         -- Use the special "*" filetype for defining formatter configurations on any filetype
         ["*"] = {
-            require("formatter.filetypes.any").remove_trailing_whitespace
+            function() return remove_trailing_whitespace end,
         }
     }
 })
 
 local opts = {noremap = true, silent = true}
-vim.keymap.set('n', '<leader>lf', ":Format<Enter>", opts)
-vim.keymap.set('n', '<leader>lF', ":FormatWrite<Enter>", opts)
+vim.keymap.set('n', '<Space>lf', ":Format<Enter>", opts)
+vim.keymap.set('n', '<Space>lF', ":FormatWrite<Enter>", opts)

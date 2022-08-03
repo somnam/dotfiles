@@ -2,8 +2,15 @@ local available, _ = pcall(require, "nvim-treesitter")
 if not available then return end
 
 require('nvim-treesitter.configs').setup({
+  ensure_installed = {
+    "lua",
+    "python",
+    "toml",
+    "json",
+  },
   highlight = {
     enable = true,
+    additional_vim_regex_highlighting = false,
   }
 })
 

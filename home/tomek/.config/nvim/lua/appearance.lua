@@ -21,10 +21,10 @@ vim.cmd([[
         highlight VertSplit      cterm=bold ctermbg=none ctermfg=8
 
         " Set status line colors
-        highlight StatusLine    cterm=bold ctermbg=238
-        highlight StatusLineNC  cterm=none ctermbg=237
-        highlight StatusLineTerm    cterm=bold ctermbg=238
-        highlight StatusLineTermNC  cterm=none ctermbg=237
+        highlight StatusLine    cterm=bold ctermfg=255 ctermbg=238
+        highlight StatusLineNC  cterm=none ctermfg=250 ctermbg=238
+        highlight StatusLineTerm    cterm=bold ctermfg=255 ctermbg=238
+        highlight StatusLineTermNC  cterm=none ctermfg=250 ctermbg=238
     endfun
 
     augroup color_scheme
