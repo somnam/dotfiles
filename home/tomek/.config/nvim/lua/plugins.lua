@@ -26,4 +26,8 @@ packer.startup(function()
       {'hrsh7th/cmp-path'},
     }
   }
+  use {
+    'dracula/vim',
+    as = 'dracula.vim'
+  }
 end)

@@ -13,5 +13,5 @@ vim.keymap.set("n", "j", "gj", opts)
 vim.keymap.set("n", "k", "gk", opts)
 
 -- Switch buffers
-vim.keymap.set("", "<C-Left>", ":bp<Enter>", opts)
-vim.keymap.set("", "<C-Right>", ":bn<Enter>", opts)
+vim.keymap.set("", "<S-h>", ":bp<Enter>", opts)
+vim.keymap.set("", "<S-l>", ":bn<Enter>", opts)
