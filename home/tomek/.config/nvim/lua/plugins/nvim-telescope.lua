@@ -1,9 +1,9 @@
 local available, telescope = pcall(require, "telescope")
 if not available then return end
 
-telescope.setup({
-  defaults={
-    vimgrep_arguments={
+local vimgrep_arguments = {}
+if vim.fn.executable('ack') == 1 then
+  vimgrep_arguments = {
       "ack",
       "--nocolor",
       "--nogroup",
@@ -12,7 +12,12 @@ telescope.setup({
       "--ignore-dir=.cache",
       "--ignore-dir=.mypy_cache",
       "--ignore-dir=.pytest_cache",
-    },
+  }
+end
+
+telescope.setup({
+  defaults={
+    vimgrep_arguments=vimgrep_arguments,
   },
   pickers = {
     buffers = {

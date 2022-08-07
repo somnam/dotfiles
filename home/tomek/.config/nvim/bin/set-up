@@ -57,7 +57,7 @@ download-plugin-manager ()
 
 sync-plugins ()
 {
-    local plugins="$HOME/.config/nvim/lua/plugins.lua"
+    local plugins="$HOME/.config/nvim/lua/plugins/packer.lua"
     [[ -f $plugins ]] || return
 
 
