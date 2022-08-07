@@ -7,6 +7,7 @@ require('nvim-treesitter.configs').setup({
     "python",
     "toml",
     "json",
+    "bash",
   },
   highlight = {
     enable = true,
