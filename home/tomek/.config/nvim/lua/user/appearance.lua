@@ -6,4 +6,4 @@ vim.api.nvim_create_autocmd("ColorScheme", {
     vim.highlight.create('DraculaComment', {ctermfg=68, guibg="#6272A4"}, false)
   end
 })
-vim.cmd("colorscheme dracula")
+vim.cmd("silent! colorscheme dracula")
