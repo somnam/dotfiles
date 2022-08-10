@@ -1,6 +1,17 @@
 local available, lualine = pcall(require, "lualine")
 if not available then return end
 
+
+local lualine_c = {
+  {
+    'filename',
+    -- displays file status (readonly status, modified status)
+    file_status = true,
+    -- 0 = just filename, 1 = relative path, 2 = absolute path
+    path = 1,
+  }
+}
+
 lualine.setup({
   options = {
     icons_enabled = false,
@@ -9,12 +20,9 @@ lualine.setup({
     component_separators = ''
   },
   sections = {
-    lualine_a = {
-      {
-        'filename',
-        file_status = true, -- displays file status (readonly status, modified status)
-        path = 1 -- 0 = just filename, 1 = relative path, 2 = absolute path
-      }
-    }
-  }
+    lualine_c = lualine_c,
+  },
+  inactive_sections = {
+    lualine_c = lualine_c,
+  },
 })
