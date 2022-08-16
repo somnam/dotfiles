@@ -20,7 +20,7 @@ end
 
 -- Set short form of --in-place flag for sed.
 local remove_trailing_whitespace = require("formatter.filetypes.any").remove_trailing_whitespace()
-remove_trailing_whitespace.args[1] = "-i ''"
+remove_trailing_whitespace.args[1] = "-i''"
 
 formatter.setup({
     filetype = {

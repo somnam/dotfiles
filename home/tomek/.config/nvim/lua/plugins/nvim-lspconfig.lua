@@ -12,7 +12,6 @@ local on_attach = function(client, bufnr)
   vim.keymap.set('n', '<Space>ld', vim.lsp.buf.definition, bufopts)
   vim.keymap.set('n', '<Space>lr', vim.lsp.buf.rename, bufopts)
   vim.keymap.set('n', '<Space>lR', vim.lsp.buf.references, bufopts)
-  vim.keymap.set('n', '<Space>lo', vim.lsp.buf.document_symbol, bufopts)
   vim.keymap.set('n', '<Space>ls', vim.lsp.buf.signature_help, bufopts)
   vim.keymap.set('n', '<Space>lh', vim.lsp.buf.hover, bufopts)
 end
