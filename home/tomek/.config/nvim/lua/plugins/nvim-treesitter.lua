@@ -6,17 +6,11 @@ require('nvim-treesitter.configs').setup({
     "lua",
     "python",
     "toml",
-    "json",
     "bash",
   },
   highlight = {
     enable = true,
+    disable = { "json", "yaml" },
     additional_vim_regex_highlighting = false,
   }
 })
-
--- Set folding method
-vim.opt.foldenable = false
-vim.opt.foldlevel = 1
-vim.opt.foldmethod = 'expr'
-vim.opt.foldexpr = 'nvim_treesitter#foldexpr()'

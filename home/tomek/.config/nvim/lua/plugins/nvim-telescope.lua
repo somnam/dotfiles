@@ -17,7 +17,8 @@ end
 
 telescope.setup({
   defaults={
-    vimgrep_arguments=vimgrep_arguments,
+    preview = false,
+    vimgrep_arguments = vimgrep_arguments,
   },
   pickers = {
     buffers = {

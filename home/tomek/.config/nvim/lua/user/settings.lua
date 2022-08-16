@@ -18,6 +18,7 @@ vim.opt.wildoptions = 'tagfile'
 vim.opt.wrap = true             -- Line wrapping
 vim.opt.linebreak = true        -- Wrap long lines at a linebreak character
 vim.opt.wrapscan =  false       -- Search wrapping
+vim.opt.foldmethod = 'marker'   -- Set folding method
 
 vim.opt.smartindent = true      -- Try to be smart with indenting
 vim.opt.autoindent = true       -- Set global autoindent on
