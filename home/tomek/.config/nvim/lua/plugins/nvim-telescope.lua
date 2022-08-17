@@ -15,14 +15,25 @@ if vim.fn.executable('ack') == 1 then
   }
 end
 
+local delete_buffer = require("telescope.actions").delete_buffer
+
 telescope.setup({
   defaults={
     preview = false,
+    color_devicons = false,
     vimgrep_arguments = vimgrep_arguments,
   },
   pickers = {
     buffers = {
       sort_mru = true,
+      mappings = {
+        i = {
+          ["<c-d>"] = delete_buffer,
+        },
+        n = {
+          ["<c-d>"] = delete_buffer,
+        }
+      }
     },
   },
 })
