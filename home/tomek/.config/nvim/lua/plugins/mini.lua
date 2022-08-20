@@ -12,7 +12,7 @@ require('mini.cursorword').setup({
   delay = 100
 })
 
-local neigh_pattern = '.[^%w]'
+local neigh_pattern = '.[^%w%%%\'%"%.]'
 require('mini.pairs').setup({
   mappings = {
     ['('] = { neigh_pattern = neigh_pattern },
@@ -21,9 +21,9 @@ require('mini.pairs').setup({
     [']'] = { neigh_pattern = neigh_pattern },
     ['{'] = { neigh_pattern = neigh_pattern },
     ['}'] = { neigh_pattern = neigh_pattern },
-    ['"'] = { neigh_pattern = neigh_pattern },
-    ["'"] = { neigh_pattern = neigh_pattern },
-    ['`'] = { neigh_pattern = neigh_pattern },
+    ['"'] = { action = 'open', neigh_pattern = neigh_pattern },
+    ["'"] = { action = 'open', neigh_pattern = neigh_pattern },
+    ['`'] = { action = 'open', neigh_pattern = neigh_pattern },
   }
 })
 
