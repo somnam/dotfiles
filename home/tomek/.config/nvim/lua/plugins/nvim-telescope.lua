@@ -21,6 +21,12 @@ telescope.setup({
   defaults={
     preview = false,
     color_devicons = false,
+    layout_config = {
+      horizontal = {
+        height = 0.8,
+        width = 0.7
+      }
+    },
     vimgrep_arguments = vimgrep_arguments,
   },
   pickers = {
