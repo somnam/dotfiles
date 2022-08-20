@@ -4,7 +4,6 @@ if not(available and buffer_available) then return end
 
 local menu_text = {
   nvim_lsp = "[LSP]",
-  nvim_lua = "[LUA]",
   buffer = "[Buffer]",
   path = "[Path]",
 }
@@ -16,17 +15,20 @@ local window = {
 }
 
 cmp.setup({
-  sources = cmp.config.sources({
-    { name = 'nvim_lsp' },
-    { name = 'nvim_lua' },
+  sources = cmp.config.sources(
     {
-      name = 'buffer',
-      option = {
-        get_bufnrs = function() return vim.api.nvim_list_bufs() end,
-      }
+      { name = 'nvim_lsp' },
     },
-    { name = 'path' },
-  }),
+    {
+      {
+        name = 'buffer',
+        option = {
+          get_bufnrs = function() return vim.api.nvim_list_bufs() end,
+        }
+      },
+      { name = 'path' },
+    }
+  ),
   confirm_opts = {
     behavior = cmp.ConfirmBehavior.Replace,
     select = false,
