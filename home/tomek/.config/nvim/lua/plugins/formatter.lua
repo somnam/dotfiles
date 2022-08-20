@@ -1,6 +1,22 @@
 local available, formatter = pcall(require, "formatter")
 if not available then return end
 
+local util = require("formatter.util")
+
+-- Use perl insead of sed for character replacement.
+local perl = function(pattern, replacement, flags)
+  return {
+    exe = "perl",
+    args = {
+      "-p -i -e",
+      util.quote_cmd_arg(util.wrap_sed_replace(pattern, replacement, flags)),
+    },
+    stdin = false,
+  }
+end
+
+local remove_trailing_whitespace = util.withl(perl, "[ \t]*$")
+
 -- Set python fixers list.
 local python_fixers = {}
 
@@ -18,17 +34,11 @@ if vim.fn.executable(python_black_cmd) == 1 then
     table.insert(python_fixers, function() return black end)
 end
 
--- Set short form of --in-place flag for sed.
-local remove_trailing_whitespace = require("formatter.filetypes.any").remove_trailing_whitespace()
-remove_trailing_whitespace.args[1] = "-i''"
-
 formatter.setup({
     filetype = {
         python = python_fixers,
         -- Use the special "*" filetype for defining formatter configurations on any filetype
-        ["*"] = {
-            function() return remove_trailing_whitespace end,
-        }
+        ["*"] = {remove_trailing_whitespace}
     }
 })
 
