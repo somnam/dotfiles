@@ -4,6 +4,7 @@ if not(available and buffer_available) then return end
 
 local menu_text = {
   nvim_lsp = "[LSP]",
+  nvim_lsp_signature_help = "[LSP]",
   buffer = "[Buffer]",
   path = "[Path]",
 }
@@ -18,8 +19,7 @@ cmp.setup({
   sources = cmp.config.sources(
     {
       { name = 'nvim_lsp' },
-    },
-    {
+      { name = 'nvim_lsp_signature_help' },
       {
         name = 'buffer',
         option = {
