@@ -15,6 +15,30 @@ local window = {
   side_padding = 1,
 }
 
+local function get_bufnrs()
+  -- Index only open buffers up to 1 megabyte size.
+
+  local valid_buffers = {}
+  local max_size = 1024 * 1024
+
+  for _, buffer in pairs(vim.api.nvim_list_bufs()) do
+    local buffer_size = vim.api.nvim_buf_get_offset(buffer, vim.api.nvim_buf_line_count(buffer))
+    if buffer_size > max_size then
+      goto continue
+    end
+
+    local buffer_listed = vim.fn.buflisted(buffer) == 1
+    local buffer_terminal = vim.fn.getbufvar(buffer, '&buftype', 'ERROR') == 'terminal'
+    if buffer_listed or buffer_terminal then
+      table.insert(valid_buffers, buffer)
+    end
+
+    ::continue::
+  end
+
+  return valid_buffers
+end
+
 cmp.setup({
   sources = cmp.config.sources(
     {
@@ -23,7 +47,7 @@ cmp.setup({
       {
         name = 'buffer',
         option = {
-          get_bufnrs = function() return vim.api.nvim_list_bufs() end,
+          get_bufnrs = get_bufnrs,
         }
       },
       { name = 'path' },
