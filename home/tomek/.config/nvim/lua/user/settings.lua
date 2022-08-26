@@ -1,8 +1,7 @@
 -- Default settings
 
 vim.opt.encoding = 'utf8'
-vim.opt.expandtab = true
-vim.opt.smarttab = true
+vim.opt.shortmess:append("I")   -- Disable intro message
 
 vim.opt.incsearch = true        -- Incremental search
 vim.opt.hlsearch = true         -- Highlight search results.

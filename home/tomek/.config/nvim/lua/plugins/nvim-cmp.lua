@@ -40,19 +40,12 @@ local function get_bufnrs()
 end
 
 cmp.setup({
-  sources = cmp.config.sources(
-    {
-      { name = 'nvim_lsp' },
-      { name = 'nvim_lsp_signature_help' },
-      {
-        name = 'buffer',
-        option = {
-          get_bufnrs = get_bufnrs,
-        }
-      },
-      { name = 'path' },
-    }
-  ),
+  sources = cmp.config.sources({
+    { name = 'nvim_lsp', group_index = 1 },
+    { name = 'nvim_lsp_signature_help', group_index = 1 },
+    { name = 'buffer', group_index = 2, option = { get_bufnrs = get_bufnrs } },
+    { name = 'path', group_index = 3 },
+  }),
   confirm_opts = {
     behavior = cmp.ConfirmBehavior.Replace,
     select = false,
