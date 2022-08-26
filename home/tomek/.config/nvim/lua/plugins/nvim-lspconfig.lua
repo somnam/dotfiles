@@ -1,12 +1,26 @@
 local available, lspconfig = pcall(require, "lspconfig")
 if not available then return end
 
-local opts = {noremap = true, silent = true}
-vim.keymap.set('n', '<Space>d[', vim.diagnostic.goto_prev, opts)
-vim.keymap.set('n', '<Space>d]', vim.diagnostic.goto_next, opts)
-vim.keymap.set('n', '<Space>dm', vim.diagnostic.setloclist, opts)
+local function set_handlers_style()
+  local handlers_style = {focusable = true, style = "minimal", border = "rounded"}
+
+  handlers = {
+    ["textDocument/hover"] = vim.lsp.handlers.hover,
+    ["textDocument/signatureHelp"] = vim.lsp.handlers.signature_help,
+  }
+
+  for name, handler in pairs(handlers) do
+    vim.lsp.handlers[name] = vim.lsp.with(handler, handlers_style)
+  end
+end
 
 local function on_attach(client, bufnr)
+  vim.api.nvim_buf_set_option(bufnr, "omnifunc", "v:lua.vim.lsp.omnifunc")
+  vim.api.nvim_buf_set_option(bufnr, "formatexpr", "v:lua.vim.lsp.formatexpr()")
+  if client.server_capabilities.definitionProvider then
+    vim.api.nvim_buf_set_option(bufnr, "tagfunc", "v:lua.vim.lsp.tagfunc")
+  end
+
   local bufopts = {noremap = true, silent = true, buffer = bufnr}
   vim.keymap.set('n', '<Space>lD', vim.lsp.buf.declaration, bufopts)
   vim.keymap.set('n', '<Space>ld', vim.lsp.buf.definition, bufopts)
@@ -15,6 +29,8 @@ local function on_attach(client, bufnr)
   vim.keymap.set('n', '<Space>ls', vim.lsp.buf.signature_help, bufopts)
   vim.keymap.set('n', '<Space>lh', vim.lsp.buf.hover, bufopts)
 end
+
+set_handlers_style()
 
 local python_lsp_cmd = vim.fn.stdpath("data") .. "/python/bin/jedi-language-server"
 if vim.fn.executable(python_lsp_cmd) == 1 then
