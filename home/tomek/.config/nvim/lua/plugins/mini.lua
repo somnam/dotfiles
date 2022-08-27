@@ -4,7 +4,6 @@ if not available then return end
 require('mini.bufremove').setup()
 vim.api.nvim_command(":command! BD lua MiniBufremove.delete()")
 vim.api.nvim_command(":command! BW lua MiniBufremove.wipeout()")
-vim.api.nvim_command(":command! BU lua MiniBufremove.unshow()")
 
 require('mini.comment').setup()
 
