@@ -7,6 +7,7 @@ vim.opt.incsearch = true        -- Incremental search
 vim.opt.hlsearch = true         -- Highlight search results.
 vim.opt.ignorecase = true       -- Do case insensitive matching
 vim.opt.smartcase = true        -- Do smart case matching
+vim.opt.iskeyword:append('-')   -- Treat dash separated words as a word text object
 
 vim.opt.showcmd = true          -- Show (partial) command in status line.
 vim.opt.laststatus = 2          -- Always display statusbar
