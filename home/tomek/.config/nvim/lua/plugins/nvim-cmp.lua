@@ -53,7 +53,7 @@ local window = {
 
 local buffer_option = {
   get_bufnrs = get_bufnrs,
-  indexing_interval = 250,
+  indexing_interval = 500,
 }
 
 cmp.setup({
