@@ -31,4 +31,5 @@ packer.startup(function()
     'dracula/vim',
     as = 'dracula.vim'
   }
+  use {'tomasiser/vim-code-dark'}
 end)
