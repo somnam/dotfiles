@@ -15,7 +15,7 @@ local lualine_c = {
 lualine.setup({
   options = {
     icons_enabled = false,
-    theme = 'dracula',
+    theme = 'auto',
     section_separators = '',
     component_separators = ''
   },

@@ -11,9 +11,9 @@ require('mini.cursorword').setup({
   delay = 100
 })
 
-local neigh_char = '[^%w%%%\'%"%.]'
+local neigh_char = '[^%w%%%\'%"%.%#]'
 local neigh_pattern = neigh_char .. neigh_char
-local quote_neigh_char = '[^%w%%%\'%"%.%(%{%[%)%}%]]'
+local quote_neigh_char = '[^%w%%%\'%"%.%#%(%{%[%)%}%]]'
 local quote_neigh_pattern = quote_neigh_char .. quote_neigh_char
 require('mini.pairs').setup({
   mappings = {
