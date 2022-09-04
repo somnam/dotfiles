@@ -1,19 +1,6 @@
 local available, lspconfig = pcall(require, "lspconfig")
 if not available then return end
 
-local function set_handlers_style()
-  local handlers_style = {focusable = true, style = "minimal", border = "rounded"}
-
-  handlers = {
-    ["textDocument/hover"] = vim.lsp.handlers.hover,
-    ["textDocument/signatureHelp"] = vim.lsp.handlers.signature_help,
-  }
-
-  for name, handler in pairs(handlers) do
-    vim.lsp.handlers[name] = vim.lsp.with(handler, handlers_style)
-  end
-end
-
 local function on_attach(client, bufnr)
   vim.api.nvim_buf_set_option(bufnr, "omnifunc", "v:lua.vim.lsp.omnifunc")
   vim.api.nvim_buf_set_option(bufnr, "formatexpr", "v:lua.vim.lsp.formatexpr()")
@@ -30,40 +17,47 @@ local function on_attach(client, bufnr)
   vim.keymap.set('n', '<Space>lh', vim.lsp.buf.hover, bufopts)
 end
 
-set_handlers_style()
+local vim_data_path = vim.fn.stdpath("data")
 
-local python_lsp_cmd = vim.fn.stdpath("data") .. "/python/bin/jedi-language-server"
+local flake8_cmd = vim_data_path .. "/python/bin/flake8"
+
+local python_lsp_cmd = vim_data_path .. "/python/bin/jedi-language-server"
 if vim.fn.executable(python_lsp_cmd) == 1 then
-  local python_flake_cmd = vim.fn.stdpath("data") .. "/python/bin/flake8"
-
-  -- Enable diagnostics only when linter is not available.
-  local has_linter = vim.fn.executable(python_flake_cmd)
-
   local function jedi_language_server_on_attach(client, bufnr)
-      on_attach(client, bufnr)
+    on_attach(client, bufnr)
 
-      -- Customize trigger characters.
-      client.server_capabilities.completionProvider.triggerCharacters = {"."}
+    -- Customize trigger characters.
+    client.server_capabilities.completionProvider.triggerCharacters = {"."}
+  end
+
+  local function jedi_language_server_on_new_config(new_config, root_dir)
+    -- Enable diagnostics only when linter is not available.
+    local enable_diagnostics = vim.fn.executable(flake8_cmd) ~= 1
+
+    -- Set additional paths for completion.
+    local extra_paths = {
+      root_dir .. "/.venv/lib/python3.7/site-packages",
+      root_dir .. "/.venv/lib/python3.8/site-packages",
+      root_dir .. "/.venv/lib/python3.9/site-packages",
+      root_dir .. "/.venv/lib/python3.10/site-packages",
+    }
+
+    new_config.init_options = {
+      diagnostics = {
+        enable = enable_diagnostics,
+      },
+      workspace = {
+        extraPaths = extra_paths,
+      },
+    }
   end
 
   local capabilities = vim.lsp.protocol.make_client_capabilities()
 
-  local extra_paths = {
-    -- Additional paths for completion.
-    -- vim.fn.expand("~/additional/path"),
-  }
-
   lspconfig.jedi_language_server.setup({
-      init_options = {
-        diagnostics = {
-          enable = has_linter ~= 1,
-        },
-        workspace = {
-          extraPaths = extra_paths,
-        },
-      },
-      capabilities = capabilities,
-      on_attach = jedi_language_server_on_attach,
-      cmd = { python_lsp_cmd },
+    capabilities = capabilities,
+    on_attach = jedi_language_server_on_attach,
+    on_new_config = jedi_language_server_on_new_config,
+    cmd = { python_lsp_cmd },
   })
 end

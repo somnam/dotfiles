@@ -9,6 +9,7 @@ if vim.fn.executable('ack') == 1 then
       "--nogroup",
       "--column",
       "--smart-case",
+      "--ignore-dir=.venv",
       "--ignore-dir=.cache",
       "--ignore-dir=.mypy_cache",
       "--ignore-dir=.pytest_cache",
@@ -34,10 +35,10 @@ telescope.setup({
       sort_mru = true,
       mappings = {
         i = {
-          ["<c-d>"] = delete_buffer,
+          ["dd"] = delete_buffer,
         },
         n = {
-          ["<c-d>"] = delete_buffer,
+          ["dd"] = delete_buffer,
         }
       }
     },
