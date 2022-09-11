@@ -19,6 +19,7 @@ vim.opt.wrap = true             -- Line wrapping
 vim.opt.linebreak = true        -- Wrap long lines at a linebreak character
 vim.opt.wrapscan =  false       -- Search wrapping
 vim.opt.foldmethod = 'marker'   -- Set folding method
+vim.opt.cursorline = true       -- Highlight current cursor line
 
 vim.opt.smartindent = true      -- Try to be smart with indenting
 vim.opt.autoindent = true       -- Set global autoindent on
@@ -40,7 +41,7 @@ vim.opt.ttimeoutlen = 10        -- Set to unnoticeable small value
 vim.opt.updatetime = 300        -- Longer update time leads to noticeable delays
 vim.opt.synmaxcol = 512         -- Be forgiving with long lines
 
-vim.opt.clipboard = 'unnamedplus' -- Use the "global" buffer for copy and paste
+-- vim.opt.clipboard = 'unnamedplus' -- Use the "global" buffer for copy and paste
 vim.opt.undofile = true         -- Enable persistent undo
 vim.opt.modeline = false        -- Don't run arbitrary modeline code
 vim.opt.inccommand = 'nosplit'  -- Shows the effects of a command incrementally.
