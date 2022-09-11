@@ -2,7 +2,7 @@ vim.g.dracula_colorterm = 0
 vim.api.nvim_create_autocmd("ColorScheme", {
   pattern="dracula",
   callback = function()
-    vim.highlight.create('DraculaComment', {ctermfg=68, guibg="#6272A4"}, false)
+    vim.highlight.create("DraculaComment", {ctermfg=68, guibg="#6272A4"}, false)
   end
 })
 

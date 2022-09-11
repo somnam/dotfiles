@@ -12,7 +12,7 @@ require('mini.cursorword').setup({
 })
 
 local neigh_pattern = '.[%s%)%]%}]'
-local quote_neigh_pattern = '[%{%[%(%s][%s%)%]%}]'
+local quote_neigh_pattern = '[%{%[%(%=%s][%s%)%]%}]'
 require('mini.pairs').setup({
   mappings = {
     ['('] = { neigh_pattern = neigh_pattern },
