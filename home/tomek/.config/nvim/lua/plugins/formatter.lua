@@ -43,5 +43,5 @@ formatter.setup({
 })
 
 local opts = {noremap = true, silent = true}
-vim.keymap.set('n', '<Space>lf', ":Format<Enter>", opts)
-vim.keymap.set('n', '<Space>lF', ":FormatWrite<Enter>", opts)
+vim.api.nvim_set_keymap("n", "<Space>lf", ":Format<Enter>", opts)
+vim.api.nvim_set_keymap("n", "<Space>lF", ":FormatWrite<Enter>", opts)

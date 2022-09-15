@@ -8,13 +8,13 @@ local function on_attach(client, bufnr)
     vim.api.nvim_buf_set_option(bufnr, "tagfunc", "v:lua.vim.lsp.tagfunc")
   end
 
-  local bufopts = {noremap = true, silent = true, buffer = bufnr}
-  vim.keymap.set('n', '<Space>lD', vim.lsp.buf.declaration, bufopts)
-  vim.keymap.set('n', '<Space>ld', vim.lsp.buf.definition, bufopts)
-  vim.keymap.set('n', '<Space>lR', vim.lsp.buf.rename, bufopts)
-  vim.keymap.set('n', '<Space>lr', vim.lsp.buf.references, bufopts)
-  vim.keymap.set('n', '<Space>ls', vim.lsp.buf.signature_help, bufopts)
-  vim.keymap.set('n', '<Space>lh', vim.lsp.buf.hover, bufopts)
+  local bufopts = {noremap = true, silent = true}
+  vim.api.nvim_buf_set_keymap(bufnr, "n", "<Space>lD", ":lua vim.lsp.buf.declaration()<Enter>", bufopts)
+  vim.api.nvim_buf_set_keymap(bufnr, "n", "<Space>ld", ":lua vim.lsp.buf.definition()<Enter>", bufopts)
+  vim.api.nvim_buf_set_keymap(bufnr, "n", "<Space>lR", ":lua vim.lsp.buf.rename()<Enter>", bufopts)
+  vim.api.nvim_buf_set_keymap(bufnr, "n", "<Space>lr", ":lua vim.lsp.buf.references()<Enter>", bufopts)
+  vim.api.nvim_buf_set_keymap(bufnr, "n", "<Space>ls", ":lua vim.lsp.buf.signature_help()<Enter>", bufopts)
+  vim.api.nvim_buf_set_keymap(bufnr, "n", "<Space>lh", ":lua vim.lsp.buf.hover()<Enter>", bufopts)
 end
 
 local vim_data_path = vim.fn.stdpath("data")

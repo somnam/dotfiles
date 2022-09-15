@@ -1,9 +1,9 @@
-local available, _ = pcall(require, "mini.starter")
+local available, _ = pcall(require, 'mini.starter')
 if not available then return end
 
 require('mini.bufremove').setup()
-vim.api.nvim_command(":command! BD lua MiniBufremove.delete(0, true)")
-vim.api.nvim_command(":command! BW lua MiniBufremove.wipeout(0, true)")
+vim.api.nvim_command(':command! BD lua MiniBufremove.delete(0, true)')
+vim.api.nvim_command(':command! BW lua MiniBufremove.wipeout(0, true)')
 
 require('mini.comment').setup()
 
@@ -24,33 +24,50 @@ require('mini.pairs').setup({
   }
 })
 
-require('mini.sessions').setup({
-  directory = ''
-})
-
 local starter = require('mini.starter')
-local actions_section = function()
-  return function()
-    return {
-      { action = 'Telescope oldfiles',        name = 'Previous files',  section = 'Actions' },
-      { action = 'Telescope find_files',      name = 'Find files',      section = 'Actions' },
-      { action = 'Telescope git_files',       name = 'Git files',       section = 'Actions' },
-      { action = 'Telescope live_grep',       name = 'Live grep',       section = 'Actions' },
-      { action = 'Telescope command_history', name = 'Command history', section = 'Actions' },
-      { action = 'enew',                      name = 'New buffer',      section = 'Actions' },
-      { action = 'qall',                      name = 'Quit Neovim',     section = 'Actions' },
-    }
-  end
+local function actions_section()
+  return {
+    { action = 'enew', name = 'New buffer', section = 'Actions' },
+    { action = 'qall', name = 'Quit', section = 'Actions' },
+  }
 end
+local function header()
+  local version = vim.version()
+  return string.format(
+    'NVIM v%d.%d.%d %s',
+    version.major, version.minor, version.patch,
+    jit.version
+  )
+end
+vim.api.nvim_create_autocmd('User', {
+  pattern = 'MiniStarterOpened',
+  callback = function(args)
+    local width = vim.api.nvim_win_get_width(0)
+
+    vim.api.nvim_create_autocmd('CursorMoved', {
+      buffer = args.buf,
+      callback = function()
+        local current_width = vim.api.nvim_win_get_width(0)
+        if width ~= current_width then
+          width = current_width
+          MiniStarter.refresh()
+        end
+      end
+    })
+  end
+})
 starter.setup({
   evaluate_single = true,
+  header = header,
   items = {
-    actions_section(),
+    starter.sections.recent_files(9, false),
+    actions_section,
   },
+  footer = '',
   content_hooks = {
-    starter.gen_hook.adding_bullet(),
     starter.gen_hook.indexing('all', { 'Actions' }),
-    starter.gen_hook.padding(3, 2),
+    starter.gen_hook.adding_bullet(),
+    starter.gen_hook.aligning('center', 'center'),
   },
 })
 
