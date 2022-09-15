@@ -2,12 +2,12 @@ local available, gitsigns = pcall(require, "gitsigns")
 if not available then return end
 
 local on_attach = function(bufnr)
-  local bufopts = {noremap = true, silent = true, buffer = bufnr}
+  local bufopts = {noremap = true, silent = true}
 
-  vim.keymap.set("n", "<Space>gd", ":Gitsigns diffthis<Enter>", bufopts)
-  vim.keymap.set("n", "<Space>gb", ":Gitsigns toggle_current_line_blame<Enter>", bufopts)
-  vim.keymap.set("n", "<Space>g[", ":Gitsigns prev_hunk<Enter>", bufopts)
-  vim.keymap.set("n", "<Space>g]", ":Gitsigns next_hunk<Enter>", bufopts)
+  vim.api.nvim_buf_set_keymap(bufnr, "n", "<Space>gd", ":Gitsigns diffthis<Enter>", bufopts)
+  vim.api.nvim_buf_set_keymap(bufnr, "n", "<Space>gb", ":Gitsigns toggle_current_line_blame<Enter>", bufopts)
+  vim.api.nvim_buf_set_keymap(bufnr, "n", "<Space>g[", ":Gitsigns prev_hunk<Enter>", bufopts)
+  vim.api.nvim_buf_set_keymap(bufnr, "n", "<Space>g]", ":Gitsigns next_hunk<Enter>", bufopts)
 end
 
 gitsigns.setup({
