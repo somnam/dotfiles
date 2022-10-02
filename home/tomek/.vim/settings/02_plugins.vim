@@ -11,7 +11,6 @@ Plug 'vim-python/python-syntax'
 Plug 'Vimjas/vim-python-pep8-indent'
 Plug 'pangloss/vim-javascript'
 Plug 'mhinz/vim-signify'
-Plug 'dracula/vim', { 'as': 'vim-dracula' }
 Plug 'mhinz/vim-startify'
 Plug 'wincent/ferret'
 Plug 'LunarWatcher/auto-pairs'

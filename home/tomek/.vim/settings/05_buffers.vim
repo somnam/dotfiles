@@ -1,5 +1,6 @@
 " Buffer Bye
 command! BD Bdelete
+command! BW Bwipeout
 
 " BufferExpolorer
 command! LS BufExplorer
