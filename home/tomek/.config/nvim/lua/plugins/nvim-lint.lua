@@ -22,34 +22,24 @@ local python_linters = {}
 
 local vim_data_path = vim.fn.stdpath("data")
 
-local python_flake_cmd = vim_data_path .. "/python/bin/flake8"
-if vim.fn.executable(python_flake_cmd) == 1 then
-  table.insert(python_linters, 'flake8')
-  lint.linters.flake8.cmd = python_flake_cmd
+local flake8_cmds = {"flake8", vim_data_path .. "/python/bin/flake8"}
+for _, flake8_cmd in ipairs(flake8_cmds) do
+  if vim.fn.executable(flake8_cmd) == 1 then
+    table.insert(python_linters, 'flake8')
+    lint.linters.flake8.cmd = flake8_cmd
+    break
+  end
 end
 
-local python_mypy_cmd = vim_data_path .. "/python/bin/mypy"
-if vim.fn.executable(python_mypy_cmd) == 1 then
-  table.insert(python_linters, 'mypy')
-  lint.linters.mypy.cmd = python_mypy_cmd
-
-  table.insert(
-    lint.linters.mypy.args,
+local mypy_cmds = {"mypy", vim_data_path .. "/python/bin/mypy"}
+for _, mypy_cmd in ipairs(mypy_cmds) do
+  if vim.fn.executable(mypy_cmd) == 1 then
+    table.insert(python_linters, 'mypy')
+    lint.linters.mypy.cmd = mypy_cmd
     -- Allow namespace packages.
-    "--namespace-packages"
-  )
-
-  -- Set additional entries in MYPYPATH.
-  local mypy_path = extend_mypy_path({
-    ".venv/lib/python3.7/site-packages",
-    ".venv/lib/python3.8/site-packages",
-    ".venv/lib/python3.9/site-packages",
-    ".venv/lib/python3.10/site-packages",
-  })
-
-  lint.linters.mypy.env = {
-    ["MYPYPATH"] = mypy_path,
-  }
+    table.insert(lint.linters.mypy.args, "--namespace-packages")
+    break
+  end
 end
 
 -- Set linting map.

@@ -19,10 +19,10 @@ end
 
 local vim_data_path = vim.fn.stdpath("data")
 
-local flake8_cmd = vim_data_path .. "/python/bin/flake8"
-
 local python_lsp_cmd = vim_data_path .. "/python/bin/jedi-language-server"
 if vim.fn.executable(python_lsp_cmd) == 1 then
+  local flake8_cmds = {"flake8", vim_data_path .. "/python/bin/flake8"}
+
   local function jedi_language_server_on_attach(client, bufnr)
     on_attach(client, bufnr)
 
@@ -32,22 +32,17 @@ if vim.fn.executable(python_lsp_cmd) == 1 then
 
   local function jedi_language_server_on_new_config(new_config, root_dir)
     -- Enable diagnostics only when linter is not available.
-    local enable_diagnostics = vim.fn.executable(flake8_cmd) ~= 1
-
-    -- Set additional paths for completion.
-    local extra_paths = {
-      root_dir .. "/.venv/lib/python3.7/site-packages",
-      root_dir .. "/.venv/lib/python3.8/site-packages",
-      root_dir .. "/.venv/lib/python3.9/site-packages",
-      root_dir .. "/.venv/lib/python3.10/site-packages",
-    }
+    local enable_diagnostics = true
+    for _, flake8_cmd in ipairs(flake8_cmds) do
+      if vim.fn.executable(flake8_cmd) == 1 then
+        enable_diagnostics = false
+        break
+      end
+    end
 
     new_config.init_options = {
       diagnostics = {
         enable = enable_diagnostics,
-      },
-      workspace = {
-        extraPaths = extra_paths,
       },
     }
   end
