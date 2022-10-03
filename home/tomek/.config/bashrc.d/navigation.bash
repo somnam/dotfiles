@@ -19,4 +19,4 @@ shopt -s dirspell 2> /dev/null
 shopt -s cdspell 2> /dev/null
 
 # Automatically trim long paths in the prompt (requires Bash 4.x)
-PROMPT_DIRTRIM=3
+PROMPT_DIRTRIM=4

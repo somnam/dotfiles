@@ -17,13 +17,8 @@ alias l='ls -CF'
 
 # Utils
 alias c="clear"
-alias g="gvim --remote-silent"
-alias v="vim --remote-silent"
-alias h="htop"
-alias rscreen="screen -d -r"
 alias bc="bc ~/.bcrc"
 alias info="info --vi-keys"
-alias sudo="sudo -E"
 alias apt-up='sudo apt update && sudo apt full-upgrade && sudo apt autoremove --purge && sudo apt autoclean'
 alias apt-clean='sudo apt autoremove --purge && sudo apt autoclean'
 alias swapr='sync && sudo /sbin/sysctl vm.drop_caches=3 && sudo swapoff -a && sudo swapon -a'
@@ -33,4 +28,3 @@ alias Suspend='systemctl suspend';
 alias Hibernate='systemctl hibernate';
 alias Restart='systemctl reboot';
 alias Stop='systemctl poweroff'
-
