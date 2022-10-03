@@ -20,18 +20,26 @@ local remove_trailing_whitespace = util.withl(perl, "[ \t]*$")
 -- Set python fixers list.
 local python_fixers = {}
 
-local python_isort_cmd = vim.fn.stdpath("data") .. "/python/bin/isort"
-if vim.fn.executable(python_isort_cmd) == 1 then
-    local isort = require("formatter.filetypes.python").isort()
-    isort.exe = python_isort_cmd
-    table.insert(python_fixers, function() return isort end)
+local vim_data_path = vim.fn.stdpath("data")
+
+local isort_cmds = {"isort", vim_data_path .. "/python/bin/isort"}
+for _, isort_cmd in ipairs(isort_cmds) do
+    if vim.fn.executable(isort_cmd) == 1 then
+        local isort = require("formatter.filetypes.python").isort()
+        isort.exe = isort_cmd
+        table.insert(python_fixers, function() return isort end)
+        break
+    end
 end
 
-local python_black_cmd = vim.fn.stdpath("data") .. "/python/bin/black"
-if vim.fn.executable(python_black_cmd) == 1 then
-    local black = require("formatter.filetypes.python").black()
-    black.exe = python_black_cmd
-    table.insert(python_fixers, function() return black end)
+local black_cmds = {"black", vim_data_path .. "/python/bin/black"}
+for _, black_cmd in ipairs(black_cmds) do
+    if vim.fn.executable(black_cmd) == 1 then
+        local black = require("formatter.filetypes.python").black()
+        black.exe = black_cmd
+        table.insert(python_fixers, function() return black end)
+        break
+    end
 end
 
 formatter.setup({
