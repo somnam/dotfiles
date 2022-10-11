@@ -37,18 +37,22 @@ local lualine_c = {
   {'filename', file_status = true, path = 1},
 }
 
+local lualine_x = {'encoding', 'fileformat', 'filetype'}
+
 lualine.setup({
   options = {
     icons_enabled = false,
-    theme = 'auto',
+    theme = 'material',
     section_separators = '',
     component_separators = ''
   },
   sections = {
     lualine_b = lualine_b,
     lualine_c = lualine_c,
+    lualine_x = lualine_x,
   },
   inactive_sections = {
     lualine_c = lualine_c,
+    lualine_x = lualine_x,
   },
 })
