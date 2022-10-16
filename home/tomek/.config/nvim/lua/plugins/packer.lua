@@ -19,6 +19,10 @@ packer.startup(function()
     requires = { {'nvim-lua/plenary.nvim'} }
   }
   use {
+    'nvim-telescope/telescope-file-browser.nvim',
+    requires = { {'nvim-telescope/telescope.nvim'} }
+  }
+  use {
     'hrsh7th/nvim-cmp',
     requires = {
       {'hrsh7th/cmp-nvim-lsp'},
