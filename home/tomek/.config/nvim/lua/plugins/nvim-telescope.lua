@@ -27,6 +27,13 @@ local buffer_mappings = {
   ["<C-d>"] = actions.delete_buffer,
 }
 
+local file_browser = {
+  dir_icon = '',
+  grouped = true,
+  hidden = true,
+  hijack_netrw = true,
+}
+
 telescope.setup({
   defaults={
     preview = {filesize_limit = 1},
@@ -36,7 +43,7 @@ telescope.setup({
     layout_strategy = "vertical",
     layout_config = {
       horizontal = {height = 0.8, width = 0.7, prompt_position = "top"},
-      vertical = {preview_height = 0.4, width = 0.4, prompt_position = "top"},
+      vertical = {preview_height = 0.4, width = 0.7, prompt_position = "top"},
       center = {height = 0.5, preview_cutoff = 1},
     },
     results_title = false,
@@ -50,7 +57,7 @@ telescope.setup({
     },
   },
   extensions = {
-    file_browser = {hijack_netrw = true},
+    file_browser = file_browser,
   }
 })
 
