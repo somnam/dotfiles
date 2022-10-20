@@ -65,8 +65,6 @@ sync-plugins ()
     local nvim=${nvim:-"$HOME/.local/bin/nvim"}
 
     $nvim -u "$plugins" -c 'autocmd User PackerComplete quitall' -c 'PackerSync'
-
-    echo
 }
 
 
@@ -103,9 +101,12 @@ main ()
 
     if [[ "$(require-update-nvim $@)" == true ]]; then
         update-nvim
+        echo
     fi
     sync-nvim-plugins
+    echo
     update-python-requirements
+    echo
 }
 
 main $@
