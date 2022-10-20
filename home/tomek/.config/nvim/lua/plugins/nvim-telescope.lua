@@ -28,7 +28,7 @@ local buffer_mappings = {
 }
 
 local file_browser = {
-  dir_icon = '',
+  dir_icon = '⧠',
   grouped = true,
   hidden = true,
   hijack_netrw = true,
@@ -71,4 +71,3 @@ vim.api.nvim_set_keymap("n", "<Space>fg", ":Telescope git_status<Enter>", opts)
 vim.api.nvim_set_keymap("n", "<Space>fl", ":Telescope live_grep<Enter>", opts)
 vim.api.nvim_set_keymap("n", "<Space>fo", ":Telescope treesitter<Enter>", opts)
 vim.api.nvim_set_keymap("n", "<Space>fe", ":Telescope file_browser<Enter>", opts)
-
