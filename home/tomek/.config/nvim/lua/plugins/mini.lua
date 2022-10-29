@@ -60,6 +60,7 @@ starter.setup({
   evaluate_single = true,
   header = header,
   items = {
+    starter.sections.recent_files(9, true),
     starter.sections.recent_files(9, false),
     actions_section,
   },

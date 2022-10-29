@@ -60,11 +60,13 @@ sync-plugins ()
     local plugins="$HOME/.config/nvim/lua/plugins/packer.lua"
     [[ -f $plugins ]] || return
 
-
     local nvim=$(which nvim)
     local nvim=${nvim:-"$HOME/.local/bin/nvim"}
+    local disable_starter='let g:ministarter_disable=v:true'
+    local quit_after_sync='autocmd User PackerComplete quitall'
+    local sync_cmd='PackerSync'
 
-    $nvim -u "$plugins" -c 'autocmd User PackerComplete quitall' -c 'PackerSync'
+    $nvim -c "$disable_starter" -c "$quit_after_sync" -c "$sync_cmd"
 }
 
 
