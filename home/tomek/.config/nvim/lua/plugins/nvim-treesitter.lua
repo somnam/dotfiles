@@ -3,11 +3,14 @@ if not available then return end
 
 require('nvim-treesitter.configs').setup({
   ensure_installed = {
+    "bash",
     "lua",
+    "make",
+    "markdown",
     "python",
     "toml",
-    "bash",
   },
+  sync_install = true,
   highlight = {
     enable = true,
     disable = { "json", "yaml" },

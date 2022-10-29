@@ -3,6 +3,7 @@ vim.api.nvim_create_autocmd("ColorScheme", {
   pattern="dracula",
   callback = function()
     vim.api.nvim_set_hl(0, "DraculaComment", {ctermfg=68, bg="#6272A4"})
+    vim.api.nvim_set_hl(0, "CursorLine", {ctermbg=235, bg="#424450"})
   end
 })
 
