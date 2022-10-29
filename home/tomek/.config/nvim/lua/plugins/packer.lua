@@ -31,9 +31,6 @@ packer.startup(function()
       {'hrsh7th/cmp-path'},
     }
   }
-  use {
-    'dracula/vim',
-    as = 'dracula.vim'
-  }
   use {'tomasiser/vim-code-dark'}
+  use {'Mofiqul/vscode.nvim'}
 end)
