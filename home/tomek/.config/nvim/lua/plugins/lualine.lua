@@ -29,10 +29,7 @@ end
 
 local lualine_b = {
   {'branch', icons_enabled = true, fmt = truncate_branch},
-  {
-    'diff',
-    diff_color = {added = {fg='green'}, modified = {fg='blue'}, removed = {fg='red'}}
-  },
+  {'diff'},
   'diagnostics'
 }
 
