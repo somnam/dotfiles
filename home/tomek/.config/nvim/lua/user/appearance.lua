@@ -3,7 +3,14 @@ local function true_color_term()
 end
 
 local function set_true_color_theme()
-  vim.cmd("silent! colorscheme vscode")
+  local available, vscode = pcall(require, "vscode")
+  if not available then return end
+
+  vscode.setup({
+    group_overrides = {
+      CursorLine = {bg="#282828"},
+    }
+  })
 end
 
 local function set_256_color_theme()
@@ -24,4 +31,3 @@ if true_color_term() then
 else
   set_256_color_theme()
 end
-

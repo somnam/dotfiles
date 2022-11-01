@@ -1,77 +1,43 @@
-local available, _ = pcall(require, 'mini.starter')
-if not available then return end
-
-require('mini.bufremove').setup()
-vim.api.nvim_command(':command! BD lua MiniBufremove.delete(0, true)')
-vim.api.nvim_command(':command! BW lua MiniBufremove.wipeout(0, true)')
-
-require('mini.comment').setup()
-
-require('mini.cursorword').setup({
-  delay = 100
-})
-
-local neigh_pattern = '.[%s%)%]%}]'
-local quote_neigh_pattern = '[%{%[%(%=%s][%s%)%]%}]'
-require('mini.pairs').setup({
-  mappings = {
-    ['('] = { neigh_pattern = neigh_pattern },
-    ['['] = { neigh_pattern = neigh_pattern },
-    ['{'] = { neigh_pattern = neigh_pattern },
-    ['"'] = { action = 'open', neigh_pattern = quote_neigh_pattern },
-    ["'"] = { action = 'open', neigh_pattern = quote_neigh_pattern },
-    ['`'] = { action = 'open', neigh_pattern = quote_neigh_pattern },
-  }
-})
-
-local starter = require('mini.starter')
-local function actions_section()
-  return {
-    { action = 'enew', name = 'New buffer', section = 'Actions' },
-    { action = 'qall', name = 'Quit', section = 'Actions' },
-  }
+local available_bufremove, bufremove = pcall(require, 'mini.bufremove')
+if available_bufremove then
+  vim.api.nvim_command(':command! BD lua MiniBufremove.delete(0, true)')
+  vim.api.nvim_command(':command! BW lua MiniBufremove.wipeout(0, true)')
+  bufremove.setup()
 end
-local function header()
-  local version = vim.version()
-  return string.format(
-    'NVIM v%d.%d.%d %s',
-    version.major, version.minor, version.patch,
-    jit.version
-  )
+
+
+local available_comment, comment = pcall(require, 'mini.comment')
+if available_comment then
+  comment.setup()
 end
-vim.api.nvim_create_autocmd('User', {
-  pattern = 'MiniStarterOpened',
-  callback = function(args)
-    local width = vim.api.nvim_win_get_width(0)
 
-    vim.api.nvim_create_autocmd('CursorMoved', {
-      buffer = args.buf,
-      callback = function()
-        local current_width = vim.api.nvim_win_get_width(0)
-        if width ~= current_width then
-          width = current_width
-          MiniStarter.refresh()
-        end
-      end
-    })
-  end
-})
-starter.setup({
-  evaluate_single = true,
-  header = header,
-  items = {
-    starter.sections.recent_files(9, true),
-    starter.sections.recent_files(9, false),
-    actions_section,
-  },
-  footer = '',
-  content_hooks = {
-    starter.gen_hook.indexing('all', { 'Actions' }),
-    starter.gen_hook.adding_bullet(),
-    starter.gen_hook.aligning('center', 'center'),
-  },
-})
+local available_cursorword, cursorword = pcall(require, 'mini.cursorword')
+if available_cursorword then
+  cursorword.setup({delay = 100})
+end
 
-require('mini.surround').setup()
+local available_pairs, pairs = pcall(require, 'mini.pairs')
+if available_pairs then
+  local neigh_pattern = '.[%s%)%]%}]'
+  local quote_neigh_pattern = '[%{%[%(%=%s][%s%)%]%}]'
+  pairs.setup({
+    mappings = {
+      ['('] = { neigh_pattern = neigh_pattern },
+      ['['] = { neigh_pattern = neigh_pattern },
+      ['{'] = { neigh_pattern = neigh_pattern },
+      ['"'] = { action = 'open', neigh_pattern = quote_neigh_pattern },
+      ["'"] = { action = 'open', neigh_pattern = quote_neigh_pattern },
+      ['`'] = { action = 'open', neigh_pattern = quote_neigh_pattern },
+    }
+  })
+end
 
-require('mini.trailspace').setup()
+local available_surround, surround = pcall(require, 'mini.surround')
+if available_surround then
+  surround.setup()
+end
+
+local available_trailspace, trailspace = pcall(require, 'mini.trailspace')
+if available_trailspace then
+  trailspace.setup()
+end
