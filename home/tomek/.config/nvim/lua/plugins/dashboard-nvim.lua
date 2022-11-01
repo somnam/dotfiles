@@ -54,12 +54,12 @@ dashboard.custom_center = {
     icon = "  ",
     desc = "New file                        ",
     action = "enew",
-    shortcut = "<Space>n"
+    shortcut = "<Space>n "
   },
   {
     icon = "  ",
     desc = "Quit                            ",
     action = "qall",
-    shortcut = "<Space>q"
+    shortcut = "<Space>q "
   },
 }
