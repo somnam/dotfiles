@@ -1,6 +1,12 @@
 #!/bin/bash
 set -e
 
+nvim-bin ()
+{
+    local nvim=$(which nvim)
+    echo "${nvim:-"$HOME/.local/bin/nvim"}"
+}
+
 update-nvim ()
 {
     echo 'Downloading latest appimage'
@@ -39,6 +45,7 @@ sync-nvim-plugins ()
 
     download-plugin-manager
     sync-plugins
+    sync-treesitter-parsers
 }
 
 download-plugin-manager ()
@@ -60,12 +67,24 @@ sync-plugins ()
     local plugins="$HOME/.config/nvim/lua/plugins/packer.lua"
     [[ -f $plugins ]] || return
 
-    local nvim=$(which nvim)
-    local nvim=${nvim:-"$HOME/.local/bin/nvim"}
+    local nvim=$(nvim-bin)
     local quit_after_sync='autocmd User PackerComplete quitall'
     local sync_cmd='PackerSync'
 
-    $nvim -c "$quit_after_sync" -c "$sync_cmd" SYNC
+    $nvim -u "$plugins" -c "$quit_after_sync" -c "$sync_cmd" SYNC
+}
+
+
+sync-treesitter-parsers ()
+{
+    local treesitter="$HOME/.config/nvim/lua/plugins/nvim-treesitter.lua"
+    [[ -f $treesitter ]] || return
+
+    local nvim=$(nvim-bin)
+    local parsers=(bash c dockerfile help lua make markdown python rust sql toml vim)
+    local install_parsers="TSInstall! ${parsers[@]}"
+    local quit_after_sync="sleep ${#parsers[@]} | quitall"
+    $nvim --headless -c "$install_parsers" -c "$quit_after_sync"
 }
 
 
