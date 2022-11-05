@@ -8,10 +8,7 @@ packer.startup(function()
   use {'nmac427/guess-indent.nvim'}
   use {'neovim/nvim-lspconfig'}
   use {'lewis6991/gitsigns.nvim'}
-  use {
-    'nvim-treesitter/nvim-treesitter',
-    run = function() require('nvim-treesitter.install').update({ with_sync = true }) end,
-  }
+  use {'nvim-treesitter/nvim-treesitter'}
   use {'mfussenegger/nvim-lint'}
   use {'mhartington/formatter.nvim'}
   use {'nvim-lualine/lualine.nvim'}
