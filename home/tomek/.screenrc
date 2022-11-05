@@ -83,7 +83,7 @@ termcapinfo xterm*|rxvt*|kterm*|Eterm* hs:ts=\E]0;:fs=\007:ds=\E]0;\007
 # enabled if there is no hardstatus setting for your terminal)
 #
 #hardstatus lastline "%-Lw%{= BW}%50>%n%f* %t%{-}%+Lw%<"
-hardstatus alwayslastline "%{b dd}%-w%{.bW}%t [%n]%{-}%+w %=%{..G} %H %{..Y} %Y/%m/%d %c"
+hardstatus alwayslastline "%{b dd}%-w%{.Y}%t [%n]%{-}%+w %=%{..G} %H %{..B} %Y/%m/%d %c"
 
 # set these terminals up to be 'optimal' instead of vt100
 termcapinfo xterm*|linux*|rxvt*|Eterm* OP
@@ -102,8 +102,9 @@ termcapinfo xterm*|xterms*|xs*|rxvt* ti@:te@
 # Enable non-blocking mode to better cope with flaky ssh connections.
 defnonblock 5
 
-# Set $TERM
+# Change env vars.
 term screen.xterm-256color
+unsetenv COLORTERM
 
 # ------------------------------------------------------------------------------
 # STARTUP SCREENS
