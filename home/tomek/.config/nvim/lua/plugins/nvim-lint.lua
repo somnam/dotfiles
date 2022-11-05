@@ -1,23 +1,6 @@
 local available, lint = pcall(require, "lint")
 if not available then return end
 
-local function extend_mypy_path(additional_paths)
-  local mypy_paths = {}
-
-  -- Existing paths.
-  for path in string.gmatch((vim.env.MYPYPATH or ""), "[^:,]+") do
-    table.insert(mypy_paths, path)
-  end
-
-  -- Additional paths.
-  for idx = 1, #additional_paths do
-    table.insert(mypy_paths, additional_paths[idx])
-  end
-
-  return table.concat(mypy_paths, ":")
-end
-
--- Python linters list.
 local python_linters = {}
 
 local vim_data_path = vim.fn.stdpath("data")
@@ -42,7 +25,7 @@ for _, mypy_cmd in ipairs(mypy_cmds) do
   end
 end
 
--- Set linting map.
+-- Set linters map.
 lint.linters_by_ft = {
   python = python_linters
 }

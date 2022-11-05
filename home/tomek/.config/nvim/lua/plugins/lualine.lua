@@ -29,10 +29,7 @@ end
 
 local lualine_b = {
   {'branch', icons_enabled = true, fmt = truncate_branch},
-  {
-    'diff',
-    diff_color = {added = {fg='green'}, modified = {fg='blue'}, removed = {fg='red'}}
-  },
+  {'diff'},
   'diagnostics'
 }
 
@@ -45,7 +42,7 @@ local lualine_x = {'encoding', 'fileformat', 'filetype'}
 lualine.setup({
   options = {
     icons_enabled = false,
-    theme = 'dracula',
+    theme = 'onedark',
     section_separators = '',
     component_separators = ''
   },
