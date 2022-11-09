@@ -12,11 +12,9 @@ end
 
 gitsigns.setup({
   signs = {
-    add          = {text = '+'},
-    change       = {text = '!'},
-    delete       = {text = '-', show_count = true},
-    topdelete    = {text = '‾', show_count = true},
-    changedelete = {text = '~', show_count = true},
+    delete       = {show_count = true},
+    topdelete    = {show_count = true},
+    changedelete = {show_count = true},
   },
   on_attach = on_attach,
   current_line_blame = true,
