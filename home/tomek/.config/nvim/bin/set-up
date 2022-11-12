@@ -81,7 +81,7 @@ sync-treesitter-parsers ()
     [[ -f $treesitter ]] || return
 
     local nvim=$(nvim-bin)
-    local parsers=(bash c dockerfile help lua make markdown python rust sql toml vim)
+    local parsers=(bash c dockerfile lua make markdown python rust sql toml vim)
     local install_parsers="TSInstall! ${parsers[@]}"
     local quit_after_sync="sleep ${#parsers[@]} | quitall"
     $nvim --headless -c "$install_parsers" -c "$quit_after_sync"
