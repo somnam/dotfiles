@@ -6,6 +6,7 @@ packer.startup(function()
   use {'echasnovski/mini.nvim'}
   use {'glepnir/dashboard-nvim'}
   use {'nmac427/guess-indent.nvim'}
+  use {'lukas-reineke/indent-blankline.nvim'}
   use {'neovim/nvim-lspconfig'}
   use {'lewis6991/gitsigns.nvim'}
   use {'nvim-treesitter/nvim-treesitter'}
