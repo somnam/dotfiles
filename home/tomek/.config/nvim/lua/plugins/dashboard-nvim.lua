@@ -40,7 +40,13 @@ dashboard.custom_center = {
   },
   {
     icon = "  ",
-    desc = "Find word                       ",
+    desc = "Find changed files              ",
+    action = "Telescope git_status",
+    shortcut = "<Space>fg"
+  },
+  {
+    icon = "  ",
+    desc = "Find in files                   ",
     action = "Telescope live_grep",
     shortcut = "<Space>fw"
   },
