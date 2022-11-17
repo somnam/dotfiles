@@ -42,7 +42,7 @@ local lualine_x = {'encoding', 'fileformat', 'filetype'}
 lualine.setup({
   options = {
     icons_enabled = false,
-    theme = 'onedark',
+    theme = 'auto',
     section_separators = '',
     component_separators = ''
   },
