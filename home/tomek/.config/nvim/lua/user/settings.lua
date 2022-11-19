@@ -1,26 +1,26 @@
 -- Default settings
 
-vim.opt.encoding = 'utf8'
+vim.opt.encoding = "utf8"
 vim.opt.shortmess:append("I")   -- Disable intro message
 
 vim.opt.incsearch = true        -- Incremental search
 vim.opt.hlsearch = true         -- Highlight search results.
 vim.opt.ignorecase = true       -- Do case insensitive matching
 vim.opt.smartcase = true        -- Do smart case matching
-vim.opt.iskeyword:append('-')   -- Treat dash separated words as a word text object
+vim.opt.iskeyword:append("-")   -- Treat dash separated words as a word text object
 
 vim.opt.showcmd = true          -- Show (partial) command in status line.
 vim.opt.laststatus = 2          -- Always display statusbar
 vim.opt.wildmenu = true         -- Use wildmenu
-vim.opt.wildmode = 'full:longest'
-vim.opt.wildoptions = 'tagfile'
+vim.opt.wildmode = "full:longest"
+vim.opt.wildoptions = "tagfile"
 
 vim.opt.wrap = true             -- Line wrapping
 vim.opt.linebreak = true        -- Wrap long lines at a linebreak character
 vim.opt.wrapscan =  false       -- Search wrapping
-vim.opt.foldmethod = 'marker'   -- Set folding method
+vim.opt.foldmethod = "marker"   -- Set folding method
 vim.opt.cursorline = true       -- Highlight current cursor line
-vim.opt.mouse = 'vi'            -- Mouse modes
+vim.opt.mouse = "vi"            -- Mouse modes
 
 vim.opt.smartindent = true      -- Try to be smart with indenting
 vim.opt.autoindent = true       -- Set global autoindent on
@@ -42,10 +42,10 @@ vim.opt.ttimeoutlen = 10        -- Set to unnoticeable small value
 vim.opt.updatetime = 300        -- Longer update time leads to noticeable delays
 vim.opt.synmaxcol = 512         -- Be forgiving with long lines
 
--- vim.opt.clipboard = 'unnamedplus' -- Use the "global" buffer for copy and paste
+-- vim.opt.clipboard = "unnamedplus" -- Use the "global" buffer for copy and paste
 vim.opt.undofile = true         -- Enable persistent undo
 vim.opt.modeline = false        -- Don't run arbitrary modeline code
-vim.opt.inccommand = 'nosplit'  -- Shows the effects of a command incrementally.
+vim.opt.inccommand = "nosplit"  -- Shows the effects of a command incrementally.
 vim.g.netrw_banner = 0          -- Netrw settings
 
 vim.opt.formatoptions:remove("c")   -- Disable automatic comment insertion
@@ -54,8 +54,8 @@ vim.opt.formatoptions:remove("o")
 vim.opt.shortmess:append("c")       -- Shut off completion messages
 vim.opt.complete:remove("i")        -- Prevent a condition where vim lags due to searching include files and tags
 vim.opt.complete:remove("t")
-vim.opt.completeopt = {'menu', 'menuone', 'noinsert'} -- Completion behavior
+vim.opt.completeopt = {"menu", "menuone", "noinsert"} -- Completion behavior
 vim.opt.pumheight = 15                                -- Completion window height
 
-vim.opt.diffopt:append('algorithm:patience') -- Diff settings
-vim.opt.diffopt:append('indent-heuristic')
+vim.opt.diffopt:append("algorithm:patience") -- Diff settings
+vim.opt.diffopt:append("indent-heuristic")
