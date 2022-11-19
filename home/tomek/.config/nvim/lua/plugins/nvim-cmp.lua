@@ -7,7 +7,7 @@ local function buffer_listed(buffer)
 end
 
 local function buffer_terminal(buffer)
-  return vim.fn.getbufvar(buffer, '&buftype', 'ERROR') == 'terminal'
+  return vim.fn.getbufvar(buffer, "&buftype", "ERROR") == "terminal"
 end
 
 local function buffer_above_max_size(buffer, max_size)
@@ -46,7 +46,7 @@ local menu_text = {
 }
 
 local window = {
-  border = 'rounded',
+  border = "rounded",
   col_offset = 0,
   side_padding = 1,
 }
@@ -58,10 +58,10 @@ local buffer_option = {
 
 cmp.setup({
   sources = cmp.config.sources({
-    { name = 'nvim_lsp', group_index = 1 },
-    { name = 'nvim_lsp_signature_help', group_index = 1 },
-    { name = 'buffer', group_index = 2, option = buffer_option },
-    { name = 'path', group_index = 3 },
+    { name = "nvim_lsp", group_index = 1 },
+    { name = "nvim_lsp_signature_help", group_index = 1 },
+    { name = "buffer", group_index = 2, option = buffer_option },
+    { name = "path", group_index = 3 },
   }),
   confirm_opts = {
     behavior = cmp.ConfirmBehavior.Replace,
@@ -72,11 +72,11 @@ cmp.setup({
     documentation = window,
   },
   mapping = cmp.mapping.preset.insert({
-    ['<C-b>'] = cmp.mapping.scroll_docs(-4),
-    ['<C-f>'] = cmp.mapping.scroll_docs(4),
-    ['<C-Space>'] = cmp.mapping.complete(),
-    ['<C-e>'] = cmp.mapping.abort(),
-    ['<CR>'] = cmp.mapping.confirm({ select = true }),
+    ["<C-b>"] = cmp.mapping.scroll_docs(-4),
+    ["<C-f>"] = cmp.mapping.scroll_docs(4),
+    ["<C-Space>"] = cmp.mapping.complete(),
+    ["<C-e>"] = cmp.mapping.abort(),
+    ["<CR>"] = cmp.mapping.confirm({ select = true }),
   }),
   formatting = {
     fields = { "abbr", "kind", "menu" },

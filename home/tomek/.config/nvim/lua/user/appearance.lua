@@ -1,5 +1,5 @@
 local function true_color_term()
-  return vim.env.COLORTERM == 'truecolor'
+  return vim.env.COLORTERM == "truecolor"
 end
 
 local function set_vscode_theme()
