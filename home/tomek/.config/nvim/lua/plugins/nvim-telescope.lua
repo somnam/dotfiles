@@ -28,7 +28,7 @@ local buffer_mappings = {
 }
 
 local file_browser = {
-  dir_icon = "🗁",
+  dir_icon = "📁",
   grouped = true,
   hidden = true,
   hijack_netrw = true,
