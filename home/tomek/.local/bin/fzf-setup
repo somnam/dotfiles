@@ -1,0 +1,41 @@
+#!/bin/bash
+set -e
+
+download-fzf ()
+{
+    echo "Downloading latest fzf source"
+
+    local git=$(which git)
+    local mkdir=$(which mkdir)
+    local fzf_url="https://github.com/junegunn/fzf.git"
+    local fzf_dir="$HOME/.fzf"
+    local fzf_git_dir="$fzf_dir/.git"
+
+    if [[ -d "$fzf_dir" ]] then
+        $git --git-dir="$fzf_git_dir" --work-tree="$fzf_dir" pull
+    else
+        $mkdir -p "$fzf_dir" && $git clone --depth 1 "$fzf_url" "$fzf_dir"
+    fi
+}
+
+install-fzf()
+{
+    local fzf_dir="$HOME/.fzf"
+    local fzf_install="$fzf_dir/install"
+    local fzf_install_opts="--bin"
+
+    [[ -f $fzf_install ]] || exit
+
+    $fzf_install "$fzf_install_opts"
+}
+
+main ()
+{
+    [[ $(which git) ]] || return 0;
+
+    download-fzf
+
+    install-fzf
+}
+
+main $@
