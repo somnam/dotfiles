@@ -2,7 +2,7 @@ local available, telescope = pcall(require, "telescope")
 if not available then return end
 
 local vimgrep_arguments = {}
-if vim.fn.executable('ack') == 1 then
+if vim.fn.executable("ack") == 1 then
   vimgrep_arguments = {
       "ack",
       "--nocolor",
@@ -16,7 +16,7 @@ if vim.fn.executable('ack') == 1 then
   }
 end
 
-local actions = require('telescope.actions')
+local actions = require("telescope.actions")
 local mappings = {
   ["<C-f>"] = actions.preview_scrolling_down,
   ["<C-b>"] = actions.preview_scrolling_up,
@@ -28,25 +28,27 @@ local buffer_mappings = {
 }
 
 local file_browser = {
-  dir_icon = '📁',
+  dir_icon = "🗁",
   grouped = true,
   hidden = true,
   hijack_netrw = true,
 }
 
+local dropdown = require("telescope.themes").get_dropdown({
+  layout_config = {width = 0.5, height = 0.6},
+})
+
 telescope.setup({
   defaults={
-    preview = {filesize_limit = 1},
+    preview = false,
     color_devicons = false,
-    path_display = {"truncate"},
-    sorting_strategy = "ascending",
-    layout_strategy = "vertical",
-    layout_config = {
-      horizontal = {height = 0.8, width = 0.7, prompt_position = "top"},
-      vertical = {preview_height = 0.4, width = 0.7, prompt_position = "top"},
-      center = {height = 0.5, preview_cutoff = 1},
-    },
-    results_title = false,
+    path_display = {truncate = 3},
+    results_title = dropdown.results_title,
+    sorting_strategy = dropdown.sorting_strategy,
+    layout_strategy = dropdown.layout_strategy,
+    layout_config = dropdown.layout_config,
+    border = dropdown.border,
+    borderchars = dropdown.borderchars,
     mappings = {i = mappings, n = mappings},
     vimgrep_arguments = vimgrep_arguments,
   },
