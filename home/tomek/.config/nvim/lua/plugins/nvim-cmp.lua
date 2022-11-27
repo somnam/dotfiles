@@ -46,7 +46,7 @@ local menu_text = {
 }
 
 local kind_icons = {
-    Text           = "T",
+    Text           = "t",
     Method         = "ƒ",
     Function       = "ƒ",
     Constructor    = "c",
@@ -59,7 +59,7 @@ local kind_icons = {
     Unit           = "U",
     Value          = "v",
     Enum           = "Ε",
-    Keyword        = "K",
+    Keyword        = "k",
     Snippet        = "✄",
     Color          = "🖌",
     File           = "🗀",
