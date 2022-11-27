@@ -1,8 +1,8 @@
 local function true_color_term()
-  return vim.env.COLORTERM == 'truecolor'
+  return vim.env.COLORTERM == "truecolor"
 end
 
-local function set_true_color_theme()
+local function set_vscode_theme()
   local available, vscode = pcall(require, "vscode")
   if not available then return end
 
@@ -13,7 +13,7 @@ local function set_true_color_theme()
   })
 end
 
-local function set_256_color_theme()
+local function set_codedark_theme()
   vim.api.nvim_create_autocmd("ColorScheme", {
     pattern="codedark",
     callback = function()
@@ -24,6 +24,14 @@ local function set_256_color_theme()
   })
 
   vim.cmd("silent! colorscheme codedark")
+end
+
+local function set_true_color_theme()
+  set_vscode_theme()
+end
+
+local function set_256_color_theme()
+  set_codedark_theme()
 end
 
 if true_color_term() then

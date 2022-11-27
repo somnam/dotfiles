@@ -18,6 +18,6 @@ gitsigns.setup({
   },
   on_attach = on_attach,
   current_line_blame = true,
-  current_line_blame_formatter = '<author> (<author_time:%Y-%m-%d>) <abbrev_sha>: <summary>',
+  current_line_blame_formatter = "<author> (<author_time:%Y-%m-%d>) <abbrev_sha>: <summary>",
   update_debounce = 1000,
 })

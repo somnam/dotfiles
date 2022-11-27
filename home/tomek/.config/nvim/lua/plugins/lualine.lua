@@ -8,7 +8,7 @@ end
 
 local function maybe_truncate(status, available_length)
   if #status > available_length then
-    return status:sub(1, available_length) .. '>'
+    return status:sub(1, available_length) .. ">"
   end
   return status
 end
@@ -28,23 +28,23 @@ local function truncate_branch(branch)
 end
 
 local lualine_b = {
-  {'branch', icons_enabled = true, fmt = truncate_branch},
-  {'diff'},
-  'diagnostics'
+  {"branch", icons_enabled = true, fmt = truncate_branch},
+  {"diff"},
+  "diagnostics"
 }
 
 local lualine_c = {
-  {'filename', file_status = true, path = 1},
+  {"filename", file_status = true, path = 1},
 }
 
-local lualine_x = {'encoding', 'fileformat', 'filetype'}
+local lualine_x = {"encoding", "fileformat", "filetype"}
 
 lualine.setup({
   options = {
     icons_enabled = false,
-    theme = 'onedark',
-    section_separators = '',
-    component_separators = ''
+    theme = "auto",
+    section_separators = "",
+    component_separators = ""
   },
   sections = {
     lualine_b = lualine_b,
