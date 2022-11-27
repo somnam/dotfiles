@@ -1,3 +1,6 @@
+# Check fzf
+[[ -d "$HOME/.fzf" ]] || return
+
 # Setup fzf
 # ---------
 if [[ ! "$PATH" == *$HOME/.fzf/bin* ]]; then
