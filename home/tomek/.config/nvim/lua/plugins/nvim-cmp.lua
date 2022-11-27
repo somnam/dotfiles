@@ -45,6 +45,40 @@ local menu_text = {
   path = "[Path]",
 }
 
+local kind_icons = {
+    Text           = "T",
+    Method         = "ƒ",
+    Function       = "ƒ",
+    Constructor    = "c",
+    Field          = "𝐟",
+    Variable       = "V",
+    Class          = "C",
+    Interface      = "I",
+    Module         = "M",
+    Property       = "🛠",
+    Unit           = "U",
+    Value          = "v",
+    Enum           = "Ε",
+    Keyword        = "K",
+    Snippet        = "✄",
+    Color          = "🖌",
+    File           = "🗀",
+    Reference      = "⛉",
+    Folder         = "🗁",
+    EnumMember     = "e",
+    Constant       = "c",
+    Struct         = "{}",
+    Event          = "🗲",
+    Operator       = "O",
+    TypeParameter  = "T",
+}
+
+local function format(entry, vim_item)
+  vim_item.menu = menu_text[entry.source.name]
+  vim_item.kind = string.format('%s %s', kind_icons[vim_item.kind], vim_item.kind)
+  return vim_item
+end
+
 local window = {
   border = "rounded",
   col_offset = 0,
@@ -80,9 +114,6 @@ cmp.setup({
   }),
   formatting = {
     fields = { "abbr", "kind", "menu" },
-    format = function(entry, vim_item)
-      vim_item.menu = menu_text[entry.source.name]
-      return vim_item
-    end,
+    format = format,
   },
 })
