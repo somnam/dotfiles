@@ -7,9 +7,9 @@ nvim-bin ()
     echo "${nvim:-"$HOME/.local/bin/nvim"}"
 }
 
-update-nvim ()
+upgrade-nvim ()
 {
-    echo 'Downloading latest appimage'
+    echo "Downloading latest nvim appimage"
 
     local wget=$(which wget)
     local grep=$(which grep)
@@ -19,9 +19,9 @@ update-nvim ()
     echo "Fetching appimage download url"
     local appimage_url=$(
         $wget -q -O- https://api.github.com/repos/neovim/neovim/releases/latest \
-            | $grep 'browser_download_url.*.appimage' \
+            | $grep "browser_download_url.*.appimage" \
             | $head -n 1 \
-            | $sed -e 's/^.*\(http.*appimage\).*$/\1/'
+            | $sed -e "s/^.*\(http.*appimage\).*$/\1/"
     )
 
     if [[ -n $appimage_url ]]; then
@@ -35,13 +35,13 @@ update-nvim ()
             $wget -q --progress=bar --show-progress "$appimage_url" -O "$nvim_path" &&\
             $chmod u+x "$nvim_path"
     else
-        echo 'AppImage download url not found'
+        echo "AppImage download url not found"
     fi
 }
 
 sync-nvim-plugins ()
 {
-    echo 'Synchronizing plugins'
+    echo "Synchronizing plugins"
 
     download-plugin-manager
     sync-plugins
@@ -52,7 +52,7 @@ download-plugin-manager ()
 {
     local git=$(which git)
     local mkdir=$(which mkdir)
-    local plugin_manager_url='https://github.com/wbthomason/packer.nvim'
+    local plugin_manager_url="https://github.com/wbthomason/packer.nvim"
     local nvim_plugin_dir="$HOME/.local/share/nvim/site/pack/packer/start"
     local plugin_manager="$nvim_plugin_dir/packer.nvim"
 
@@ -68,8 +68,8 @@ sync-plugins ()
     [[ -f $plugins ]] || return
 
     local nvim=$(nvim-bin)
-    local quit_after_sync='autocmd User PackerComplete quitall'
-    local sync_cmd='PackerSync'
+    local quit_after_sync="autocmd User PackerComplete quitall"
+    local sync_cmd="PackerSync"
 
     $nvim -u "$plugins" -c "$quit_after_sync" -c "$sync_cmd" SYNC
 }
@@ -93,7 +93,7 @@ update-python-requirements ()
     local python_cmd="$HOME/.local/share/nvim/python/bin/python"
     local requirements="$HOME/.config/nvim/requirements.txt"
     if [[ -f "$python_cmd" && -f "$requirements" ]]; then
-        echo 'Updating python requirements'
+        echo "Updating python requirements"
         $python_cmd -mpip install -U setuptools pip wheel
         $python_cmd -mpip install -U -r "$requirements"
     else
@@ -101,28 +101,29 @@ update-python-requirements ()
     fi
 }
 
-require-update-nvim ()
+require-nvim-upgrade ()
 {
-    # Check if update is required.
-    local update=false
+    # Check if upgrade is required.
+    local upgrade=false
 
     while getopts :u flag; do
         case "${flag}" in
-            u) update=true;;
+            u) upgrade=true;;
         esac
     done
 
-    echo "$update"
+    echo "$upgrade"
 }
 
 main ()
 {
-    [[ $(which wget) ]] || return 0;
+    [[ $(which wget) && $(which git) ]] || return 0;
 
-    if [[ "$(require-update-nvim $@)" == true ]]; then
-        update-nvim
+    if [[ "$(require-nvim-upgrade $@)" == true ]]; then
+        upgrade-nvim
         echo
     fi
+
     sync-nvim-plugins
     echo
     update-python-requirements
