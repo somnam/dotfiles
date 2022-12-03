@@ -1,2 +1,0 @@
-#!/bin/bash
-/usr/bin/dmenu_run -b -p "Run:" -nb "#e5e5e5" -nf "#202020" -fn "-misc-fixed-bold-r-normal-*-15-*-*-*-c-*-iso10646-1"
