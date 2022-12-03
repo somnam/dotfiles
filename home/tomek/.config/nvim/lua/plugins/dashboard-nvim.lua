@@ -29,32 +29,26 @@ dashboard.custom_center = {
   {
     icon = "  ",
     desc = "Previous files                  ",
-    action = "Telescope oldfiles",
+    action = "FzfLua oldfiles",
     shortcut = "<Space>fp"
   },
   {
     icon = "  ",
     desc = "Find files                      ",
-    action = "Telescope find_files",
+    action = "FzfLua files",
     shortcut = "<Space>ff"
   },
   {
     icon = "  ",
     desc = "Find changed files              ",
-    action = "Telescope git_status",
+    action = "FzfLua git_status",
     shortcut = "<Space>fg"
   },
   {
     icon = "  ",
     desc = "Find in files                   ",
-    action = "Telescope live_grep",
+    action = "FzfLua live_grep",
     shortcut = "<Space>fw"
-  },
-  {
-    icon = "  ",
-    desc = "File browser                    ",
-    action = "Telescope file_browser",
-    shortcut = "<Space>fb"
   },
   {
     icon = "  ",

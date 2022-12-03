@@ -1,0 +1,50 @@
+local available, fzf_lua = pcall(require, "fzf-lua")
+if not available then return end
+
+local find_cmd = {
+  "find",
+  "-L",
+  ".",
+  "-type f",
+  "-not",
+  "-path",
+  "'*/.*'",
+}
+
+local grep_cmd = {
+  "grep",
+  "--binary-files=without-match",
+  "--line-number",
+  "--recursive",
+  "--color=auto",
+  "--perl-regexp",
+  "--exclude-dir='.*'",
+}
+if vim.fn.executable("ack") == 1 then
+  grep_cmd = {
+    "ack",
+    "--nocolor",
+    "--column",
+    "--smart-case",
+    "--ignore-dir={.cache,.mypy_cache,.pytest_cache}",
+  }
+end
+
+
+fzf_lua.setup({
+  winopts = {
+    width = 0.65,
+    col = 0.50,
+    preview = {layout = "vertical"},
+  },
+  files = {cmd = table.concat(find_cmd, " ")},
+  grep = {cmd = table.concat(grep_cmd, " ")},
+})
+
+local opts = {noremap = true, silent = true}
+vim.api.nvim_set_keymap("n", "<Space>fp", ":FzfLua oldfiles<Enter>", opts)
+vim.api.nvim_set_keymap("n", "<Space>fb", ":FzfLua buffers<Enter>", opts)
+vim.api.nvim_set_keymap("n", "<Space>ff", ":FzfLua files<Enter>", opts)
+vim.api.nvim_set_keymap("n", "<Space>fg", ":FzfLua git_status<Enter>", opts)
+vim.api.nvim_set_keymap("n", "<Space>fw", ":FzfLua live_grep<Enter>", opts)
+vim.api.nvim_set_keymap("n", "<Space>fo", ":FzfLua lsp_document_symbols<Enter>", opts)
