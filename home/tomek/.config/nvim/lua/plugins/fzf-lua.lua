@@ -27,15 +27,23 @@ if vim.fn.executable("ack") == 1 then
     "--column",
     "--smart-case",
     "--ignore-dir={.cache,.mypy_cache,.pytest_cache}",
+    "--ignore-dir={.env,.venv}",
   }
 end
 
+local vim_data_path = vim.fn.stdpath("data")
 
 fzf_lua.setup({
   winopts = {
     width = 0.65,
     col = 0.50,
     preview = {layout = "vertical"},
+  },
+  fzf_opts = {
+    ['--history'] = vim_data_path .. '/fzf_lua_history',
+  },
+  fzf_colors = {
+    ["bg+"] = {"bg", "Normal"},
   },
   files = {cmd = table.concat(find_cmd, " ")},
   grep = {cmd = table.concat(grep_cmd, " ")},
