@@ -35,8 +35,8 @@ local function set_fzf_lua_hl()
   vim.api.nvim_create_autocmd("ColorScheme", {
     pattern="*",
     callback = function()
-      vim.api.nvim_set_hl(0, 'FzfLuaNormal', {nocombine = true, default = false})
-      vim.api.nvim_set_hl(0, "FzfLuaBorder", {nocombine = true, default = false})
+      vim.api.nvim_set_hl(0, 'FzfLuaNormal', {nocombine = true})
+      vim.api.nvim_set_hl(0, "FzfLuaBorder", {nocombine = true})
     end
   })
 end
