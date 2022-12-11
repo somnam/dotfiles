@@ -40,7 +40,7 @@ fzf_lua.setup({
     preview = {layout = "vertical"},
   },
   fzf_opts = {
-    ['--history'] = vim_data_path .. '/fzf_lua_history',
+    ["--history"] = vim_data_path .. "/fzf_lua_history",
   },
   fzf_colors = {
     ["bg+"] = {"bg", "Normal"},
