@@ -4,7 +4,7 @@ if not available then return end
 packer.startup(function()
   use {"wbthomason/packer.nvim"}
   use {"echasnovski/mini.nvim"}
-  use {"glepnir/dashboard-nvim"}
+  use {"goolord/alpha-nvim"}
   use {"nmac427/guess-indent.nvim"}
   use {"lukas-reineke/indent-blankline.nvim"}
   use {"neovim/nvim-lspconfig"}
