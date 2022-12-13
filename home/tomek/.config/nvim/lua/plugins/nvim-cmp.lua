@@ -93,7 +93,6 @@ local buffer_option = {
 cmp.setup({
   sources = cmp.config.sources({
     { name = "nvim_lsp", group_index = 1 },
-    { name = "nvim_lsp_signature_help", group_index = 1 },
     { name = "buffer", group_index = 2, option = buffer_option },
     { name = "path", group_index = 3 },
   }),
