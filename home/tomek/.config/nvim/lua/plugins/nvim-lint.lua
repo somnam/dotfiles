@@ -30,11 +30,13 @@ lint.linters_by_ft = {
   python = python_linters
 }
 
-local function try_lint()
-  lint.try_lint()
+local function nvim_lint_trigger()
+  vim.api.nvim_create_autocmd({"BufWinEnter", "BufWritePost"}, {
+    group = vim.api.nvim_create_augroup("nvim_lint_trigger", { clear = true }),
+    callback = function()
+      lint.try_lint()
+    end
+  })
 end
 
--- Trigger linting on file save.
-vim.api.nvim_create_autocmd({"BufWinEnter", "BufWritePost"}, {
-  callback = try_lint,
-})
+nvim_lint_trigger()

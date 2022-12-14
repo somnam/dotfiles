@@ -1,6 +1,16 @@
 local available, packer = pcall(require, "packer")
 if not available then return end
 
+local function packer_auto_source()
+  vim.api.nvim_create_autocmd("BufWritePost", {
+    pattern = "*/nvim/lua/plugins/packer.lua",
+    group = vim.api.nvim_create_augroup("packer_auto_source", { clear = true }),
+    callback = function(ctx)
+      vim.cmd("source " .. ctx.file)
+    end
+  })
+end
+
 packer.startup(function()
   use {"wbthomason/packer.nvim"}
   use {"echasnovski/mini.nvim"}
@@ -25,3 +35,5 @@ packer.startup(function()
   use {"tomasiser/vim-code-dark"}
   use {"Mofiqul/vscode.nvim"}
 end)
+
+packer_auto_source()

@@ -9,7 +9,6 @@ local function on_attach(client, bufnr)
   end
 
   local bufopts = {noremap = true, silent = true}
-  vim.api.nvim_buf_set_keymap(bufnr, "n", "<Space>lD", ":lua vim.lsp.buf.declaration()<Enter>", bufopts)
   vim.api.nvim_buf_set_keymap(bufnr, "n", "<Space>ld", ":lua vim.lsp.buf.definition()<Enter>", bufopts)
   vim.api.nvim_buf_set_keymap(bufnr, "n", "<Space>lr", ":lua vim.lsp.buf.rename()<Enter>", bufopts)
   vim.api.nvim_buf_set_keymap(bufnr, "n", "<Space>lf", ":lua vim.lsp.buf.references()<Enter>", bufopts)
