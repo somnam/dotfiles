@@ -50,9 +50,10 @@ fzf_lua.setup({
 })
 
 local opts = {noremap = true, silent = true}
-vim.api.nvim_set_keymap("n", "<Space>fp", ":FzfLua oldfiles<Enter>", opts)
-vim.api.nvim_set_keymap("n", "<Space>fb", ":FzfLua buffers<Enter>", opts)
-vim.api.nvim_set_keymap("n", "<Space>ff", ":FzfLua files<Enter>", opts)
-vim.api.nvim_set_keymap("n", "<Space>fg", ":FzfLua git_status<Enter>", opts)
-vim.api.nvim_set_keymap("n", "<Space>fw", ":FzfLua live_grep<Enter>", opts)
-vim.api.nvim_set_keymap("n", "<Space>fo", ":FzfLua lsp_document_symbols<Enter>", opts)
+vim.api.nvim_set_keymap("n", "<Space>p", ":FzfLua oldfiles<Enter>", opts)
+vim.api.nvim_set_keymap("n", "<Space><Space>", ":FzfLua buffers<Enter>", opts)
+vim.api.nvim_set_keymap("n", "<Space>s", ":FzfLua files<Enter>", opts)
+vim.api.nvim_set_keymap("n", "<Space>S", ":FzfLua git_status<Enter>", opts)
+vim.api.nvim_set_keymap("n", "<Space>w", ":FzfLua live_grep<Enter>", opts)
+vim.api.nvim_set_keymap("n", "<Space>W", ":FzfLua live_grep_resume<Enter>", opts)
+vim.api.nvim_set_keymap("n", "<Space>M", ":FzfLua lsp_document_diagnostics<Enter>", opts)
