@@ -51,5 +51,4 @@ formatter.setup({
 })
 
 local opts = {noremap = true, silent = true}
-vim.api.nvim_set_keymap("n", "<Space>df", ":Format<Enter>", opts)
-vim.api.nvim_set_keymap("n", "<Space>dF", ":FormatWrite<Enter>", opts)
+vim.api.nvim_set_keymap("n", "<Space>df", ":FormatWrite<Enter>", opts)

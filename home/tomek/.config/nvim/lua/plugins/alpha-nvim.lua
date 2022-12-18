@@ -26,12 +26,12 @@ dashboard.section.header.val = {
 }
 
 dashboard.section.buttons.val = {
-    dashboard.button("<Leader> fp", "> Previous files" , ":FzfLua oldfiles<Enter>"),
-    dashboard.button("<Leader> ff", "> Find files", ":FzfLua files<Enter>"),
-    dashboard.button("<Leader> fw", "> Find in files", ":FzfLua live_grep<Enter>"),
-    dashboard.button("<Leader> fg", "> Find changed files", ":FzfLua git_status<Enter>"),
-    dashboard.button("<Leader> n ", "> New file" , ":enew<Enter>"),
-    dashboard.button("<Leader> q ", "> Quit", ":qa<Enter>"),
+    dashboard.button("<Leader> fp", "▶ Previous files" , ":FzfLua oldfiles<Enter>"),
+    dashboard.button("<Leader> ff", "▶ Find files", ":FzfLua files<Enter>"),
+    dashboard.button("<Leader> fw", "▶ Find in files", ":FzfLua live_grep<Enter>"),
+    dashboard.button("<Leader> fg", "▶ Find changed files", ":FzfLua git_status<Enter>"),
+    dashboard.button("<Leader> n ", "▶ New file" , ":enew<Enter>"),
+    dashboard.button("<Leader> q ", "▶ Quit", ":qa<Enter>"),
 }
 
 alpha.setup(dashboard.opts)
