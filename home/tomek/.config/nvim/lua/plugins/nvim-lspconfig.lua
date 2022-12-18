@@ -1,6 +1,8 @@
 local available, lspconfig = pcall(require, "lspconfig")
 if not available then return end
 
+local fzf_lua_available, _ = pcall(require, "fzf-lua")
+
 local function on_attach(client, bufnr)
   vim.api.nvim_buf_set_option(bufnr, "omnifunc", "v:lua.vim.lsp.omnifunc")
   vim.api.nvim_buf_set_option(bufnr, "formatexpr", "v:lua.vim.lsp.formatexpr()")
@@ -9,11 +11,18 @@ local function on_attach(client, bufnr)
   end
 
   local bufopts = {noremap = true, silent = true}
-  vim.api.nvim_buf_set_keymap(bufnr, "n", "<Space>ld", ":lua vim.lsp.buf.definition()<Enter>", bufopts)
-  vim.api.nvim_buf_set_keymap(bufnr, "n", "<Space>lr", ":lua vim.lsp.buf.rename()<Enter>", bufopts)
-  vim.api.nvim_buf_set_keymap(bufnr, "n", "<Space>la", ":lua vim.lsp.buf.references()<Enter>", bufopts)
-  vim.api.nvim_buf_set_keymap(bufnr, "n", "<Space>ls", ":lua vim.lsp.buf.signature_help()<Enter>", bufopts)
-  vim.api.nvim_buf_set_keymap(bufnr, "n", "<Space>lk", ":lua vim.lsp.buf.hover()<Enter>", bufopts)
+  vim.api.nvim_buf_set_keymap(bufnr, "n", "<Space>d", ":lua vim.lsp.buf.definition()<Enter>", bufopts)
+  vim.api.nvim_buf_set_keymap(bufnr, "n", "<Space>r", ":lua vim.lsp.buf.rename()<Enter>", bufopts)
+  vim.api.nvim_buf_set_keymap(bufnr, "n", "<Space>k", ":lua vim.lsp.buf.hover()<Enter>", bufopts)
+  vim.api.nvim_buf_set_keymap(bufnr, "n", "<Space>K", ":lua vim.lsp.buf.signature_help()<Enter>", bufopts)
+
+  if fzf_lua_available then
+    vim.api.nvim_buf_set_keymap(bufnr, "n", "<Space>O", ":FzfLua lsp_document_symbols<Enter>", bufopts)
+    vim.api.nvim_buf_set_keymap(bufnr, "n", "<Space>A", ":FzfLua lsp_references<Enter>", bufopts)
+  else
+    vim.api.nvim_buf_set_keymap(bufnr, "o", "<Space>O", ":lua vim.lsp.buf.document_symbol()<Enter>", bufopts)
+    vim.api.nvim_buf_set_keymap(bufnr, "n", "<Space>A", ":lua vim.lsp.buf.references()<Enter>", bufopts)
+  end
 end
 
 local vim_data_path = vim.fn.stdpath("data")
