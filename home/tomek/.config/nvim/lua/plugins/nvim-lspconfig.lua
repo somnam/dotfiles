@@ -17,11 +17,11 @@ local function on_attach(client, bufnr)
   vim.api.nvim_buf_set_keymap(bufnr, "n", "<Space>K", ":lua vim.lsp.buf.signature_help()<Enter>", bufopts)
 
   if fzf_lua_available then
-    vim.api.nvim_buf_set_keymap(bufnr, "n", "<Space>O", ":FzfLua lsp_document_symbols<Enter>", bufopts)
-    vim.api.nvim_buf_set_keymap(bufnr, "n", "<Space>A", ":FzfLua lsp_references<Enter>", bufopts)
+    vim.api.nvim_buf_set_keymap(bufnr, "n", "<Space>o", ":FzfLua lsp_document_symbols<Enter>", bufopts)
+    vim.api.nvim_buf_set_keymap(bufnr, "n", "<Space>a", ":FzfLua lsp_references<Enter>", bufopts)
   else
-    vim.api.nvim_buf_set_keymap(bufnr, "o", "<Space>O", ":lua vim.lsp.buf.document_symbol()<Enter>", bufopts)
-    vim.api.nvim_buf_set_keymap(bufnr, "n", "<Space>A", ":lua vim.lsp.buf.references()<Enter>", bufopts)
+    vim.api.nvim_buf_set_keymap(bufnr, "o", "<Space>o", ":lua vim.lsp.buf.document_symbol()<Enter>", bufopts)
+    vim.api.nvim_buf_set_keymap(bufnr, "n", "<Space>a", ":lua vim.lsp.buf.references()<Enter>", bufopts)
   end
 end
 
