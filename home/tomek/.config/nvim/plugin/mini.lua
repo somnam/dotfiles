@@ -13,7 +13,7 @@ end
 
 local available_cursorword, cursorword = pcall(require, "mini.cursorword")
 if available_cursorword then
-  cursorword.setup({delay = 100})
+  cursorword.setup()
 end
 
 local available_pairs, pairs = pcall(require, "mini.pairs")

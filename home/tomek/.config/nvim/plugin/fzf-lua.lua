@@ -1,6 +1,15 @@
 local available, fzf_lua = pcall(require, "fzf-lua")
 if not available then return end
 
+vim.api.nvim_create_autocmd("ColorScheme", {
+  pattern="*",
+  group = vim.api.nvim_create_augroup("set_fzf_lua_hl", { clear = true }),
+  callback = function()
+    vim.api.nvim_set_hl(0, 'FzfLuaNormal', {nocombine = true})
+    vim.api.nvim_set_hl(0, "FzfLuaBorder", {nocombine = true})
+  end
+})
+
 local find_cmd = {
   "find",
   "-L",

@@ -1,0 +1,6 @@
+require('settings')
+require('appearance')
+require('mappings')
+require('diagnostic')
+require('lsp')
+require('plugins')
