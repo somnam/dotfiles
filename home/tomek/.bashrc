@@ -10,7 +10,7 @@ export OSH=~/.oh-my-bash
 # Set name of the theme to load. Optionally, if you set this to "random"
 # it'll load a random theme each time that oh-my-bash is loaded.
 # OSH_THEME="font"
-OSH_THEME="vscode"
+OSH_THEME="vscode-multiline"
 
 # Uncomment the following line to use case-sensitive completion.
 # CASE_SENSITIVE="true"
@@ -83,8 +83,9 @@ completions=(
 # Add wisely, as too many aliases slow down shell startup.
 aliases=(
   general
-  apt
   files
+  rh
+  sudo
 )
 
 # Which plugins would you like to load? (plugins can be found in ~/.oh-my-bash/plugins/*)
@@ -93,7 +94,7 @@ aliases=(
 # Add wisely, as too many plugins slow down shell startup.
 plugins=(
   cargo
-  docker
+  fzf
   git
   pyenv
   pyenv-virtualenv
@@ -115,11 +116,12 @@ source "$OSH"/oh-my-bash.sh
 # export LANG=en_US.UTF-8
 
 # Preferred editor for local and remote sessions
-if [[ -n $SSH_CONNECTION ]]; then
-  export EDITOR='vim'
-else
-  export EDITOR='mvim'
-fi
+# if [[ -n $SSH_CONNECTION ]]; then
+#   export EDITOR='vim'
+# else
+#   export EDITOR='mvim'
+# fi
+export EDITOR='vim'
 
 # Compilation flags
 # export ARCHFLAGS="-arch x86_64"
