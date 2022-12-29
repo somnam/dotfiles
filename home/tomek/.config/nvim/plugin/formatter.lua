@@ -4,7 +4,7 @@ if not available then return end
 local util = require("formatter.util")
 
 -- Use perl insead of sed for character replacement.
-local perl = function(pattern, replacement, flags)
+local function perl(pattern, replacement, flags)
   return {
     exe = "perl",
     args = {
@@ -17,34 +17,25 @@ end
 
 local remove_trailing_whitespace = util.withl(perl, "[ \t]*$")
 
--- Set python fixers list.
-local python_fixers = {}
+local function python_fixers()
+    local fixers = {}
 
-local vim_data_path = vim.fn.stdpath("data")
-
-local isort_cmds = {"isort", vim_data_path .. "/python/bin/isort"}
-for _, isort_cmd in ipairs(isort_cmds) do
-    if vim.fn.executable(isort_cmd) == 1 then
-        local isort = require("formatter.filetypes.python").isort()
-        isort.exe = isort_cmd
-        table.insert(python_fixers, function() return isort end)
-        break
+    local isort = require("formatter.filetypes.python").isort
+    if vim.fn.executable(isort().exe) == 1 then
+        table.insert(fixers, isort)
     end
-end
 
-local black_cmds = {"black", vim_data_path .. "/python/bin/black"}
-for _, black_cmd in ipairs(black_cmds) do
-    if vim.fn.executable(black_cmd) == 1 then
-        local black = require("formatter.filetypes.python").black()
-        black.exe = black_cmd
-        table.insert(python_fixers, function() return black end)
-        break
+    local black = require("formatter.filetypes.python").black
+    if vim.fn.executable(black().exe) == 1 then
+        table.insert(fixers, black)
     end
+
+    return fixers
 end
 
 formatter.setup({
     filetype = {
-        python = python_fixers,
+        python = python_fixers(),
         -- Use the special "*" filetype for defining formatter configurations on any filetype
         ["*"] = {remove_trailing_whitespace}
     }
