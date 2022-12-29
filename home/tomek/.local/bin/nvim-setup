@@ -65,7 +65,7 @@ download-plugin-manager ()
 sync-plugins ()
 {
     local plugins="$HOME/.config/nvim/lua/plugins.lua"
-    [[ -f $plugins ]] || return
+    [[ -f $plugins ]] || exit 1
 
     local nvim=$(nvim-bin)
     local quit_after_sync="autocmd User PackerComplete quitall"
@@ -78,7 +78,7 @@ sync-plugins ()
 sync-treesitter-parsers ()
 {
     local treesitter="$HOME/.config/nvim/plugin/nvim-treesitter.lua"
-    [[ -f $treesitter ]] || return
+    [[ -f $treesitter ]] || exit 1
 
     local nvim=$(nvim-bin)
     local parsers=(bash c dockerfile lua make markdown python rust sql toml vim help)
@@ -90,7 +90,13 @@ sync-treesitter-parsers ()
 
 update-python-requirements ()
 {
-    local python_cmd="$HOME/.local/share/nvim/python/bin/python"
+    local pyenv=$(which pyenv)
+    [[ -z "$pyenv" ]] && exit 1
+
+    local venv_path=$(pyenv virtualenv-prefix nvim)
+    [[ -z "$venv_path" ]] && exit 1
+
+    local python_cmd="$venv_path/bin/python"
     local requirements="$HOME/.config/nvim/requirements.txt"
     if [[ -f "$python_cmd" && -f "$requirements" ]]; then
         echo "Updating python requirements"
@@ -117,7 +123,7 @@ require-nvim-upgrade ()
 
 main ()
 {
-    [[ $(which wget) && $(which git) ]] || return 0;
+    [[ $(which wget) && $(which git) ]] || exit 1
 
     if [[ "$(require-nvim-upgrade $@)" == true ]]; then
         upgrade-nvim
