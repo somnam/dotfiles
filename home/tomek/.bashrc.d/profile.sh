@@ -1,18 +1,18 @@
 BASH_THEME="git-prompt"
 
+plugins=(
+    docker
+    fzf
+    git
+    pyenv
+)
+
 completions=(
     bash
 )
 
 aliases=(
     general
-)
-
-plugins=(
-    docker
-    fzf
-    git
-    pyenv
 )
 
 source "$HOME/.bashrc.d/main/main.sh"

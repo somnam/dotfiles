@@ -16,8 +16,18 @@ __git_ps1()
 
 source_git_prompt()
 {
-    local git_prompt="/usr/share/git-core/contrib/completion/git-prompt.sh"
-    [[ -f "${git_prompt}" ]] && source "${git_prompt}" > /dev/null
+    local locations=(
+        "/usr/share/git-core/contrib/completion/git-prompt.sh"
+        "/Library/Developer/CommandLineTools/usr/share/git-core/git-prompt.sh"
+    )
+    local git_prompt
+
+    for git_prompt in ${locations[@]}; do
+        if [[ -f "${git_prompt}" ]]; then
+            source "${git_prompt}" > /dev/null
+            break
+        fi
+    done
 
     unset -f source_git_prompt
 }
