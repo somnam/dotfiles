@@ -4,7 +4,6 @@ set_prompt_theme()
     local blank='\[\e[00m\]'
     local green='\[\e[0;32m\]'
     local lgreen='\[\e[1;32m\]'
-    local lyellow='\[\e[1;33m\]'
     local lblue='\[\e[1;34m\]'
     local lred='\[\e[1;31m\]'
 
