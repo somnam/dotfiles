@@ -1,5 +1,4 @@
 require('settings')
-require('appearance').setup()
 require('mappings')
 require('diagnostic')
 require('lsp')
