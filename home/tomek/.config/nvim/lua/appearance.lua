@@ -22,14 +22,27 @@ M.true_color_term = function()
   return vim.env.COLORTERM == "truecolor"
 end
 
+M.set_colorscheme = function(colorscheme)
+  local cmd = string.format(
+    [[
+      hi clear
+      syntax reset
+      colorscheme %s
+    ]],
+    colorscheme
+  )
+  vim.cmd(cmd)
+end
+
 M.setup = function(config)
   config = vim.tbl_extend("keep", config or {}, M.defaults)
 
   if M.true_color_term() then
     vim.go.termguicolors = true
-    vim.cmd("colorscheme " .. config.truecolor_colorscheme)
+    M.set_colorscheme(config.truecolor_colorscheme)
   else
-    vim.cmd("colorscheme " .. config.colorscheme)
+    vim.go.termguicolors = false
+    M.set_colorscheme(config.colorscheme)
   end
 end
 
