@@ -15,4 +15,4 @@ aliases=(
     general
 )
 
-source "$HOME/.bashrc.d/main/main.sh"
+source "$HOME/.config/bashrc.d/main/main.sh"

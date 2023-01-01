@@ -1,6 +1,6 @@
 source-rc-files()
 {
-    local rc_path="$HOME/.bashrc.d"
+    local rc_path="$HOME/.config/bashrc.d"
     local rc_file
 
     # shell
