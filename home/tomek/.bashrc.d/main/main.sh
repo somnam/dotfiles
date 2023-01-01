@@ -8,6 +8,12 @@ source-rc-files()
         source "$rc_file"
     done
 
+    # plugins
+    for plugin in ${plugins[@]}; do
+        rc_file="$rc_path/plugins/${plugin}.sh"
+        [[ -f "$rc_file" ]] && source "$rc_file"
+    done
+
     # completions
     for completion in ${completions[@]}; do
         rc_file="$rc_path/completions/${completion}.sh"
@@ -17,12 +23,6 @@ source-rc-files()
     # aliases
     for alias in ${aliases[@]}; do
         rc_file="$rc_path/aliases/${alias}.sh"
-        [[ -f "$rc_file" ]] && source "$rc_file"
-    done
-
-    # plugins
-    for plugin in ${plugins[@]}; do
-        rc_file="$rc_path/plugins/${plugin}.sh"
         [[ -f "$rc_file" ]] && source "$rc_file"
     done
 
