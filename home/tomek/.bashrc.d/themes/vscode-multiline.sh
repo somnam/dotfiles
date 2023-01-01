@@ -1,6 +1,4 @@
-#! bash oh-my-bash.module
-
-_omb_theme_vscode_initialize() {
+vscode_theme_initialize() {
     local userpart='`export XIT=$? \
         && [ ! -z "${GITHUB_USER}" ] && echo -n "\[\033[0;32m\]@${GITHUB_USER} " || echo -n "\[\033[0;32m\]\u " \
         && [ "$XIT" -ne "0" ] && echo -n "\[\033[1;31m\]➜" || echo -n "\[\033[0m\]➜"`'
@@ -18,9 +16,9 @@ _omb_theme_vscode_initialize() {
     local lightblue='\[\033[1;34m\]'
     local removecolor='\[\033[0m\]'
     PS1="${userpart} ${lightblue}\w ${gitbranch}${removecolor}\n\$ "
-    unset -f _omb_theme_vscode_initialize
+    unset -f vscode_theme_initialize
 }
-_omb_theme_vscode_initialize
 
-_omb_theme_PROMPT_COMMAND() { true; }
+vscode_theme_initialize
+
 PROMPT_DIRTRIM=4
