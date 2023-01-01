@@ -93,7 +93,7 @@ update-python-requirements ()
     local pyenv=$(which pyenv)
     [[ -z "$pyenv" ]] && exit 1
 
-    local venv_path=$(pyenv virtualenv-prefix nvim)
+    local venv_path=$(pyenv prefix nvim)
     [[ -z "$venv_path" ]] && exit 1
 
     local python_cmd="$venv_path/bin/python"
