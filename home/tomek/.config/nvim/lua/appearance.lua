@@ -14,7 +14,7 @@ vim.api.nvim_create_autocmd("VimResized", {
 local M = {
   defaults = {
     colorscheme = "default",
-    true_colorscheme = "default",
+    truecolor_colorscheme = "default",
   }
 }
 
@@ -27,7 +27,7 @@ M.setup = function(config)
 
   if M.true_color_term() then
     vim.go.termguicolors = true
-    vim.cmd("colorscheme " .. config.true_colorscheme)
+    vim.cmd("colorscheme " .. config.truecolor_colorscheme)
   else
     vim.cmd("colorscheme " .. config.colorscheme)
   end
