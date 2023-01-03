@@ -11,11 +11,6 @@ if available_comment then
   comment.setup()
 end
 
-local available_cursorword, cursorword = pcall(require, "mini.cursorword")
-if available_cursorword then
-  cursorword.setup()
-end
-
 local available_pairs, pairs = pcall(require, "mini.pairs")
 if available_pairs then
   local neigh_pattern = ".[%s%)%]%}]"
