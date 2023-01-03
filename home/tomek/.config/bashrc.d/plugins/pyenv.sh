@@ -10,5 +10,4 @@ fi
 if command -v pyenv >/dev/null; then
     # Initialize pyenv
     eval -- "$(pyenv init -)"
-    eval -- "$(pyenv virtualenv-init -)"
 fi
