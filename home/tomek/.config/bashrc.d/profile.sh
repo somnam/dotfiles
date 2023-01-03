@@ -5,6 +5,7 @@ plugins=(
     fzf
     git
     pyenv
+    pyenv-python-version
 )
 
 completions=(
