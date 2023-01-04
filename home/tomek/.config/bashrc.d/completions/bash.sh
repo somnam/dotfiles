@@ -1,11 +1,11 @@
 # Perform file completion in a case insensitive fashion
-bind "set completion-ignore-case on"
+bind "set completion-ignore-case on" 2>/dev/null
 
 # Treat hyphens and underscores as equivalent
-bind "set completion-map-case on"
+bind "set completion-map-case on" 2>/dev/null
 
 # Immediately add a trailing slash when autocompleting symlinks to directories
-bind "set mark-symlinked-directories on"
+bind "set mark-symlinked-directories on" 2>/dev/null
 
 # If set, the pattern "**" used in a pathname expansion context will
 # match all files and zero or more directories and subdirectories.
