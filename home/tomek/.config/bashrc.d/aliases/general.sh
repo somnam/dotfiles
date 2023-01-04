@@ -4,15 +4,13 @@ if [ -x /usr/bin/dircolors ]; then
 fi
 
 if command ls --color -d . > /dev/null; then
-    alias ls='ls --color=auto'
-    alias dir='dir --color=auto'
-    alias vdir='vdir --color=auto'
+    alias ls='ls --color=always'
 fi
 
-if [[ $(echo | grep --color=auto "" > /dev/null 2>&1) -ne "0" ]]; then
-    alias grep='grep --color=auto'
-    alias fgrep='fgrep --color=auto'
-    alias egrep='egrep --color=auto'
+if [[ $(echo | grep --color=always "" > /dev/null 2>&1) -ne "0" ]]; then
+    alias grep='grep --color=always'
+    alias fgrep='fgrep --color=always'
+    alias egrep='egrep --color=always'
 fi
 
 if command -v ack > /dev/null 2>&1; then
@@ -27,7 +25,7 @@ alias cp='cp -v'
 alias mv='mv -v'
 alias mkdir='mkdir -p'
 
-alias less='less -FSRXc'
+alias less='less -SRXc'
 alias info='info --vi-keys'
 alias wget='wget -c'
 alias sudo='sudo -E'
