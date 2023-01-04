@@ -28,7 +28,7 @@ shopt -s checkwinsize
 bind Space:magic-space
 
 # record each line as it gets issued
-PROMPT_COMMAND='history -a'
+PROMPT_COMMAND="history -a;${PROMPT_COMMAND}"
 
 # for setting history length see HISTSIZE and HISTFILESIZE in bash(1)
 HISTSIZE=20000
