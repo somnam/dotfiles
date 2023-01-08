@@ -1,6 +1,8 @@
 local available, fzf_lua = pcall(require, "fzf-lua")
 if not available then return end
 
+local find = require('utils.find')
+
 vim.api.nvim_create_autocmd("ColorScheme", {
   pattern="*",
   group = vim.api.nvim_create_augroup("set_fzf_lua_hl", { clear = true }),
@@ -10,35 +12,6 @@ vim.api.nvim_create_autocmd("ColorScheme", {
   end
 })
 
-local find_cmd = {
-  "find",
-  "-L",
-  ".",
-  "-type f",
-  "-not",
-  "-path",
-  "'*/.*'",
-}
-
-local grep_cmd = {
-  "grep",
-  "--binary-files=without-match",
-  "--line-number",
-  "--recursive",
-  "--color=auto",
-  "--perl-regexp",
-  "--exclude-dir='.*'",
-}
-if vim.fn.executable("ack") == 1 then
-  grep_cmd = {
-    "ack",
-    "--nocolor",
-    "--column",
-    "--smart-case",
-    "--ignore-dir={.cache,.mypy_cache,.pytest_cache}",
-    "--ignore-dir={.env,.venv}",
-  }
-end
 
 local vim_data_path = vim.fn.stdpath("data")
 
@@ -54,8 +27,8 @@ fzf_lua.setup({
   fzf_colors = {
     ["bg+"] = {"bg", "Normal"},
   },
-  files = {cmd = table.concat(find_cmd, " ")},
-  grep = {cmd = table.concat(grep_cmd, " ")},
+  files = {cmd = find.find_cmd()},
+  grep = {cmd = find.grep_cmd()},
 })
 
 local opts = {noremap = true, silent = true}

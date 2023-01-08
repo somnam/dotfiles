@@ -54,3 +54,24 @@ if vim.fn.executable(python_lsp_cmd) == 1 then
     cmd = { python_lsp_cmd },
   })
 end
+
+local rust_lsp_cmd = "rust-analyzer"
+if vim.fn.executable(rust_lsp_cmd) == 1 then
+
+  local rust_analyzer_settings = {
+    checkOnSave = {
+      command = "clippy",
+    },
+  }
+
+  local capabilities = vim.lsp.protocol.make_client_capabilities()
+
+  lspconfig.rust_analyzer.setup({
+    capabilities = capabilities,
+    on_attach = on_attach,
+    settings = {
+      ["rust-analyzer"] = rust_analyzer_settings
+    },
+    cmd = { rust_lsp_cmd }
+  })
+end
