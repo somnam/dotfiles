@@ -17,6 +17,10 @@ if command -v ack > /dev/null 2>&1; then
     alias ack-python='ack --python --ignore-dir={.env,.venv}'
 fi
 
+if command -v fd > /dev/null 2>&1; then
+    alias fd='fd --hidden'
+fi
+
 alias ll='ls -ahlF'
 alias la='ls -A'
 alias l='ls -CF'
