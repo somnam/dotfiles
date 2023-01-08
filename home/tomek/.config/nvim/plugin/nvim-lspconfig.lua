@@ -57,7 +57,6 @@ end
 
 local rust_lsp_cmd = "rust-analyzer"
 if vim.fn.executable(rust_lsp_cmd) == 1 then
-
   local rust_analyzer_settings = {
     checkOnSave = {
       command = "clippy",

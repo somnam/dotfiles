@@ -20,3 +20,4 @@ vim.api.nvim_set_keymap("n", "<Space>q", ":qall<Enter>", opts)
 
 -- Terminal mappings
 vim.api.nvim_set_keymap("t", "<C-[>", [[<C-\><C-n>]], opts)
+vim.api.nvim_set_keymap("n", "<Space>t", ":vs | te<Enter>", opts)
