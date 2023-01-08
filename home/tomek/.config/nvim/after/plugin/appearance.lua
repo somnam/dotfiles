@@ -1,1 +1,1 @@
-require("appearance").setup()
+require("utils.appearance").setup({truecolor_colorscheme = "dracula"})

@@ -1,7 +1,5 @@
 local opts = {noremap = true, silent = true}
 
-vim.api.nvim_set_keymap("i", "<C-c>", "<Esc>", opts)
-
 -- Move between windows
 vim.api.nvim_set_keymap("n", "<C-j>", "<C-W>j", opts)
 vim.api.nvim_set_keymap("n", "<C-k>", "<C-W>k", opts)
@@ -19,3 +17,6 @@ vim.api.nvim_set_keymap("", "<S-l>", ":tabn<Enter>", opts)
 -- Leader mappings
 vim.api.nvim_set_keymap("n", "<Space>n", ":enew<Enter>", opts)
 vim.api.nvim_set_keymap("n", "<Space>q", ":qall<Enter>", opts)
+
+-- Terminal mappings
+vim.api.nvim_set_keymap("t", "<C-[>", [[<C-\><C-n>]], opts)

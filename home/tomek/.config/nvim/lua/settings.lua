@@ -29,7 +29,7 @@ vim.opt.smarttab = true         -- Smart tab
 vim.opt.shiftwidth = 4          -- Set default tabs behavior
 vim.opt.tabstop = 4
 vim.opt.softtabstop = 4
-
+vim.opt.signcolumn = "yes"      -- Show sign column
 vim.opt.hidden = true           -- Hide buffer instead of closing it
 
 vim.opt.lazyredraw = true       -- Don't redraw the screen when not needed
