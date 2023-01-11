@@ -1,6 +1,7 @@
 local available, cmp = pcall(require, "cmp")
-local buffer_available, cmp_buffer = pcall(require, "cmp_buffer")
-if not(available and buffer_available) then return end
+if not available then return end
+
+local compare = require("cmp.config.compare")
 
 local function buffer_listed(buffer)
   return vim.fn.buflisted(buffer) == 1
@@ -115,4 +116,15 @@ cmp.setup({
     fields = { "abbr", "kind", "menu" },
     format = format,
   },
+  sorting = {
+    priority_weight = 1.0,
+    comparators = {
+      compare.locality,
+      compare.recently_used,
+      compare.score,
+      compare.offset,
+      compare.order,
+      compare.kind,
+    }
+  }
 })
