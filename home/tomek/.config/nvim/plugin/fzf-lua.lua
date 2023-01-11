@@ -12,7 +12,6 @@ vim.api.nvim_create_autocmd("ColorScheme", {
   end
 })
 
-
 local vim_data_path = vim.fn.stdpath("data")
 
 fzf_lua.setup({

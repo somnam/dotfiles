@@ -2,6 +2,7 @@ local available, lspconfig = pcall(require, "lspconfig")
 if not available then return end
 
 local fzf_lua_available, _ = pcall(require, "fzf-lua")
+local cmp_nvim_lsp_available, cmp_nvim_lsp = pcall(require, "cmp_nvim_lsp")
 
 local function on_attach(client, bufnr)
   vim.api.nvim_buf_set_option(bufnr, "omnifunc", "v:lua.vim.lsp.omnifunc")
@@ -25,6 +26,20 @@ local function on_attach(client, bufnr)
   end
 end
 
+local function lsp_capabilities()
+  local capabilities = vim.lsp.protocol.make_client_capabilities()
+
+  if cmp_nvim_lsp_available then
+    capabilities = vim.tbl_deep_extend(
+      "force",
+      capabilities,
+      cmp_nvim_lsp.default_capabilities({snippetSupport = false})
+    )
+  end
+
+  return capabilities
+end
+
 local python_lsp_cmd = "jedi-language-server"
 if vim.fn.executable(python_lsp_cmd) == 1 then
   local function jedi_language_server_on_attach(client, bufnr)
@@ -45,10 +60,8 @@ if vim.fn.executable(python_lsp_cmd) == 1 then
     }
   end
 
-  local capabilities = vim.lsp.protocol.make_client_capabilities()
-
   lspconfig.jedi_language_server.setup({
-    capabilities = capabilities,
+    capabilities = lsp_capabilities(),
     on_attach = jedi_language_server_on_attach,
     on_new_config = jedi_language_server_on_new_config,
     cmd = { python_lsp_cmd },
@@ -63,10 +76,8 @@ if vim.fn.executable(rust_lsp_cmd) == 1 then
     },
   }
 
-  local capabilities = vim.lsp.protocol.make_client_capabilities()
-
   lspconfig.rust_analyzer.setup({
-    capabilities = capabilities,
+    capabilities = lsp_capabilities(),
     on_attach = on_attach,
     settings = {
       ["rust-analyzer"] = rust_analyzer_settings
