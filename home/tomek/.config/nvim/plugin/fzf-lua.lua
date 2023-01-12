@@ -31,7 +31,8 @@ fzf_lua.setup({
 })
 
 local opts = {noremap = true, silent = true}
-vim.api.nvim_set_keymap("n", "<Space>p", ":FzfLua oldfiles<Enter>", opts)
+vim.api.nvim_set_keymap("n", "<Space>p", ":FzfLua oldfiles cwd_only=True<Enter>", opts)
+vim.api.nvim_set_keymap("n", "<Space>P", ":FzfLua oldfiles<Enter>", opts)
 vim.api.nvim_set_keymap("n", "<Space>b", ":FzfLua buffers<Enter>", opts)
 vim.api.nvim_set_keymap("n", "<Space>f", ":FzfLua files<Enter>", opts)
 vim.api.nvim_set_keymap("n", "<Space>gs", ":FzfLua git_status<Enter>", opts)

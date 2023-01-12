@@ -124,7 +124,6 @@ cmp.setup({
       compare.score,
       compare.offset,
       compare.order,
-      compare.kind,
     }
   }
 })
