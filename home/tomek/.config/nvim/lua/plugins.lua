@@ -21,8 +21,7 @@ packer.startup(function()
   use {"mfussenegger/nvim-lint"}
   use {"mhartington/formatter.nvim"}
   use {"nvim-lualine/lualine.nvim"}
-  use {'ibhagwan/fzf-lua'}
-  use {'SidOfc/carbon.nvim'}
+  use {"ibhagwan/fzf-lua"}
   use {
     "hrsh7th/nvim-cmp",
     requires = {
@@ -33,5 +32,5 @@ packer.startup(function()
   }
   use {"tomasiser/vim-code-dark"}
   use {"Mofiqul/vscode.nvim"}
-  use {'Mofiqul/dracula.nvim'}
+  use {"Mofiqul/dracula.nvim"}
 end)
