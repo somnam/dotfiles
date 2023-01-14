@@ -22,6 +22,7 @@ packer.startup(function()
   use {"mhartington/formatter.nvim"}
   use {"nvim-lualine/lualine.nvim"}
   use {"ibhagwan/fzf-lua"}
+  use {"nvim-tree/nvim-tree.lua"}
   use {
     "hrsh7th/nvim-cmp",
     requires = {
