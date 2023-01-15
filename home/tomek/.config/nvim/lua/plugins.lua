@@ -31,6 +31,7 @@ packer.startup(function()
       {"hrsh7th/cmp-path"},
     }
   }
+  use {"akinsho/toggleterm.nvim"}
   use {"tomasiser/vim-code-dark"}
   use {"Mofiqul/vscode.nvim"}
   use {"Mofiqul/dracula.nvim"}
