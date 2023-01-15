@@ -6,8 +6,8 @@ vim.api.nvim_create_autocmd("TermOpen", {
   group = vim.api.nvim_create_augroup("toggleterm_keymaps", { clear = true }),
   callback = function()
     local opts = {noremap = true, silent = true}
-    vim.api.nvim_set_keymap("t", "<C-[>", [[<C-\><C-n>]], opts)
-    vim.api.nvim_set_keymap("t", "<C-W><C-W>", "<Cmd>wincmd w<Enter>", opts)
+    vim.api.nvim_buf_set_keymap(0, "t", "<C-[>", [[<C-\><C-n>]], opts)
+    vim.api.nvim_buf_set_keymap(0, "t", "<C-W><C-W>", "<Cmd>wincmd w<Enter>", opts)
   end
 })
 
