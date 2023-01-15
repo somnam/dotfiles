@@ -18,6 +18,14 @@ local function autocmd()
     group = vim.api.nvim_create_augroup("autoresize_widows", { clear = true }),
     command = "wincmd =",
   })
+
+  vim.api.nvim_create_autocmd("ColorScheme", {
+    pattern="*",
+    group = vim.api.nvim_create_augroup("after_colorscheme", { clear = true }),
+    callback = function()
+      vim.api.nvim_set_hl(0, "SignColumn", { link = "Normal" })
+    end
+  })
 end
 
 local function colorscheme_cmd(colorscheme)
@@ -26,7 +34,7 @@ local function colorscheme_cmd(colorscheme)
       [[
         hi clear
         syntax reset
-        colorscheme %s
+        silent! colorscheme %s
       ]],
       colorscheme
     )
