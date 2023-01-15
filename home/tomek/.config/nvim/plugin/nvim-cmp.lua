@@ -1,52 +1,20 @@
 local available, cmp = pcall(require, "cmp")
 if not available then return end
 
-local compare = require("cmp.config.compare")
+local M = {}
 
-local function buffer_listed(buffer)
-  return vim.fn.buflisted(buffer) == 1
-end
+M.buffer = require("utils.buffer")
 
-local function buffer_terminal(buffer)
-  return vim.fn.getbufvar(buffer, "&buftype", "ERROR") == "terminal"
-end
+M.max_size = 1024 * 1024
 
-local function buffer_above_max_size(buffer, max_size)
-  local buffer_size = vim.api.nvim_buf_get_offset(buffer, vim.api.nvim_buf_line_count(buffer))
-  return buffer_size > max_size
-end
-
-local function get_bufnrs()
-  -- Index only open buffers up to 1 megabyte size.
-
-  local valid_buffers = {}
-  local max_size = 1024 * 1024
-
-  for _, buffer in pairs(vim.api.nvim_list_bufs()) do
-    if buffer_above_max_size(buffer, max_size) then
-      goto continue
-    end
-
-    if not(buffer_listed(buffer) or buffer_terminal(buffer)) then
-      goto continue
-    end
-
-    table.insert(valid_buffers, buffer)
-
-    ::continue::
-  end
-
-  return valid_buffers
-end
-
-local menu_text = {
+M.menu_text = {
   nvim_lsp = "[LSP]",
   nvim_lsp_signature_help = "[LSP]",
   buffer = "[Buffer]",
   path = "[Path]",
 }
 
-local kind_icons = {
+M.kind_icons = {
     Text           = "t",
     Method         = "ƒ",
     Function       = "ƒ",
@@ -74,36 +42,66 @@ local kind_icons = {
     TypeParameter  = "T",
 }
 
-local function format(entry, vim_item)
-  vim_item.menu = menu_text[entry.source.name]
-  vim_item.kind = string.format('%s %s', kind_icons[vim_item.kind], vim_item.kind)
+M.blocklist = {
+  buftype = {"terminal"},
+  filetype = {"alpha", "NvimTree"},
+}
+
+M.buffer_blocked = function(buffer)
+  return (
+    M.buffer.blocked(buffer, "buftype", M.blocklist.buftype)
+    or M.buffer.blocked(buffer, "filetype", M.blocklist.filetype)
+  )
+end
+
+M.current_buffer_enabled = function()
+  return not M.buffer_blocked(vim.api.nvim_get_current_buf())
+end
+
+M.get_bufnrs = function()
+  local valid_buffers = {}
+
+  for _, buffer in pairs(vim.api.nvim_list_bufs()) do
+    local invalid_buffer = (
+      M.buffer.above_max_size(buffer, max_size)
+      or not M.buffer.listed(buffer)
+      or M.buffer_blocked(buffer)
+    )
+    if not invalid_buffer then
+      table.insert(valid_buffers, buffer)
+    end
+  end
+
+  return valid_buffers
+end
+
+M.format_field = function(entry, vim_item)
+  vim_item.menu = M.menu_text[entry.source.name]
+  vim_item.kind = string.format('%s %s', M.kind_icons[vim_item.kind], vim_item.kind)
   return vim_item
 end
 
-local window = {
-  border = "rounded",
-  col_offset = 0,
-  side_padding = 1,
-}
-
-local buffer_option = {
+M.buffer_option = {
   get_bufnrs = get_bufnrs,
   indexing_interval = 500,
 }
 
+M.window_option = cmp.config.window.bordered()
+
 cmp.setup({
   sources = cmp.config.sources({
     { name = "nvim_lsp", group_index = 1 },
-    { name = "buffer", group_index = 2, option = buffer_option },
+    { name = "buffer", group_index = 2, option = M.buffer_option },
     { name = "path", group_index = 3 },
   }),
+  enabled = M.current_buffer_enabled,
   confirm_opts = {
     behavior = cmp.ConfirmBehavior.Replace,
     select = false,
   },
   window = {
-    completion = window,
-    documentation = window,
+    completion = M.window_option,
+    documentation = M.window_option,
   },
   mapping = cmp.mapping.preset.insert({
     ["<C-b>"] = cmp.mapping.scroll_docs(-4),
@@ -114,16 +112,17 @@ cmp.setup({
   }),
   formatting = {
     fields = { "abbr", "kind", "menu" },
-    format = format,
+    format = M.format_field,
   },
   sorting = {
     priority_weight = 1.0,
     comparators = {
-      compare.locality,
-      compare.recently_used,
-      compare.score,
-      compare.offset,
-      compare.order,
+      cmp.config.compare.locality,
+      cmp.config.compare.recently_used,
+      cmp.config.compare.score,
+      cmp.config.compare.offset,
+      cmp.config.compare.order,
     }
   }
 })
+

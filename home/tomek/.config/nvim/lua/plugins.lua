@@ -32,7 +32,19 @@ packer.startup(function()
     }
   }
   use {"akinsho/toggleterm.nvim"}
-  use {"tomasiser/vim-code-dark"}
-  use {"Mofiqul/vscode.nvim"}
-  use {"Mofiqul/dracula.nvim"}
+  use {
+    "tomasiser/vim-code-dark",
+    opt = true,
+    event ="ColorSchemePre coldedark",
+  }
+  use {
+    "Mofiqul/vscode.nvim",
+    opt = true,
+    event = "ColorSchemePre vscode",
+  }
+  use {
+    "Mofiqul/dracula.nvim",
+    opt = true,
+    event = "ColorSchemePre dracula"
+  }
 end)
