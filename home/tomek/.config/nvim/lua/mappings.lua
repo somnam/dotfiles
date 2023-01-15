@@ -17,8 +17,3 @@ vim.api.nvim_set_keymap("", "<S-l>", ":tabn<Enter>", opts)
 -- Leader mappings
 vim.api.nvim_set_keymap("n", "<Space>n", ":enew<Enter>", opts)
 vim.api.nvim_set_keymap("n", "<Space>q", ":qall<Enter>", opts)
-
--- Terminal mappings
-vim.api.nvim_set_keymap("t", [[<C-\><C-\>]], [[<C-\><C-n>]], opts)
-vim.api.nvim_set_keymap("n", "<Space>tv", ":vs | te<Enter>", opts)
-vim.api.nvim_set_keymap("n", "<Space>ts", ":sp | te<Enter>", opts)
