@@ -6,6 +6,12 @@ vim.api.nvim_set_keymap("n", "<C-k>", "<C-W>k", opts)
 vim.api.nvim_set_keymap("n", "<C-h>", "<C-W>h", opts)
 vim.api.nvim_set_keymap("n", "<C-l>", "<C-W>l", opts)
 
+-- Resize windows
+vim.api.nvim_set_keymap("n", "<C-Down>", ":resize +2<Enter>", opts)
+vim.api.nvim_set_keymap("n", "<C-Up>", ":resize -2<Enter>", opts)
+vim.api.nvim_set_keymap("n", "<C-Left>", ":vertical resize -2<Enter>", opts)
+vim.api.nvim_set_keymap("n", "<C-Right>", ":vertical resize +2<Enter>", opts)
+
 -- Move vertically by visual line
 vim.api.nvim_set_keymap("n", "j", "gj", opts)
 vim.api.nvim_set_keymap("n", "k", "gk", opts)
