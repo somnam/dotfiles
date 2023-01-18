@@ -26,8 +26,7 @@ dashboard.section.header.val = {
 }
 
 dashboard.section.buttons.val = {
-    dashboard.button("<Leader> P ", "▶ Previous files" , ":FzfLua oldfiles<Enter>"),
-    dashboard.button("<Leader> p ", "▶ Previous cwd files" , ":FzfLua oldfiles cwd_only=true<Enter>"),
+    dashboard.button("<Leader> p ", "▶ Recent files" , ":FzfLua oldfiles cwd_only=true<Enter>"),
     dashboard.button("<Leader> f ", "▶ Find files", ":FzfLua files<Enter>"),
     dashboard.button("<Leader> w ", "▶ Find in files", ":FzfLua live_grep<Enter>"),
     dashboard.button("<Leader> n ", "▶ New file" , ":enew<Enter>"),

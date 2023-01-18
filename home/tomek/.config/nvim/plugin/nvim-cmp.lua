@@ -43,7 +43,7 @@ M.kind_icons = {
 }
 
 M.blocklist = {
-  buftype = {"terminal"},
+  buftype = {"terminal", "prompt"},
   filetype = {"alpha", "NvimTree"},
 }
 

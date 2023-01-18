@@ -7,7 +7,7 @@ vim.api.nvim_create_autocmd("ColorScheme", {
   pattern="*",
   group = vim.api.nvim_create_augroup("set_fzf_lua_hl", { clear = true }),
   callback = function()
-    vim.api.nvim_set_hl(0, 'FzfLuaNormal', {nocombine = true})
+    vim.api.nvim_set_hl(0, "FzfLuaNormal", {nocombine = true})
     vim.api.nvim_set_hl(0, "FzfLuaBorder", {nocombine = true})
   end
 })
@@ -26,8 +26,14 @@ fzf_lua.setup({
   fzf_colors = {
     ["bg+"] = {"bg", "Normal"},
   },
-  files = {cmd = find.find_cmd()},
-  grep = {cmd = find.grep_cmd()},
+  files = {
+    prompt = 'Files❯ ',
+    cmd = find.find_cmd(),
+  },
+  grep = {
+    prompt = 'Words❯ ',
+    cmd = find.grep_cmd(),
+  },
 })
 
 local opts = {noremap = true, silent = true}
