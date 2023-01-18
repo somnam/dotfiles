@@ -37,7 +37,6 @@ vim.opt.ttyfast = true          -- Faster scrolling
 vim.opt.ttimeout = true         -- Time waited for key press(es) to complete, faster key response
 vim.opt.timeout = true          -- Setting for mappings
 vim.opt.timeoutlen = 1000       -- Set to default value
-vim.opt.ttimeout = true         -- Setting for key codes
 vim.opt.ttimeoutlen = 10        -- Set to unnoticeable small value
 vim.opt.updatetime = 300        -- Longer update time leads to noticeable delays
 vim.opt.synmaxcol = 512         -- Be forgiving with long lines
