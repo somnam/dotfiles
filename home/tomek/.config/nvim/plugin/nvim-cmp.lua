@@ -63,7 +63,7 @@ M.get_bufnrs = function()
 
   for _, buffer in pairs(vim.api.nvim_list_bufs()) do
     local invalid_buffer = (
-      M.buffer.above_max_size(buffer, max_size)
+      M.buffer.above_max_size(buffer, M.max_size)
       or not M.buffer.listed(buffer)
       or M.buffer_blocked(buffer)
     )
@@ -82,7 +82,7 @@ M.format_field = function(entry, vim_item)
 end
 
 M.buffer_option = {
-  get_bufnrs = get_bufnrs,
+  get_bufnrs = M.get_bufnrs,
   indexing_interval = 500,
 }
 

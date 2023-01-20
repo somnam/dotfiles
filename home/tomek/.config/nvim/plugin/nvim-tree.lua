@@ -5,6 +5,7 @@ nvim_tree.setup({
   disable_netrw = true,
   sync_root_with_cwd = true,
   view = {
+    width = 35,
     mappings = {
       list = {
         { key = "<C-k>", action = "" },
