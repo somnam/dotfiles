@@ -2,6 +2,7 @@ local available, lualine = pcall(require, "lualine")
 if not available then return end
 
 local statusline = require("utils.statusline")
+local icon = require("utils.icon").lualine
 
 -- helper
 local H = {}
@@ -27,8 +28,8 @@ lualine.setup({
   options = {
     icons_enabled = false,
     theme = "auto",
-    section_separators = "",
-    component_separators = ""
+    section_separators = icon.section_separators,
+    component_separators = "",
   },
   sections = {
     lualine_b = H.lualine_b,
