@@ -4,10 +4,17 @@ vim.api.nvim_set_keymap("n", "<Space>]m", ":lua vim.diagnostic.goto_next()<Enter
 vim.api.nvim_set_keymap("n", "<Space>m", ":lua vim.diagnostic.open_float()<Enter>", opts)
 vim.api.nvim_set_keymap("n", "<Space>M", ":lua vim.diagnostic.setloclist()<Enter>", opts)
 
+local signs = { Error = "ⓧ ", Warn = "⚠ ", Hint = "⨀ ", Info = "ⓘ " }
+for type, icon in pairs(signs) do
+	local hl = "DiagnosticSign" .. type
+	vim.fn.sign_define(hl, { text = icon, texthl = hl, numhl = hl })
+end
+
 local diagnostic_opts = {
   virtual_text = {
     severity = { min = "ERROR" },
   },
   update_in_insert = false,
+  severity_sort = true,
 }
 vim.diagnostic.config(diagnostic_opts)
