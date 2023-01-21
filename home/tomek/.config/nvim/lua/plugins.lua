@@ -9,6 +9,8 @@ vim.api.nvim_create_autocmd("BufWritePost", {
   end
 })
 
+local use = packer.use
+
 packer.startup(function()
   use {"wbthomason/packer.nvim"}
   use {"echasnovski/mini.nvim"}

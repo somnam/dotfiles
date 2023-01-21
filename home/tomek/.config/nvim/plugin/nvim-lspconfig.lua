@@ -1,33 +1,21 @@
 local available, lspconfig = pcall(require, "lspconfig")
 if not available then return end
 
-local fzf_lua_available, _ = pcall(require, "fzf-lua")
-local cmp_nvim_lsp_available, cmp_nvim_lsp = pcall(require, "cmp_nvim_lsp")
+-- helper
+local H = {}
 
-local function on_attach(client, bufnr)
+H.on_attach = function(client, bufnr)
   vim.api.nvim_buf_set_option(bufnr, "omnifunc", "v:lua.vim.lsp.omnifunc")
   vim.api.nvim_buf_set_option(bufnr, "formatexpr", "v:lua.vim.lsp.formatexpr()")
   if client.server_capabilities.definitionProvider then
     vim.api.nvim_buf_set_option(bufnr, "tagfunc", "v:lua.vim.lsp.tagfunc")
   end
-
-  local bufopts = {noremap = true, silent = true}
-  vim.api.nvim_buf_set_keymap(bufnr, "n", "<Space>d", ":lua vim.lsp.buf.definition()<Enter>", bufopts)
-  vim.api.nvim_buf_set_keymap(bufnr, "n", "<Space>r", ":lua vim.lsp.buf.rename()<Enter>", bufopts)
-  vim.api.nvim_buf_set_keymap(bufnr, "n", "<Space>k", ":lua vim.lsp.buf.hover()<Enter>", bufopts)
-  vim.api.nvim_buf_set_keymap(bufnr, "n", "<Space>K", ":lua vim.lsp.buf.signature_help()<Enter>", bufopts)
-
-  if fzf_lua_available then
-    vim.api.nvim_buf_set_keymap(bufnr, "n", "<Space>o", ":FzfLua lsp_document_symbols<Enter>", bufopts)
-    vim.api.nvim_buf_set_keymap(bufnr, "n", "<Space>a", ":FzfLua lsp_references<Enter>", bufopts)
-  else
-    vim.api.nvim_buf_set_keymap(bufnr, "o", "<Space>o", ":lua vim.lsp.buf.document_symbol()<Enter>", bufopts)
-    vim.api.nvim_buf_set_keymap(bufnr, "n", "<Space>a", ":lua vim.lsp.buf.references()<Enter>", bufopts)
-  end
 end
 
-local function lsp_capabilities()
+H.lsp_capabilities = function()
   local capabilities = vim.lsp.protocol.make_client_capabilities()
+
+  local cmp_nvim_lsp_available, cmp_nvim_lsp = pcall(require, "cmp_nvim_lsp")
 
   if cmp_nvim_lsp_available then
     capabilities = vim.tbl_deep_extend(
@@ -40,48 +28,48 @@ local function lsp_capabilities()
   return capabilities
 end
 
-local python_lsp_cmd = "jedi-language-server"
-if vim.fn.executable(python_lsp_cmd) == 1 then
-  local function jedi_language_server_on_attach(client, bufnr)
-    on_attach(client, bufnr)
+H.jedi_language_server_on_attach = function(client, bufnr)
+  -- Customize trigger characters.
+  client.server_capabilities.completionProvider.triggerCharacters = {"."}
 
-    -- Customize trigger characters.
-    client.server_capabilities.completionProvider.triggerCharacters = {"."}
-  end
+  H.on_attach(client, bufnr)
+end
 
-  local function jedi_language_server_on_new_config(new_config, root_dir)
-    -- Enable diagnostics only when linter is not available.
-    local enable_diagnostics = vim.fn.executable("flake8") ~= 1
+H.jedi_language_server_on_new_config = function(new_config, _)
+  -- Enable diagnostics only when linter is not available.
+  local enable_diagnostics = vim.fn.executable("flake8") ~= 1
 
-    new_config.init_options = {
-      diagnostics = {
-        enable = enable_diagnostics,
+  new_config.init_options = {
+    diagnostics = {
+      enable = enable_diagnostics,
+    },
+  }
+end
+
+H.rust_analyzer_settings = function()
+  return {
+    ["rust-analyzer"] = {
+      checkOnSave = {
+        command = "clippy",
       },
     }
-  end
+  }
+end
 
+-- setup
+
+if vim.fn.executable("jedi-language-server") == 1 then
   lspconfig.jedi_language_server.setup({
-    capabilities = lsp_capabilities(),
-    on_attach = jedi_language_server_on_attach,
-    on_new_config = jedi_language_server_on_new_config,
-    cmd = { python_lsp_cmd },
+    capabilities = H.lsp_capabilities(),
+    on_attach = H.jedi_language_server_on_attach,
+    on_new_config = H.jedi_language_server_on_new_config,
   })
 end
 
-local rust_lsp_cmd = "rust-analyzer"
-if vim.fn.executable(rust_lsp_cmd) == 1 then
-  local rust_analyzer_settings = {
-    checkOnSave = {
-      command = "clippy",
-    },
-  }
-
+if vim.fn.executable("rust-analyzer") == 1 then
   lspconfig.rust_analyzer.setup({
-    capabilities = lsp_capabilities(),
-    on_attach = on_attach,
-    settings = {
-      ["rust-analyzer"] = rust_analyzer_settings
-    },
-    cmd = { rust_lsp_cmd }
+    capabilities = H.lsp_capabilities(),
+    settings = H.rust_analyzer_settings(),
+    on_attach = H.on_attach,
   })
 end

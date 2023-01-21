@@ -1,6 +1,18 @@
 local available, toggleterm = pcall(require, "toggleterm")
 if not available then return end
 
+-- helper
+local H = {}
+
+H.size = function(term)
+  if term.direction == "horizontal" then
+    return math.floor(vim.o.lines * 0.25)
+  elseif term.direction == "vertical" then
+    return math.floor(vim.o.columns * 0.5)
+  end
+end
+
+-- autocmd
 vim.api.nvim_create_autocmd("TermOpen", {
   pattern = "term://*toggleterm#*",
   group = vim.api.nvim_create_augroup("toggleterm_keymaps", { clear = true }),
@@ -15,16 +27,9 @@ vim.api.nvim_create_autocmd("TermOpen", {
   end
 })
 
-local function size(term)
-  if term.direction == "horizontal" then
-    return math.floor(vim.o.lines * 0.25)
-  elseif term.direction == "vertical" then
-    return math.floor(vim.o.columns * 0.5)
-  end
-end
-
+-- setup
 toggleterm.setup({
   open_mapping = [[<C-\>]],
-  size = size,
+  size = H.size,
   autochdir = true,
 })

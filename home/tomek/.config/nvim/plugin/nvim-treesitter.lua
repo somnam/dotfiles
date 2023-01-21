@@ -1,6 +1,7 @@
 local available, _ = pcall(require, "nvim-treesitter")
 if not available then return end
 
+-- setup
 require("nvim-treesitter.configs").setup({
   highlight = {
     enable = true,

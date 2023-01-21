@@ -1,3 +1,4 @@
+-- bufremove
 local available_bufremove, bufremove = pcall(require, "mini.bufremove")
 if available_bufremove then
   vim.api.nvim_command(":command! BD lua MiniBufremove.delete(0, true)")
@@ -5,12 +6,13 @@ if available_bufremove then
   bufremove.setup()
 end
 
-
+-- comment
 local available_comment, comment = pcall(require, "mini.comment")
 if available_comment then
   comment.setup()
 end
 
+-- pairs
 local available_pairs, pairs = pcall(require, "mini.pairs")
 if available_pairs then
   local neigh_pattern = ".[%s%)%]%}]"
@@ -27,11 +29,13 @@ if available_pairs then
   })
 end
 
+-- surround
 local available_surround, surround = pcall(require, "mini.surround")
 if available_surround then
   surround.setup()
 end
 
+-- trailspace
 local available_trailspace, trailspace = pcall(require, "mini.trailspace")
 if available_trailspace then
   trailspace.setup()
