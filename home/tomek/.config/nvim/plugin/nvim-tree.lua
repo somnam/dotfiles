@@ -1,34 +1,10 @@
 local available, nvim_tree = pcall(require, "nvim-tree")
 if not available then return end
 
+local icon = require("utils.icon").nvim_tree
+
 -- helper
 local H = {}
-
-H.glyphs = {
-  default = "",
-  symlink = "➛",
-  bookmark = "★",
-  modified = "●",
-  folder = {
-    arrow_closed = "▶",
-    arrow_open = "▼",
-    default = "📁",
-    open = "📂",
-    empty = "📂",
-    empty_open = "📂",
-    symlink = "➛",
-    symlink_open = "➛",
-  },
-  git = {
-    unstaged = "M",
-    staged = "S",
-    unmerged = "C",
-    renamed = "R",
-    untracked = "U",
-    deleted = "D",
-    ignored = "I",
-  },
-}
 
 H.mappings = {
   list = {
@@ -60,7 +36,7 @@ nvim_tree.setup({
       webdev_colors = false,
       git_placement = "after",
       modified_placement = "before",
-      glyphs = H.glyphs,
+      glyphs = icon.glyphs,
     },
   },
   filesystem_watchers = {

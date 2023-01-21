@@ -1,10 +1,11 @@
 local available, cmp = pcall(require, "cmp")
 if not available then return end
 
+local buffer = require("utils.buffer")
+local icon = require("utils.icon").nvim_cmp
+
 -- helper
 local H = {}
-
-H.buffer = require("utils.buffer")
 
 H.max_size = 1024 * 1024
 
@@ -15,43 +16,15 @@ H.menu_text = {
   path = "[Path]",
 }
 
-H.kind_icons = {
-    Text           = "t",
-    Method         = "ƒ",
-    Function       = "ƒ",
-    Constructor    = "c",
-    Field          = "𝐟",
-    Variable       = "V",
-    Class          = "C",
-    Interface      = "I",
-    Module         = "M",
-    Property       = "p",
-    Unit           = "U",
-    Value          = "v",
-    Enum           = "Ε",
-    Keyword        = "k",
-    Snippet        = "S",
-    Color          = "🖌",
-    File           = "📁",
-    Reference      = "➛",
-    Folder         = "📂",
-    EnumMember     = "e",
-    Constant       = "c",
-    Struct         = "{}",
-    Event          = "E",
-    Operator       = "O",
-    TypeParameter  = "T",
-}
-
 H.blocklist = {
   buftype = {"terminal", "prompt"},
   filetype = {"alpha", "NvimTree"},
 }
 
-H.buffer_blocked = function(buffer)
+H.buffer_blocked = function(buf)
   return (
-    H.buffer.blocked(buffer, "buftype", H.blocklist.buftype)
-    or H.buffer.blocked(buffer, "filetype", H.blocklist.filetype)
+    buffer.blocked(buf, "buftype", H.blocklist.buftype)
+    or buffer.blocked(buf, "filetype", H.blocklist.filetype)
   )
 end
 
@@ -62,14 +35,14 @@ end
 H.get_bufnrs = function()
   local valid_buffers = {}
 
-  for _, buffer in pairs(vim.api.nvim_list_bufs()) do
+  for _, buf in pairs(vim.api.nvim_list_bufs()) do
     local invalid_buffer = (
-      H.buffer.above_max_size(buffer, H.max_size)
-      or not H.buffer.listed(buffer)
-      or H.buffer_blocked(buffer)
+      buffer.above_max_size(buf, H.max_size)
+      or not buffer.listed(buf)
+      or H.buffer_blocked(buf)
     )
     if not invalid_buffer then
-      table.insert(valid_buffers, buffer)
+      table.insert(valid_buffers, buf)
     end
   end
 
@@ -78,7 +51,7 @@ end
 
 H.format_field = function(entry, vim_item)
   vim_item.menu = H.menu_text[entry.source.name]
-  vim_item.kind = string.format('%s %s', H.kind_icons[vim_item.kind], vim_item.kind)
+  vim_item.kind = string.format('%s %s', icon.kind_icons[vim_item.kind], vim_item.kind)
   return vim_item
 end
 
