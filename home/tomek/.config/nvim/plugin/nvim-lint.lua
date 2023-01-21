@@ -1,7 +1,10 @@
 local available, lint = pcall(require, "lint")
 if not available then return end
 
-local function python_linters()
+-- helper
+local H = {}
+
+H.python_linters = function()
   local linters = {}
 
   local flake8 = lint.linters.flake8
@@ -18,14 +21,31 @@ local function python_linters()
   return linters
 end
 
--- Set linters map.
-lint.linters_by_ft = {
-  python = python_linters()
-}
+H.lua_linters = function()
+  local linters = {}
 
+  local luacheck = lint.linters.luacheck
+  if vim.fn.executable(luacheck.cmd) == 1 then
+    table.insert(linters, luacheck.cmd)
+  end
+
+  return linters
+end
+
+H.linters_by_ft = function()
+  return {
+    python = H.python_linters(),
+    lua = H.lua_linters(),
+  }
+end
+
+-- autocmd
 vim.api.nvim_create_autocmd({"BufWinEnter", "BufWritePost"}, {
   group = vim.api.nvim_create_augroup("nvim_lint_trigger", { clear = true }),
   callback = function()
     lint.try_lint()
   end
 })
+
+-- setup
+lint.linters_by_ft = H.linters_by_ft()

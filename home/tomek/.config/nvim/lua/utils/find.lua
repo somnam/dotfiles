@@ -4,7 +4,7 @@ local function has_cmd(cmd)
   return vim.fn.executable(cmd) == 1
 end
 
-function cmd(cmd_and_args)
+local function cmd(cmd_and_args)
   return table.concat(cmd_and_args, " ")
 end
 

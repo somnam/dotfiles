@@ -3,8 +3,11 @@ if not available then return end
 
 local util = require("formatter.util")
 
--- Use perl insead of sed for character replacement.
-local function perl(pattern, replacement, flags)
+-- helper
+local H = {}
+
+H.perl = function(pattern, replacement, flags)
+  -- Use perl insead of sed for character replacement.
   return {
     exe = "perl",
     args = {
@@ -15,31 +18,44 @@ local function perl(pattern, replacement, flags)
   }
 end
 
-local remove_trailing_whitespace = util.withl(perl, "[ \t]*$")
+H.remove_trailing_whitespace = util.withl(H.perl, "[ \t]*$")
 
-local function python_fixers()
-    local fixers = {}
-
-    local isort = require("formatter.filetypes.python").isort
-    if vim.fn.executable(isort().exe) == 1 then
-        table.insert(fixers, isort)
-    end
-
-    local black = require("formatter.filetypes.python").black
-    if vim.fn.executable(black().exe) == 1 then
-        table.insert(fixers, black)
-    end
-
-    return fixers
+H.autoflake = function()
+  return {
+    exe = "autoflake",
+    args = {"--in-place"},
+  }
 end
 
-formatter.setup({
-    filetype = {
-        python = python_fixers(),
-        -- Use the special "*" filetype for defining formatter configurations on any filetype
-        ["*"] = {remove_trailing_whitespace}
-    }
-})
+H.python_fixers = function()
+  local fixers = {}
 
+  local isort = require("formatter.filetypes.python").isort
+  if vim.fn.executable(isort().exe) == 1 then
+      table.insert(fixers, isort)
+  end
+
+  local black = require("formatter.filetypes.python").black
+  if vim.fn.executable(black().exe) == 1 then
+      table.insert(fixers, black)
+  end
+
+  if vim.fn.executable(H.autoflake().exe) == 1 then
+      table.insert(fixers, H.autoflake)
+  end
+
+  return fixers
+end
+
+-- keymap
 local opts = {noremap = true, silent = true}
 vim.api.nvim_set_keymap("n", "<Space>=", ":FormatWrite<Enter>", opts)
+
+-- setup
+formatter.setup({
+  filetype = {
+    python = H.python_fixers(),
+    -- Formatter configurations on any filetype
+    ["*"] = {H.remove_trailing_whitespace}
+  }
+})
