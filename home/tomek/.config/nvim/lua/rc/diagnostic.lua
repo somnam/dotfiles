@@ -1,4 +1,4 @@
-local icon = require("utils.icon").diagnostic
+local icon = require("util.icon").diagnostic
 
 local opts = {noremap = true, silent = true}
 vim.api.nvim_set_keymap("n", "<Space>[m", ":lua vim.diagnostic.goto_prev()<Enter>", opts)

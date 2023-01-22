@@ -1,5 +1,2 @@
-require('settings')
-require('mappings')
-require('diagnostic')
-require('lsp')
-require('plugins')
+require('rc')
+require('plugin')
