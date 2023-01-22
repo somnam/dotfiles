@@ -1,8 +1,8 @@
 local available, cmp = pcall(require, "cmp")
 if not available then return end
 
-local buffer = require("utils.buffer")
-local icon = require("utils.icon").nvim_cmp
+local buffer = require("util.buffer")
+local icon = require("util.icon").nvim_cmp
 
 -- helper
 local H = {}

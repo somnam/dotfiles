@@ -1,8 +1,8 @@
 local available, lualine = pcall(require, "lualine")
 if not available then return end
 
-local statusline = require("utils.statusline")
-local icon = require("utils.icon").lualine
+local statusline = require("util.statusline")
+local icon = require("util.icon").lualine
 
 -- helper
 local H = {}
