@@ -1,7 +1,7 @@
 local available, nvim_tree = pcall(require, "nvim-tree")
 if not available then return end
 
-local icon = require("utils.icon").nvim_tree
+local icon = require("util.icon").nvim_tree
 
 -- helper
 local H = {}

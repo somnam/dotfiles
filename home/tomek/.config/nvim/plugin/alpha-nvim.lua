@@ -2,8 +2,8 @@ local available, alpha = pcall(require, "alpha")
 if not available then return end
 
 local dashboard = require("alpha.themes.dashboard")
-local starter = require("utils.starter")
-local icon = require("utils.icon").dashboard
+local starter = require("util.starter")
+local icon = require("util.icon").dashboard
 
 -- helper
 local H = {}

@@ -1,7 +1,7 @@
 local available, fzf_lua = pcall(require, "fzf-lua")
 if not available then return end
 
-local find = require('utils.find')
+local find = require('util.find')
 
 -- autocmd
 vim.api.nvim_create_autocmd("ColorScheme", {
