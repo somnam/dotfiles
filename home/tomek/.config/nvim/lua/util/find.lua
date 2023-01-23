@@ -25,7 +25,7 @@ M.find_args = function()
     ".",
     "-type f",
     "-not", "-path", "'*/.*'",
-    "-and", "-not", "-path", "*/__pycache__/*",
+    "-and", "-not", "-path", "'*/__pycache__/*'",
   }
 end
 

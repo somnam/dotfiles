@@ -8,11 +8,11 @@ M.diagnostic = {
 }
 
 M.dashboard = {
-  find_recent = "➤  ",
-  find_file = "➤  ",
-  find_word = "➤  ",
-  new_file = "➤  ",
-  quit = "➤  ",
+  find_recent = "▶  ",
+  find_file = "▶  ",
+  find_word = "▶  ",
+  new_file = "▶  ",
+  quit = "▶  ",
 }
 
 M.nvim_tree = {
