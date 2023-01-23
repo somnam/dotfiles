@@ -64,7 +64,7 @@ download-plugin-manager ()
 
 sync-plugins ()
 {
-    local plugins="$HOME/.config/nvim/lua/plugins.lua"
+    local plugins="$HOME/.config/nvim/lua/plugin/init.lua"
     [[ -f $plugins ]] || exit 1
 
     local nvim=$(nvim-bin)
@@ -77,7 +77,7 @@ sync-plugins ()
 
 sync-treesitter-parsers ()
 {
-    local treesitter="$HOME/.config/nvim/plugin/nvim-treesitter.lua"
+    local treesitter="$HOME/.config/nvim/lua/plugin/nvim-treesitter.lua"
     [[ -f $treesitter ]] || exit 1
 
     local nvim=$(nvim-bin)
