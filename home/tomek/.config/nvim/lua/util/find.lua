@@ -15,6 +15,7 @@ M.find_args = function()
       "--type=file",
       "--type=symlink",
       "--color=never",
+      "--exclude=__pycache__",
     }
   end
 
@@ -24,6 +25,7 @@ M.find_args = function()
     ".",
     "-type f",
     "-not", "-path", "'*/.*'",
+    "-and", "-not", "-path", "*/__pycache__/*",
   }
 end
 
