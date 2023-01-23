@@ -1,4 +1,4 @@
--- Default settings
+-- Default options
 
 vim.opt.encoding = "utf8"
 vim.opt.shortmess:append("I")   -- Disable intro message
