@@ -20,6 +20,8 @@ vim.opt.linebreak = true        -- Wrap long lines at a linebreak character
 vim.opt.wrapscan =  false       -- Search wrapping
 vim.opt.foldmethod = "marker"   -- Set folding method
 vim.opt.cursorline = true       -- Highlight current cursor line
+vim.opt.cursorcolumn = false    -- Don't highlight current cursor column
+vim.opt.number = false          -- Don't display line numbers
 vim.opt.mouse = "vi"            -- Mouse modes
 
 vim.opt.smartindent = true      -- Try to be smart with indenting
