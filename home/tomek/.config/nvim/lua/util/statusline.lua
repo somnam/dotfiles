@@ -14,7 +14,7 @@ end
 
 M.available_branch_length = function(columns)
   local min_length = 9
-  local factor = columns > 240 and 1 or columns > 120 and 2 or columns > 80 and 3 or 5
+  local factor = columns > 240 and 1 or columns > 120 and 2 or columns > 80 and 6 or 10
   local available_length = math.floor(columns / factor)
   return available_length > min_length and available_length or min_length
 end
