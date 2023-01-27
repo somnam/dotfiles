@@ -21,7 +21,11 @@ P.config = function()
     {"filename", file_status = true, path = 1},
   }
 
+  H.winbar_c = H.lualine_c
+
   H.lualine_x = {"encoding", "fileformat", "filetype"}
+
+  H.winbar_x = {"filetype"}
 
   -- setup
   lualine.setup({
@@ -30,6 +34,15 @@ P.config = function()
       theme = "auto",
       section_separators = icon.section_separators,
       component_separators = "",
+      disabled_filetypes = {
+        winbar = {
+          "help",
+          "packer",
+          "NvimTree",
+          "alpha",
+          "toggleterm",
+        },
+      },
     },
     sections = {
       lualine_b = H.lualine_b,
@@ -39,6 +52,14 @@ P.config = function()
     inactive_sections = {
       lualine_c = H.lualine_c,
       lualine_x = H.lualine_x,
+    },
+    winbar = {
+      lualine_c = H.winbar_c,
+      lualine_x = H.winbar_x,
+    },
+    inactive_winbar = {
+      lualine_c = H.winbar_c,
+      lualine_x = H.winbar_x,
     },
   })
 end
