@@ -10,7 +10,7 @@ vim.opt.smartcase = true        -- Do smart case matching
 vim.opt.iskeyword:append("-")   -- Treat dash separated words as a word text object
 
 vim.opt.showcmd = true          -- Show (partial) command in status line.
-vim.opt.laststatus = 2          -- Always display statusbar
+vim.opt.laststatus = 3          -- Always display statusbar
 vim.opt.wildmenu = true         -- Use wildmenu
 vim.opt.wildmode = "full:longest"
 vim.opt.wildoptions = "tagfile"
