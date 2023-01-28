@@ -1,5 +1,0 @@
-# Set scheduler to "deadline" for SSD drives
-ACTION=="add|change", KERNEL=="sd[a-z]", ATTR{queue/rotational}=="0", ATTR{queue/scheduler}="deadline"
-
-# Disable Bluetooth
-SUBSYSTEM=="rfkill", ATTR{type}=="bluetooth", ATTR{state}="0"

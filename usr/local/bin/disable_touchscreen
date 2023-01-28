@@ -1,0 +1,5 @@
+#!/bin/bash
+
+if [[ -d /sys/bus/hid/drivers/hid-multitouch ]]; then
+    /bin/ls /sys/bus/hid/drivers/hid-multitouch | /bin/grep '2808:5120' | /bin/cat > /sys/bus/hid/drivers/hid-multitouch/unbind
+fi
