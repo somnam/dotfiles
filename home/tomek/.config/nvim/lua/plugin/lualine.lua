@@ -14,16 +14,16 @@ P.config = function()
       fmt = statusline.truncate_branch,
     },
     "diff",
-    "diagnostics"
+    "diagnostics",
   }
 
-  H.lualine_c = {
-    {"filename", file_status = true, path = 1},
-  }
-
-  H.winbar_c = H.lualine_c
+  H.lualine_c = {}
 
   H.lualine_x = {"encoding", "fileformat", "filetype"}
+
+  H.lualine_z = {"searchcount", "location"}
+
+  H.winbar_c = {{"filename", file_status = true, path = 1}}
 
   H.winbar_x = {"filetype"}
 
@@ -37,6 +37,7 @@ P.config = function()
       disabled_filetypes = {
         winbar = {
           "help",
+          "checkhealth",
           "packer",
           "NvimTree",
           "alpha",
@@ -48,6 +49,7 @@ P.config = function()
       lualine_b = H.lualine_b,
       lualine_c = H.lualine_c,
       lualine_x = H.lualine_x,
+      lualine_z = H.lualine_z,
     },
     inactive_sections = {
       lualine_c = H.lualine_c,
