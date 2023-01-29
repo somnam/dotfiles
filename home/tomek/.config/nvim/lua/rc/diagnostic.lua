@@ -1,12 +1,12 @@
-local icon = require("util.icon").diagnostic
-
 local opts = {noremap = true, silent = true}
 vim.api.nvim_set_keymap("n", "<Space>[m", ":lua vim.diagnostic.goto_prev()<Enter>", opts)
 vim.api.nvim_set_keymap("n", "<Space>]m", ":lua vim.diagnostic.goto_next()<Enter>", opts)
 vim.api.nvim_set_keymap("n", "<Space>m", ":lua vim.diagnostic.open_float()<Enter>", opts)
 vim.api.nvim_set_keymap("n", "<Space>M", ":lua vim.diagnostic.setloclist()<Enter>", opts)
 
-for type, glyph in pairs(icon) do
+local icons = {Error = "🅧 ", Warn = "🅦 ", Hint = "🅗 ", Info = "🅘 "}
+
+for type, glyph in pairs(icons) do
 	local hl = "DiagnosticSign" .. type
 	vim.fn.sign_define(hl, { text = glyph, texthl = hl, numhl = hl })
 end

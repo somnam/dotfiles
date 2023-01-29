@@ -4,16 +4,15 @@ P.config = function()
   local alpha = require("alpha")
   local dashboard = require("alpha.themes.dashboard")
   local starter = require("util.starter")
-  local icon = require("util.icon").dashboard
 
   local H = {}
 
   H.labels = {
-    find_recent = icon.find_recent .. "Recent files",
-    find_file = icon.find_file .. "Find files",
-    find_word = icon.find_word .. "Find in files",
-    new_file = icon.new_file .. "New file",
-    quit = icon.quit .. "Quit",
+    find_recent = "▶  Recent files",
+    find_file = "▶  Find files",
+    find_word = "▶  Find in files",
+    new_file = "▶  New file",
+    quit = "▶  Quit",
   }
 
   -- autocmd

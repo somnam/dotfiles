@@ -3,7 +3,6 @@ local P = {"nvim-lualine/lualine.nvim"}
 P.config = function()
   local lualine = require("lualine")
   local statusline = require("util.statusline")
-  local icon = require("util.icon").lualine
 
   local H = {}
 
@@ -23,7 +22,7 @@ P.config = function()
 
   H.lualine_z = {"searchcount", "location"}
 
-  H.winbar_c = {{"filename", file_status = true, path = 1}}
+  H.winbar_c = {{"filename", file_status = true, path = 0}}
 
   H.winbar_x = {"filetype"}
 
@@ -32,7 +31,7 @@ P.config = function()
     options = {
       icons_enabled = false,
       theme = "auto",
-      section_separators = icon.section_separators,
+      section_separators = {left = "›", right = "‹"},
       component_separators = "",
       disabled_filetypes = {
         winbar = {
