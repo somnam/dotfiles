@@ -2,7 +2,6 @@ local P = {"nvim-tree/nvim-tree.lua"}
 
 P.config = function()
   local nvim_tree = require("nvim-tree")
-  local icon = require("util.icon").nvim_tree
 
   local H = {}
 
@@ -13,6 +12,32 @@ P.config = function()
       { key = "<C-s>", action = "split" },
       { key = "<F1>",  action = "toggle_help" },
       { key = "<C-f>", action = "toggle_file_info" },
+    },
+  }
+
+  H.glyphs = {
+    default = "📄",
+    symlink = "🔗",
+    bookmark = "⭐",
+    modified = "🔶",
+    folder = {
+      arrow_closed = "▶",
+      arrow_open = "▼",
+      default = "📁",
+      open = "📂",
+      empty = "📪",
+      empty_open = "📭",
+      symlink = "📫",
+      symlink_open = "📬",
+    },
+    git = {
+      unstaged = "U",
+      staged = "S",
+      unmerged = "!",
+      renamed = "R",
+      untracked = "?",
+      deleted = "-",
+      ignored = "I",
     },
   }
 
@@ -36,7 +61,7 @@ P.config = function()
         webdev_colors = false,
         git_placement = "after",
         modified_placement = "before",
-        glyphs = icon.glyphs,
+        glyphs = H.glyphs,
       },
     },
     filesystem_watchers = {

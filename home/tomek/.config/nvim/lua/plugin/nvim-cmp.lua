@@ -9,7 +9,6 @@ P.requires = {
 P.config = function()
   local cmp = require("cmp")
   local buffer = require("util.buffer")
-  local icon = require("util.icon").nvim_cmp
 
   local H = {}
 
@@ -55,9 +54,46 @@ P.config = function()
     return valid_buffers
   end
 
+  H.kind_icons = {
+    Array = "🅰️ ",
+    Boolean = "☯️ ",
+    Key = "🔑",
+    Namespace = "🪐",
+    Null = "☢️ ",
+    Number = "🔢",
+    Object = "🅾️ ",
+    Package = "🕋",
+    String = "🔠",
+    Text = "📜",
+    Method = "🧶",
+    Function = "🧵",
+    Constructor = "🚧",
+    Field = "🔘",
+    Variable = "🔷",
+    Class = "📦",
+    Interface = "🧩",
+    Module = "📦",
+    Property = "🔵",
+    Unit = "🗳️",
+    Value = "🧪",
+    Enum = "🧫",
+    Keyword = "🔑",
+    Snippet = "🌱",
+    Color = "🎨",
+    File = "📁",
+    Reference = "⛳",
+    Folder = "📂",
+    EnumMember = "🦠",
+    Constant = "🧊",
+    Struct = "🧱",
+    Event = "📅",
+    Operator = "❎",
+    TypeParameter = "🧬",
+  }
+
   H.format_field = function(entry, vim_item)
     vim_item.menu = H.menu_text[entry.source.name]
-    vim_item.kind = string.format('%s %s', icon.kind_icons[vim_item.kind], vim_item.kind)
+    vim_item.kind = string.format('%s %s', H.kind_icons[vim_item.kind], vim_item.kind)
     return vim_item
   end
 
