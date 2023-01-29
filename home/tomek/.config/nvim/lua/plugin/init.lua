@@ -14,14 +14,6 @@ H.plugin_read = function(file)
   return plugin_available and plugin or nil
 end
 
-H.config ={
-  display = {
-    open_fn = function()
-      return require("packer.util").float({ border = "single" })
-    end
-  }
-}
-
 -- autocmd
 vim.api.nvim_create_autocmd("BufWritePost", {
   pattern = "*/nvim/lua/plugin/*.lua",
@@ -29,26 +21,23 @@ vim.api.nvim_create_autocmd("BufWritePost", {
   callback = H.plugin_source,
 })
 
-packer.startup({
-  function(use)
-    use {"wbthomason/packer.nvim"}
-    use (H.plugin_read("mini.lua"))
-    use (H.plugin_read("alpha-nvim.lua"))
-    use (H.plugin_read("guess-indent.lua"))
-    use (H.plugin_read("indent-blankline.lua"))
-    use (H.plugin_read("nvim-lspconfig.lua"))
-    use (H.plugin_read("gitsigns.lua"))
-    use (H.plugin_read("nvim-treesitter.lua"))
-    use (H.plugin_read("nvim-lint.lua"))
-    use (H.plugin_read("formatter.lua"))
-    use (H.plugin_read("lualine.lua"))
-    use (H.plugin_read("fzf-lua.lua"))
-    use (H.plugin_read("nvim-tree.lua"))
-    use (H.plugin_read("nvim-cmp.lua"))
-    use (H.plugin_read("toggleterm.lua"))
-    use (H.plugin_read("codedark.lua"))
-    use (H.plugin_read("vscode.lua"))
-    use (H.plugin_read("dracula.lua"))
-  end,
-  config = H.config,
-})
+packer.startup(function(use)
+  use {"wbthomason/packer.nvim"}
+  use (H.plugin_read("mini.lua"))
+  use (H.plugin_read("alpha-nvim.lua"))
+  use (H.plugin_read("guess-indent.lua"))
+  use (H.plugin_read("indent-blankline.lua"))
+  use (H.plugin_read("nvim-lspconfig.lua"))
+  use (H.plugin_read("gitsigns.lua"))
+  use (H.plugin_read("nvim-treesitter.lua"))
+  use (H.plugin_read("nvim-lint.lua"))
+  use (H.plugin_read("formatter.lua"))
+  use (H.plugin_read("lualine.lua"))
+  use (H.plugin_read("fzf-lua.lua"))
+  use (H.plugin_read("nvim-tree.lua"))
+  use (H.plugin_read("nvim-cmp.lua"))
+  use (H.plugin_read("toggleterm.lua"))
+  use (H.plugin_read("codedark.lua"))
+  use (H.plugin_read("vscode.lua"))
+  use (H.plugin_read("dracula.lua"))
+end)
