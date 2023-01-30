@@ -13,7 +13,10 @@ P.config = function()
       fmt = statusline.truncate_branch,
     },
     "diff",
-    "diagnostics",
+    {
+      "diagnostics",
+      symbols = {error = "🄴 ", warn = "🅆 ", hint = "🄷 ", info = "🄸 "},
+    },
   }
 
   H.lualine_c = {}
@@ -22,7 +25,7 @@ P.config = function()
 
   H.lualine_z = {"searchcount", "location"}
 
-  H.winbar_c = {{"filename", file_status = true, path = 0}}
+  H.winbar_c = {{"filename", file_status = true, path = 1}}
 
   H.winbar_x = {"filetype"}
 
@@ -31,7 +34,6 @@ P.config = function()
     options = {
       icons_enabled = false,
       theme = "auto",
-      section_separators = {left = "›", right = "‹"},
       component_separators = "",
       disabled_filetypes = {
         winbar = {
