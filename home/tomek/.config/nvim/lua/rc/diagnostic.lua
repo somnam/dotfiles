@@ -13,7 +13,8 @@ end
 
 local diagnostic_opts = {
   virtual_text = {
-    severity = {min = "ERROR"},
+    severity = {min = vim.diagnostic.severity.ERROR},
+    prefix = "↳",
   },
   update_in_insert = false,
   severity_sort = true,
