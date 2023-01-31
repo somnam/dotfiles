@@ -15,7 +15,7 @@ P.config = function()
     "diff",
     {
       "diagnostics",
-      symbols = {error = "🄴 ", warn = "🅆 ", hint = "🄷 ", info = "🄸 "},
+      symbols = {error = "● ", warn = "▲ ", hint = "◆ ", info = "■ "}
     },
   }
 

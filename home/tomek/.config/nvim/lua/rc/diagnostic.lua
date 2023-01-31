@@ -4,7 +4,7 @@ vim.api.nvim_set_keymap("n", "<Space>]m", ":lua vim.diagnostic.goto_next()<Enter
 vim.api.nvim_set_keymap("n", "<Space>m", ":lua vim.diagnostic.open_float()<Enter>", opts)
 vim.api.nvim_set_keymap("n", "<Space>M", ":lua vim.diagnostic.setloclist()<Enter>", opts)
 
-local icons = {Error = "🄴 ", Warn = "🅆 ", Hint = "🄷 ", Info = "🄸 "}
+local icons = {Error = "●", Warn = "▲", Hint = "◆", Info = "■"}
 
 for type, glyph in pairs(icons) do
 	local hl = "DiagnosticSign" .. type

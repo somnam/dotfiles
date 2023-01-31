@@ -15,6 +15,7 @@ M.find_args = function()
       "--type=file",
       "--type=symlink",
       "--color=never",
+      "--hidden",
       "--exclude=__pycache__",
     }
   end
