@@ -8,9 +8,9 @@ P.config = function()
     show_current_context = true,
     show_trailing_blankline_indent = false,
     -- A list of filetypes for which the auto command gets disabled
-    filetype_exclude = {"netrw", "tutor"},
+    filetype_exclude = {"alpha", "help", "packer", "netrw", "NvimTree", "tutor"},
     -- A list of buffer types for which the auto command gets disabled
-    buftype_exclude = {"help", "nofile", "terminal", "prompt", "alpha"},
+    buftype_exclude = {"nofile", "prompt", "terminal"},
   })
 end
 
