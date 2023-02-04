@@ -3,6 +3,7 @@ local P = {"nvim-lualine/lualine.nvim"}
 P.config = function()
   local lualine = require("lualine")
   local statusline = require("util.statusline")
+  local lsp = require("util.lsp")
 
   local H = {}
 
@@ -17,6 +18,13 @@ P.config = function()
       "diagnostics",
       symbols = {error = "● ", warn = "▲ ", hint = "◆ ", info = "■ "}
     },
+    {
+      lsp.get_clients_count,
+      cond = lsp.has_clients,
+      icons_enabled = true,
+      icon = "🛠",
+      on_click = lsp.show_info,
+    }
   }
 
   H.lualine_c = {}

@@ -15,7 +15,6 @@ P.config = function()
 
   H.lsp_capabilities = function()
     local capabilities = vim.lsp.protocol.make_client_capabilities()
-
     local cmp_nvim_lsp_available, cmp_nvim_lsp = pcall(require, "cmp_nvim_lsp")
 
     if cmp_nvim_lsp_available then
