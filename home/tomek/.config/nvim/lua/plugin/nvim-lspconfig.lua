@@ -5,6 +5,12 @@ P.config = function()
 
   local H = {}
 
+  H.customize_ui = function()
+    local windows = require('lspconfig.ui.windows')
+
+    windows.default_options.border = 'single'
+  end
+
   H.on_attach = function(client, bufnr)
     vim.api.nvim_buf_set_option(bufnr, "omnifunc", "v:lua.vim.lsp.omnifunc")
     vim.api.nvim_buf_set_option(bufnr, "formatexpr", "v:lua.vim.lsp.formatexpr()")
@@ -57,6 +63,8 @@ P.config = function()
   end
 
   -- setup
+
+  H.customize_ui()
 
   if vim.fn.executable("jedi-language-server") == 1 then
     lspconfig.jedi_language_server.setup({

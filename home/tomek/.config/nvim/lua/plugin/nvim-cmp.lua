@@ -21,20 +21,8 @@ P.config = function()
     path = "[Path]",
   }
 
-  H.blocklist = {
-    buftype = {"terminal", "prompt"},
-    filetype = {"alpha", "NvimTree"},
-  }
-
-  H.buffer_blocked = function(buf)
-    return (
-      buffer.blocked(buf, "buftype", H.blocklist.buftype)
-      or buffer.blocked(buf, "filetype", H.blocklist.filetype)
-    )
-  end
-
   H.current_buffer_enabled = function()
-    return not H.buffer_blocked(vim.api.nvim_get_current_buf())
+    return not buffer.excluded(vim.api.nvim_get_current_buf())
   end
 
   H.get_bufnrs = function()
@@ -44,7 +32,7 @@ P.config = function()
       local invalid_buffer = (
         buffer.above_max_size(buf, H.max_size)
         or not buffer.listed(buf)
-        or H.buffer_blocked(buf)
+        or buffer.excluded(buf)
       )
       if not invalid_buffer then
         table.insert(valid_buffers, buf)
