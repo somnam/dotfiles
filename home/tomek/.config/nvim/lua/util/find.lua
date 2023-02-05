@@ -16,7 +16,7 @@ M.find_args = function()
       "--type=symlink",
       "--color=never",
       "--hidden",
-      "--exclude=__pycache__",
+      "--exclude={.git,__pycache__}",
     }
   end
 

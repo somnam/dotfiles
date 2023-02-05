@@ -22,7 +22,7 @@ P.config = function()
       lsp.get_clients_count,
       cond = lsp.has_clients,
       icons_enabled = true,
-      icon = "🛠",
+      icon = "⚙",
       on_click = lsp.show_info,
     }
   }
