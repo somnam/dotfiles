@@ -5,7 +5,7 @@ P.event = "ColorSchemePre coldedark"
 P.config = function()
   -- autocmd
   vim.api.nvim_create_autocmd("ColorScheme", {
-    pattern="codedark",
+    pattern = "codedark",
     group = vim.api.nvim_create_augroup("set_codedark_theme", { clear = true }),
     callback = function()
       vim.api.nvim_set_hl(0, "GitSignsAdd", {ctermbg="none", ctermfg=65, bg="none", fg="#4B5632"})

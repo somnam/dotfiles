@@ -9,11 +9,30 @@ M.above_max_size = function(buffer, max_size)
   return buffer_size > max_size
 end
 
-M.blocked = function(buffer, option, blocklist)
-  local bufoption = vim.api.nvim_buf_get_option(buffer, option)
-  return vim.tbl_contains(blocklist, bufoption)
+M.exclude = {
+  buftype = {"nofile", "prompt", "terminal"},
+  filetype = {"alpha", "help", "netrw", "NvimTree", "packer", "tutor"},
+}
+
+M.buftype_excluded = function(buffer, exclude_list)
+  return vim.tbl_contains(
+    exclude_list,
+    vim.api.nvim_buf_get_option(buffer, "buftype")
+  )
+end
+
+M.filetype_excluded = function(buffer, exclude_list)
+  return vim.tbl_contains(
+    exclude_list,
+    vim.api.nvim_buf_get_option(buffer, "filetype")
+  )
+end
+
+M.excluded = function(buffer)
+  return (
+    M.buftype_excluded(buffer, M.exclude.buftype)
+    or M.filetype_excluded(buffer, M.exclude.filetype)
+  )
 end
 
 return M
-
-

@@ -35,8 +35,6 @@ P.config = function()
 
   H.winbar_c = {{"filename", file_status = true, path = 1}}
 
-  H.winbar_x = {"filetype"}
-
   -- setup
   lualine.setup({
     options = {
@@ -66,11 +64,9 @@ P.config = function()
     },
     winbar = {
       lualine_c = H.winbar_c,
-      lualine_x = H.winbar_x,
     },
     inactive_winbar = {
       lualine_c = H.winbar_c,
-      lualine_x = H.winbar_x,
     },
   })
 end

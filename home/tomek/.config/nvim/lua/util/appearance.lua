@@ -20,7 +20,7 @@ local function autocmd()
   })
 
   vim.api.nvim_create_autocmd("ColorScheme", {
-    pattern="*",
+    pattern = "*",
     group = vim.api.nvim_create_augroup("after_colorscheme", { clear = true }),
     callback = function()
       vim.api.nvim_set_hl(0, "SignColumn", { link = "Normal" })
