@@ -45,6 +45,16 @@ P.config = function()
   local opts = {noremap = true, silent = true}
   vim.api.nvim_set_keymap("n", "<Space>e", ":NvimTreeToggle<Enter>", opts)
 
+  -- autocmd
+  vim.api.nvim_create_autocmd("VimEnter", {
+    group = vim.api.nvim_create_augroup("nvim_tree_trigger", { clear = true }),
+    callback = function(ctx)
+      if vim.fn.isdirectory(ctx.file) == 1 then
+        require("nvim-tree.api").tree.open()
+      end
+    end
+  })
+
   -- setup
   nvim_tree.setup({
     disable_netrw = true,
