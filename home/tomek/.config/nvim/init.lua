@@ -1,2 +1,2 @@
-require('rc')
+require('core')
 require('plugin')
