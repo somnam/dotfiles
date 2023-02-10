@@ -94,11 +94,11 @@ P.config = function()
 
   -- setup
   cmp.setup({
-    sources = cmp.config.sources({
+    sources = {
       { name = "nvim_lsp", group_index = 1 },
       { name = "buffer", group_index = 2, option = H.buffer_option },
       { name = "path", group_index = 3 },
-    }),
+    },
     enabled = H.current_buffer_enabled,
     confirm_opts = {
       behavior = cmp.ConfirmBehavior.Replace,
@@ -120,12 +120,13 @@ P.config = function()
       format = H.format_field,
     },
     sorting = {
-      priority_weight = 1.0,
       comparators = {
+        cmp.config.compare.offset,
         cmp.config.compare.locality,
         cmp.config.compare.recently_used,
+        cmp.config.compare.exact,
         cmp.config.compare.score,
-        cmp.config.compare.offset,
+        cmp.config.compare.kind,
         cmp.config.compare.order,
       }
     }
