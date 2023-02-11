@@ -3,8 +3,6 @@ local P = {"Mofiqul/dracula.nvim"}
 P.event = "ColorSchemePre dracula"
 
 P.config = function()
-  local dracula = require("dracula")
-
   -- autocmd
   vim.api.nvim_create_autocmd("ColorScheme", {
     pattern = "dracula",
@@ -15,7 +13,7 @@ P.config = function()
   })
 
   -- setup
-  dracula.setup({})
+  require("dracula").setup({})
 end
 
 return P

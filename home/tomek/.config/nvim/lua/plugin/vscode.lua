@@ -3,8 +3,6 @@ local P = {"Mofiqul/vscode.nvim"}
 P.event = "ColorSchemePre vscode"
 
 P.config = function()
-  local vscode = require("vscode")
-
   -- autocmd
   vim.api.nvim_create_autocmd("ColorScheme", {
     pattern = "vscode",
@@ -15,7 +13,7 @@ P.config = function()
   })
 
   -- setup
-  vscode.setup({})
+  require("vscode").setup({})
 end
 
 return P
