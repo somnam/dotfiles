@@ -1,9 +1,11 @@
 local P = {"hrsh7th/nvim-cmp"}
 
+P.event = "InsertEnter"
+
 P.requires = {
-  {"hrsh7th/cmp-nvim-lsp"},
-  {"hrsh7th/cmp-buffer"},
-  {"hrsh7th/cmp-path"},
+  {"hrsh7th/cmp-nvim-lsp", after = "nvim-cmp"},
+  {"hrsh7th/cmp-buffer", after = "nvim-cmp"},
+  {"hrsh7th/cmp-path", after = "nvim-cmp"},
 }
 
 P.config = function()
