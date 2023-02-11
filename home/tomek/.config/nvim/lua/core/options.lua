@@ -53,9 +53,15 @@ vim.opt.undofile = true         -- Enable persistent undo
 vim.opt.modeline = false        -- Don't run arbitrary modeline code
 vim.opt.inccommand = "nosplit"  -- Shows the effects of a command incrementally.
 
-vim.g.netrw_banner = 0          -- Hide netrw banner
-vim.g.loaded_netrw = 1          -- Disable netrw
+-- Disable unused plugins
+vim.g.loaded_netrw = 1
 vim.g.loaded_netrwPlugin = 1
+vim.g.loaded_netrwSettings = 1
+vim.g.loaded_netrwFileHandlers = 1
+vim.g.loaded_vimball = 1
+vim.g.loaded_vimballPlugin = 1
+vim.g.loaded_getscript = 1
+vim.g.loaded_getscriptPlugin = 1
 
 vim.opt.formatoptions:remove("c")   -- Disable automatic comment insertion
 vim.opt.formatoptions:remove("r")
