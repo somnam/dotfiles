@@ -3,14 +3,18 @@ if not available then return end
 
 local H = {}
 
-H.plugin_path = vim.fn.stdpath('config') .. "/lua/plugin/"
+H.path = vim.fn.stdpath('config') .. "/lua/plugin/"
 
-H.plugin_source = function(_)
-  vim.cmd("source " .. H.plugin_path .. "init.lua")
+H.source = function(_)
+  vim.cmd("source " .. H.path .. "init.lua")
 end
 
-H.plugin_read = function(file)
-  local plugin_available, plugin = pcall(dofile, H.plugin_path .. file)
+H.plugin_file = function(filename)
+  return H.path .. filename .. ".lua"
+end
+
+H.plugin = function(filename)
+  local plugin_available, plugin = pcall(dofile, H.plugin_file(filename))
   return plugin_available and plugin or nil
 end
 
@@ -18,27 +22,27 @@ end
 vim.api.nvim_create_autocmd("BufWritePost", {
   pattern = "*/nvim/lua/plugin/*.lua",
   group = vim.api.nvim_create_augroup("packer_auto_source", { clear = true }),
-  callback = H.plugin_source,
+  callback = H.source,
 })
 
 packer.startup(function(use)
   use {"wbthomason/packer.nvim"}
-  use (H.plugin_read("mini.lua"))
-  use (H.plugin_read("alpha-nvim.lua"))
-  use (H.plugin_read("guess-indent.lua"))
-  use (H.plugin_read("indent-blankline.lua"))
-  use (H.plugin_read("nvim-lspconfig.lua"))
-  use (H.plugin_read("gitsigns.lua"))
-  use (H.plugin_read("nvim-treesitter.lua"))
-  use (H.plugin_read("nvim-lint.lua"))
-  use (H.plugin_read("formatter.lua"))
-  use (H.plugin_read("lualine.lua"))
-  use (H.plugin_read("fzf-lua.lua"))
-  use (H.plugin_read("nvim-tree.lua"))
-  use (H.plugin_read("nvim-cmp.lua"))
-  use (H.plugin_read("toggleterm.lua"))
-  use (H.plugin_read("codedark.lua"))
-  use (H.plugin_read("vscode.lua"))
-  use (H.plugin_read("dracula.lua"))
-  use (H.plugin_read("kanagawa.lua"))
+  use (H.plugin("mini"))
+  use (H.plugin("alpha-nvim"))
+  use (H.plugin("guess-indent"))
+  use (H.plugin("indent-blankline"))
+  use (H.plugin("nvim-lspconfig"))
+  use (H.plugin("gitsigns"))
+  use (H.plugin("nvim-treesitter"))
+  use (H.plugin("nvim-lint"))
+  use (H.plugin("formatter"))
+  use (H.plugin("lualine"))
+  use (H.plugin("fzf-lua"))
+  use (H.plugin("nvim-tree"))
+  use (H.plugin("nvim-cmp"))
+  use (H.plugin("toggleterm"))
+  use (H.plugin("codedark"))
+  use (H.plugin("vscode"))
+  use (H.plugin("dracula"))
+  use (H.plugin("kanagawa"))
 end)
