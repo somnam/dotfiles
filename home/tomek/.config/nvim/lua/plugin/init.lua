@@ -5,7 +5,7 @@ local H = {}
 
 H.path = vim.fn.stdpath('config') .. "/lua/plugin/"
 
-H.source = function(_)
+H.source_plugins = function(_)
   vim.cmd("source " .. H.path .. "init.lua")
 end
 
@@ -22,7 +22,7 @@ end
 vim.api.nvim_create_autocmd("BufWritePost", {
   pattern = "*/nvim/lua/plugin/*.lua",
   group = vim.api.nvim_create_augroup("packer_auto_source", { clear = true }),
-  callback = H.source,
+  callback = H.source_plugins,
 })
 
 packer.startup(function(use)

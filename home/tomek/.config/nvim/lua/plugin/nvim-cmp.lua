@@ -30,14 +30,14 @@ P.config = function()
   H.get_bufnrs = function()
     local valid_buffers = {}
 
-    for _, buf in pairs(vim.api.nvim_list_bufs()) do
+    for _, bufnr in pairs(vim.api.nvim_list_bufs()) do
       local invalid_buffer = (
-        buffer.above_max_size(buf, H.max_size)
-        or not buffer.listed(buf)
-        or buffer.excluded(buf)
+        buffer.above_max_size(bufnr, H.max_size)
+        or not buffer.listed(bufnr)
+        or buffer.excluded(bufnr)
       )
       if not invalid_buffer then
-        table.insert(valid_buffers, buf)
+        table.insert(valid_buffers, bufnr)
       end
     end
 

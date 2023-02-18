@@ -2,12 +2,26 @@ local P = {"nvim-treesitter/nvim-treesitter"}
 
 P.config = function()
   local nvim_treesitter_configs = require("nvim-treesitter.configs")
+  local buffer = require("util.buffer")
+
+  local H = {}
+
+  H.exclude_filetype = {"json", "yaml"}
+
+  H.max_size = 1024 * 1024
+
+  H.maybe_disable_treesitter = function(filetype, bufnr)
+    return (
+      vim.tbl_contains(H.exclude_filetype, filetype)
+      or buffer.above_max_size(bufnr, H.max_size)
+    )
+  end
 
   -- setup
   nvim_treesitter_configs.setup({
     highlight = {
       enable = true,
-      disable = { "json", "yaml" },
+      disable = H.maybe_disable_treesitter,
       additional_vim_regex_highlighting = false,
     }
   })

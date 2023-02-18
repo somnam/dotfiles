@@ -2,14 +2,23 @@ local available_cursorword, cursorword = pcall(require, "mini.cursorword")
 if available_cursorword then
   local buffer = require("util.buffer")
 
-  local function mini_cursorword_disable()
-    vim.b.minicursorword_disable = true
+  local H = {}
+
+  H.exclude_filetype = vim.list_extend(
+    {"json", "yaml"},
+    buffer.exclude.filetype
+  )
+
+  H.maybe_disable_mini_cursorword = function(ctx)
+    if vim.tbl_contains(H.exclude_filetype, ctx.match) then
+      vim.b.minicursorword_disable = true
+    end
   end
 
   vim.api.nvim_create_autocmd("FileType", {
-    pattern = table.concat(buffer.exclude.filetype, ","),
+    pattern = "*",
     group = vim.api.nvim_create_augroup("mini_cursorword_file_disable", { clear = true }),
-    callback = mini_cursorword_disable,
+    callback = H.maybe_disable_mini_cursorword,
   })
 
   cursorword.setup({delay = 150})
