@@ -19,6 +19,8 @@ P.config = function()
 
   -- setup
   nvim_treesitter_configs.setup({
+    auto_install = true,
+    ignore_install = H.exclude_filetype,
     highlight = {
       enable = true,
       disable = H.maybe_disable_treesitter,

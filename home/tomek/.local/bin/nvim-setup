@@ -84,10 +84,7 @@ sync-treesitter-parsers ()
     [[ -f $treesitter ]] || exit 1
 
     local nvim=$(nvim-bin)
-    local parsers=(bash c dockerfile lua make markdown python rust sql toml vim help)
-    local install_parsers="TSInstall! ${parsers[@]}"
-    local quit_after_sync="sleep ${#parsers[@]} | quitall"
-    $nvim --headless -c "$install_parsers" -c "$quit_after_sync"
+    $nvim --headless -c "TSUpdateSync" -c "quit"
 }
 
 
@@ -110,32 +107,22 @@ update-python-requirements ()
     fi
 }
 
-require-nvim-upgrade ()
-{
-    # Check if upgrade is required.
-    local upgrade=false
-
-    while getopts :u flag; do
-        case "${flag}" in
-            u) upgrade=true;;
-        esac
-    done
-
-    echo "$upgrade"
-}
-
 main ()
 {
     [[ $(which wget) && $(which git) ]] || exit 1
 
-    if [[ "$(require-nvim-upgrade $@)" == true ]]; then
-        upgrade-nvim
-        echo
-    fi
+    while getopts "up" flag; do
+        case "${flag}" in
+            u)
+                upgrade-nvim
+                echo;;
+            p)
+                update-python-requirements
+                echo;;
+        esac
+    done
 
     sync-nvim-plugins
-    echo
-    update-python-requirements
     echo
 }
 
