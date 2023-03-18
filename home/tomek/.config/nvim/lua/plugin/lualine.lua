@@ -48,7 +48,6 @@ P.config = function()
           "packer",
           "NvimTree",
           "alpha",
-          "toggleterm",
         },
       },
     },
