@@ -1,6 +1,7 @@
 BASH_THEME="git-prompt"
 
 plugins=(
+    brew
     docker
     fzf
     git
@@ -10,9 +11,11 @@ plugins=(
 
 completions=(
     bash
+    brew
 )
 
 aliases=(
+    brew
     general
 )
 
