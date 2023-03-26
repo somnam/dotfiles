@@ -1,3 +1,5 @@
+#!/usr/bin/env bash
+
 print_modules()
 {
     for module in "$@"; do

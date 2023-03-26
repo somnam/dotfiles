@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/usr/bin/env bash
 set -e
 
 nvim-bin ()
@@ -9,16 +9,18 @@ nvim-bin ()
 
 upgrade-nvim ()
 {
+    [[ $(which curl) ]] || (echo "curl not installed" && exit 1)
+
     echo "Downloading latest nvim appimage"
 
-    local wget=$(which wget)
+    local curl=$(which curl)
     local grep=$(which grep)
     local sed=$(which sed)
     local head=$(which head)
 
     echo "Fetching appimage download url"
     local appimage_url=$(
-        $wget -q -O- https://api.github.com/repos/neovim/neovim/releases/latest \
+        $curl -s -o- https://api.github.com/repos/neovim/neovim/releases/latest \
             | $grep "browser_download_url.*.appimage" \
             | $head -n 1 \
             | $sed -e "s/^.*\(http.*appimage\).*$/\1/"
@@ -32,7 +34,7 @@ upgrade-nvim ()
         local nvim_path="$bin_path/nvim"
 
         $mkdir -p "$bin_path" &&\
-            $wget -q --progress=bar --show-progress "$appimage_url" -O "$nvim_path" &&\
+            $curl -# -L "$appimage_url" -o "$nvim_path" &&\
             $chmod u+x "$nvim_path"
     else
         echo "AppImage download url not found"
@@ -50,13 +52,15 @@ sync-nvim-plugins ()
 
 download-plugin-manager ()
 {
+    [[ $(which git) ]] || (echo "git not installed" && exit 1)
+
     local git=$(which git)
     local mkdir=$(which mkdir)
     local plugin_manager_url="https://github.com/wbthomason/packer.nvim"
     local nvim_plugin_dir="$HOME/.local/share/nvim/site/pack/packer/start"
     local plugin_manager="$nvim_plugin_dir/packer.nvim"
 
-    [[ -d "$plugin_manager" ]] && return
+    [[ -e "$plugin_manager" ]] && return
 
     $mkdir -p "$nvim_plugin_dir" && $git clone --depth 1 "$plugin_manager_url" "$plugin_manager"
 }
@@ -91,7 +95,7 @@ sync-treesitter-parsers ()
 update-python-requirements ()
 {
     local pyenv=$(which pyenv)
-    [[ -z "$pyenv" ]] && exit 1
+    [[ -z "$pyenv" ]] && echo "pyenv not installed" && exit 1
 
     local venv_path=$(pyenv prefix nvim)
     [[ -z "$venv_path" ]] && exit 1
@@ -109,8 +113,6 @@ update-python-requirements ()
 
 main ()
 {
-    [[ $(which wget) && $(which git) ]] || exit 1
-
     while getopts "up" flag; do
         case "${flag}" in
             u)
