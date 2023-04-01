@@ -9,14 +9,14 @@ local function cmd(cmd_and_args)
 end
 
 M.find_args = function()
-  if has_cmd("fd") then
+  if has_cmd("rg") then
     return {
-      "fd",
-      "--type=file",
-      "--type=symlink",
+      "rg",
       "--color=never",
+      "--files",
       "--hidden",
-      "--exclude={.git,__pycache__}",
+      "--follow",
+      "-g '!{.git,__pycache__}'",
     }
   end
 
@@ -35,17 +35,29 @@ M.find_cmd = function()
 end
 
 M.grep_args = function()
+  if has_cmd("rg") then
+    return {
+      "rg",
+      "--column",
+      "--line-number",
+      "--no-heading",
+      "--color=always",
+      "--smart-case",
+      "--max-columns=4096",
+    }
+  end
+
   if has_cmd("ack") then
-      return {
-        "ack",
-        "--nocolor",
-        "--nogroup",
-        "--column",
-        "--smart-case",
-        "--ignore-dir={.cache,.mypy_cache,.pytest_cache}",
-        "--ignore-dir={.env,.venv}",
-      }
-    end
+    return {
+      "ack",
+      "--nocolor",
+      "--nogroup",
+      "--column",
+      "--smart-case",
+      "--ignore-dir={.cache,.mypy_cache,.pytest_cache}",
+      "--ignore-dir={.env,.venv}",
+    }
+  end
 
   return {
     "grep",
