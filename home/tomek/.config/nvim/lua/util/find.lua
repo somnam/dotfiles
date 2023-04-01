@@ -1,15 +1,15 @@
 local M = {}
 
-local function has_cmd(cmd)
+M.has_cmd = function(cmd)
   return vim.fn.executable(cmd) == 1
 end
 
-local function cmd(cmd_and_args)
+M.cmd = function(cmd_and_args)
   return table.concat(cmd_and_args, " ")
 end
 
 M.find_args = function()
-  if has_cmd("rg") then
+  if M.has_cmd("rg") then
     return {
       "rg",
       "--color=never",
@@ -31,11 +31,11 @@ M.find_args = function()
 end
 
 M.find_cmd = function()
-  return cmd(M.find_args())
+  return M.cmd(M.find_args())
 end
 
 M.grep_args = function()
-  if has_cmd("rg") then
+  if M.has_cmd("rg") then
     return {
       "rg",
       "--column",
@@ -47,7 +47,7 @@ M.grep_args = function()
     }
   end
 
-  if has_cmd("ack") then
+  if M.has_cmd("ack") then
     return {
       "ack",
       "--nocolor",
@@ -71,7 +71,7 @@ M.grep_args = function()
 end
 
 M.grep_cmd = function()
-  return cmd(M.grep_args())
+  return M.cmd(M.grep_args())
 end
 
 return M
