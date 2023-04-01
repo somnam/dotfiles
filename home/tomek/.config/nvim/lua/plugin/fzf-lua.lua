@@ -54,6 +54,7 @@ P.config = function()
     grep = {
       prompt = 'Words❯ ',
       cmd = find.grep_cmd(),
+      rg_glob = find.has_cmd("rg"),
     },
   })
 end
