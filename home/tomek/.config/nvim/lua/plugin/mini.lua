@@ -2,8 +2,16 @@ local P = {"echasnovski/mini.nvim"}
 
 P.config = function()
   local mini_bufremove = require("mini.bufremove")
-  vim.api.nvim_command(":command! BD lua MiniBufremove.delete(0, true)")
-  vim.api.nvim_command(":command! BW lua MiniBufremove.wipeout(0, true)")
+  vim.api.nvim_cmd({
+    cmd = "command",
+    args = {"BD lua MiniBufremove.delete(0, true)"},
+    bang = true,
+  }, {})
+  vim.api.nvim_cmd({
+    cmd = "command",
+    args = {"BW lua MiniBufremove.wipeout(0, true)"},
+    bang = true,
+  }, {})
   mini_bufremove.setup()
 
   local mini_comment = require("mini.comment")
