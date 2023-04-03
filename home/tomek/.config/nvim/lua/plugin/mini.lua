@@ -31,8 +31,8 @@ P.config = function()
     }
   })
 
-  local mini_surround = require("mini.surround")
-  mini_surround.setup()
+  local mini_jump = require("mini.jump")
+  mini_jump.setup()
 
   local mini_trailspace = require("mini.trailspace")
   mini_trailspace.setup()
