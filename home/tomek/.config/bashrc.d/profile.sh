@@ -2,11 +2,14 @@ BASH_THEME="git-prompt"
 
 plugins=(
     brew
+    cargo
     docker
     fzf
     git
+    lua
     pyenv
     pyenv-python-version
+    rg
 )
 
 completions=(
