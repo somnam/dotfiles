@@ -14,9 +14,8 @@ M.find_args = function()
       "rg",
       "--color=never",
       "--files",
-      "--hidden",
       "--follow",
-      "-g '!{.git,__pycache__}'",
+      "-g '!__pycache__'",
     }
   end
 
