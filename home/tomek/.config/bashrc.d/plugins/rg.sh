@@ -1,10 +1,10 @@
 if command -v rg > /dev/null 2>&1; then
     rgpy() {
-        rg --type py --smart-case $@
+        rg --type py --smart-case "$1"
     }
 
     rgf() {
-        if [ -z "$2" ]; then
+        if [[ -z "$2" ]]; then
             rg --files . | rg "$1"
         else
             rg --files "$2" | rg "$1"
