@@ -5,15 +5,17 @@ P.config = function()
 
   local H = {}
 
-  H.mappings = {
-    list = {
-      { key = "<C-k>", action = "" },
-      { key = "<C-x>", action = "" },
-      { key = "<C-s>", action = "split" },
-      { key = "<F1>",  action = "toggle_help" },
-      { key = "<C-f>", action = "toggle_file_info" },
-    },
-  }
+  H.on_attach = function(bufnr)
+    require('nvim-tree.api').config.mappings.default_on_attach(bufnr)
+
+    local api = ":lua require('nvim-tree.api')."
+    local opts = {noremap = true, silent = true, nowait = true}
+    vim.api.nvim_buf_del_keymap(bufnr, "n", "<C-k>")
+    vim.api.nvim_buf_del_keymap(bufnr, "n", "<C-x>")
+    vim.api.nvim_buf_set_keymap(bufnr, "n", "<F1>", api .. "tree.toggle_help()<Enter>", opts)
+    vim.api.nvim_buf_set_keymap(bufnr, "n", "<C-s>", api .. "node.open.horizontal()<Enter>", opts)
+    vim.api.nvim_buf_set_keymap(bufnr, "n", "<C-f>", api .. "node.show_info_popup()<Enter>", opts)
+  end
 
   H.glyphs = {
     default = "📄",
@@ -61,8 +63,8 @@ P.config = function()
     sync_root_with_cwd = true,
     view = {
       width = 35,
-      mappings = H.mappings,
-    },
+     },
+    on_attach = H.on_attach,
     renderer = {
       highlight_git = true,
       highlight_opened_files = "name",
