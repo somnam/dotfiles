@@ -7,6 +7,7 @@ pyenv_python_version_hook()
     for venv in $(pyenv local 2>/dev/null); do
         if pyenv prefix "${venv}" 1>/dev/null 2>&1; then
             export VIRTUAL_ENV=$(pyenv prefix "${venv}");
+            export PS1="(${venv}) ${PS1}"
             break
         fi
     done
