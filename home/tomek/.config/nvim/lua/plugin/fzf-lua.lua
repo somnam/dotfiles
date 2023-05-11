@@ -25,7 +25,8 @@ P.config = function()
   vim.api.nvim_set_keymap("n", "<Space>:", ":FzfLua command_history<Enter>", opts)
   -- git
   vim.api.nvim_set_keymap("n", "<Space>gs", ":FzfLua git_status<Enter>", opts)
-  vim.api.nvim_set_keymap("n", "<Space>gl", ":FzfLua git_commits<Enter>", opts)
+  vim.api.nvim_set_keymap("n", "<Space>gl", ":FzfLua git_bcommits<Enter>", opts)
+  vim.api.nvim_set_keymap("n", "<Space>gL", ":FzfLua git_commits<Enter>", opts)
   -- words
   vim.api.nvim_set_keymap("n", "<Space>w", ":FzfLua live_grep<Enter>", opts)
   vim.api.nvim_set_keymap("n", "<Space>W", ":FzfLua live_grep_resume<Enter>", opts)
