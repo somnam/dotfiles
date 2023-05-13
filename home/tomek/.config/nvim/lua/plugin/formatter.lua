@@ -47,6 +47,17 @@ P.config = function()
     return fixers
   end
 
+  H.rust_fixers = function()
+    local fixers = {}
+
+    local rustfmt = require("formatter.filetypes.rust").rustfmt
+    if vim.fn.executable(rustfmt().exe) == 1 then
+      table.insert(fixers, rustfmt)
+    end
+
+    return fixers
+  end
+
   -- keymap
   local opts = {noremap = true, silent = true}
   vim.api.nvim_set_keymap("n", "<Space>=", ":FormatWrite<Enter>", opts)
@@ -55,6 +66,7 @@ P.config = function()
   formatter.setup({
     filetype = {
       python = H.python_fixers(),
+      rust = H.rust_fixers(),
       -- Formatter configurations on any filetype
       ["*"] = {H.remove_trailing_whitespace}
     }
