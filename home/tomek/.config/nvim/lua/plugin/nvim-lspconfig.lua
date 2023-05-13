@@ -34,6 +34,8 @@ P.config = function()
     return capabilities
   end
 
+  -- python
+
   H.jedi_language_server_on_attach = function(client, bufnr)
     -- Customize trigger characters.
     client.server_capabilities.completionProvider.triggerCharacters = {"."}
@@ -52,6 +54,18 @@ P.config = function()
     }
   end
 
+  H.jedi_language_server_setup = function()
+    if vim.fn.executable("jedi-language-server") == 1 then
+      lspconfig.jedi_language_server.setup({
+        capabilities = H.lsp_capabilities(),
+        on_attach = H.jedi_language_server_on_attach,
+        on_new_config = H.jedi_language_server_on_new_config,
+      })
+    end
+  end
+
+  -- rust
+
   H.rust_analyzer_settings = function()
     return {
       ["rust-analyzer"] = {
@@ -62,25 +76,21 @@ P.config = function()
     }
   end
 
+  H.rust_analyzer_setup = function()
+    if vim.fn.executable("rust-analyzer") == 1 then
+      lspconfig.rust_analyzer.setup({
+        capabilities = H.lsp_capabilities(),
+        settings = H.rust_analyzer_settings(),
+        on_attach = H.on_attach,
+      })
+    end
+  end
+
   -- setup
 
   H.customize_ui()
-
-  if vim.fn.executable("jedi-language-server") == 1 then
-    lspconfig.jedi_language_server.setup({
-      capabilities = H.lsp_capabilities(),
-      on_attach = H.jedi_language_server_on_attach,
-      on_new_config = H.jedi_language_server_on_new_config,
-    })
-  end
-
-  if vim.fn.executable("rust-analyzer") == 1 then
-    lspconfig.rust_analyzer.setup({
-      capabilities = H.lsp_capabilities(),
-      settings = H.rust_analyzer_settings(),
-      on_attach = H.on_attach,
-    })
-  end
+  H.jedi_language_server_setup()
+  H.rust_analyzer_setup()
 end
 
 return P
