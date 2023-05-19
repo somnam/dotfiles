@@ -16,6 +16,8 @@ P.config = function()
 
   H.max_size = 1024 * 1024
 
+  H.max_label_width = 50
+
   H.menu_text = {
     nvim_lsp = "[LSP]",
     nvim_lsp_signature_help = "[LSP]",
@@ -42,6 +44,14 @@ P.config = function()
     end
 
     return valid_buffers
+  end
+
+  H.truncate_label = function(label)
+    if #label > H.max_label_width then
+      return vim.fn.strcharpart(label, 0, H.max_label_width) .. '…'
+    end
+
+    return label
   end
 
   H.kind_icons = {
@@ -84,6 +94,7 @@ P.config = function()
   H.format_field = function(entry, vim_item)
     vim_item.menu = H.menu_text[entry.source.name]
     vim_item.kind = string.format('%s %s', H.kind_icons[vim_item.kind], vim_item.kind)
+    vim_item.abbr = H.truncate_label(vim_item.abbr)
     return vim_item
   end
 
