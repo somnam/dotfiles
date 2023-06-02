@@ -12,6 +12,7 @@ P.config = function()
     find_file = "▶  Find files",
     find_word = "▶  Find in files",
     new_file = "▶  New file",
+    plugins = "▶  Plugins",
     quit = "▶  Quit",
   }
 
@@ -25,6 +26,7 @@ P.config = function()
     dashboard.button("<Leader> f ", H.labels.find_file, ":FzfLua files<Enter>"),
     dashboard.button("<Leader> w ", H.labels.find_word, ":FzfLua live_grep<Enter>"),
     dashboard.button("<Leader> n ", H.labels.new_file , ":enew<Enter>"),
+    dashboard.button("<Leader> l ", H.labels.plugins , ":Lazy<Enter>"),
     dashboard.button("<Leader> q ", H.labels.quit, ":qa<Enter>"),
   }
   alpha.setup(dashboard.opts)
