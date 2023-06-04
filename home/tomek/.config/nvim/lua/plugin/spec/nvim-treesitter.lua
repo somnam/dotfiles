@@ -1,14 +1,16 @@
 local P = {"nvim-treesitter/nvim-treesitter"}
 
+P.build = ":TSUpdate"
+
 P.config = function()
   local nvim_treesitter_configs = require("nvim-treesitter.configs")
   local buffer = require("util.buffer")
 
   local H = {}
 
-  H.exclude_filetype = {"json", "yaml"}
+  H.exclude_filetype = buffer.exclude.filetype
 
-  H.max_size = 1024 * 1024
+  H.max_size = buffer.max_size
 
   H.maybe_disable_treesitter = function(filetype, bufnr)
     return (

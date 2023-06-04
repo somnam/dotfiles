@@ -60,7 +60,6 @@ P.config = function()
         winbar = {
           "help",
           "checkhealth",
-          "packer",
           "NvimTree",
           "alpha",
         },
