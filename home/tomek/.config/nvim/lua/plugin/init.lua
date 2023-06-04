@@ -29,7 +29,7 @@ H.icons = {
   ft = "📂",
   init = "⚙",
   import = "✅",
-  keys = "🗝",
+  keys = "🔑",
   plugin = "🔌",
   runtime = "💻",
   source = "📄",
@@ -48,7 +48,12 @@ H.setup = function()
     {
       ui = {
         icons = H.icons,
-      }
+      },
+      checker = {
+        enabled = true,
+        notify = false,
+        frequency = 3600 * 24,
+      },
     }
   )
 end
