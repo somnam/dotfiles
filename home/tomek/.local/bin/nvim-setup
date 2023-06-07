@@ -61,7 +61,7 @@ main ()
                 update-python-requirements
                 echo;;
             *)
-                echo "Usage: $0 [-s][-p]";;
+                echo "Usage: $0 [-u][-p]";;
         esac
     done
 }
