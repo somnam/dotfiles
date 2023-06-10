@@ -1,5 +1,7 @@
 local P = {"nvim-lualine/lualine.nvim"}
 
+P.event = "VeryLazy"
+
 P.config = function()
   local lualine = require("lualine")
   local statusline = require("util.statusline")
@@ -7,12 +9,20 @@ P.config = function()
 
   local H = {}
 
+  H.get_updated = function()
+    local checker = require("lazy.manage.checker")
+    return #checker.updated
+  end
+
   H.lualine_b = {
     {
       "branch",
       icons_enabled = true,
       fmt = statusline.truncate_branch,
     },
+  }
+
+  H.lualine_c = {
     "diff",
     {
       "diagnostics",
@@ -24,10 +34,15 @@ P.config = function()
       icons_enabled = true,
       icon = "⚙",
       on_click = lsp.show_info,
-    }
+    },
+    {
+      H.get_updated,
+      cond = require("lazy.status").has_updates,
+      icons_enabled = true,
+      icon = "⟳",
+      color = {fg = "#ff9e64"},
+    },
   }
-
-  H.lualine_c = {}
 
   H.lualine_x = {"encoding", "fileformat", "filetype"}
 
@@ -45,7 +60,6 @@ P.config = function()
         winbar = {
           "help",
           "checkhealth",
-          "packer",
           "NvimTree",
           "alpha",
         },
@@ -67,6 +81,7 @@ P.config = function()
     inactive_winbar = {
       lualine_c = H.winbar_c,
     },
+    extensions = {"fzf", "nvim-tree", "lazy"},
   })
 end
 

@@ -32,55 +32,6 @@ upgrade-nvim ()
     fi
 }
 
-sync-nvim-plugins ()
-{
-    echo "Synchronizing plugins"
-
-    download-plugin-manager
-    sync-plugins
-    sync-treesitter-parsers
-}
-
-download-plugin-manager ()
-{
-    [[ $(which git) ]] || (echo "git not installed" && exit 1)
-
-    local plugin_manager_url="https://github.com/wbthomason/packer.nvim"
-    local nvim_plugin_dir="$HOME/.local/share/nvim/site/pack/packer/start"
-    local plugin_manager="$nvim_plugin_dir/packer.nvim"
-
-    [[ -e "$plugin_manager" ]] && return
-
-    mkdir -p "$nvim_plugin_dir" && git clone --depth 1 "$plugin_manager_url" "$plugin_manager"
-}
-
-
-sync-plugins ()
-{
-    local plugins="$HOME/.config/nvim/lua/plugin/init.lua"
-    [[ -f $plugins ]] || exit 1
-
-    local compiled_plugins="$HOME/.config/nvim/plugin/packer_compiled.lua"
-    [[ -f $compiled_plugins ]] && rm $compiled_plugins
-
-    local nvim=$(nvim-bin)
-    local quit_after_sync="autocmd User PackerComplete quitall"
-    local sync_cmd="PackerSync"
-
-    $nvim -u "$plugins" -c "$quit_after_sync" -c "$sync_cmd" SYNC
-}
-
-
-sync-treesitter-parsers ()
-{
-    local treesitter="$HOME/.config/nvim/lua/plugin/nvim-treesitter.lua"
-    [[ -f $treesitter ]] || exit 1
-
-    local nvim=$(nvim-bin)
-    $nvim --headless -c "TSUpdateSync" -c "quit"
-}
-
-
 update-python-requirements ()
 {
     [[ $(which pyenv) ]] || (echo "pyenv not installed" && exit 1)
@@ -101,7 +52,7 @@ update-python-requirements ()
 
 main ()
 {
-    while getopts "up" flag; do
+    while getopts ":up" flag; do
         case "${flag}" in
             u)
                 upgrade-nvim
@@ -109,11 +60,10 @@ main ()
             p)
                 update-python-requirements
                 echo;;
+            *)
+                echo "Usage: $0 [-u][-p]";;
         esac
     done
-
-    sync-nvim-plugins
-    echo
 }
 
 main $@
