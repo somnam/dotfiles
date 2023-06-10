@@ -4,6 +4,8 @@ M.listed = function(buffer)
   return vim.fn.buflisted(buffer) == 1
 end
 
+M.max_size = 1024 * 64
+
 M.above_max_size = function(buffer, max_size)
   local buffer_size = vim.api.nvim_buf_get_offset(buffer, vim.api.nvim_buf_line_count(buffer))
   return buffer_size > max_size
@@ -11,7 +13,7 @@ end
 
 M.exclude = {
   buftype = {"nofile", "prompt", "terminal"},
-  filetype = {"alpha", "help", "netrw", "NvimTree", "packer", "tutor"},
+  filetype = {"alpha", "help", "netrw", "NvimTree", "tutor"},
 }
 
 M.buftype_excluded = function(buffer, exclude_list)

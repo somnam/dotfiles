@@ -1,6 +1,8 @@
 local P = {"lukas-reineke/indent-blankline.nvim"}
 
-P.dependencies = 'nvim-treesitter'
+P.dependencies = {
+  "nvim-treesitter/nvim-treesitter",
+}
 
 P.config = function()
   local indent_blankline = require("indent_blankline")
