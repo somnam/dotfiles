@@ -14,8 +14,7 @@ M.executable_at = function(path)
     return false
   end
 
-  local perm = vim.fn.getfperm(path)
-  return perm and string.sub(perm, 3, 3) == 'x' or false
+  return string.sub(vim.fn.getfperm(path), 3, 3) == 'x'
 end
 
 M.executable_in_virtual_env = function(cmd)
