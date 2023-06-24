@@ -17,10 +17,4 @@ M.executable_at = function(path)
   return string.sub(vim.fn.getfperm(path), 3, 3) == 'x'
 end
 
-M.executable_in_virtual_env = function(cmd)
-  local virtual_env = vim.env.VIRTUAL_ENV
-  local virtual_env_cmd = virtual_env and virtual_env .. '/bin/' .. cmd or nil
-  return M.executable_at(virtual_env_cmd)
-end
-
 return M
