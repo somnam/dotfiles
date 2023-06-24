@@ -6,6 +6,7 @@ P.config = function()
   local formatter = require("formatter")
   local util = require("formatter.util")
   local command = require("util.command")
+  local python = require("util.python")
 
   local H = {}
 
@@ -44,7 +45,7 @@ P.config = function()
   H.rustfmt = require("formatter.filetypes.rust").rustfmt
 
   H.python_fixers = function()
-    if command.executable_in_virtual_env(H.ruff().exe) then
+    if python.executable_in_virtual_env(H.ruff().exe) then
       return {H.ruff}
     end
 

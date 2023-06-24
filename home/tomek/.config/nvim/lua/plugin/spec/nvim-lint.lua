@@ -5,6 +5,7 @@ P.event = {"BufWinEnter", "BufWritePost"}
 P.config = function()
   local lint = require("lint")
   local command = require("util.command")
+  local python = require("util.python")
 
   local H = {}
 
@@ -19,7 +20,7 @@ P.config = function()
   H.python_linters = function()
     local linters = {}
 
-    if command.executable_in_virtual_env(H.ruff) then
+    if python.executable_in_virtual_env(H.ruff) then
       table.insert(linters, H.ruff)
     elseif command.executable(H.flake8) then
       table.insert(linters, H.flake8)
