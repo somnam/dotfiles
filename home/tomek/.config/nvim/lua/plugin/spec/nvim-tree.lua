@@ -1,5 +1,7 @@
 local P = {"nvim-tree/nvim-tree.lua"}
 
+P.event = "VimEnter"
+
 P.config = function()
   local nvim_tree = require("nvim-tree")
 

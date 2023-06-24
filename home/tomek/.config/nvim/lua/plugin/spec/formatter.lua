@@ -1,8 +1,11 @@
 local P = {"mhartington/formatter.nvim"}
 
+P.event = {"BufReadPost", "BufNewFile"}
+
 P.config = function()
   local formatter = require("formatter")
   local util = require("formatter.util")
+  local command = require("util.command")
 
   local H = {}
 
@@ -20,6 +23,10 @@ P.config = function()
 
   H.remove_trailing_whitespace = util.withl(H.perl, "[ \t]*$")
 
+  H.isort = require("formatter.filetypes.python").isort
+
+  H.black = require("formatter.filetypes.python").black
+
   H.autoflake = function()
     return {
       exe = "autoflake",
@@ -27,20 +34,31 @@ P.config = function()
     }
   end
 
+  H.ruff = function()
+    return {
+      exe = "ruff",
+      args = {"--fix"},
+    }
+  end
+
+  H.rustfmt = require("formatter.filetypes.rust").rustfmt
+
   H.python_fixers = function()
+    if command.executable_in_virtual_env(H.ruff().exe) then
+      return {H.ruff}
+    end
+
     local fixers = {}
 
-    local isort = require("formatter.filetypes.python").isort
-    if vim.fn.executable(isort().exe) == 1 then
-        table.insert(fixers, isort)
+    if command.executable(H.isort().exe) then
+        table.insert(fixers, H.isort)
     end
 
-    local black = require("formatter.filetypes.python").black
-    if vim.fn.executable(black().exe) == 1 then
-        table.insert(fixers, black)
+    if command.executable(H.black().exe) then
+        table.insert(fixers, H.black)
     end
 
-    if vim.fn.executable(H.autoflake().exe) == 1 then
+    if command.executable(H.autoflake().exe) then
         table.insert(fixers, H.autoflake)
     end
 
@@ -50,9 +68,8 @@ P.config = function()
   H.rust_fixers = function()
     local fixers = {}
 
-    local rustfmt = require("formatter.filetypes.rust").rustfmt
-    if vim.fn.executable(rustfmt().exe) == 1 then
-      table.insert(fixers, rustfmt)
+    if command.executable(H.rustfmt().exe) then
+      table.insert(fixers, H.rustfmt)
     end
 
     return fixers

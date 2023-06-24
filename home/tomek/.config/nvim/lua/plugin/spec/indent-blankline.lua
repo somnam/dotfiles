@@ -1,5 +1,7 @@
 local P = {"lukas-reineke/indent-blankline.nvim"}
 
+P.event = {"BufReadPost", "BufNewFile"}
+
 P.dependencies = {
   "nvim-treesitter/nvim-treesitter",
 }

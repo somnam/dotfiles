@@ -1,5 +1,7 @@
 local P = {"nmac427/guess-indent.nvim"}
 
+P.event = {"BufReadPost", "BufNewFile"}
+
 P.config = function()
   local guess_indent = require("guess-indent")
   local buffer = require("util.buffer")
