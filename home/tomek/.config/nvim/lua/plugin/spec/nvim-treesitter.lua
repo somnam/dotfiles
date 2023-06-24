@@ -2,13 +2,18 @@ local P = {"nvim-treesitter/nvim-treesitter"}
 
 P.build = ":TSUpdate"
 
+P.event = {"BufReadPost", "BufNewFile"}
+
 P.config = function()
   local nvim_treesitter_configs = require("nvim-treesitter.configs")
   local buffer = require("util.buffer")
 
   local H = {}
 
-  H.exclude_filetype = buffer.exclude.filetype
+  H.exclude_filetype = vim.list_extend(
+    {"yaml"},
+    buffer.exclude.filetype
+  )
 
   H.max_size = buffer.max_size
 

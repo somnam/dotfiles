@@ -1,5 +1,7 @@
 local P = {"lewis6991/gitsigns.nvim"}
 
+P.event = {"BufReadPre", "BufNewFile"}
+
 P.config = function()
   local gitsigns = require("gitsigns")
 

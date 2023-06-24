@@ -1,8 +1,11 @@
 local P = {"ibhagwan/fzf-lua"}
 
+P.event = "VimEnter"
+
 P.config = function()
   local fzf_lua = require("fzf-lua")
-  local find = require('util.find')
+  local search = require('util.search')
+  local command = require("util.command")
 
   -- autocmd
   vim.api.nvim_create_autocmd("ColorScheme", {
@@ -50,12 +53,12 @@ P.config = function()
     },
     files = {
       prompt = 'Files❯ ',
-      cmd = find.find_cmd(),
+      cmd = search.find(),
     },
     grep = {
       prompt = 'Words❯ ',
-      cmd = find.grep_cmd(),
-      rg_glob = find.has_cmd("rg"),
+      cmd = search.grep(),
+      rg_glob = command.executable("rg")
     },
   })
 end

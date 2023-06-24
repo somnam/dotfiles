@@ -1,21 +1,32 @@
 local P = {"mfussenegger/nvim-lint"}
 
+P.event = {"BufWinEnter", "BufWritePost"}
+
 P.config = function()
   local lint = require("lint")
+  local command = require("util.command")
 
   local H = {}
+
+  H.ruff = lint.linters.ruff.cmd
+
+  H.flake8 = lint.linters.flake8.cmd
+
+  H.mypy = lint.linters.mypy.cmd
+
+  H.luacheck = lint.linters.luacheck.cmd
 
   H.python_linters = function()
     local linters = {}
 
-    local flake8 = lint.linters.flake8
-    if vim.fn.executable(flake8.cmd) == 1 then
-      table.insert(linters, flake8.cmd)
+    if command.executable_in_virtual_env(H.ruff) then
+      table.insert(linters, H.ruff)
+    elseif command.executable(H.flake8) then
+      table.insert(linters, H.flake8)
     end
 
-    local mypy = lint.linters.mypy
-    if vim.fn.executable(mypy.cmd) == 1 then
-      table.insert(linters, mypy.cmd)
+    if vim.fn.executable(H.mypy) == 1 then
+      table.insert(linters, H.mypy)
       table.insert(lint.linters.mypy.args, "--namespace-packages")
     end
 
@@ -25,9 +36,8 @@ P.config = function()
   H.lua_linters = function()
     local linters = {}
 
-    local luacheck = lint.linters.luacheck
-    if vim.fn.executable(luacheck.cmd) == 1 then
-      table.insert(linters, luacheck.cmd)
+    if vim.fn.executable(H.luacheck) == 1 then
+      table.insert(linters, H.luacheck)
     end
 
     return linters
