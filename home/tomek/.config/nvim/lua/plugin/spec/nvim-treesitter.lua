@@ -2,7 +2,7 @@ local P = {"nvim-treesitter/nvim-treesitter"}
 
 P.build = ":TSUpdate"
 
-P.event = {"BufReadPost", "BufNewFile"}
+P.event = "VimEnter"
 
 P.config = function()
   local nvim_treesitter_configs = require("nvim-treesitter.configs")

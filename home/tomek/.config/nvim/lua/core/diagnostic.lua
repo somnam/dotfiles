@@ -15,7 +15,7 @@ local diagnostic_opts = {
   virtual_text = {
     severity = {min = vim.diagnostic.severity.ERROR},
     prefix = "↳",
-    source = "if_many",
+    source = true,
   },
   update_in_insert = false,
   severity_sort = true,
@@ -23,7 +23,7 @@ local diagnostic_opts = {
     focusable = true,
     style = "minimal",
     border = "rounded",
-    source = "if_many",
+    source = true,
   },
 }
 vim.diagnostic.config(diagnostic_opts)
