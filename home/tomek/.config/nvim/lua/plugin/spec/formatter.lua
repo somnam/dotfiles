@@ -45,22 +45,20 @@ P.config = function()
   H.rustfmt = require("formatter.filetypes.rust").rustfmt
 
   H.python_fixers = function()
-    if python.executable_in_virtual_env(H.ruff().exe) then
-      return {H.ruff}
-    end
-
     local fixers = {}
 
-    if command.executable(H.isort().exe) then
-        table.insert(fixers, H.isort)
+    if python.executable_in_virtual_env(H.ruff().exe) then
+      table.insert(fixers, H.ruff)
+    elseif command.executable(H.isort().exe) then
+      table.insert(fixers, H.isort)
     end
 
     if command.executable(H.black().exe) then
-        table.insert(fixers, H.black)
+      table.insert(fixers, H.black)
     end
 
     if command.executable(H.autoflake().exe) then
-        table.insert(fixers, H.autoflake)
+      table.insert(fixers, H.autoflake)
     end
 
     return fixers
