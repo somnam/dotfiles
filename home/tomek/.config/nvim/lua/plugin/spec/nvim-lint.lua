@@ -9,26 +9,26 @@ P.config = function()
 
   local H = {}
 
-  H.ruff = lint.linters.ruff.cmd
+  H.ruff = lint.linters.ruff
 
-  H.flake8 = lint.linters.flake8.cmd
+  H.flake8 = lint.linters.flake8
 
-  H.mypy = lint.linters.mypy.cmd
+  H.mypy = lint.linters.mypy
+  H.mypy.args = vim.list_extend(lint.linters.mypy.args, {"--namespace-packages"})
 
-  H.luacheck = lint.linters.luacheck.cmd
+  H.luacheck = lint.linters.luacheck
 
   H.python_linters = function()
     local linters = {}
 
-    if python.executable_in_virtual_env(H.ruff) then
-      table.insert(linters, H.ruff)
-    elseif command.executable(H.flake8) then
-      table.insert(linters, H.flake8)
+    if python.executable_in_virtual_env(H.ruff.cmd) then
+      table.insert(linters, H.ruff.cmd)
+    elseif command.executable(H.flake8.cmd) then
+      table.insert(linters, H.flake8.cmd)
     end
 
-    if vim.fn.executable(H.mypy) == 1 then
-      table.insert(linters, H.mypy)
-      table.insert(lint.linters.mypy.args, "--namespace-packages")
+    if command.executable(H.mypy.cmd) then
+      table.insert(linters, H.mypy.cmd)
     end
 
     return linters
@@ -37,8 +37,8 @@ P.config = function()
   H.lua_linters = function()
     local linters = {}
 
-    if vim.fn.executable(H.luacheck) == 1 then
-      table.insert(linters, H.luacheck)
+    if command.executable(H.luacheck.cmd) then
+      table.insert(linters, H.luacheck.cmd)
     end
 
     return linters
