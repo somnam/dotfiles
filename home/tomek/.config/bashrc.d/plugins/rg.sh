@@ -5,9 +5,9 @@ if command -v rg > /dev/null 2>&1; then
 
     rgf() {
         if [[ -z "$2" ]]; then
-            rg --files . | rg "$1"
+            rg --files --hidden --follow --no-ignore -g '!.git' . | rg "$1"
         else
-            rg --files "${@:2}" | rg "$1"
+            rg --files --hidden --follow --no-ignore -g '!.git' "${@:2}" | rg "$1"
         fi
     }
 fi

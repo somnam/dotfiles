@@ -17,5 +17,5 @@ source "$HOME/.fzf/shell/key-bindings.bash"
 
 # Setting fd as the default source for fzf
 if command -v rg > /dev/null 2>&1; then
-    export FZF_DEFAULT_COMMAND="rg --files --hidden --follow -g '!.git'"
+    export FZF_DEFAULT_COMMAND="rg --files --hidden --follow --no-ignore -g '!.git'"
 fi
