@@ -6,6 +6,7 @@ P.config = function()
   local lsp_signature = require("lsp_signature")
 
   lsp_signature.setup({
+    close_timeout = 2000,
     handler_opts = {
       border = "rounded"
     },
