@@ -38,7 +38,7 @@ P.config = function()
   H.ruff = function()
     return {
       exe = "ruff",
-      args = {"--fix"},
+      args = {"--quiet", "--fix", "--exit-zero"},
     }
   end
 
