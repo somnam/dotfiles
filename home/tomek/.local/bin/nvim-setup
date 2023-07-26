@@ -52,18 +52,22 @@ update-python-requirements ()
 
 main ()
 {
-    while getopts ":up" flag; do
+    while getopts ":aup" flag; do
         case "${flag}" in
+            a)
+                upgrade-nvim
+                update-python-requirements
+                exit 0;;
             u)
                 upgrade-nvim
-                echo;;
+                exit 0;;
             p)
                 update-python-requirements
-                echo;;
-            *)
-                echo "Usage: $0 [-u][-p]";;
+                exit 0;;
         esac
     done
+
+    echo "Usage: $0 [-a][-u][-p]"
 }
 
 main $@

@@ -4,6 +4,8 @@ P.event = {"BufReadPre", "BufNewFile"}
 
 P.config = function()
   local lspconfig = require("lspconfig")
+  local configs = require("lspconfig.configs")
+  local command = require("util.command")
 
   local H = {}
 
@@ -47,7 +49,7 @@ P.config = function()
 
   H.jedi_language_server_on_new_config = function(new_config, _)
     -- Enable diagnostics only when linter is not available.
-    local enable_diagnostics = vim.fn.executable("flake8") ~= 1
+    local enable_diagnostics = not command.executable("flake8")
 
     new_config.init_options = {
       diagnostics = {
@@ -57,7 +59,7 @@ P.config = function()
   end
 
   H.jedi_language_server_setup = function()
-    if vim.fn.executable("jedi-language-server") == 1 then
+    if command.executable("jedi-language-server") then
       lspconfig.jedi_language_server.setup({
         capabilities = H.lsp_capabilities(),
         on_attach = H.jedi_language_server_on_attach,
@@ -79,7 +81,7 @@ P.config = function()
   end
 
   H.rust_analyzer_setup = function()
-    if vim.fn.executable("rust-analyzer") == 1 then
+    if command.executable("rust-analyzer") then
       lspconfig.rust_analyzer.setup({
         capabilities = H.lsp_capabilities(),
         settings = H.rust_analyzer_settings(),
@@ -88,11 +90,37 @@ P.config = function()
     end
   end
 
+  -- js
+
+  H.quick_lint_js_setup = function()
+    if command.executable("quick-lint-js") then
+      local function root_dir(filename)
+        local root = lspconfig.util.path.dirname(filename)
+        lspconfig.util.path.traverse_parents(
+          filename, function(dir, _) root = dir end
+        )
+        return root
+      end
+
+      configs.quick_lint_js = {
+        default_config = {
+          cmd = {"quick-lint-js", "--lsp"},
+          filetypes = {"javascript", "javascriptreact"},
+          root_dir = root_dir,
+        },
+        docs = {description = "quick-lint-js"}
+      }
+
+      lspconfig.quick_lint_js.setup({})
+    end
+  end
+
   -- setup
 
   H.customize_ui()
   H.jedi_language_server_setup()
   H.rust_analyzer_setup()
+  H.quick_lint_js_setup()
 end
 
 return P
