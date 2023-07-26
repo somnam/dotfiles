@@ -8,13 +8,13 @@ upgrade-ripgrep ()
     local archi=$(uname -sm)
 
     case "$archi" in
-      "Darwin arm64") upgrade-ripgrep-darwin ;;
-      "Linux x86_64") upgrade-ripgrep-linux ;;
+      "Darwin arm64") download-ripgrep-darwin ;;
+      "Linux x86_64") download-ripgrep-linux ;;
       *) echo "unknown arch" && exit 1 ;;
     esac
 }
 
-upgrade-ripgrep-darwin ()
+download-ripgrep-darwin ()
 {
     local release_url="https://api.github.com/repos/microsoft/ripgrep-prebuilt/releases/latest"
 
@@ -37,7 +37,7 @@ upgrade-ripgrep-darwin ()
     fi
 }
 
-upgrade-ripgrep-linux ()
+download-ripgrep-linux ()
 {
     echo "TODO"
 }
@@ -45,14 +45,7 @@ upgrade-ripgrep-linux ()
 upgrade-fzf()
 {
     download-fzf
-
-    local fzf_dir="$HOME/.fzf"
-    local fzf_install="$fzf_dir/install"
-    local fzf_install_opts="--bin"
-
-    [[ -f $fzf_install ]] || exit
-
-    $fzf_install "$fzf_install_opts"
+    setup-fzf
 }
 
 download-fzf ()
@@ -71,10 +64,98 @@ download-fzf ()
     fi
 }
 
+setup-fzf ()
+{
+    local fzf_dir="$HOME/.fzf"
+    local fzf_install="$fzf_dir/install"
+    local fzf_install_opts="--bin"
+
+    [[ -f $fzf_install ]] || exit
+
+    $fzf_install "$fzf_install_opts"
+}
+
+upgrade-pyenv ()
+{
+    download-pyenv
+    setup-pyenv
+}
+
+download-pyenv ()
+{
+    local pyenv_dir="$HOME/.pyenv"
+
+    if [[ -d "$pyenv_dir" ]]; then
+        return
+    fi
+
+    [[ $(which curl) ]] || (echo "curl not installed" && exit 1)
+
+    local pyenv_install_url="https://raw.githubusercontent.com/pyenv/pyenv-installer/master/bin/pyenv-installer"
+
+    curl -L "$pyenv_install_url" | bash
+}
+
+
+setup-pyenv ()
+{
+    [[ $(which make) ]] || (echo "make not installed" && exit 1)
+
+    local pyenv_dir="$HOME/.pyenv"
+
+    cd $pyenv_dir && src/configure && make -C src
+
+    [[ $(which pyenv) ]] || (echo "reload shell to enable pyenv" && exit 1)
+
+    pyenv doctor
+    pyenv update
+}
+
+
+upgrade-nvm()
+{
+    download-or-update-nvm
+}
+
+
+download-or-update-nvm ()
+{
+    local nvm_dir="$HOME/.nvm"
+
+    [[ $(which curl) ]] || (echo "curl not installed" && exit 1)
+
+    local nvm_install_url="https://raw.githubusercontent.com/nvm-sh/nvm/master/install.sh"
+
+    curl -o- "$nvm_install_url" | PROFILE=/dev/null bash
+}
+
+
 main ()
 {
-    upgrade-fzf
-    upgrade-ripgrep
+    while getopts ":afrpn" flag; do
+        case "${flag}" in
+            a)
+                upgrade-fzf
+                upgrade-ripgrep
+                upgrade-pyenv
+                upgrade-nvm
+                exit 0;;
+            f)
+                upgrade-fzf
+                exit 0;;
+            r)
+                upgrade-ripgrep
+                exit 0;;
+            p)
+                upgrade-pyenv
+                exit 0;;
+            n)
+                upgrade-nvm
+                exit 0;;
+        esac
+    done
+
+    echo "Usage: $0 [-a][-f][-r][-p][-n]"
 }
 
 main $@
