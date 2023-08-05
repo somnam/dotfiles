@@ -2,6 +2,8 @@ local P = {"shellRaining/hlchunk.nvim"}
 
 P.event = "UIEnter"
 
+P.dependencies = {"nvim-treesitter/nvim-treesitter"}
+
 P.config = function()
   require("hlchunk").setup({
     blank = {
