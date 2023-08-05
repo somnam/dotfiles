@@ -11,11 +11,11 @@ P.config = function()
   local H = {}
 
   H.exclude_filetype = vim.list_extend(
-    {"yaml"},
+    {"bash", "yaml"},
     buffer.exclude.filetype
   )
 
-  H.max_size = buffer.max_size
+  H.max_size = 1024 * 128
 
   H.maybe_disable_treesitter = function(filetype, bufnr)
     return (
