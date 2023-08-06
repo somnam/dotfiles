@@ -48,11 +48,9 @@ window:
   #
   # Blank space added around the window in pixels. This padding is scaled
   # by DPI and the specified value is always added at both opposing sides.
-  padding:
+  #padding:
   #  x: 0
   #  y: 0
-    x: 4
-    y: 4
 
   # Spread additional padding evenly around the terminal content.
   #dynamic_padding: false
@@ -129,7 +127,7 @@ scrolling:
 # Font configuration
 font:
   # Normal (roman) font face
-  normal:
+  #normal:
     # Font family
     #
     # Default:
@@ -137,43 +135,39 @@ font:
     #   - (Linux/BSD) monospace
     #   - (Windows) Consolas
     #family: monospace
-    family: JetBrains Mono
 
     # The `style` can be specified to pick a specific face.
     #style: Regular
 
   # Bold font face
-  bold:
+  #bold:
     # Font family
     #
     # If the bold family is not specified, it will fall back to the
     # value specified for the normal font.
     #family: monospace
-    family: JetBrains Mono
 
     # The `style` can be specified to pick a specific face.
     #style: Bold
 
   # Italic font face
-  italic:
+  #italic:
     # Font family
     #
     # If the italic family is not specified, it will fall back to the
     # value specified for the normal font.
     #family: monospace
-    family: JetBrains Mono
 
     # The `style` can be specified to pick a specific face.
     #style: Italic
 
   # Bold italic font face
-  bold_italic:
+  #bold_italic:
     # Font family
     #
     # If the bold italic family is not specified, it will fall back to the
     # value specified for the normal font.
     #family: monospace
-    family: JetBrains Mono
 
     # The `style` can be specified to pick a specific face.
     #style: Bold Italic
