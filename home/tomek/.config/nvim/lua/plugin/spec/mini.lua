@@ -9,7 +9,7 @@ P.config = function()
 
   H.exclude_filetype = buffer.exclude.filetype
 
-  H.max_size = buffer.max_size
+  H.max_size = 1024 * 256
 
   H.maybe_disable_mini_cursorword = function(ctx)
     return (

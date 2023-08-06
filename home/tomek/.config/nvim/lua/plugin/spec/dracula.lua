@@ -13,7 +13,9 @@ P.config = function()
   })
 
   -- setup
-  require("dracula").setup({})
+  require("dracula").setup({
+    transparent_bg = true,
+  })
 end
 
 return P

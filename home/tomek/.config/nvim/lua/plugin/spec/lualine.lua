@@ -18,6 +18,7 @@ P.config = function()
     {
       "branch",
       icons_enabled = true,
+      icon = "ᛋ",
       fmt = statusline.truncate_branch,
     },
   }
