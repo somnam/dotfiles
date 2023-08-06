@@ -9,6 +9,7 @@ plugins=(
     lua
     pyenv
     pyenv-python-version
+    nvm
     rg
 )
 
