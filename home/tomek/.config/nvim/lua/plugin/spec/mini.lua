@@ -63,6 +63,47 @@ P.config = function()
 
   local mini_cursorword = require("mini.cursorword")
   mini_cursorword.setup({delay = 150})
+
+  local mini_clue = require("mini.clue")
+  mini_clue.setup({
+    triggers = {
+      -- Leader triggers
+      { mode = 'n', keys = '<Space>' },
+      { mode = 'x', keys = '<Space>' },
+
+      -- `g` key
+      { mode = 'n', keys = 'g' },
+      { mode = 'x', keys = 'g' },
+
+      -- Marks
+      { mode = 'n', keys = "'" },
+      { mode = 'n', keys = '`' },
+      { mode = 'x', keys = "'" },
+      { mode = 'x', keys = '`' },
+
+      -- Registers
+      { mode = 'n', keys = '"' },
+      { mode = 'x', keys = '"' },
+
+      -- `z` key
+      { mode = 'n', keys = 'z' },
+      { mode = 'x', keys = 'z' },
+    },
+    clues = {
+      -- Enhance this by adding descriptions for <Leader> mapping groups
+      mini_clue.gen_clues.g(),
+      mini_clue.gen_clues.marks(),
+      mini_clue.gen_clues.registers(),
+      mini_clue.gen_clues.z(),
+    },
+    window = {
+      config = {
+        width = "auto",
+        row = "auto",
+        col = "auto"
+      }
+    }
+  })
 end
 
 return P

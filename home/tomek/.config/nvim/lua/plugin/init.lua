@@ -41,7 +41,10 @@ H.icons = {
 H.setup = function()
   -- keymap
   local opts = {noremap = true, silent = true}
-  vim.api.nvim_set_keymap("n", "<Space>l", ":Lazy<Enter>", opts)
+  vim.api.nvim_set_keymap(
+    "n", "<Space>l", ":Lazy<Enter>",
+    vim.tbl_extend("keep", {desc = "Open the Plugin Manager UI"}, opts)
+  )
 
   require("lazy").setup(
     "plugin.spec",

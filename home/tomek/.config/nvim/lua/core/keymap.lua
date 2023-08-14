@@ -21,5 +21,11 @@ vim.api.nvim_set_keymap("", "<S-h>", ":tabp<Enter>", opts)
 vim.api.nvim_set_keymap("", "<S-l>", ":tabn<Enter>", opts)
 
 -- Leader mappings
-vim.api.nvim_set_keymap("n", "<Space>n", ":enew<Enter>", opts)
-vim.api.nvim_set_keymap("n", "<Space>q", ":qall<Enter>", opts)
+vim.api.nvim_set_keymap(
+  "n", "<Space>n", ":enew<Enter>",
+  vim.tbl_extend("keep", {desc = "Edit a new buffer"}, opts)
+)
+vim.api.nvim_set_keymap(
+  "n", "<Space>q", ":qall<Enter>",
+  vim.tbl_extend("keep", {desc = "Exit Neovim"}, opts)
+)

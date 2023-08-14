@@ -1,8 +1,20 @@
 local opts = {noremap = true, silent = true}
-vim.api.nvim_set_keymap("n", "<Space>[m", ":lua vim.diagnostic.goto_prev()<Enter>", opts)
-vim.api.nvim_set_keymap("n", "<Space>]m", ":lua vim.diagnostic.goto_next()<Enter>", opts)
-vim.api.nvim_set_keymap("n", "<Space>m", ":lua vim.diagnostic.open_float()<Enter>", opts)
-vim.api.nvim_set_keymap("n", "<Space>M", ":lua vim.diagnostic.setloclist()<Enter>", opts)
+vim.api.nvim_set_keymap(
+  "n", "<Space>[m", ":lua vim.diagnostic.goto_prev()<Enter>",
+  vim.tbl_extend("keep", {desc = "Go to previous diagnostic"}, opts)
+)
+vim.api.nvim_set_keymap(
+  "n", "<Space>]m", ":lua vim.diagnostic.goto_next()<Enter>",
+  vim.tbl_extend("keep", {desc = "Go to next diagnostic"}, opts)
+)
+vim.api.nvim_set_keymap(
+  "n", "<Space>m", ":lua vim.diagnostic.open_float()<Enter>",
+  vim.tbl_extend("keep", {desc = "List cursor line diagnostics"}, opts)
+)
+vim.api.nvim_set_keymap(
+  "n", "<Space>M", ":lua vim.diagnostic.setloclist()<Enter>",
+  vim.tbl_extend("keep", {desc = "List all buffer diagnostics"}, opts)
+)
 
 local icons = {
     [vim.diagnostic.severity.ERROR] = {hl = "DiagnosticSignError", glyph = "●"},
