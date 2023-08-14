@@ -47,7 +47,10 @@ P.config = function()
 
   -- keymap
   local opts = {noremap = true, silent = true}
-  vim.api.nvim_set_keymap("n", "<Space>e", ":NvimTreeToggle<Enter>", opts)
+  vim.api.nvim_set_keymap(
+    "n", "<Space>e", ":NvimTreeToggle<Enter>",
+    vim.tbl_extend("keep", {desc = "Open or close the file tree"}, opts)
+  )
 
   -- autocmd
   vim.api.nvim_create_autocmd("VimEnter", {

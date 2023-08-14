@@ -76,7 +76,10 @@ P.config = function()
 
   -- keymap
   local opts = {noremap = true, silent = true}
-  vim.api.nvim_set_keymap("n", "<Space>=", ":FormatWrite<Enter>", opts)
+  vim.api.nvim_set_keymap(
+    "n", "<Space>=", ":FormatWrite<Enter>",
+    vim.tbl_extend("keep", {desc = "Format and write current buffer"}, opts)
+  )
 
   -- setup
   formatter.setup({

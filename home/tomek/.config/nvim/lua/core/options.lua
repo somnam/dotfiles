@@ -43,9 +43,9 @@ vim.opt.softtabstop = 4
 vim.opt.ttyfast = true          -- Faster scrolling
 vim.opt.timeout = true          -- Setting for mappings
 vim.opt.ttimeout = true         -- Time waited for key press(es) to complete, faster key response
-vim.opt.timeoutlen = 1000       -- Set to default value
+vim.opt.timeoutlen = 2000       -- Set to default value
 vim.opt.ttimeoutlen = 25        -- Set to unnoticeable small value
-vim.opt.updatetime = 1000       -- Longer update time leads to noticeable delays
+vim.opt.updatetime = 2000       -- Longer update time leads to noticeable delays
 vim.opt.synmaxcol = 512         -- Be forgiving with long lines
 
 vim.opt.clipboard = "unnamedplus" -- Use the "global" buffer for copy and paste
