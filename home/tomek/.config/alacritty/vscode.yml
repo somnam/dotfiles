@@ -7,8 +7,11 @@ schemes:
       foreground: '#1e1e1e'
 
     cursor:
-      text: '#d4d4d4'
-      cursor: '#d4d4d4'
+      text: CellBackground
+      cursor: CellForeground
+    vi_mode_cursor:
+      text: CellBackground
+      cursor: CellForeground
 
     normal:
       black:   '#1e1e1e'
@@ -37,8 +40,11 @@ schemes:
       foreground: '#d4d4d4'
 
     cursor:
-      text: '#d4d4d4'
-      cursor: '#d4d4d4'
+      text: CellBackground
+      cursor: CellForeground
+    vi_mode_cursor:
+      text: CellBackground
+      cursor: CellForeground
 
     normal:
       black:   '#1e1e1e'
