@@ -17,7 +17,6 @@ P.config = function()
   H.lualine_b = {
     {
       "branch",
-      icons_enabled = true,
       fmt = statusline.truncate_branch,
     },
   }
@@ -31,14 +30,12 @@ P.config = function()
     {
       lsp.get_clients_count,
       cond = lsp.has_clients,
-      icons_enabled = true,
       icon = "⚙",
       on_click = lsp.show_info,
     },
     {
       H.get_updated,
       cond = require("lazy.status").has_updates,
-      icons_enabled = true,
       icon = "⟳",
       color = {fg = "#ff9e64"},
     },
@@ -53,7 +50,6 @@ P.config = function()
   -- setup
   lualine.setup({
     options = {
-      icons_enabled = false,
       theme = "auto",
       component_separators = "",
       disabled_filetypes = {

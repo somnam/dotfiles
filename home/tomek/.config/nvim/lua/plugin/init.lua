@@ -22,23 +22,6 @@ H.bootstrap = function()
   vim.opt.rtp:prepend(H.lazy_path)
 end
 
-H.icons = {
-  cmd = "⌘",
-  config = "🛠",
-  event = "📅",
-  ft = "📂",
-  init = "⚙",
-  import = "✅",
-  keys = "🔑",
-  plugin = "🔌",
-  runtime = "💻",
-  require = "🌙",
-  source = "📄",
-  start = "🚀",
-  task = "📌",
-  lazy = "💤 ",
-}
-
 H.setup = function()
   -- keymap
   local opts = {noremap = true, silent = true}
@@ -50,9 +33,6 @@ H.setup = function()
   require("lazy").setup(
     "plugin.spec",
     {
-      ui = {
-        icons = H.icons,
-      },
       checker = {
         enabled = true,
         notify = false,
