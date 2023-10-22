@@ -19,32 +19,6 @@ P.config = function()
     vim.api.nvim_buf_set_keymap(bufnr, "n", "<C-f>", api .. "node.show_info_popup()<Enter>", opts)
   end
 
-  H.glyphs = {
-    default = "📄",
-    symlink = "🔗",
-    bookmark = "⭐",
-    modified = "✏️",
-    folder = {
-      arrow_closed = "▶",
-      arrow_open = "▼",
-      default = "📁",
-      open = "📂",
-      empty = "📁",
-      empty_open = "📂",
-      symlink = "📁",
-      symlink_open = "📂",
-    },
-    git = {
-      unstaged = "U",
-      staged = "S",
-      unmerged = "!",
-      renamed = "R",
-      untracked = "?",
-      deleted = "-",
-      ignored = "I",
-    },
-  }
-
   -- keymap
   local opts = {noremap = true, silent = true}
   vim.api.nvim_set_keymap(
@@ -75,10 +49,8 @@ P.config = function()
       highlight_opened_files = "name",
       highlight_modified = "name",
       icons = {
-        webdev_colors = false,
         git_placement = "after",
         modified_placement = "before",
-        glyphs = H.glyphs,
       },
     },
     filesystem_watchers = {

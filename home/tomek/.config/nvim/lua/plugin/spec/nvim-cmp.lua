@@ -6,11 +6,13 @@ P.dependencies = {
   "hrsh7th/cmp-nvim-lsp",
   "hrsh7th/cmp-buffer",
   "hrsh7th/cmp-path",
+  "onsails/lspkind.nvim",
 }
 
 P.config = function()
   local cmp = require("cmp")
   local buffer = require("util.buffer")
+  local lspkind = require('lspkind')
 
   local H = {}
 
@@ -46,58 +48,6 @@ P.config = function()
     return valid_buffers
   end
 
-  H.truncate_label = function(label)
-    if #label > H.max_label_width then
-      return vim.fn.strcharpart(label, 0, H.max_label_width) .. '…'
-    end
-
-    return label
-  end
-
-  H.kind_icons = {
-    Array = "🅰️",
-    Boolean = "☯️",
-    Class = "📦",
-    Color = "🎨",
-    Constant = "🧊",
-    Constructor = "🚧",
-    Enum = "🧫",
-    EnumMember = "🦠",
-    Event = "📅",
-    Field = "🔘",
-    File = "📁",
-    Folder = "📂",
-    Function = "🧵",
-    Interface = "🧩",
-    Key = "🔑",
-    Keyword = "🔑",
-    Method = "🧶",
-    Module = "📦",
-    Namespace = "🗃️",
-    Null = "🌑",
-    Number = "🔢",
-    Object = "🅾️",
-    Operator = "❎",
-    Package = "🕋",
-    Property = "🔵",
-    Reference = "↔️",
-    Snippet = "✂️",
-    String = "🔠",
-    Struct = "🧱",
-    Text = "📜",
-    TypeParameter = "🧬",
-    Unit = "🗳️",
-    Value = "💲",
-    Variable = "🔷",
-  }
-
-  H.format_field = function(entry, vim_item)
-    vim_item.menu = H.menu_text[entry.source.name]
-    vim_item.kind = string.format('%s %s', H.kind_icons[vim_item.kind], vim_item.kind)
-    vim_item.abbr = H.truncate_label(vim_item.abbr)
-    return vim_item
-  end
-
   H.buffer_option = {
     get_bufnrs = H.get_bufnrs,
     indexing_interval = 500,
@@ -130,7 +80,13 @@ P.config = function()
     }),
     formatting = {
       fields = { "abbr", "kind", "menu" },
-      format = H.format_field,
+      format = lspkind.cmp_format({
+        mode = 'symbol_text',
+        menu = H.menu_text,
+        preset = 'codicons',
+        maxwidth = H.max_label_width,
+        ellipsis_char = '…',
+      }),
     },
     sorting = {
       comparators = {
