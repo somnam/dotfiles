@@ -27,6 +27,8 @@ P.config = function()
     path = "[Path]",
   }
 
+  H.kind_icons = lspkind.presets.codicons
+
   H.current_buffer_enabled = function()
     return not buffer.excluded(vim.api.nvim_get_current_buf())
   end
@@ -46,6 +48,21 @@ P.config = function()
     end
 
     return valid_buffers
+  end
+
+  H.truncate_label = function(label)
+    if #label > H.max_label_width then
+      return vim.fn.strcharpart(label, 0, H.max_label_width) .. '…'
+    end
+
+    return label
+  end
+
+  H.format_field = function(entry, vim_item)
+    vim_item.menu = H.menu_text[entry.source.name]
+    vim_item.kind = string.format('%s  %s', H.kind_icons[vim_item.kind], vim_item.kind)
+    vim_item.abbr = H.truncate_label(vim_item.abbr)
+    return vim_item
   end
 
   H.buffer_option = {
@@ -80,13 +97,7 @@ P.config = function()
     }),
     formatting = {
       fields = { "abbr", "kind", "menu" },
-      format = lspkind.cmp_format({
-        mode = 'symbol_text',
-        menu = H.menu_text,
-        preset = 'codicons',
-        maxwidth = H.max_label_width,
-        ellipsis_char = '…',
-      }),
+      format = H.format_field,
     },
     sorting = {
       comparators = {
