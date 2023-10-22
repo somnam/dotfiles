@@ -32,6 +32,7 @@ H.icons = {
   keys = "🔑",
   plugin = "🔌",
   runtime = "💻",
+  require = "🌙",
   source = "📄",
   start = "🚀",
   task = "📌",
