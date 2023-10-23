@@ -25,18 +25,18 @@ P.config = function()
     "diff",
     {
       "diagnostics",
-      symbols = {error = "● ", warn = "▲ ", hint = "◆ ", info = "■ "}
+      symbols = {error = "󰅚 ", warn = "󰀪 ", info = "󰋽 ", hint = "󰌶 "}
     },
     {
       lsp.get_clients_count,
       cond = lsp.has_clients,
-      icon = "⚙",
+      icon = " ",
       on_click = lsp.show_info,
     },
     {
       H.get_updated,
       cond = require("lazy.status").has_updates,
-      icon = "⟳",
+      icon = "󰒲 ",
       color = {fg = "#ff9e64"},
     },
   }

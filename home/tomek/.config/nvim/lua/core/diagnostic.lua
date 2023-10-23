@@ -17,10 +17,10 @@ vim.api.nvim_set_keymap(
 )
 
 local icons = {
-    [vim.diagnostic.severity.ERROR] = {hl = "DiagnosticSignError", glyph = "●"},
-    [vim.diagnostic.severity.WARN] = {hl = "DiagnosticSignWarn", glyph = "▲"},
-    [vim.diagnostic.severity.INFO] = {hl = "DiagnosticSignInfo", glyph = "■"},
-    [vim.diagnostic.severity.HINT] = {hl = "DiagnosticSignHint", glyph = "◆"},
+    [vim.diagnostic.severity.ERROR] = {hl = "DiagnosticSignError", glyph = "󰅚 "},
+    [vim.diagnostic.severity.WARN] = {hl = "DiagnosticSignWarn", glyph = "󰀪 "},
+    [vim.diagnostic.severity.INFO] = {hl = "DiagnosticSignInfo", glyph = "󰋽 "},
+    [vim.diagnostic.severity.HINT] = {hl = "DiagnosticSignHint", glyph = "󰌶 "},
 }
 
 for _, icon in pairs(icons) do
