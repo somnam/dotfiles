@@ -3,6 +3,20 @@ local command = require("util.command")
 local M = {}
 
 M.get_find_command = function()
+  local fd = {
+    cmd = "fd",
+    args = {
+      "--color=never",
+      "--type f",
+      "--hidden",
+      "--follow",
+      "--exclude .git",
+    }
+  }
+  if command.executable(fd.cmd) then
+    return fd
+  end
+
   local rg = {
     cmd = "rg",
     args = {
