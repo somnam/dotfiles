@@ -3,6 +3,7 @@ BASH_THEME="git-prompt"
 plugins=(
     brew
     cargo
+    colima
     docker
     fzf
     git
