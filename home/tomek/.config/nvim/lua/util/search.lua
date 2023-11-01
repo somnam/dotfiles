@@ -22,8 +22,9 @@ M.get_find_command = function()
     args = {
       "--color=never",
       "--files",
+      "--hidden",
       "--follow",
-      "-g '!__pycache__'",
+      "-g '!.git'",
     }
   }
   if command.executable(rg.cmd) then
@@ -36,7 +37,7 @@ M.get_find_command = function()
       "-L",
       ".",
       "-type f",
-      "-not", "-path", "'*/.*'",
+      "-not", "-path", "'*/.git/*'",
       "-and", "-not", "-path", "'*/__pycache__/*'",
     }
   }
@@ -51,6 +52,8 @@ M.get_grep_command = function()
       "--no-heading",
       "--color=always",
       "--smart-case",
+      "--hidden",
+      "--follow",
       "--max-columns=4096",
     }
   }
@@ -81,7 +84,7 @@ M.get_grep_command = function()
       "--recursive",
       "--color=never",
       "--perl-regexp",
-      "--exclude-dir='.*'",
+      "--exclude-dir='.git'",
     }
   }
 end

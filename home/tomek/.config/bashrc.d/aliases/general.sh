@@ -13,12 +13,16 @@ if [[ $(echo | grep --color=always "" > /dev/null 2>&1) -ne "0" ]]; then
     alias egrep='egrep --color=always'
 fi
 
-if command -v ack > /dev/null 2>&1; then
+if command -v ack >/dev/null; then
     alias ack-python='ack --python --ignore-dir={.env,.venv}'
 fi
 
-if command -v fd > /dev/null 2>&1; then
-    alias fd='fd --hidden'
+if command -v rg >/dev/null; then
+    alias rg='rg --hidden --follow --no-ignore'
+fi
+
+if command -v fd >/dev/null; then
+    alias fd='fd --hidden --follow --no-ignore'
 fi
 
 alias ll='ls -ahlF'
