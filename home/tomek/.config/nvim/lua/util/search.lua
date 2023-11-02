@@ -55,6 +55,7 @@ M.get_grep_command = function()
       "--hidden",
       "--follow",
       "--max-columns=4096",
+      "-g '!.git'",
     }
   }
   if command.executable(rg.cmd) then
