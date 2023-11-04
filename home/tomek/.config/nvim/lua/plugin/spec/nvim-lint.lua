@@ -1,66 +1,64 @@
-local P = {"mfussenegger/nvim-lint"}
+return {
+  "mfussenegger/nvim-lint",
+  event = {"BufWinEnter", "BufWritePost"},
+  config = function()
+    local lint = require("lint")
+    local command = require("util.command")
+    local python = require("util.python")
 
-P.event = {"BufWinEnter", "BufWritePost"}
+    local H = {}
 
-P.config = function()
-  local lint = require("lint")
-  local command = require("util.command")
-  local python = require("util.python")
+    H.ruff = lint.linters.ruff
 
-  local H = {}
+    H.flake8 = lint.linters.flake8
 
-  H.ruff = lint.linters.ruff
+    H.mypy = lint.linters.mypy
+    H.mypy.args = vim.list_extend(lint.linters.mypy.args, {"--namespace-packages"})
 
-  H.flake8 = lint.linters.flake8
+    H.luacheck = lint.linters.luacheck
 
-  H.mypy = lint.linters.mypy
-  H.mypy.args = vim.list_extend(lint.linters.mypy.args, {"--namespace-packages"})
+    H.python_linters = function()
+      local linters = {}
 
-  H.luacheck = lint.linters.luacheck
+      if python.executable_in_virtual_env(H.ruff.cmd) then
+        table.insert(linters, H.ruff.cmd)
+      elseif command.executable(H.flake8.cmd) then
+        table.insert(linters, H.flake8.cmd)
+      end
 
-  H.python_linters = function()
-    local linters = {}
+      if command.executable(H.mypy.cmd) then
+        table.insert(linters, H.mypy.cmd)
+      end
 
-    if python.executable_in_virtual_env(H.ruff.cmd) then
-      table.insert(linters, H.ruff.cmd)
-    elseif command.executable(H.flake8.cmd) then
-      table.insert(linters, H.flake8.cmd)
+      return linters
     end
 
-    if command.executable(H.mypy.cmd) then
-      table.insert(linters, H.mypy.cmd)
+    H.lua_linters = function()
+      local linters = {}
+
+      if command.executable(H.luacheck.cmd) then
+        table.insert(linters, H.luacheck.cmd)
+      end
+
+      return linters
     end
 
-    return linters
+    H.linters_by_ft = function()
+      return {
+        python = H.python_linters(),
+        lua = H.lua_linters(),
+      }
+    end
+
+    -- autocmd
+    vim.api.nvim_create_autocmd({"BufWinEnter", "BufWritePost"}, {
+      group = vim.api.nvim_create_augroup("nvim_lint_trigger", { clear = true }),
+      callback = function()
+        lint.try_lint()
+      end
+    })
+
+    -- setup
+    lint.linters_by_ft = H.linters_by_ft()
   end
-
-  H.lua_linters = function()
-    local linters = {}
-
-    if command.executable(H.luacheck.cmd) then
-      table.insert(linters, H.luacheck.cmd)
-    end
-
-    return linters
-  end
-
-  H.linters_by_ft = function()
-    return {
-      python = H.python_linters(),
-      lua = H.lua_linters(),
-    }
-  end
-
-  -- autocmd
-  vim.api.nvim_create_autocmd({"BufWinEnter", "BufWritePost"}, {
-    group = vim.api.nvim_create_augroup("nvim_lint_trigger", { clear = true }),
-    callback = function()
-      lint.try_lint()
-    end
-  })
-
-  -- setup
-  lint.linters_by_ft = H.linters_by_ft()
-end
-
-return P
+}

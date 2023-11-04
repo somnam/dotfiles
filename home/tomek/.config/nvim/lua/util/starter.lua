@@ -4,24 +4,15 @@ M.nvim_version = function()
   local version = vim.version()
 
   return string.format(
-    "Nvim v%d.%d.%d %s",
-    version.major, version.minor, version.patch,
-    jit.version
+    "NVIM v%d.%d.%d",
+    version.major, version.minor, version.patch
   )
 end
 
-M.header_padding = function(pad)
-  pad = pad ~= nil and pad or 4
-  local repeats = string.len(M.nvim_version()) + pad
-  return string.rep("=", repeats)
-end
+M.blank = ""
 
 M.header = function()
-  return {
-    string.format(" %s ", M.header_padding()),
-    string.format(" = %s = ", M.nvim_version()),
-    string.format(" %s ", M.header_padding()),
-  }
+  return {M.blank, M.nvim_version(), M.blank}
 end
 
 return M
