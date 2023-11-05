@@ -10,6 +10,7 @@ M.get_find_command = function()
       "--type f",
       "--hidden",
       "--follow",
+      "--no-require-git",
       "--exclude .git",
     }
   }
@@ -24,6 +25,7 @@ M.get_find_command = function()
       "--files",
       "--hidden",
       "--follow",
+      "--no-require-git",
       "-g '!.git'",
     }
   }
@@ -54,6 +56,7 @@ M.get_grep_command = function()
       "--smart-case",
       "--hidden",
       "--follow",
+      "--no-require-git",
       "--max-columns=4096",
       "-g '!.git'",
     }
