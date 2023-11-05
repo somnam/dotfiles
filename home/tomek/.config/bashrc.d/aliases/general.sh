@@ -18,11 +18,11 @@ if command -v ack >/dev/null; then
 fi
 
 if command -v rg >/dev/null; then
-    alias rg='rg --hidden --follow --no-ignore'
+    alias rg='rg --hidden --follow --no-require-git'
 fi
 
 if command -v fd >/dev/null; then
-    alias fd='fd --hidden --follow --no-ignore'
+    alias fd='fd --hidden --follow --no-require-git'
 fi
 
 alias ll='ls -ahlF'
