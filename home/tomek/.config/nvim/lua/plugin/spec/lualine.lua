@@ -24,12 +24,6 @@ return {
         "branch",
         fmt = statusline.truncate_branch,
       },
-      {
-        "filename",
-        file_status = true,
-        path = 1,
-        on_click = H.copy_file_path_to_clipboard,
-      }
     }
 
     H.lualine_c = {
@@ -56,7 +50,14 @@ return {
 
     H.lualine_z = {"searchcount", "location"}
 
-    H.winbar_c = {{"filename", file_status = true, path = 0}}
+    H.winbar_c = {
+      {
+        "filename",
+        file_status = true,
+        path = 1,
+        on_click = H.copy_file_path_to_clipboard,
+      },
+    }
 
     -- setup
     lualine.setup({
