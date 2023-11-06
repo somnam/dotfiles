@@ -13,11 +13,23 @@ return {
       return #checker.updated
     end
 
+    H.copy_file_path_to_clipboard = function()
+      vim.fn.setreg('+', vim.fn.expand('%'))
+      vim.defer_fn(function() vim.cmd("echon ''") end, 600)
+      vim.api.nvim_notify("Path copied to clipboard.", vim.log.levels.INFO, {})
+    end
+
     H.lualine_b = {
       {
         "branch",
         fmt = statusline.truncate_branch,
       },
+      {
+        "filename",
+        file_status = true,
+        path = 1,
+        on_click = H.copy_file_path_to_clipboard,
+      }
     }
 
     H.lualine_c = {
@@ -44,7 +56,7 @@ return {
 
     H.lualine_z = {"searchcount", "location"}
 
-    H.winbar_c = {{"filename", file_status = true, path = 1}}
+    H.winbar_c = {{"filename", file_status = true, path = 0}}
 
     -- setup
     lualine.setup({
