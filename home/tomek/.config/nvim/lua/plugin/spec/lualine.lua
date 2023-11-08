@@ -43,6 +43,7 @@ return {
         cond = require("lazy.status").has_updates,
         icon = "󰒲 ",
         color = {fg = "#ff9e64"},
+        on_click = require("lazy").home,
       },
     }
 
