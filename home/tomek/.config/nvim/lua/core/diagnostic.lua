@@ -33,6 +33,7 @@ local diagnostic_opts = {
     prefix = "",
     source = true,
   },
+  underline = false,
   update_in_insert = false,
   severity_sort = true,
   float = {
