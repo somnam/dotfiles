@@ -65,6 +65,7 @@ return {
       options = {
         theme = "auto",
         component_separators = "",
+        section_separators = { left = '', right = ''},
         disabled_filetypes = {
           winbar = {
             "help",
