@@ -8,15 +8,17 @@ plugins=(
     fzf
     git
     lua
+    nvim
+    nvm
     pyenv
     pyenv-python-version
-    nvm
     rg
 )
 
 completions=(
     bash
     brew
+    cargo
 )
 
 aliases=(
