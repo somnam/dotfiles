@@ -5,12 +5,15 @@ return {
     "hrsh7th/cmp-nvim-lsp",
     "hrsh7th/cmp-buffer",
     "hrsh7th/cmp-path",
+    "L3MON4D3/LuaSnip",
+    "saadparwaiz1/cmp_luasnip",
     "onsails/lspkind.nvim",
   },
   config = function()
     local cmp = require("cmp")
     local buffer = require("util.buffer")
-    local lspkind = require('lspkind')
+    local lspkind = require("lspkind")
+    local luasnip = require("luasnip")
 
     local H = {}
 
@@ -20,7 +23,7 @@ return {
 
     H.menu_text = {
       nvim_lsp = "[LSP]",
-      nvim_lsp_signature_help = "[LSP]",
+      luasnip = "[Snippet]",
       buffer = "[Buffer]",
       path = "[Path]",
     }
@@ -74,6 +77,7 @@ return {
     cmp.setup({
       sources = {
         { name = "nvim_lsp", group_index = 1 },
+        { name = 'luasnip', group_index = 1 },
         { name = "buffer", group_index = 2, option = H.buffer_option },
         { name = "path", group_index = 3 },
       },
@@ -81,6 +85,11 @@ return {
       confirm_opts = {
         behavior = cmp.ConfirmBehavior.Replace,
         select = false,
+      },
+      snippet = {
+        expand = function(args)
+          luasnip.lsp_expand(args.body)
+        end
       },
       window = {
         completion = H.window_option,

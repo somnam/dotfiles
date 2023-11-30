@@ -5,20 +5,13 @@ return {
     local lspconfig = require("lspconfig")
     local configs = require("lspconfig.configs")
     local command = require("util.command")
+    local lsp = require("util.lsp")
 
     local H = {}
 
     H.customize_ui = function()
       local windows = require('lspconfig.ui.windows')
       windows.default_options.border = 'single'
-    end
-
-    H.on_attach = function(client, bufnr)
-      vim.api.nvim_buf_set_option(bufnr, "omnifunc", "v:lua.vim.lsp.omnifunc")
-      vim.api.nvim_buf_set_option(bufnr, "formatexpr", "v:lua.vim.lsp.formatexpr()")
-      if client.server_capabilities.definitionProvider then
-        vim.api.nvim_buf_set_option(bufnr, "tagfunc", "v:lua.vim.lsp.tagfunc")
-      end
     end
 
     H.lsp_capabilities = function()
@@ -29,7 +22,7 @@ return {
         capabilities = vim.tbl_deep_extend(
           "force",
           capabilities,
-          cmp_nvim_lsp.default_capabilities({snippetSupport = false})
+          cmp_nvim_lsp.default_capabilities()
         )
       end
 
@@ -41,7 +34,7 @@ return {
       -- Customize trigger characters.
       client.server_capabilities.completionProvider.triggerCharacters = {"."}
 
-      H.on_attach(client, bufnr)
+      lsp.on_attach(client, bufnr)
     end
     H.jedi_language_server_on_new_config = function(new_config, _)
       -- Enable diagnostics only when linter is not available.
@@ -67,7 +60,7 @@ return {
     H.rust_analyzer_settings = function()
       return {
         ["rust-analyzer"] = {
-          checkOnSave = {
+          check = {
             command = "clippy",
           },
         }
