@@ -1,5 +1,6 @@
 return {
   "L3MON4D3/LuaSnip",
+  version = "v2.*",
   build = "echo 'NOTE: jsregexp is optional\n'; make install_jsregexp",
   event = {"BufReadPre", "BufNewFile"},
   config = function()

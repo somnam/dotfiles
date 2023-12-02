@@ -1,4 +1,4 @@
-jedi-language-server
+python-lsp-server
 isort
 black
 flake8
