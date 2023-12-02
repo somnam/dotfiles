@@ -30,28 +30,34 @@ return {
     end
 
     -- python
-    H.jedi_language_server_on_attach = function(client, bufnr)
-      -- Customize trigger characters.
-      client.server_capabilities.completionProvider.triggerCharacters = {"."}
-
-      lsp.on_attach(client, bufnr)
-    end
-    H.jedi_language_server_on_new_config = function(new_config, _)
-      -- Enable diagnostics only when linter is not available.
-      local enable_diagnostics = not command.executable("flake8")
-
-      new_config.init_options = {
-        diagnostics = {
-          enable = enable_diagnostics,
+    H.pylsp_settings = function()
+      local plugins = {
+        black = {enabled = false},
+        autopep8 = {enabled = false},
+        flake8 = {enabled = false},
+        jedi_completion = {
+          enabled = true,
+          include_params = true,
+          include_class_objects = true,
         },
+        mccabe = {enabled = false},
+        pycodestyle = {enabled = false},
+        pyflakes = {enabled = false},
+        pylint = {enabled = false},
+        yapf = {enabled = false},
       }
+      return {pylsp = {plugins = plugins}}
     end
-    H.jedi_language_server_setup = function()
-      if command.executable("jedi-language-server") then
-        lspconfig.jedi_language_server.setup({
+    H.pylsp_flags = function()
+      return {debounce_text_changes = 150}
+    end
+    H.pylsp_setup = function()
+      if command.executable("pylsp") then
+        lspconfig.pylsp.setup({
           capabilities = H.lsp_capabilities(),
-          on_attach = H.jedi_language_server_on_attach,
-          on_new_config = H.jedi_language_server_on_new_config,
+          settings = H.pylsp_settings(),
+          flags = H.pylsp_flags(),
+          on_attach = lsp.on_attach,
         })
       end
     end
@@ -63,6 +69,9 @@ return {
           check = {
             command = "clippy",
           },
+          completion = {
+            postfix = {enable = false},
+          }
         }
       }
     end
@@ -71,7 +80,7 @@ return {
         lspconfig.rust_analyzer.setup({
           capabilities = H.lsp_capabilities(),
           settings = H.rust_analyzer_settings(),
-          on_attach = H.on_attach,
+          on_attach = lsp.on_attach,
         })
       end
     end
@@ -102,7 +111,7 @@ return {
 
     -- setup
     H.customize_ui()
-    H.jedi_language_server_setup()
+    H.pylsp_setup()
     H.rust_analyzer_setup()
     H.quick_lint_js_setup()
   end
