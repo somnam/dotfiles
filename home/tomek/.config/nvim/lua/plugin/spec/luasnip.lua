@@ -47,9 +47,7 @@ return {
     end
 
     -- setup
-    luasnip.setup({
-      delete_check_events = "TextChanged",
-    })
+    luasnip.setup({})
 
     for _, type in pairs({"vscode", "snipmate", "lua"}) do
       require("luasnip.loaders.from_" .. type).lazy_load()

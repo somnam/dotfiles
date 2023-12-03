@@ -39,6 +39,7 @@ return {
           enabled = true,
           include_params = true,
           include_class_objects = true,
+          include_function_objects = true,
         },
         mccabe = {enabled = false},
         pycodestyle = {enabled = false},
