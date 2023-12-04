@@ -58,6 +58,34 @@ return {
       end
     end
 
+    -- python pyright
+    H.pyright_settings = function()
+      return {
+        pyright = {
+          disableLanguageServices = false,
+          disableOrganizeImports = true
+        },
+        python = {
+          analysis = {
+            autoImportCompletions = true,
+            autoSearchPaths = true,
+            diagnosticMode = "openFilesOnly",
+            typeCheckingMode = "off",
+            useLibraryCodeForTypes = true,
+          }
+        }
+      }
+    end
+    H.pyright_setup = function()
+      if command.executable("pyright-langserver") then
+        lspconfig.pyright.setup({
+          capabilities = H.lsp_capabilities(),
+          settings = H.pyright_settings(),
+          on_attach = lsp.on_attach,
+        })
+      end
+    end
+
     -- rust
     H.rust_analyzer_settings = function()
       return {
@@ -107,7 +135,7 @@ return {
 
     -- setup
     H.customize_ui()
-    H.jedi_language_server_setup()
+    H.pyright_setup()
     H.rust_analyzer_setup()
     H.quick_lint_js_setup()
   end
