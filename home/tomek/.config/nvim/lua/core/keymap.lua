@@ -20,6 +20,9 @@ vim.api.nvim_set_keymap("n", "k", "gk", opts)
 vim.api.nvim_set_keymap("", "<S-h>", ":tabp<Enter>", opts)
 vim.api.nvim_set_keymap("", "<S-l>", ":tabn<Enter>", opts)
 
+-- Clear search and update diff
+vim.api.nvim_set_keymap("n", "<Esc>", ":mode | :nohlsearch | diffupdate<Enter>", opts)
+
 -- Leader mappings
 vim.api.nvim_set_keymap(
   "n", "<Space>n", ":enew<Enter>",

@@ -38,6 +38,9 @@ H.setup = function()
         notify = false,
         frequency = 3600 * 24,
       },
+      change_detection = {
+        enabled = false,
+      },
       ui = {
         border = "rounded",
       },
