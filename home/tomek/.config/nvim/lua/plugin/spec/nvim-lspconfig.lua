@@ -6,6 +6,7 @@ return {
     local configs = require("lspconfig.configs")
     local command = require("util.command")
     local lsp = require("util.lsp")
+    local python = require("util.python")
 
     local H = {}
 
@@ -72,7 +73,8 @@ return {
             diagnosticMode = "openFilesOnly",
             typeCheckingMode = "off",
             useLibraryCodeForTypes = true,
-          }
+          },
+          pythonPath = python.virtual_env_cmd("python"),
         }
       }
     end
