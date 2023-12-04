@@ -50,11 +50,11 @@ return {
     end
 
     H.format_field = lspkind.cmp_format({
-      mode = 'symbol_text',
+      mode = "symbol_text",
       menu = H.menu_text,
-      preset = 'codicons',
+      preset = "codicons",
       maxwidth = H.max_label_width,
-      ellipsis_char = '…',
+      ellipsis_char = "…",
     })
 
     H.buffer_option = {
@@ -69,7 +69,7 @@ return {
       sources = {
         { name = "nvim_lsp", group_index = 1 },
         { name = "buffer", group_index = 2, option = H.buffer_option },
-        { name = 'luasnip', group_index = 3 },
+        { name = "luasnip", group_index = 3 },
         { name = "path", group_index = 4 },
       },
       enabled = H.current_buffer_enabled,
@@ -95,6 +95,26 @@ return {
         ["<C-Space>"] = cmp.mapping.complete(),
         ["<C-e>"] = cmp.mapping.abort(),
         ["<CR>"] = cmp.mapping.confirm({ select = true }),
+        ["<C-l>"] = cmp.mapping(
+          function(fallback)
+            if luasnip.expand_or_locally_jumpable() then
+              luasnip.expand_or_jump()
+            elseif not luasnip.in_snippet() then
+              fallback()
+            end
+          end,
+          {"i", "s"}
+        ),
+        ["<C-h>"] = cmp.mapping(
+          function(fallback)
+            if luasnip.locally_jumpable(-1) then
+              luasnip.jump(-1)
+            elseif not luasnip.in_snippet() then
+              fallback()
+            end
+          end,
+          {"i", "s"}
+        ),
       }),
       formatting = {
         fields = { "abbr", "kind", "menu" },

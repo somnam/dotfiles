@@ -14,7 +14,7 @@ return {
       windows.default_options.border = 'single'
     end
 
-    H.lsp_capabilities = function()
+    H.lsp_capabilities = function(override)
       local capabilities = vim.lsp.protocol.make_client_capabilities()
       local cmp_nvim_lsp_available, cmp_nvim_lsp = pcall(require, "cmp_nvim_lsp")
 
@@ -22,43 +22,38 @@ return {
         capabilities = vim.tbl_deep_extend(
           "force",
           capabilities,
-          cmp_nvim_lsp.default_capabilities()
+          cmp_nvim_lsp.default_capabilities(override)
         )
       end
 
       return capabilities
     end
 
-    -- python
-    H.pylsp_settings = function()
-      local plugins = {
-        black = {enabled = false},
-        autopep8 = {enabled = false},
-        flake8 = {enabled = false},
-        jedi_completion = {
-          enabled = true,
-          include_params = true,
-          include_class_objects = true,
-          include_function_objects = true,
-        },
-        mccabe = {enabled = false},
-        pycodestyle = {enabled = false},
-        pyflakes = {enabled = false},
-        pylint = {enabled = false},
-        yapf = {enabled = false},
+    -- python jedi
+    H.jedi_language_server_capabilities = function()
+      -- Only snippets are returned when enabled.
+      return H.lsp_capabilities({snippetSupport = false})
+    end
+    H.jedi_language_server_on_attach = function(client, bufnr)
+      -- Customize trigger characters.
+      client.server_capabilities.completionProvider.triggerCharacters = {"."}
+
+      H.on_attach(client, bufnr)
+    end
+    H.jedi_language_server_on_new_config = function(new_config, _)
+      new_config.init_options = {
+        diagnostics = {
+          -- Enable diagnostics only when linter is not available.
+          enable = not command.executable("flake8"),
+        }
       }
-      return {pylsp = {plugins = plugins}}
     end
-    H.pylsp_flags = function()
-      return {debounce_text_changes = 150}
-    end
-    H.pylsp_setup = function()
-      if command.executable("pylsp") then
-        lspconfig.pylsp.setup({
-          capabilities = H.lsp_capabilities(),
-          settings = H.pylsp_settings(),
-          flags = H.pylsp_flags(),
-          on_attach = lsp.on_attach,
+    H.jedi_language_server_setup = function()
+      if command.executable("jedi-language-server") then
+        lspconfig.jedi_language_server.setup({
+          capabilities = H.jedi_language_server_capabilities(),
+          on_attach = H.jedi_language_server_on_attach,
+          on_new_config = H.jedi_language_server_on_new_config,
         })
       end
     end
@@ -112,7 +107,7 @@ return {
 
     -- setup
     H.customize_ui()
-    H.pylsp_setup()
+    H.jedi_language_server_setup()
     H.rust_analyzer_setup()
     H.quick_lint_js_setup()
   end
