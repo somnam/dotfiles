@@ -16,6 +16,11 @@ return {
       )
       vim.api.nvim_buf_set_keymap(
         bufnr,
+        "n", "<Space>gb", ":Gitsigns blame_line<Enter>",
+        vim.tbl_extend("keep", {desc = "Show blame annotation at the end of current line."}, bufopts)
+      )
+      vim.api.nvim_buf_set_keymap(
+        bufnr,
         "n", "<Space>[g", ":Gitsigns prev_hunk<Enter>",
         vim.tbl_extend("keep", {desc = "Go to previous git change block"}, bufopts)
       )
@@ -34,7 +39,6 @@ return {
         changedelete = {show_count = true},
       },
       on_attach = H.on_attach,
-      current_line_blame = true,
       current_line_blame_formatter = "<author> (<author_time:%Y-%m-%d>) <abbrev_sha>: <summary>",
       update_debounce = 1000,
     })
