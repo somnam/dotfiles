@@ -21,12 +21,12 @@ return {
       )
       vim.api.nvim_buf_set_keymap(
         bufnr,
-        "n", "<Space>[g", ":Gitsigns prev_hunk<Enter>",
+        "n", "<Space>g[", ":Gitsigns prev_hunk<Enter>",
         vim.tbl_extend("keep", {desc = "Go to previous git change block"}, bufopts)
       )
       vim.api.nvim_buf_set_keymap(
         bufnr,
-        "n", "<Space>]g", ":Gitsigns next_hunk<Enter>",
+        "n", "<Space>g]", ":Gitsigns next_hunk<Enter>",
         vim.tbl_extend("keep", {desc = "Go to next git change block"}, bufopts)
       )
     end

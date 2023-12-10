@@ -131,7 +131,7 @@ return {
           docs = {description = "quick-lint-js"}
         }
 
-        lspconfig.quick_lint_js.setup({})
+        lspconfig.quick_lint_js.setup()
       end
     end
 

@@ -12,6 +12,6 @@ return {
     })
 
     -- setup
-    require("vscode").setup({})
+    require("vscode").setup()
   end
 }

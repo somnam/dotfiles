@@ -10,17 +10,18 @@ upgrade-fzf()
 download-fzf ()
 {
     [[ $(which git) ]] || (echo "git not installed" && exit 1)
+    local FZF_VERSION='0.39.0'
+    echo "Downloading fzf version ${FZF_VERSION}"
 
-    echo "Downloading latest fzf source"
     local fzf_url="https://github.com/junegunn/fzf.git"
     local fzf_dir="$HOME/.fzf"
     local fzf_git_dir="$fzf_dir/.git"
 
-    if [[ -d "$fzf_dir" ]]; then
-        git --git-dir="$fzf_git_dir" --work-tree="$fzf_dir" pull
-    else
+    if [[ ! -d "$fzf_dir" ]]; then
         mkdir -p "$fzf_dir" && git clone --depth 1 "$fzf_url" "$fzf_dir"
     fi
+
+    git --git-dir="$fzf_git_dir" --work-tree="$fzf_dir" checkout "$FZF_VERSION"
 }
 
 setup-fzf ()
