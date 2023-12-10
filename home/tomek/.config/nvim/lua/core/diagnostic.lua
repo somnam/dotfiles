@@ -1,13 +1,5 @@
 local opts = {noremap = true, silent = true}
 vim.api.nvim_set_keymap(
-  "n", "<Space>[m", ":lua vim.diagnostic.goto_prev()<Enter>",
-  vim.tbl_extend("keep", {desc = "Go to previous diagnostic"}, opts)
-)
-vim.api.nvim_set_keymap(
-  "n", "<Space>]m", ":lua vim.diagnostic.goto_next()<Enter>",
-  vim.tbl_extend("keep", {desc = "Go to next diagnostic"}, opts)
-)
-vim.api.nvim_set_keymap(
   "n", "<Space>m", ":lua vim.diagnostic.open_float()<Enter>",
   vim.tbl_extend("keep", {desc = "List cursor line diagnostics"}, opts)
 )

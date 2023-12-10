@@ -34,3 +34,5 @@ local handlers_style = {focusable = true, style = "minimal", border = "rounded"}
 for name, handler in pairs(handlers) do
   vim.lsp.handlers[name] = vim.lsp.with(handler, handlers_style)
 end
+
+vim.lsp.set_log_level("ERROR")

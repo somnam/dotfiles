@@ -7,7 +7,7 @@ return {
     local luasnip = require("luasnip")
 
     -- setup
-    luasnip.setup({})
+    luasnip.setup()
 
     for _, type in pairs({"vscode", "snipmate", "lua"}) do
       require("luasnip.loaders.from_" .. type).lazy_load()
