@@ -9,7 +9,6 @@ return {
       "saadparwaiz1/cmp_luasnip",
       dependencies = {"L3MON4D3/LuaSnip"},
     },
-    "zbirenbaum/copilot.lua",
     "onsails/lspkind.nvim",
   },
   config = function()
@@ -17,7 +16,6 @@ return {
     local buffer = require("util.buffer")
     local lspkind = require("lspkind")
     local luasnip = require("luasnip")
-    local copilot_available, copilot = pcall(require, "copilot.suggestion")
 
     local H = {}
 
@@ -99,17 +97,6 @@ return {
         ["<C-Space>"] = cmp.mapping.complete(),
         ["<C-e>"] = cmp.mapping.abort(),
         ["<CR>"] = cmp.mapping.confirm({ select = true }),
-        ["<Tab>"] = cmp.mapping(
-          function(fallback)
-            if copilot_available and copilot.is_visible() then
-              copilot.accept()
-              if cmp.visible() then cmp.close() end
-            else
-              fallback()
-            end
-          end,
-          {"i", "s"}
-        ),
         ["<C-l>"] = cmp.mapping(
           function(fallback)
             if luasnip.expand_or_locally_jumpable() then
