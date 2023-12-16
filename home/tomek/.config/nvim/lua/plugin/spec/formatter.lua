@@ -1,8 +1,16 @@
 return {
   "mhartington/formatter.nvim",
   event = {"BufReadPost", "BufNewFile"},
-  config = function()
-    local formatter = require("formatter")
+  keys = {
+    {
+      "<Space>=",
+      ":FormatWrite<Enter>",
+      noremap = true,
+      silent = true,
+      desc = "Format and write current buffer"
+    },
+  },
+  opts = function()
     local util = require("formatter.util")
     local command = require("util.command")
     local python = require("util.python")
@@ -73,21 +81,13 @@ return {
       return fixers
     end
 
-    -- keymap
-    local opts = {noremap = true, silent = true}
-    vim.api.nvim_set_keymap(
-      "n", "<Space>=", ":FormatWrite<Enter>",
-      vim.tbl_extend("keep", {desc = "Format and write current buffer"}, opts)
-    )
-
-    -- setup
-    formatter.setup({
+    return {
       filetype = {
         python = H.python_fixers(),
         rust = H.rust_fixers(),
         -- Formatter configurations on any filetype
         ["*"] = {H.remove_trailing_whitespace}
       }
-    })
+    }
   end
 }

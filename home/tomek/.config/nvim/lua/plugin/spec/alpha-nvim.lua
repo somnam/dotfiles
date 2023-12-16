@@ -1,10 +1,12 @@
 return {
   "goolord/alpha-nvim",
   event = "VimEnter",
-  config = function()
-    local alpha = require("alpha")
+  init = function()
+    vim.cmd("autocmd FileType alpha setlocal nofoldenable")
+  end,
+  opts = function()
     local dashboard = require("alpha.themes.dashboard")
-    local starter = require("util.starter")
+    local misc = require("util.misc")
 
     local H = {}
 
@@ -17,11 +19,12 @@ return {
       quit = "󰅚  Quit",
     }
 
-    -- autocmd
-    vim.cmd("autocmd FileType alpha setlocal nofoldenable")
+    H.header = function()
+      local blank = ""
+      return {blank, misc.nvim_version(), blank}
+    end
 
-    -- setup
-    dashboard.section.header.val = starter.header()
+    dashboard.section.header.val = H.header()
     dashboard.section.buttons.val = {
       dashboard.button("<Leader> p ", H.labels.find_recent , ":FzfLua oldfiles cwd_only=true<Enter>"),
       dashboard.button("<Leader> f ", H.labels.find_file, ":FzfLua files<Enter>"),
@@ -30,6 +33,6 @@ return {
       dashboard.button("<Leader> z ", H.labels.plugins , ":Lazy<Enter>"),
       dashboard.button("<Leader> q ", H.labels.quit, ":qa<Enter>"),
     }
-    alpha.setup(dashboard.opts)
+    return dashboard.opts
   end
 }
