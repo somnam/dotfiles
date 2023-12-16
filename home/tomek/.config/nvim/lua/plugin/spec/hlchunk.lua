@@ -2,32 +2,30 @@ return {
   "shellRaining/hlchunk.nvim",
   event = {"BufReadPre", "BufNewFile"},
   dependencies = {"nvim-treesitter/nvim-treesitter"},
-  config = function()
-    require("hlchunk").setup({
-      blank = {
-        enable = false,
+  opts = {
+    blank = {
+      enable = false,
+    },
+    chunk = {
+      use_treesitter = true,
+      chars = {
+        horizontal_line = "",
+        vertical_line = "│",
+        left_top = "┌",
+        left_bottom = "└",
+        right_arrow = "",
       },
-      chunk = {
-        use_treesitter = true,
-        chars = {
-          horizontal_line = "",
-          vertical_line = "│",
-          left_top = "┌",
-          left_bottom = "└",
-          right_arrow = "",
-        },
-        style = "#00ffff",
-        max_file_size = 1024 * 512,
+      style = "#00ffff",
+      max_file_size = 1024 * 512,
+    },
+    indent = {
+      use_treesitter = false,
+      chars = {
+        "│",
       },
-      indent = {
-        use_treesitter = false,
-        chars = {
-          "│",
-        },
-      },
-      line_num = {
-        enable = false,
-      },
-    })
-  end
+    },
+    line_num = {
+      enable = false,
+    },
+  }
 }

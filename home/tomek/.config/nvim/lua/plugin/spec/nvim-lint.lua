@@ -1,6 +1,15 @@
 return {
   "mfussenegger/nvim-lint",
   event = {"BufReadPre", "BufNewFile"},
+  init = function()
+    local lint = require("lint")
+    vim.api.nvim_create_autocmd({"BufWinEnter", "BufWritePost"}, {
+      group = vim.api.nvim_create_augroup("nvim_lint_trigger", { clear = true }),
+      callback = function()
+        lint.try_lint()
+      end
+    })
+  end,
   config = function()
     local lint = require("lint")
     local command = require("util.command")
@@ -43,22 +52,9 @@ return {
       return linters
     end
 
-    H.linters_by_ft = function()
-      return {
-        python = H.python_linters(),
-        lua = H.lua_linters(),
-      }
-    end
-
-    -- autocmd
-    vim.api.nvim_create_autocmd({"BufWinEnter", "BufWritePost"}, {
-      group = vim.api.nvim_create_augroup("nvim_lint_trigger", { clear = true }),
-      callback = function()
-        lint.try_lint()
-      end
-    })
-
-    -- setup
-    lint.linters_by_ft = H.linters_by_ft()
+    lint.linters_by_ft = {
+      python = H.python_linters(),
+      lua = H.lua_linters(),
+    }
   end
 }

@@ -1,8 +1,7 @@
 return {
   "Mofiqul/dracula.nvim",
   event = "ColorSchemePre dracula",
-  config = function()
-    -- autocmd
+  init = function()
     vim.api.nvim_create_autocmd("ColorScheme", {
       pattern = "dracula*",
       group = vim.api.nvim_create_augroup("set_dracula_theme", { clear = true }),
@@ -10,10 +9,8 @@ return {
         vim.api.nvim_set_hl(0, "CursorLine", {bg="#343746"})
       end
     })
-
-    -- setup
-    require("dracula").setup({
-      transparent_bg = true,
-    })
-  end
+  end,
+  opts = {
+    transparent_bg = true,
+  }
 }

@@ -23,7 +23,6 @@ H.bootstrap = function()
 end
 
 H.setup = function()
-  -- keymap
   local opts = {noremap = true, silent = true}
   vim.api.nvim_set_keymap(
     "n", "<Space>z", ":Lazy<Enter>",
