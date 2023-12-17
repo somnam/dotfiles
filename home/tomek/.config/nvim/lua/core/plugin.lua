@@ -30,8 +30,10 @@ H.setup = function()
   )
 
   require("lazy").setup(
-    "plugin",
     {
+      spec = {
+        {import = "plugin"},
+      },
       checker = {
         enabled = true,
         notify = false,
