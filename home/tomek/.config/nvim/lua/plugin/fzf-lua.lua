@@ -1,4 +1,4 @@
-local search = require('util.search')
+local search = require("util.search")
 local command = require("util.command")
 
 return {
@@ -110,7 +110,8 @@ return {
   opts = {
     winopts = {
       width = 0.65,
-      col = 0.50,
+      row = 0.1,
+      col = 0.5,
       preview = {layout = "vertical"},
     },
     fzf_opts = {
