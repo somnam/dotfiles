@@ -26,4 +26,17 @@ M.truncate_branch = function(branch)
   return branch
 end
 
+M.copy_file_path_to_clipboard = function()
+  vim.fn.setreg('+', vim.fn.expand('%'))
+  vim.defer_fn(function() vim.cmd("echon ''") end, 600)
+  vim.api.nvim_notify("Path copied to clipboard.", vim.log.levels.INFO, {})
+end
+
+M.location = function()
+  local line = vim.fn.line(".")
+  local col = vim.fn.col(".")
+
+  return string.format('%3d:%-2d', line, col)
+end
+
 return M
