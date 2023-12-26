@@ -1,7 +1,0 @@
-jedi-language-server
-pyright
-isort
-black
-flake8
-autoflake
-mypy

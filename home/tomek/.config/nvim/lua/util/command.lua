@@ -6,15 +6,7 @@ M.into_shell = function(cmd, args)
 end
 
 M.executable = function(cmd)
-  return vim.fn.executable(cmd) == 1
-end
-
-M.executable_at = function(path)
-  if not vim.fn.filereadable(path) then
-    return false
-  end
-
-  return string.sub(vim.fn.getfperm(path), 3, 3) == 'x'
+  return cmd and vim.fn.executable(cmd) == 1 or false
 end
 
 return M
