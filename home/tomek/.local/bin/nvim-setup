@@ -32,42 +32,17 @@ upgrade-nvim ()
     fi
 }
 
-update-python-requirements ()
-{
-    [[ $(which pyenv) ]] || (echo "pyenv not installed" && exit 1)
-
-    local venv_path=$(pyenv prefix nvim)
-    [[ -z "$venv_path" ]] && (echo "nvim virtualenv not created" && exit 1)
-
-    local python_cmd="$venv_path/bin/python"
-    local requirements="$HOME/.config/nvim/requirements.txt"
-    if [[ -f "$python_cmd" && -f "$requirements" ]]; then
-        echo "Updating python requirements"
-        $python_cmd -mpip install -U setuptools pip wheel
-        $python_cmd -mpip install -U -r "$requirements"
-    else
-        echo "Python requirements not updated"
-    fi
-}
-
 main ()
 {
     while getopts ":aup" flag; do
         case "${flag}" in
             a)
                 upgrade-nvim
-                update-python-requirements
-                exit 0;;
-            u)
-                upgrade-nvim
-                exit 0;;
-            p)
-                update-python-requirements
                 exit 0;;
         esac
     done
 
-    echo "Usage: $0 [-a][-u][-p]"
+    echo "Usage: $0 [-a]"
 }
 
 main $@

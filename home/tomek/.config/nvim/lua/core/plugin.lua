@@ -23,10 +23,9 @@ H.bootstrap = function()
 end
 
 H.setup = function()
-  local opts = {noremap = true, silent = true}
   vim.api.nvim_set_keymap(
     "n", "<Space>z", ":Lazy<Enter>",
-    vim.tbl_extend("keep", {desc = "Open the Plugin Manager UI"}, opts)
+    {noremap = true, silent = true, desc = "Open the Plugin Manager UI"}
   )
 
   require("lazy").setup(
@@ -40,7 +39,7 @@ H.setup = function()
         frequency = 3600 * 24,
       },
       change_detection = {
-        enabled = false,
+        notify = false,
       },
       ui = {
         border = "rounded",

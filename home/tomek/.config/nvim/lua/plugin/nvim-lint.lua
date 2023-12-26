@@ -1,3 +1,7 @@
+local config = require("core.config")
+local command = require("util.command")
+local python = require("util.python")
+
 return {
   "mfussenegger/nvim-lint",
   event = {"BufReadPre", "BufNewFile"},
@@ -12,49 +16,60 @@ return {
   end,
   config = function()
     local lint = require("lint")
-    local command = require("util.command")
-    local python = require("util.python")
+    local linters = lint.linters
+
+    linters.mypy.args = vim.list_extend(linters.mypy.args, {"--namespace-packages"})
 
     local H = {}
 
-    H.ruff = lint.linters.ruff
-
-    H.flake8 = lint.linters.flake8
-
-    H.mypy = lint.linters.mypy
-    H.mypy.args = vim.list_extend(lint.linters.mypy.args, {"--namespace-packages"})
-
-    H.luacheck = lint.linters.luacheck
-
-    H.python_linters = function()
-      local linters = {}
-
-      if python.executable_in_virtual_env(H.ruff.cmd) then
-        table.insert(linters, H.ruff.cmd)
-      elseif command.executable(H.flake8.cmd) then
-        table.insert(linters, H.flake8.cmd)
+    H.python_linters = function(names)
+      if python.in_virtual_env() then
+        return H.python_virtual_env_linters(names)
+      else
+        return H.linters(names)
       end
-
-      if command.executable(H.mypy.cmd) then
-        table.insert(linters, H.mypy.cmd)
-      end
-
-      return linters
     end
 
-    H.lua_linters = function()
-      local linters = {}
+    H.python_virtual_env_linters = function(names)
+      local results = {}
 
-      if command.executable(H.luacheck.cmd) then
-        table.insert(linters, H.luacheck.cmd)
+      for _, name in pairs(names) do
+        local linter = linters[name]
+        if linter and python.executable_in_virtual_env(linter.cmd) then
+          table.insert(results, linter.cmd)
+        end
       end
 
-      return linters
+      return results
     end
 
-    lint.linters_by_ft = {
-      python = H.python_linters(),
-      lua = H.lua_linters(),
-    }
+    H.linters = function(names)
+      local results = {}
+
+      for _, name in pairs(names) do
+        local linter = linters[name]
+        if linter and command.executable(linter.cmd) then
+          table.insert(results, linter.cmd)
+        end
+      end
+
+      return results
+    end
+
+    H.linters_by_filetype = function ()
+      local results = {
+        python = H.python_linters(config.plugin.lint.python),
+      }
+
+      for filetype, value in pairs(config.plugin.lint) do
+        if results[filetype] == nil then
+          results[filetype] = H.linters(value)
+        end
+      end
+
+      return results
+    end
+
+    lint.linters_by_ft = H.linters_by_filetype()
   end
 }

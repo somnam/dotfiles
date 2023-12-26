@@ -75,5 +75,8 @@ vim.opt.pumheight = 15                                -- Completion window heigh
 vim.opt.diffopt:append("algorithm:patience")
 vim.opt.diffopt:append("indent-heuristic")
 
+-- Python3 executable
+vim.g.python3_host_prog = require("util.python").python_host_prog()
+
 -- Disable python plugins support
 vim.g.loaded_python3_provider = 0

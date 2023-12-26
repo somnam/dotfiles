@@ -1,3 +1,16 @@
 {
-    "colorscheme": "default"
+    "colorscheme": "default",
+    "plugin": {
+        "formatter": {
+            "python": ["black", "isort", "ruff"],
+            "rust": ["rustfmt"]
+        },
+        "lint": {
+            "python": ["flake8", "mypy", "ruff"],
+            "lua": ["luacheck"]
+        },
+        "mason": {
+            "ensure_installed": []
+        }
+    }
 }

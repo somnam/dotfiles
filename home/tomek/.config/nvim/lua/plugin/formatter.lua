@@ -1,3 +1,7 @@
+local config = require("core.config")
+local command = require("util.command")
+local python = require("util.python")
+
 return {
   "mhartington/formatter.nvim",
   event = {"BufReadPost", "BufNewFile"},
@@ -11,14 +15,11 @@ return {
     },
   },
   opts = function()
+    local filetypes = require("formatter.filetypes")
+    local defaults = require("formatter.defaults")
     local util = require("formatter.util")
-    local command = require("util.command")
-    local python = require("util.python")
 
-    local H = {}
-
-    H.perl = function(pattern, replacement, flags)
-      -- Use perl insead of sed for character replacement.
+    defaults.perl_pie = function(pattern, replacement, flags)
       return {
         exe = "perl",
         args = {
@@ -29,65 +30,70 @@ return {
       }
     end
 
-    H.remove_trailing_whitespace = util.withl(H.perl, "[ \t]*$")
+    -- Use perl insead of sed for whitespace replacement.
+    filetypes.any.strip_trailing_whitespace = util.withl(defaults.perl_pie, "[ \t]*$")
 
-    H.isort = require("formatter.filetypes.python").isort
-
-    H.black = require("formatter.filetypes.python").black
-
-    H.autoflake = function()
-      return {
-        exe = "autoflake",
-        args = {"--in-place"},
-      }
-    end
-
-    H.ruff = function()
+    filetypes.python.ruff = function()
       return {
         exe = "ruff",
         args = {"--quiet", "--fix", "--exit-zero"},
       }
     end
 
-    H.rustfmt = require("formatter.filetypes.rust").rustfmt
+    local H = {}
 
-    H.python_fixers = function()
-      local fixers = {}
+    H.formatters = function(names)
+      local results = {}
 
-      if python.executable_in_virtual_env(H.ruff().exe) then
-        table.insert(fixers, H.ruff)
-      elseif command.executable(H.isort().exe) then
-        table.insert(fixers, H.isort)
+      for _, name in pairs(names) do
+        local formatter = filetypes.rust[name]
+        if formatter and command.executable(formatter().exe) then
+          table.insert(results, formatter)
+        end
       end
 
-      if command.executable(H.black().exe) then
-        table.insert(fixers, H.black)
-      end
-
-      if command.executable(H.autoflake().exe) then
-        table.insert(fixers, H.autoflake)
-      end
-
-      return fixers
+      return results
     end
 
-    H.rust_fixers = function()
-      local fixers = {}
+    H.python_formatters = function(names)
+      if python.in_virtual_env() then
+        return H.python_virtual_env_formatters(names)
+      else
+        return H.formatters(names)
+      end
+    end
 
-      if command.executable(H.rustfmt().exe) then
-        table.insert(fixers, H.rustfmt)
+    H.python_virtual_env_formatters = function(names)
+      local results = {}
+
+      for _, name in pairs(names) do
+        local formatter = filetypes.python[name]
+        if formatter and python.executable_in_virtual_env(formatter().exe) then
+          table.insert(results, formatter)
+        end
       end
 
-      return fixers
+      return results
+    end
+
+    H.formatters_by_filetype = function ()
+      local results = {
+        python = H.python_formatters(config.plugin.formatter.python),
+        -- Formatter configurations on any filetype
+        ["*"] = {filetypes.any.strip_trailing_whitespace}
+      }
+
+      for filetype, value in pairs(config.plugin.formatter) do
+        if results[filetype] == nil then
+          results[filetype] = H.formatters(value)
+        end
+      end
+
+      return results
     end
 
     return {
-      filetype = {
-        python = H.python_fixers(),
-        rust = H.rust_fixers(),
-        -- Formatter configurations on any filetype
-        ["*"] = {H.remove_trailing_whitespace}
-      }
+      filetype = H.formatters_by_filetype(),
     }
   end
 }
