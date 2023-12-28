@@ -7,24 +7,6 @@ return {
   "neovim/nvim-lspconfig",
   event = {"BufReadPre", "BufNewFile"},
   dependencies = {"williamboman/mason.nvim"},
-  init = function ()
-    local lspconfig = require("lspconfig")
-
-    require("lspconfig.configs").quick_lint_js = {
-      default_config = {
-        cmd = {"quick-lint-js", "--lsp"},
-        filetypes = {"javascript", "javascriptreact"},
-        root_dir = function (filename)
-          local root = lspconfig.util.path.dirname(filename)
-          lspconfig.util.path.traverse_parents(
-            filename, function(dir, _) root = dir end
-          )
-          return root
-        end,
-      },
-      docs = {description = "quick-lint-js"}
-    }
-  end,
   opts = function (_, opts)
     return misc.map_extend({
       capabilities = vim.lsp.protocol.make_client_capabilities(),
@@ -95,8 +77,23 @@ return {
   end,
   config = function(_, opts)
     local lspconfig = require("lspconfig")
+    local lspconfig_configs = require("lspconfig.configs")
 
-    -- setup
+    lspconfig_configs.quick_lint_js = {
+      default_config = {
+        cmd = {"quick-lint-js", "--lsp"},
+        filetypes = {"javascript", "javascriptreact"},
+        root_dir = function (filename)
+          local root = lspconfig.util.path.dirname(filename)
+          lspconfig.util.path.traverse_parents(
+            filename, function(dir, _) root = dir end
+          )
+          return root
+        end,
+      },
+      docs = {description = "quick-lint-js"}
+    }
+
     for server, server_config in pairs(opts.servers) do
       local cmd = lspconfig[server].document_config.default_config.cmd
       if type(cmd) == 'table' and command.executable(cmd[1]) then
