@@ -27,4 +27,6 @@ M.map_extend = function(dst, src)
   return dst
 end
 
+M.path_separator = vim.fn.has("win32") == 1 and ";" or ":"
+
 return M

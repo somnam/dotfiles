@@ -5,18 +5,16 @@ local python = require("util.python")
 return {
   "mfussenegger/nvim-lint",
   event = {"BufReadPre", "BufNewFile"},
-  init = function()
+  config = function()
     local lint = require("lint")
+    local linters = lint.linters
+
     vim.api.nvim_create_autocmd({"BufWinEnter", "BufWritePost"}, {
       group = vim.api.nvim_create_augroup("nvim_lint_trigger", { clear = true }),
       callback = function()
         lint.try_lint()
       end
     })
-  end,
-  config = function()
-    local lint = require("lint")
-    local linters = lint.linters
 
     linters.mypy.args = vim.list_extend(linters.mypy.args, {"--namespace-packages"})
 

@@ -14,7 +14,6 @@ return {
       },
     },
     opts = {
-      PATH = "append",
       log_level = vim.log.levels.WARN,
       ui = {
         border = "rounded",
