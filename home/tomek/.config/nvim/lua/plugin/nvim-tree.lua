@@ -24,16 +24,6 @@ return {
       desc = "Open or close the file tree"
     },
   },
-  init = function()
-    vim.api.nvim_create_autocmd("VimEnter", {
-      group = vim.api.nvim_create_augroup("nvim_tree_trigger", { clear = true }),
-      callback = function(ctx)
-        if vim.fn.isdirectory(ctx.file) == 1 then
-          require("nvim-tree.api").tree.open()
-        end
-      end
-    })
-  end,
   opts = {
     disable_netrw = true,
     sync_root_with_cwd = true,
@@ -53,5 +43,19 @@ return {
     filesystem_watchers = {
       debounce_delay = 200,
     },
-  }
+  },
+  config = function(_, opts)
+    local nvim_tree_api = require("nvim-tree.api")
+
+    vim.api.nvim_create_autocmd("VimEnter", {
+      group = vim.api.nvim_create_augroup("nvim_tree_trigger", { clear = true }),
+      callback = function(ctx)
+        if vim.fn.isdirectory(ctx.file) == 1 then
+          nvim_tree_api.tree.open()
+        end
+      end
+    })
+
+    return require("nvim-tree").setup(opts)
+  end
 }

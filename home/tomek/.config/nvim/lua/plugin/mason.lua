@@ -1,4 +1,5 @@
 local config = require("core.config")
+local python = require("util.python")
 
 return {
   {
@@ -13,8 +14,10 @@ return {
         desc = "Open the Package Manager UI"
       },
     },
+    init = function ()
+      vim.g.python3_host_prog = python.nvim_virtual_env_prog()
+    end,
     opts = {
-      PATH = "append",
       log_level = vim.log.levels.WARN,
       ui = {
         border = "rounded",
@@ -25,6 +28,12 @@ return {
         },
       },
     },
+    config = function (_, opts)
+      require("mason").setup(opts)
+
+      vim.env.PATH = python.remove_pyenv_shims_from_path()
+      vim.env.PATH = python.add_virtual_env_bin_to_path()
+    end
   },
   {
     "WhoIsSethDaniel/mason-tool-installer.nvim",
