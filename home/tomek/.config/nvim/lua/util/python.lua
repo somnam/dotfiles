@@ -3,13 +3,16 @@ local misc = require("util.misc")
 
 local M = {}
 
+M.virtual_env = vim.env.VIRTUAL_ENV
+
+M.virtual_env_bin = M.virtual_env and M.virtual_env .. "/bin" or nil
+
 M.in_virtual_env = function ()
-  return vim.env.VIRTUAL_ENV ~= nil
+  return M.virtual_env ~= nil
 end
 
 M.virtual_env_cmd = function(cmd)
-  local virtual_env = vim.env.VIRTUAL_ENV
-  return virtual_env and virtual_env .. "/bin/" .. cmd or nil
+  return M.virtual_env_bin and M.virtual_env_bin .. "/" .. cmd or nil
 end
 
 M.executable_in_virtual_env = function(cmd)
@@ -30,10 +33,17 @@ M.nvim_virtual_env_prog = function ()
 end
 
 M.remove_pyenv_shims_from_path = function ()
-  -- Shims can lead to commands not working in working dir context.
+  -- Shims can lead to commands not working in cwd context.
   if M.pyenv_shims then
     local result, _ = string.gsub(vim.env.PATH, M.pyenv_shims .. misc.path_separator, "")
     return result
+  end
+  return vim.env.PATH
+end
+
+M.add_virtual_env_bin_to_path = function ()
+  if M.virtual_env_bin then
+      return M.virtual_env_bin .. misc.path_separator .. vim.env.PATH
   end
   return vim.env.PATH
 end

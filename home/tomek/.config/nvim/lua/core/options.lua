@@ -77,9 +77,3 @@ vim.opt.diffopt:append("indent-heuristic")
 
 -- Disable python plugins support
 vim.g.loaded_python3_provider = 0
-
--- Python3 executable
-vim.g.python3_host_prog = require("util.python").nvim_virtual_env_prog()
-
--- PATH updates
-vim.env.PATH = require("util.python").remove_pyenv_shims_from_path()
