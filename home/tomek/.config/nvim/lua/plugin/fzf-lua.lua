@@ -112,7 +112,12 @@ return {
       width = 0.65,
       row = 0.1,
       col = 0.5,
-      preview = {layout = "vertical"},
+      preview = {
+        layout = "vertical",
+        winopts = {
+          number = false,
+        },
+      },
     },
     fzf_opts = {
       ["--history"] = vim.fn.stdpath("data") .. "/fzf_lua_history",
