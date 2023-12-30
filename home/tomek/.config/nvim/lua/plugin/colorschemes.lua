@@ -31,5 +31,9 @@ return {
   {
     "rebelot/kanagawa.nvim",
     event = "ColorSchemePre kanagawa",
+    opts = {
+      keywordStyle = {italic = false},
+      statementStyle = {bold = false},
+    }
   },
 }
