@@ -52,38 +52,36 @@ H.winbar_c = {
 return {
   "nvim-lualine/lualine.nvim",
   event = "VeryLazy",
-  opts = function(_, opts)
-    return require("util.misc").map_extend({
-      options = {
-        theme = "auto",
-        component_separators = "",
-        section_separators = { left = '', right = ''},
-        disabled_filetypes = {
-          winbar = {
-            "help",
-            "checkhealth",
-            "NvimTree",
-            "alpha",
-          },
+  opts = {
+    options = {
+      theme = "auto",
+      component_separators = "",
+      section_separators = { left = '', right = ''},
+      disabled_filetypes = {
+        winbar = {
+          "help",
+          "checkhealth",
+          "NvimTree",
+          "alpha",
         },
       },
-      sections = {
-        lualine_b = H.lualine_b,
-        lualine_c = H.lualine_c,
-        lualine_x = H.lualine_x,
-        lualine_z = H.lualine_z,
-      },
-      inactive_sections = {
-        lualine_c = H.lualine_c,
-        lualine_x = H.lualine_x,
-      },
-      winbar = {
-        lualine_c = H.winbar_c,
-      },
-      inactive_winbar = {
-        lualine_c = H.winbar_c,
-      },
-      extensions = {"fzf", "lazy", "nvim-tree", "quickfix"},
-    }, opts)
-  end
+    },
+    sections = {
+      lualine_b = H.lualine_b,
+      lualine_c = H.lualine_c,
+      lualine_x = H.lualine_x,
+      lualine_z = H.lualine_z,
+    },
+    inactive_sections = {
+      lualine_c = H.lualine_c,
+      lualine_x = H.lualine_x,
+    },
+    winbar = {
+      lualine_c = H.winbar_c,
+    },
+    inactive_winbar = {
+      lualine_c = H.winbar_c,
+    },
+    extensions = {"fzf", "lazy", "nvim-tree", "quickfix"},
+  }
 }
