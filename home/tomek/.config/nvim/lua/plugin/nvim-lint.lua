@@ -54,7 +54,7 @@ return {
       return results
     end
 
-    H.linters_by_filetype = function ()
+    H.linters_by_filetype = function()
       local results = {
         python = H.python_linters(config.plugin.lint.python),
       }

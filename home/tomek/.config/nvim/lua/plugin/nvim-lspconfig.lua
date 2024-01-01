@@ -7,7 +7,7 @@ return {
   "neovim/nvim-lspconfig",
   event = {"BufReadPre", "BufNewFile"},
   dependencies = {"williamboman/mason.nvim"},
-  opts = function (_, opts)
+  opts = function(_, opts)
     return misc.map_extend({
       capabilities = vim.lsp.protocol.make_client_capabilities(),
       servers = {
@@ -61,13 +61,28 @@ return {
         lua_ls = {
           settings = {
             Lua = {
-              runtime = {version = 'LuaJIT'},
+              runtime = {version = "LuaJIT"},
               workspace = {
                 checkThirdParty = false,
                 library = {
                   vim.env.VIMRUNTIME,
                 }
-              }
+              },
+              diagnostics = {
+                neededFileStatus = {
+                  ["codestyle-check"] = "Any",
+                },
+              },
+              format = {
+                enable = true,
+                defaultConfig = {
+                  indent_style = "space",
+                  indent_size = "2",
+                  quote_style = "double",
+                  max_line_length = "100",
+                  call_arg_parentheses = "keep",
+                },
+              },
             }
           },
           on_attach = lsp.on_attach,
@@ -83,7 +98,7 @@ return {
       default_config = {
         cmd = {"quick-lint-js", "--lsp"},
         filetypes = {"javascript", "javascriptreact"},
-        root_dir = function (filename)
+        root_dir = function(filename)
           local root = lspconfig.util.path.dirname(filename)
           lspconfig.util.path.traverse_parents(
             filename, function(dir, _) root = dir end

@@ -80,7 +80,7 @@ return {
     "AndreM222/copilot-lualine",
     lazy = true,
     dependencies = {"nvim-lualine/lualine.nvim"},
-    config = function ()
+    config = function()
       local lualine_config = require("lualine_require").lazy_require({
         config_module = "lualine.config"
       })
