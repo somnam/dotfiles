@@ -69,7 +69,7 @@ return {
       return results
     end
 
-    H.formatters_by_filetype = function ()
+    H.formatters_by_filetype = function()
       local results = {
         python = H.python_formatters(config.plugin.formatter.python),
         -- Formatter configurations on any filetype

@@ -1,24 +1,24 @@
 local M = {}
 
 M.file_exists = function(file)
-  return vim.loop.fs_stat(file) ~= nil
+  return vim.loop.fs_stat(vim.fn.expand(file)) ~= nil
 end
 
 M.read_file = function(file)
-  if not M.file_exists(file) then return nil end
+  if not M.file_exists(file) then return end
 
-  local fd = io.open(file, "r")
-  local data = fd:read("*a")
+  local fd = assert(io.open(vim.fn.expand(file), "r"))
+  local content = fd:read("*a")
   fd:close()
-  return data
+  return content
 end
 
 M.read_json_file = function(file)
   local content = M.read_file(file)
-  if not content then return {} end
+  if not content then return end
 
   local json_ok, json_data = pcall(vim.json.decode, content)
-  return json_ok and json_data or {}
+  return json_ok and json_data or nil
 end
 
 return M

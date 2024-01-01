@@ -1,6 +1,8 @@
 local git_available = vim.fn.executable("git") == 1
 if not git_available then return end
 
+local config = require("core.config")
+
 local H = {}
 
 H.lazy_path = vim.fn.stdpath("data") .. "/lazy/lazy.nvim"
@@ -40,6 +42,9 @@ H.setup = function()
       },
       change_detection = {
         notify = false,
+      },
+      install = {
+        colorscheme = { config.colorscheme, "habamax" },
       },
       ui = {
         border = "rounded",
