@@ -27,26 +27,23 @@ return {
   end,
   config = function()
 
-    local mini_bufremove = require("mini.bufremove")
     vim.api.nvim_cmd({
       cmd = "command",
-      args = {"BD lua MiniBufremove.delete(0, true)"},
+      args = { "BD lua MiniBufremove.delete(0, true)" },
       bang = true,
     }, {})
     vim.api.nvim_cmd({
       cmd = "command",
-      args = {"BW lua MiniBufremove.wipeout(0, true)"},
+      args = { "BW lua MiniBufremove.wipeout(0, true)" },
       bang = true,
     }, {})
-    mini_bufremove.setup()
+    require("mini.bufremove").setup()
 
-    local mini_comment = require("mini.comment")
-    mini_comment.setup()
+    require("mini.comment").setup()
 
-    local mini_pairs = require("mini.pairs")
     local neigh_pattern = ".[%s%)%]%}]"
     local quote_neigh_pattern = "[%{%[%(%=%s][%s%)%]%}]"
-    mini_pairs.setup({
+    require("mini.pairs").setup({
       mappings = {
         ["("] = { neigh_pattern = neigh_pattern },
         ["["] = { neigh_pattern = neigh_pattern },
@@ -57,36 +54,34 @@ return {
       }
     })
 
-    local mini_trailspace = require("mini.trailspace")
-    mini_trailspace.setup()
+    require("mini.trailspace").setup()
 
-    local mini_cursorword = require("mini.cursorword")
-    mini_cursorword.setup({delay = 150})
+    require("mini.cursorword").setup({ delay = 150 })
 
     local mini_clue = require("mini.clue")
     mini_clue.setup({
       triggers = {
         -- Leader triggers
-        { mode = 'n', keys = '<Space>' },
-        { mode = 'x', keys = '<Space>' },
+        { mode = "n", keys = "<Space>" },
+        { mode = "x", keys = "<Space>" },
 
         -- `g` key
-        { mode = 'n', keys = 'g' },
-        { mode = 'x', keys = 'g' },
+        { mode = "n", keys = "g" },
+        { mode = "x", keys = "g" },
 
         -- Marks
-        { mode = 'n', keys = "'" },
-        { mode = 'n', keys = '`' },
-        { mode = 'x', keys = "'" },
-        { mode = 'x', keys = '`' },
+        { mode = "n", keys = "'" },
+        { mode = "n", keys = '`' },
+        { mode = "x", keys = "'" },
+        { mode = "x", keys = '`' },
 
         -- Registers
-        { mode = 'n', keys = '"' },
-        { mode = 'x', keys = '"' },
+        { mode = "n", keys = '"' },
+        { mode = "x", keys = '"' },
 
         -- `z` key
-        { mode = 'n', keys = 'z' },
-        { mode = 'x', keys = 'z' },
+        { mode = "n", keys = "z" },
+        { mode = "x", keys = "z" },
       },
       clues = {
         -- Enhance this by adding descriptions for <Leader> mapping groups
@@ -102,6 +97,11 @@ return {
           col = "auto"
         }
       }
+    })
+
+    local mini_notify = require("mini.notify")
+    mini_notify.setup({
+      lsp_progress = { duration_last = 2000 },
     })
   end
 }
