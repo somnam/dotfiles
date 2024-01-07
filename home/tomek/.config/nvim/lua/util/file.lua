@@ -1,13 +1,13 @@
 local M = {}
 
 M.file_exists = function(file)
-  return vim.loop.fs_stat(vim.fn.expand(file)) ~= nil
+  return vim.loop.fs_stat(file) ~= nil
 end
 
 M.read_file = function(file)
   if not M.file_exists(file) then return end
 
-  local fd = assert(io.open(vim.fn.expand(file), "r"))
+  local fd = assert(io.open(file, "r"))
   local content = fd:read("*a")
   fd:close()
   return content
