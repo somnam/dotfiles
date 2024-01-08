@@ -33,6 +33,14 @@ return {
     -- Use perl insead of sed for whitespace replacement.
     filetypes.any.strip_trailing_whitespace = util.withl(defaults.perl_pie, "[ \t]*$")
 
+    filetypes.python.ruff = function()
+      return {
+        exe = "ruff",
+        args = { "check", "--quiet", "--fix", "--exit-zero", "-" },
+        stdin = true,
+      }
+    end
+
     local H = {}
 
     H.formatters = function(names)
