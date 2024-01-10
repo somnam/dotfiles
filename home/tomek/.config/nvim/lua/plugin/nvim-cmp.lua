@@ -46,8 +46,8 @@ return {
       return require("util.misc").map_extend({
         sources = {
           { name = "nvim_lsp", group_index = 1 },
-          { name = "buffer", group_index = 2, option = H.buffer_option },
-          { name = "path", group_index = 4 },
+          { name = "buffer", group_index = 2, keyword_length = 2, option = H.buffer_option },
+          { name = "path", group_index = 3, keyword_length = 2 },
         },
         enabled = H.current_buffer_enabled,
         confirm_opts = {
