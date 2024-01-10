@@ -103,5 +103,11 @@ return {
     mini_notify.setup({
       lsp_progress = { duration_last = 2000 },
     })
+    vim.notify = mini_notify.make_notify({
+      ERROR = { duration = 5000 },
+      WARN = { duration = 5000 },
+      INFO = { duration = 3000 },
+      DEBUG = { duration = 3000 },
+    })
   end
 }
