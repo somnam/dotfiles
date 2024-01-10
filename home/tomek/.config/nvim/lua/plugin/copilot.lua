@@ -1,27 +1,29 @@
 local H = {}
 
-H.esc = vim.api.nvim_replace_termcodes("<esc>", true, false, true)
 H.tab = vim.api.nvim_replace_termcodes("<tab>", true, false, true)
 
 H.set_accept_suggestion_keymap = function()
   vim.keymap.set(
-    {"i", "s", "n"},
+    { "i", "s", "n" },
     "<Tab>",
     H.accept_suggestion,
-    {noremap = true, silent = true}
+    { noremap = true, silent = true }
   )
 end
 
 H.del_accept_suggestion_keymap = function()
-  vim.keymap.del({"i", "s", "n"}, "<Tab>")
+  vim.keymap.del({ "i", "s", "n" }, "<Tab>")
 end
 
 H.accept_suggestion = function()
   local copilot_suggestion = require("copilot.suggestion")
+  local cmp_ok, cmp = pcall(require, "cmp")
 
   if copilot_suggestion.is_visible() then
     copilot_suggestion.accept()
-    vim.api.nvim_feedkeys(H.esc, "n", true)
+    if cmp_ok and cmp.visible() then
+      cmp.close()
+    end
   else
     vim.api.nvim_feedkeys(H.tab, "n", true)
   end
@@ -35,7 +37,7 @@ H.enable_copilot = function()
     copilot_command.enable()
   end
   H.set_accept_suggestion_keymap()
-  copilot_command.attach({force = true})
+  copilot_command.attach({ force = true })
 end
 
 H.disable_copilot = function()
@@ -52,21 +54,19 @@ end
 return {
   {
     "zbirenbaum/copilot.lua",
-    commit = "38a41d0",
     cmd = "Copilot",
     cond = function()
       return require("util.command").executable("node")
     end,
-    dependencies = {"AndreM222/copilot-lualine"},
+    dependencies = { "AndreM222/copilot-lualine" },
     keys = {
-      {"<Space>ce", H.enable_copilot, desc = "Enable Copilot for current buffer."},
-      {"<Space>cd", H.disable_copilot, desc = "Disable Copilot for all buffers."},
+      { "<Space>ce", H.enable_copilot, desc = "Enable Copilot for current buffer." },
+      { "<Space>cd", H.disable_copilot, desc = "Disable Copilot for all buffers." },
     },
     opts = {
       suggestion = {
         auto_trigger = true,
-        keymap = {accept = false},
-        debounce = 150,
+        keymap = { accept = false },
       },
       panel = {
         enabled = false,
@@ -79,7 +79,7 @@ return {
   {
     "AndreM222/copilot-lualine",
     lazy = true,
-    dependencies = {"nvim-lualine/lualine.nvim"},
+    dependencies = { "nvim-lualine/lualine.nvim" },
     config = function()
       local lualine_config = require("lualine_require").lazy_require({
         config_module = "lualine.config"
