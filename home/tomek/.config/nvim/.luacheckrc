@@ -21,7 +21,3 @@ globals = {
   "vim.go",
   "vim.env"
 }
-
-exclude_files = {
-  "./plugin/packer_compiled.lua"
-}
