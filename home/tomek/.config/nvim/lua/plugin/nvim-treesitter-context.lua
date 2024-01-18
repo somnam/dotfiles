@@ -4,6 +4,6 @@ return {
   event = "VimEnter",
   opts = {
     line_numbers = false,
-    multiline_threshold = 10,
+    multiline_threshold = 3,
   }
 }
