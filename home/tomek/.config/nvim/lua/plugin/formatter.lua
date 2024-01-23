@@ -33,7 +33,7 @@ return {
     -- Use perl insead of sed for whitespace replacement.
     filetypes.any.strip_trailing_whitespace = util.withl(defaults.perl_pie, "[ \t]*$")
 
-    filetypes.python.ruff = function()
+    filetypes.python.ruff_check = function()
       return {
         exe = "ruff",
         args = { "check", "--quiet", "--fix", "--exit-zero", "-" },
