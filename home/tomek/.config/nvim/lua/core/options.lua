@@ -17,7 +17,7 @@ vim.opt.wildoptions = "tagfile"
 
 vim.opt.wrap = true             -- Line wrapping
 vim.opt.linebreak = true        -- Wrap long lines at a linebreak character
-vim.opt.wrapscan =  false       -- Search wrapping
+vim.opt.wrapscan = false        -- Search wrapping
 vim.opt.foldmethod = "marker"   -- Set folding method
 vim.opt.foldmarker = {          -- Set fold marker
   "# region",
@@ -30,6 +30,7 @@ vim.opt.cursorcolumn = false    -- Don't highlight current cursor column
 vim.opt.signcolumn = "yes"      -- Show sign column
 vim.opt.number = false          -- Don't display line numbers
 vim.opt.hidden = true           -- Hide buffer instead of closing it
+vim.opt.mouse = "vi"            -- Mouse modes
 
 vim.opt.smartindent = true      -- Try to be smart with indenting
 vim.opt.autoindent = true       -- Set global autoindent on
@@ -68,8 +69,8 @@ vim.opt.formatoptions:remove("o")
 vim.opt.shortmess:append("c")       -- Shut off completion messages
 vim.opt.complete:remove("i")        -- Prevent a condition where vim lags due to searching include files and tags
 vim.opt.complete:remove("t")
-vim.opt.completeopt = {"menu", "menuone", "noinsert"} -- Completion behavior
-vim.opt.pumheight = 15                                -- Completion window height
+vim.opt.completeopt = { "menu", "menuone", "noinsert" } -- Completion behavior
+vim.opt.pumheight = 15                                  -- Completion window height
 
 -- Diff settings
 vim.opt.diffopt:append("algorithm:patience")
