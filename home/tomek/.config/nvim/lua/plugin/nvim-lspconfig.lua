@@ -5,8 +5,8 @@ local misc = require("util.misc")
 
 return {
   "neovim/nvim-lspconfig",
-  event = {"BufReadPre", "BufNewFile"},
-  dependencies = {"williamboman/mason.nvim"},
+  event = { "BufReadPre", "BufNewFile" },
+  dependencies = { "williamboman/mason.nvim" },
   opts = function(_, opts)
     return misc.map_extend({
       capabilities = vim.lsp.protocol.make_client_capabilities(),
@@ -19,7 +19,7 @@ return {
           },
           on_attach = function(client, bufnr)
             -- Customize trigger characters.
-            client.server_capabilities.completionProvider.triggerCharacters = {"."}
+            client.server_capabilities.completionProvider.triggerCharacters = { "." }
             return lsp.on_attach(client, bufnr)
           end,
         },
@@ -52,7 +52,7 @@ return {
                 command = "clippy",
               },
               completion = {
-                postfix = {enable = false},
+                postfix = { enable = false },
               }
             }
           },
@@ -61,7 +61,7 @@ return {
         lua_ls = {
           settings = {
             Lua = {
-              runtime = {version = "LuaJIT"},
+              runtime = { version = "LuaJIT" },
               workspace = {
                 checkThirdParty = false,
                 library = {
@@ -96,8 +96,8 @@ return {
 
     lspconfig_configs.quick_lint_js = {
       default_config = {
-        cmd = {"quick-lint-js", "--lsp"},
-        filetypes = {"javascript", "javascriptreact"},
+        cmd = { "quick-lint-js", "--lsp" },
+        filetypes = { "javascript", "javascriptreact", "typescript", "typescriptreact" },
         root_dir = function(filename)
           local root = lspconfig.util.path.dirname(filename)
           lspconfig.util.path.traverse_parents(
@@ -106,20 +106,20 @@ return {
           return root
         end,
       },
-      docs = {description = "quick-lint-js"}
+      docs = { description = "quick-lint-js" }
     }
 
     for server, server_config in pairs(opts.servers) do
       local cmd = lspconfig[server].document_config.default_config.cmd
-      if type(cmd) == 'table' and command.executable(cmd[1]) then
+      if type(cmd) == "table" and command.executable(cmd[1]) then
         lspconfig[server].setup(vim.tbl_deep_extend(
           "force",
-          {capabilities = opts.capabilities},
+          { capabilities = opts.capabilities },
           server_config
         ))
       end
     end
 
-    require('lspconfig.ui.windows').default_options.border = 'single'
+    require("lspconfig.ui.windows").default_options.border = "single"
   end
 }

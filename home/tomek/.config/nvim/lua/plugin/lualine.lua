@@ -19,7 +19,7 @@ H.lualine_c = {
   "diff",
   {
     "diagnostics",
-    symbols = {error = "󰅚 ", warn = "󰀪 ", info = "󰋽 ", hint = "󰌶 "}
+    symbols = { error = "󰅚 ", warn = "󰀪 ", info = "󰋽 ", hint = "󰌶 " }
   },
   {
     lsp.get_clients_count,
@@ -31,22 +31,17 @@ H.lualine_c = {
     H.get_updated,
     cond = require("lazy.status").has_updates,
     icon = "󰒲 ",
-    color = {fg = "#ff9e64"},
+    color = { fg = "#ff9e64" },
     on_click = require("lazy").home,
   },
 }
 
-H.lualine_x = {"encoding", "fileformat", "filetype"}
+H.lualine_x = { "encoding", "fileformat", "filetype" }
 
-H.lualine_z = {"searchcount", statusline.location}
+H.lualine_z = { "searchcount", statusline.location }
 
 H.winbar_c = {
-  {
-    "filename",
-    file_status = true,
-    path = 1,
-    on_click = statusline.copy_file_path_to_clipboard,
-  },
+  { "filename", file_status = true, path = 1 },
 }
 
 return {
@@ -56,7 +51,7 @@ return {
     options = {
       theme = "auto",
       component_separators = "",
-      section_separators = { left = '', right = ''},
+      section_separators = { left = "", right = "" },
       disabled_filetypes = {
         winbar = {
           "help",
@@ -82,6 +77,6 @@ return {
     inactive_winbar = {
       lualine_c = H.winbar_c,
     },
-    extensions = {"fzf", "lazy", "nvim-tree", "quickfix"},
+    extensions = { "fzf", "lazy", "nvim-tree", "quickfix" },
   }
 }
