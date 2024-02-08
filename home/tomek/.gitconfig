@@ -2,7 +2,7 @@
     name = Tomek Miodek
     email = tomek.miodek@gmail.com
 [core]
-    editor = vim
+    editor = nvim
 [color]
     ui = auto
 [color "branch"]
@@ -13,26 +13,24 @@
     added = green
     changed = yellow
     untracked = red
-[push]
-    default = upstream
 [diff]
-    tool = gvimdiff
+    tool = nvimdiff2
 [difftool]
     prompt = no
 [merge]
-    tool = gvimdiff
+    tool = nvimdiff2
 [mergetool]
     keepBackup = false
     prompt = no
 [push]
-    default = tracking
+    default = current
 [alias]
     fe = fetch
     co = checkout
     st = status
-    di = diff
+    di = diff -b
     dt = difftool
-    ds = diff --staged
+    ds = diff --staged -b
     url = !git config -l | grep -E '^remote.origin.url=' | cut -d= -f2
     lg = log --graph --pretty=format:'%Cred%h%Creset %C(green)(%ci) %C(blue)%an%Creset: %s'
     ll = log --name-only
@@ -40,4 +38,3 @@
     au = add -u .
     purr = pull --rebase
     merge = merge --no-ff
-    merge-local=merge --no-ff --no-commit
