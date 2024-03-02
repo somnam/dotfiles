@@ -9,5 +9,5 @@ fi
 
 if command -v pyenv >/dev/null; then
     # Initialize pyenv
-    eval -- "$(pyenv init -)"
+    eval -- "$(pyenv init --no-rehash -)"
 fi
