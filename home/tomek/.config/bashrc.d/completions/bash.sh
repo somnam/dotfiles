@@ -7,6 +7,9 @@ bind "set completion-map-case on" 2>/dev/null
 # Immediately add a trailing slash when autocompleting symlinks to directories
 bind "set mark-symlinked-directories on" 2>/dev/null
 
+# Print all possible completions after the first Tab press
+bind 'set show-all-if-ambiguous on'
+
 # If set, the pattern "**" used in a pathname expansion context will
 # match all files and zero or more directories and subdirectories.
 shopt -s globstar 2> /dev/null
