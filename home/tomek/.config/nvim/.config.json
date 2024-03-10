@@ -2,7 +2,8 @@
     "colorscheme": "default",
     "plugin": {
         "formatter": {
-            "python": ["black", "isort", "ruff"],
+            "python": ["black", "isort", "ruff", "ruff_check"],
+            "lua": ["stylua"],
             "rust": ["rustfmt"]
         },
         "lint": {
