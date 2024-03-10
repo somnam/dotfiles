@@ -1,7 +1,7 @@
-local python = require("util.python")
-local lsp = require("util.lsp")
 local command = require("util.command")
+local lsp = require("util.lsp")
 local misc = require("util.misc")
+local python = require("util.python")
 
 return {
   "neovim/nvim-lspconfig",
@@ -27,7 +27,7 @@ return {
           settings = {
             pyright = {
               disableLanguageServices = false,
-              disableOrganizeImports = true
+              disableOrganizeImports = true,
             },
             python = {
               analysis = {
@@ -38,7 +38,7 @@ return {
                 useLibraryCodeForTypes = true,
               },
               pythonPath = python.virtual_env_cmd("python"),
-            }
+            },
           },
           on_attach = lsp.on_attach,
         },
@@ -53,39 +53,17 @@ return {
               },
               completion = {
                 postfix = { enable = false },
-              }
-            }
+              },
+            },
           },
           on_attach = lsp.on_attach,
         },
         lua_ls = {
-          settings = {
-            Lua = {
-              runtime = { version = "LuaJIT" },
-              workspace = {
-                checkThirdParty = false,
-                library = {
-                  vim.env.VIMRUNTIME,
-                }
-              },
-              diagnostics = {
-                neededFileStatus = {
-                  ["codestyle-check"] = "Any",
-                },
-              },
-              format = {
-                enable = true,
-                defaultConfig = {
-                  indent_style = "space",
-                  indent_size = "2",
-                  quote_style = "double",
-                  max_line_length = "100",
-                  call_arg_parentheses = "keep",
-                },
-              },
-            }
-          },
-          on_attach = lsp.on_attach,
+          on_attach = function(client, bufnr)
+            client.server_capabilities.completionProvider.triggerCharacters =
+              { ".", ":", "(", "[", ",", "#", "*", "@", "|", "=", "{", "+", "?" }
+            return lsp.on_attach(client, bufnr)
+          end,
         },
       },
     }, opts)
@@ -100,26 +78,24 @@ return {
         filetypes = { "javascript", "javascriptreact", "typescript", "typescriptreact" },
         root_dir = function(filename)
           local root = lspconfig.util.path.dirname(filename)
-          lspconfig.util.path.traverse_parents(
-            filename, function(dir, _) root = dir end
-          )
+          lspconfig.util.path.traverse_parents(filename, function(dir, _)
+            root = dir
+          end)
           return root
         end,
       },
-      docs = { description = "quick-lint-js" }
+      docs = { description = "quick-lint-js" },
     }
 
     for server, server_config in pairs(opts.servers) do
       local cmd = lspconfig[server].document_config.default_config.cmd
       if type(cmd) == "table" and command.executable(cmd[1]) then
-        lspconfig[server].setup(vim.tbl_deep_extend(
-          "force",
-          { capabilities = opts.capabilities },
-          server_config
-        ))
+        lspconfig[server].setup(
+          vim.tbl_deep_extend("force", { capabilities = opts.capabilities }, server_config)
+        )
       end
     end
 
     require("lspconfig.ui.windows").default_options.border = "single"
-  end
+  end,
 }

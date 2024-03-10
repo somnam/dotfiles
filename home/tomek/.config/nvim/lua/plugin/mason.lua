@@ -11,7 +11,7 @@ return {
         ":Mason<Enter>",
         noremap = true,
         silent = true,
-        desc = "Open the Package Manager UI"
+        desc = "Open the Package Manager UI",
       },
     },
     init = function()
@@ -33,13 +33,13 @@ return {
 
       vim.env.PATH = python.remove_pyenv_shims_from_path()
       vim.env.PATH = python.add_virtual_env_bin_to_path()
-    end
+    end,
   },
   {
     "WhoIsSethDaniel/mason-tool-installer.nvim",
-    dependencies = {"williamboman/mason.nvim"},
+    dependencies = { "williamboman/mason.nvim" },
     opts = {
       ensure_installed = config.plugin.mason.ensure_installed,
-    }
-  }
+    },
+  },
 }

@@ -1,4 +1,4 @@
-local opts = {noremap = true, silent = true}
+local opts = { noremap = true, silent = true }
 
 -- Move between windows
 vim.api.nvim_set_keymap("n", "<C-j>", "<C-W>j", opts)
@@ -25,10 +25,14 @@ vim.api.nvim_set_keymap("n", "<Esc>", ":mode | :nohlsearch | diffupdate<Enter>",
 
 -- Leader mappings
 vim.api.nvim_set_keymap(
-  "n", "<Space>n", ":enew<Enter>",
-  vim.tbl_extend("keep", {desc = "Edit a new buffer"}, opts)
+  "n",
+  "<Space>n",
+  ":enew<Enter>",
+  vim.tbl_extend("keep", { desc = "Edit a new buffer" }, opts)
 )
 vim.api.nvim_set_keymap(
-  "n", "<Space>q", ":qall<Enter>",
-  vim.tbl_extend("keep", {desc = "Exit Neovim"}, opts)
+  "n",
+  "<Space>q",
+  ":qall<Enter>",
+  vim.tbl_extend("keep", { desc = "Exit Neovim" }, opts)
 )

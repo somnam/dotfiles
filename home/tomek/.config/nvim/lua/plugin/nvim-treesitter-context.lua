@@ -5,5 +5,5 @@ return {
   opts = {
     line_numbers = false,
     multiline_threshold = 3,
-  }
+  },
 }

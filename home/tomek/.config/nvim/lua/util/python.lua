@@ -43,7 +43,7 @@ end
 
 M.add_virtual_env_bin_to_path = function()
   if M.virtual_env_bin then
-      return M.virtual_env_bin .. misc.path_separator .. vim.env.PATH
+    return M.virtual_env_bin .. misc.path_separator .. vim.env.PATH
   end
   return vim.env.PATH
 end

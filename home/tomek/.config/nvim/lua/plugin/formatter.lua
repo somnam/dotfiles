@@ -1,17 +1,17 @@
-local config = require("core.config")
 local command = require("util.command")
+local config = require("core.config")
 local python = require("util.python")
 
 return {
   "mhartington/formatter.nvim",
-  event = {"BufReadPost", "BufNewFile"},
+  event = { "BufReadPost", "BufNewFile" },
   keys = {
     {
       "<Space>=",
       ":FormatWrite<Enter>",
       noremap = true,
       silent = true,
-      desc = "Format and write current buffer"
+      desc = "Format and write current buffer",
     },
   },
   opts = function()
@@ -43,13 +43,16 @@ return {
 
     local H = {}
 
-    H.formatters = function(names)
+    H.formatters = function(filetype, names)
       local results = {}
+      local filetype_formatters = filetypes[filetype]
 
-      for _, name in pairs(names) do
-        local formatter = filetypes.rust[name]
-        if formatter and command.executable(formatter().exe) then
-          table.insert(results, formatter)
+      if type(filetype_formatters) == "table" then
+        for _, name in pairs(names) do
+          local formatter = filetype_formatters[name]
+          if formatter and command.executable(formatter().exe) then
+            table.insert(results, formatter)
+          end
         end
       end
 
@@ -60,7 +63,7 @@ return {
       if python.in_virtual_env() then
         return H.python_virtual_env_formatters(names)
       else
-        return H.formatters(names)
+        return H.formatters("python", names)
       end
     end
 
@@ -81,12 +84,12 @@ return {
       local results = {
         python = H.python_formatters(config.plugin.formatter.python),
         -- Formatter configurations on any filetype
-        ["*"] = {filetypes.any.strip_trailing_whitespace}
+        ["*"] = { filetypes.any.strip_trailing_whitespace },
       }
 
       for filetype, value in pairs(config.plugin.formatter) do
         if results[filetype] == nil then
-          results[filetype] = H.formatters(value)
+          results[filetype] = H.formatters(filetype, value)
         end
       end
 
@@ -96,5 +99,5 @@ return {
     return {
       filetype = H.formatters_by_filetype(),
     }
-  end
+  end,
 }

@@ -1,27 +1,31 @@
-local opts = {noremap = true, silent = true}
+local opts = { noremap = true, silent = true }
 vim.api.nvim_set_keymap(
-  "n", "<Space>m", ":lua vim.diagnostic.open_float()<Enter>",
-  vim.tbl_extend("keep", {desc = "List cursor line diagnostics"}, opts)
+  "n",
+  "<Space>m",
+  ":lua vim.diagnostic.open_float()<Enter>",
+  vim.tbl_extend("keep", { desc = "List cursor line diagnostics" }, opts)
 )
 vim.api.nvim_set_keymap(
-  "n", "<Space>M", ":lua vim.diagnostic.setloclist()<Enter>",
-  vim.tbl_extend("keep", {desc = "List all buffer diagnostics"}, opts)
+  "n",
+  "<Space>M",
+  ":lua vim.diagnostic.setloclist()<Enter>",
+  vim.tbl_extend("keep", { desc = "List all buffer diagnostics" }, opts)
 )
 
 local icons = {
-    [vim.diagnostic.severity.ERROR] = {hl = "DiagnosticSignError", glyph = "󰅚 "},
-    [vim.diagnostic.severity.WARN] = {hl = "DiagnosticSignWarn", glyph = "󰀪 "},
-    [vim.diagnostic.severity.INFO] = {hl = "DiagnosticSignInfo", glyph = "󰋽 "},
-    [vim.diagnostic.severity.HINT] = {hl = "DiagnosticSignHint", glyph = "󰌶 "},
+  [vim.diagnostic.severity.ERROR] = { hl = "DiagnosticSignError", glyph = "󰅚 " },
+  [vim.diagnostic.severity.WARN] = { hl = "DiagnosticSignWarn", glyph = "󰀪 " },
+  [vim.diagnostic.severity.INFO] = { hl = "DiagnosticSignInfo", glyph = "󰋽 " },
+  [vim.diagnostic.severity.HINT] = { hl = "DiagnosticSignHint", glyph = "󰌶 " },
 }
 
 for _, icon in pairs(icons) do
-	vim.fn.sign_define(icon.hl, {text = icon.glyph, texthl = icon.hl, numhl = icon.hl})
+  vim.fn.sign_define(icon.hl, { text = icon.glyph, texthl = icon.hl, numhl = icon.hl })
 end
 
 local diagnostic_opts = {
   virtual_text = {
-    severity = {min = vim.diagnostic.severity.ERROR},
+    severity = { min = vim.diagnostic.severity.ERROR },
     prefix = "",
     source = true,
   },

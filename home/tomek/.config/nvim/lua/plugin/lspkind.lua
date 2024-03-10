@@ -7,7 +7,7 @@ return {
         mode = "symbol_text",
         preset = "codicons",
       })
-    end
+    end,
   },
   {
     "hrsh7th/nvim-cmp",
@@ -18,9 +18,9 @@ return {
           format = require("lspkind").cmp_format({
             maxwidth = 50,
             ellipsis_char = "…",
-          })
-        }
+          }),
+        },
       })
-    end
-  }
+    end,
+  },
 }

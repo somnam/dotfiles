@@ -1,5 +1,7 @@
 local git_available = vim.fn.executable("git") == 1
-if not git_available then return end
+if not git_available then
+  return
+end
 
 local config = require("core.config")
 
@@ -26,31 +28,31 @@ end
 
 H.setup = function()
   vim.api.nvim_set_keymap(
-    "n", "<Space>z", ":Lazy<Enter>",
-    {noremap = true, silent = true, desc = "Open the Plugin Manager UI"}
+    "n",
+    "<Space>z",
+    ":Lazy<Enter>",
+    { noremap = true, silent = true, desc = "Open the Plugin Manager UI" }
   )
 
-  require("lazy").setup(
-    {
-      spec = {
-        {import = "plugin"},
-      },
-      checker = {
-        enabled = true,
-        notify = false,
-        frequency = 3600 * 24,
-      },
-      change_detection = {
-        notify = false,
-      },
-      install = {
-        colorscheme = { config.colorscheme, "habamax" },
-      },
-      ui = {
-        border = "rounded",
-      },
-    }
-  )
+  require("lazy").setup({
+    spec = {
+      { import = "plugin" },
+    },
+    checker = {
+      enabled = true,
+      notify = false,
+      frequency = 3600 * 24,
+    },
+    change_detection = {
+      notify = false,
+    },
+    install = {
+      colorscheme = { config.colorscheme, "habamax" },
+    },
+    ui = {
+      border = "rounded",
+    },
+  })
 end
 
 H.bootstrap()
