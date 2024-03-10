@@ -9,24 +9,27 @@ return {
     H.max_size = 1024 * 256
 
     H.maybe_disable_mini_cursorword = function(ctx)
-      return (
-        vim.tbl_contains(buffer.exclude.filetype, ctx.match)
-        or buffer.above_max_size(ctx.buf, H.max_size)
-      )
+      return buffer.excluded(ctx.buf) or buffer.above_max_size(ctx.buf, H.max_size)
+    end
+
+    H.maybe_disable_mini_indentscope = function(ctx)
+      return buffer.excluded(ctx.buf)
     end
 
     vim.api.nvim_create_autocmd("FileType", {
       pattern = "*",
-      group = vim.api.nvim_create_augroup("mini_cursorword_file_disable", { clear = true }),
+      group = vim.api.nvim_create_augroup("maybe_disable_mini_plugin", { clear = true }),
       callback = function(ctx)
         if H.maybe_disable_mini_cursorword(ctx) then
           vim.b.minicursorword_disable = true
         end
-      end
+        if H.maybe_disable_mini_indentscope(ctx) then
+          vim.b.miniindentscope_disable = true
+        end
+      end,
     })
   end,
   config = function()
-
     vim.api.nvim_cmd({
       cmd = "command",
       args = { "BD lua MiniBufremove.delete(0, true)" },
@@ -51,10 +54,8 @@ return {
         ['"'] = { action = "open", neigh_pattern = quote_neigh_pattern },
         ["'"] = { action = "open", neigh_pattern = quote_neigh_pattern },
         ["`"] = { action = "open", neigh_pattern = quote_neigh_pattern },
-      }
+      },
     })
-
-    require("mini.trailspace").setup()
 
     require("mini.cursorword").setup({ delay = 150 })
 
@@ -71,9 +72,9 @@ return {
 
         -- Marks
         { mode = "n", keys = "'" },
-        { mode = "n", keys = '`' },
+        { mode = "n", keys = "`" },
         { mode = "x", keys = "'" },
-        { mode = "x", keys = '`' },
+        { mode = "x", keys = "`" },
 
         -- Registers
         { mode = "n", keys = '"' },
@@ -94,14 +95,25 @@ return {
         config = {
           width = "auto",
           row = "auto",
-          col = "auto"
-        }
-      }
+          col = "auto",
+        },
+      },
     })
 
     local mini_notify = require("mini.notify")
     mini_notify.setup({
       lsp_progress = { duration_last = 2000 },
     })
-  end
+
+    require("mini.indentscope").setup({
+      symbol = "│",
+      options = {
+        try_as_border = true,
+      },
+      draw = {
+        delay = 200,
+        animation = require("mini.indentscope").gen_animation.none(),
+      },
+    })
+  end,
 }

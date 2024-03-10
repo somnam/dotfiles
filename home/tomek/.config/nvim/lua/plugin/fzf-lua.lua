@@ -1,5 +1,5 @@
-local search = require("util.search")
 local command = require("util.command")
+local search = require("util.search")
 
 return {
   "ibhagwan/fzf-lua",
@@ -13,98 +13,98 @@ return {
       ":FzfLua oldfiles cwd_only=true<Enter>",
       noremap = true,
       silent = true,
-      desc = "List opened local files history"
+      desc = "List opened local files history",
     },
     {
       "<Space>P",
       ":FzfLua oldfiles<Enter>",
       noremap = true,
       silent = true,
-      desc = "List opened global files history"
+      desc = "List opened global files history",
     },
     {
       "<Space>f",
       ":FzfLua files<Enter>",
       noremap = true,
       silent = true,
-      desc = "Find files on a path"
+      desc = "Find files on a path",
     },
     {
       "<Space>b",
       ":FzfLua buffers<Enter>",
       noremap = true,
       silent = true,
-      desc = "List opened buffers"
+      desc = "List opened buffers",
     },
     {
       "<Space>:",
       ":FzfLua command_history<Enter>",
       noremap = true,
       silent = true,
-      desc = "List command history"
+      desc = "List command history",
     },
     {
       "<Space>gs",
       ":FzfLua git_status<Enter>",
       noremap = true,
       silent = true,
-      desc = "Show working tree status"
+      desc = "Show working tree status",
     },
     {
       "<Space>gl",
       ":FzfLua git_bcommits<Enter>",
       noremap = true,
       silent = true,
-      desc = "Show current buffer commit logs"
+      desc = "Show current buffer commit logs",
     },
     {
       "<Space>gL",
       ":FzfLua git_commits<Enter>",
       noremap = true,
       silent = true,
-      desc = "Show working tree commit logs"
+      desc = "Show working tree commit logs",
     },
     {
       "<Space>w",
       ":FzfLua live_grep<Enter>",
       noremap = true,
       silent = true,
-      desc = "Live grep the current project"
+      desc = "Live grep the current project",
     },
     {
       "<Space>W",
       ":FzfLua live_grep_resume<Enter>",
       noremap = true,
       silent = true,
-      desc = "Live grep continue last search"
+      desc = "Live grep continue last search",
     },
     {
       "<Space>l",
       ":FzfLua lines<Enter>",
       noremap = true,
       silent = true,
-      desc = "Search opened buffers lines"
+      desc = "Search opened buffers lines",
     },
     {
       "<Space>M",
       ":FzfLua lsp_document_diagnostics<Enter>",
       noremap = true,
       silent = true,
-      desc = "List all buffer diagnostics"
+      desc = "List all buffer diagnostics",
     },
     {
       "<Space>o",
       ":FzfLua lsp_document_symbols<Enter>",
       noremap = true,
       silent = true,
-      desc = "List all buffer symbols"
+      desc = "List all buffer symbols",
     },
     {
       "<Space>a",
       ":FzfLua lsp_references<Enter>",
       noremap = true,
       silent = true,
-      desc = "List all symbol references"
+      desc = "List all symbol references",
     },
   },
   opts = {
@@ -144,7 +144,7 @@ return {
     grep = {
       prompt = "Words❯ ",
       cmd = search.grep(),
-      rg_glob = command.executable("rg")
+      rg_glob = command.executable("rg"),
     },
-  }
+  },
 }

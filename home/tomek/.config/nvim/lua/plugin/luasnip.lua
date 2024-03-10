@@ -8,7 +8,7 @@ return {
   },
   {
     "hrsh7th/nvim-cmp",
-    dependencies = {"saadparwaiz1/cmp_luasnip"},
+    dependencies = { "saadparwaiz1/cmp_luasnip" },
     opts = function(_, opts)
       local cmp = require("cmp")
       local luasnip = require("luasnip")
@@ -17,31 +17,25 @@ return {
         snippet = {
           expand = function(args)
             require("luasnip").lsp_expand(args.body)
-          end
+          end,
         },
         mapping = {
-          ["<C-l>"] = cmp.mapping(
-            function(fallback)
-              if luasnip.expand_or_locally_jumpable() then
-                luasnip.expand_or_jump()
-              elseif not luasnip.in_snippet() then
-                fallback()
-              end
-            end,
-            {"i", "s"}
-          ),
-          ["<C-h>"] = cmp.mapping(
-            function(fallback)
-              if luasnip.locally_jumpable(-1) then
-                luasnip.jump(-1)
-              elseif not luasnip.in_snippet() then
-                fallback()
-              end
-            end,
-            {"i", "s"}
-          ),
+          ["<C-l>"] = cmp.mapping(function(fallback)
+            if luasnip.expand_or_locally_jumpable() then
+              luasnip.expand_or_jump()
+            elseif not luasnip.in_snippet() then
+              fallback()
+            end
+          end, { "i", "s" }),
+          ["<C-h>"] = cmp.mapping(function(fallback)
+            if luasnip.locally_jumpable(-1) then
+              luasnip.jump(-1)
+            elseif not luasnip.in_snippet() then
+              fallback()
+            end
+          end, { "i", "s" }),
         },
       })
-    end
-  }
+    end,
+  },
 }

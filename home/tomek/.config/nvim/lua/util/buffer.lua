@@ -10,22 +10,33 @@ M.above_max_size = function(buffer, max_size)
 end
 
 M.exclude = {
-  buftype = {"nofile", "prompt", "terminal", "quickfix"},
-  filetype = {"alpha", "help", "netrw", "NvimTree", "tutor", "qf"},
+  buftype = {
+    "nofile",
+    "prompt",
+    "quickfix",
+    "terminal",
+  },
+  filetype = {
+    "",
+    "checkhealth",
+    "NvimTree",
+    "alpha",
+    "help",
+    "lazy",
+    "man",
+    "mason",
+    "netrw",
+    "qf",
+    "tutor",
+  },
 }
 
 M.buftype_excluded = function(buffer, exclude_list)
-  return vim.tbl_contains(
-    exclude_list,
-    vim.api.nvim_buf_get_option(buffer, "buftype")
-  )
+  return vim.tbl_contains(exclude_list, vim.api.nvim_buf_get_option(buffer, "buftype"))
 end
 
 M.filetype_excluded = function(buffer, exclude_list)
-  return vim.tbl_contains(
-    exclude_list,
-    vim.api.nvim_buf_get_option(buffer, "filetype")
-  )
+  return vim.tbl_contains(exclude_list, vim.api.nvim_buf_get_option(buffer, "filetype"))
 end
 
 M.excluded = function(buffer)

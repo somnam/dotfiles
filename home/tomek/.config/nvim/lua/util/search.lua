@@ -12,7 +12,7 @@ M.get_find_command = function()
       "--follow",
       "--no-require-git",
       "--exclude .git",
-    }
+    },
   }
   if command.executable(fd.cmd) then
     return fd
@@ -27,7 +27,7 @@ M.get_find_command = function()
       "--follow",
       "--no-require-git",
       "-g '!.git'",
-    }
+    },
   }
   if command.executable(rg.cmd) then
     return rg
@@ -39,9 +39,14 @@ M.get_find_command = function()
       "-L",
       ".",
       "-type f",
-      "-not", "-path", "'*/.git/*'",
-      "-and", "-not", "-path", "'*/__pycache__/*'",
-    }
+      "-not",
+      "-path",
+      "'*/.git/*'",
+      "-and",
+      "-not",
+      "-path",
+      "'*/__pycache__/*'",
+    },
   }
 end
 
@@ -59,7 +64,7 @@ M.get_grep_command = function()
       "--no-require-git",
       "--max-columns=4096",
       "-g '!.git'",
-    }
+    },
   }
   if command.executable(rg.cmd) then
     return rg
@@ -74,7 +79,7 @@ M.get_grep_command = function()
       "--smart-case",
       "--ignore-dir={.cache,.mypy_cache,.pytest_cache}",
       "--ignore-dir={.env,.venv}",
-    }
+    },
   }
   if command.executable(ack.cmd) then
     return ack
@@ -89,7 +94,7 @@ M.get_grep_command = function()
       "--color=never",
       "--perl-regexp",
       "--exclude-dir='.git'",
-    }
+    },
   }
 end
 

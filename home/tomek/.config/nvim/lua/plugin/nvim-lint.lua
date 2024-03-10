@@ -1,22 +1,22 @@
-local config = require("core.config")
 local command = require("util.command")
+local config = require("core.config")
 local python = require("util.python")
 
 return {
   "mfussenegger/nvim-lint",
-  event = {"BufReadPre", "BufNewFile"},
+  event = { "BufReadPre", "BufNewFile" },
   config = function()
     local lint = require("lint")
     local linters = lint.linters
 
-    vim.api.nvim_create_autocmd({"BufWinEnter", "BufWritePost"}, {
+    vim.api.nvim_create_autocmd({ "BufWinEnter", "BufWritePost" }, {
       group = vim.api.nvim_create_augroup("nvim_lint_trigger", { clear = true }),
       callback = function()
         lint.try_lint()
-      end
+      end,
     })
 
-    linters.mypy.args = vim.list_extend(linters.mypy.args, {"--namespace-packages"})
+    linters.mypy.args = vim.list_extend(linters.mypy.args, { "--namespace-packages" })
 
     local H = {}
 
@@ -69,5 +69,5 @@ return {
     end
 
     lint.linters_by_ft = H.linters_by_filetype()
-  end
+  end,
 }

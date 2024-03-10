@@ -3,12 +3,7 @@ local H = {}
 H.tab = vim.api.nvim_replace_termcodes("<tab>", true, false, true)
 
 H.set_accept_suggestion_keymap = function()
-  vim.keymap.set(
-    { "i", "s", "n" },
-    "<Tab>",
-    H.accept_suggestion,
-    { noremap = true, silent = true }
-  )
+  vim.keymap.set({ "i", "s", "n" }, "<Tab>", H.accept_suggestion, { noremap = true, silent = true })
 end
 
 H.del_accept_suggestion_keymap = function()
@@ -73,8 +68,8 @@ return {
       },
       filetypes = {
         ["*"] = false,
-      }
-    }
+      },
+    },
   },
   {
     "AndreM222/copilot-lualine",
@@ -82,13 +77,13 @@ return {
     dependencies = { "nvim-lualine/lualine.nvim" },
     config = function()
       local lualine_config = require("lualine_require").lazy_require({
-        config_module = "lualine.config"
+        config_module = "lualine.config",
       })
       local current_config = lualine_config.config_module.get_config()
 
       table.insert(current_config.sections.lualine_c, "copilot")
 
       require("lualine").setup(current_config)
-    end
+    end,
   },
 }

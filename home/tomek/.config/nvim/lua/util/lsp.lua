@@ -6,7 +6,7 @@ end
 
 M.get_clients_count = function()
   local bufnr = vim.api.nvim_get_current_buf()
-  return table.getn(vim.lsp.get_active_clients({bufnr = bufnr}))
+  return table.getn(vim.lsp.get_active_clients({ bufnr = bufnr }))
 end
 
 M.show_info = function()

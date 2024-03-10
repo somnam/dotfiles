@@ -1,5 +1,5 @@
-local statusline = require("util.statusline")
 local lsp = require("util.lsp")
+local statusline = require("util.statusline")
 
 local H = {}
 
@@ -19,7 +19,7 @@ H.lualine_c = {
   "diff",
   {
     "diagnostics",
-    symbols = { error = "󰅚 ", warn = "󰀪 ", info = "󰋽 ", hint = "󰌶 " }
+    symbols = { error = "󰅚 ", warn = "󰀪 ", info = "󰋽 ", hint = "󰌶 " },
   },
   {
     lsp.get_clients_count,
@@ -78,5 +78,5 @@ return {
       lualine_c = H.winbar_c,
     },
     extensions = { "fzf", "lazy", "nvim-tree", "quickfix" },
-  }
+  },
 }
