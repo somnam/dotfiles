@@ -47,7 +47,7 @@ H.setup = function()
       notify = false,
     },
     install = {
-      colorscheme = { config.colorscheme, "habamax" },
+      colorscheme = { config.colorscheme, "default" },
     },
     ui = {
       border = "rounded",

@@ -1,6 +1,9 @@
 {
     "colorscheme": "default",
     "plugin": {
+        "lualine": {
+          "theme": null
+        },
         "formatter": {
             "python": ["black", "isort", "ruff", "ruff_check"],
             "lua": ["stylua"],
