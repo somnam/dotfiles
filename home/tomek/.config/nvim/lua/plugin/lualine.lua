@@ -1,3 +1,4 @@
+local config = require("core.config")
 local lsp = require("util.lsp")
 local statusline = require("util.statusline")
 
@@ -49,7 +50,7 @@ return {
   event = "VeryLazy",
   opts = {
     options = {
-      theme = "auto",
+      theme = config.plugin.lualine.theme or "auto",
       component_separators = "",
       section_separators = { left = "", right = "" },
       disabled_filetypes = {

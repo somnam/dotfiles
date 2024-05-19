@@ -42,8 +42,6 @@ return {
     }, {})
     require("mini.bufremove").setup()
 
-    require("mini.comment").setup()
-
     local neigh_pattern = ".[%s%)%]%}]"
     local quote_neigh_pattern = "[%{%[%(%=%s][%s%)%]%}]"
     require("mini.pairs").setup({
@@ -69,6 +67,10 @@ return {
         -- `g` key
         { mode = "n", keys = "g" },
         { mode = "x", keys = "g" },
+
+        -- Go forward/backward
+        { mode = "n", keys = "[" },
+        { mode = "n", keys = "]" },
 
         -- Marks
         { mode = "n", keys = "'" },

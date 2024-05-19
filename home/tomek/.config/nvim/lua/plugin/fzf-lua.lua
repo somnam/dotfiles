@@ -66,7 +66,7 @@ return {
     },
     {
       "<Space>w",
-      ":FzfLua live_grep<Enter>",
+      ":FzfLua live_grep_native<Enter>",
       noremap = true,
       silent = true,
       desc = "Live grep the current project",

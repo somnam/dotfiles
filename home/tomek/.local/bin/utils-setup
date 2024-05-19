@@ -10,7 +10,7 @@ upgrade-fzf()
 download-fzf ()
 {
     [[ $(which git) ]] || (echo "git not installed" && exit 1)
-    local FZF_VERSION='0.46.1'
+    local FZF_VERSION='0.52.1'
     echo "Downloading fzf version ${FZF_VERSION}"
 
     local fzf_url="https://github.com/junegunn/fzf.git"

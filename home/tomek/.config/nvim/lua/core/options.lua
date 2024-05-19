@@ -31,6 +31,7 @@ vim.opt.signcolumn = "yes" -- Show sign column
 vim.opt.number = false -- Don't display line numbers
 vim.opt.hidden = true -- Hide buffer instead of closing it
 vim.opt.mouse = "vi" -- Mouse modes
+vim.opt.scrolloff = 5 -- Minimal number of lines around the cursor
 
 vim.opt.smartindent = true -- Try to be smart with indenting
 vim.opt.autoindent = true -- Set global autoindent on
@@ -59,7 +60,6 @@ vim.opt.synmaxcol = 512 -- Be forgiving with long lines
 
 vim.opt.clipboard = "unnamedplus" -- Use the "global" buffer for copy and paste
 vim.opt.undofile = true -- Enable persistent undo
-vim.opt.modeline = false -- Don't run arbitrary modeline code
 vim.opt.inccommand = "nosplit" -- Shows the effects of a command incrementally.
 vim.opt.list = true -- Display whitespace info
 -- Display tab characters, trailing whitespace, visible spaces and mark lines that extend off-screen

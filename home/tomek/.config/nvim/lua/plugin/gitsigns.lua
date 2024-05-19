@@ -19,14 +19,14 @@ H.on_attach = function(bufnr)
   vim.api.nvim_buf_set_keymap(
     bufnr,
     "n",
-    "<Space>g[",
+    "[g",
     ":Gitsigns prev_hunk<Enter>",
     vim.tbl_extend("keep", { desc = "Go to previous git change block" }, bufopts)
   )
   vim.api.nvim_buf_set_keymap(
     bufnr,
     "n",
-    "<Space>g]",
+    "]g",
     ":Gitsigns next_hunk<Enter>",
     vim.tbl_extend("keep", { desc = "Go to next git change block" }, bufopts)
   )
