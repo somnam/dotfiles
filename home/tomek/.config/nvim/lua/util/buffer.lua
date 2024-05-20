@@ -39,10 +39,10 @@ M.filetype_excluded = function(buffer, exclude_list)
   return vim.tbl_contains(exclude_list, vim.api.nvim_buf_get_option(buffer, "filetype"))
 end
 
-M.excluded = function(buffer)
+M.excluded = function(buffer, exclude_filetype, exclude_buftype)
   return (
-    M.buftype_excluded(buffer, M.exclude.buftype)
-    or M.filetype_excluded(buffer, M.exclude.filetype)
+    M.buftype_excluded(buffer, (exclude_buftype or M.exclude.buftype))
+    or M.filetype_excluded(buffer, (exclude_filetype or M.exclude.filetype))
   )
 end
 

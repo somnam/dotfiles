@@ -47,7 +47,7 @@ H.winbar_c = {
 
 return {
   "nvim-lualine/lualine.nvim",
-  event = "VeryLazy",
+  event = "VimEnter",
   opts = {
     options = {
       theme = config.plugin.lualine.theme or "auto",

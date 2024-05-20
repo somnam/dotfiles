@@ -4,7 +4,7 @@ local python = require("util.python")
 
 return {
   "mhartington/formatter.nvim",
-  event = { "BufReadPost", "BufNewFile" },
+  event = { "BufReadPre", "BufNewFile" },
   keys = {
     {
       "<Space>=",
