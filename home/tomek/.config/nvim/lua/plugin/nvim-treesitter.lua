@@ -13,7 +13,7 @@ end
 return {
   "nvim-treesitter/nvim-treesitter",
   build = ":TSUpdate",
-  event = { "BufReadPre", "BufNewFile" },
+  event = "VimEnter",
   opts = {
     auto_install = true,
     ignore_install = treesitter.exclude_filetype,
