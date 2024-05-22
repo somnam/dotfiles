@@ -1,8 +1,11 @@
 {
     "colorscheme": "default",
+    "treesitter" : {
+        "exclude": []
+    },
     "plugin": {
         "lualine": {
-          "theme": null
+          "theme": "auto"
         },
         "formatter": {
             "python": ["black", "isort", "ruff", "ruff_check"],
