@@ -17,7 +17,6 @@ M.exclude = {
     "terminal",
   },
   filetype = {
-    "",
     "checkhealth",
     "NvimTree",
     "alpha",
