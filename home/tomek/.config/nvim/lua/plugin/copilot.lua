@@ -81,7 +81,7 @@ return {
       })
       local current_config = lualine_config.config_module.get_config()
 
-      table.insert(current_config.sections.lualine_c, "copilot")
+      table.insert(current_config.sections.lualine_x, 1, "copilot")
 
       require("lualine").setup(current_config)
     end,
