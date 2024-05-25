@@ -54,6 +54,11 @@ return {
           behavior = cmp.ConfirmBehavior.Replace,
           select = false,
         },
+        snippet = {
+          expand = function(arg)
+            vim.snippet.expand(arg.body)
+          end,
+        },
         performance = {
           debounce = 150,
         },
