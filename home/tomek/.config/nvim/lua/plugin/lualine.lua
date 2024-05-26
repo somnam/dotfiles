@@ -63,7 +63,7 @@ return {
       lualine_z = {
         "searchcount",
         "progress",
-        { statusline.location, padding = 0 },
+        { statusline.location, padding = { left = 0, right = 1 } },
       },
     },
     inactive_sections = {
