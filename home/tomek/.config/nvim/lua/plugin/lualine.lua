@@ -31,6 +31,7 @@ return {
       },
     },
     sections = {
+      lualine_a = { "mode" },
       lualine_b = {
         "branch",
         "diff",
@@ -40,7 +41,8 @@ return {
         },
       },
       lualine_c = {},
-      lualine_x = {
+      lualine_x = {},
+      lualine_y = {
         {
           lsp.get_clients_count,
           cond = lsp.has_clients,
@@ -58,11 +60,15 @@ return {
         "fileformat",
         "filetype",
       },
-      lualine_z = { "searchcount", statusline.location },
+      lualine_z = {
+        "searchcount",
+        "progress",
+        { statusline.location, padding = 0 },
+      },
     },
     inactive_sections = {
       lualine_c = {},
-      lualine_x = { "encoding", "fileformat", "filetype" },
+      lualine_x = {},
     },
     winbar = {
       lualine_c = H.winbar_c,
