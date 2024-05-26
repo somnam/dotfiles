@@ -39,8 +39,8 @@ H.disable_copilot = function()
   local copilot_client = require("copilot.client")
   local copilot_command = require("copilot.command")
 
-  H.del_accept_suggestion_keymap()
   if not copilot_client.is_disabled() then
+    H.del_accept_suggestion_keymap()
     copilot_command.detach()
     copilot_command.disable()
   end
@@ -81,7 +81,7 @@ return {
       })
       local current_config = lualine_config.config_module.get_config()
 
-      table.insert(current_config.sections.lualine_x, 1, "copilot")
+      table.insert(current_config.sections.lualine_y, 1, "copilot")
 
       require("lualine").setup(current_config)
     end,
