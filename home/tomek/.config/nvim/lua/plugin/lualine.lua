@@ -25,7 +25,6 @@ return {
       disabled_filetypes = {
         winbar = buffer.exclude.filetype,
       },
-      globalstatus = true,
       refresh = {
         winbar = 10000,
       },
