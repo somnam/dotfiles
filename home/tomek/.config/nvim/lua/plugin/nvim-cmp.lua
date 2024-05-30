@@ -72,14 +72,14 @@ return {
           ["<C-Space>"] = cmp.mapping.complete(),
           ["<C-e>"] = cmp.mapping.abort(),
           ["<CR>"] = cmp.mapping.confirm({ select = true }),
-          ["<C-l>"] = cmp.mapping(function(fallback)
+          ["<Tab>"] = cmp.mapping(function(fallback)
             if vim.snippet.active({ direction = 1 }) then
               vim.snippet.jump(1)
             else
               fallback()
             end
           end, { "i", "s" }),
-          ["<C-h>"] = cmp.mapping(function(fallback)
+          ["<S-Tab>"] = cmp.mapping(function(fallback)
             if vim.snippet.active({ direction = -1 }) then
               vim.snippet.jump(-1)
             else
