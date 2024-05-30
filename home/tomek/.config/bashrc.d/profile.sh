@@ -9,7 +9,7 @@ plugins=(
     git
     lua
     nvim
-    nvm
+    fnm
     pyenv
     pyenv-python-version
     rg

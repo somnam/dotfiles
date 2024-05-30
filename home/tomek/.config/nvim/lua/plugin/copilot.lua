@@ -1,29 +1,5 @@
 local H = {}
 
-H.tab = vim.api.nvim_replace_termcodes("<tab>", true, false, true)
-
-H.set_accept_suggestion_keymap = function()
-  vim.keymap.set({ "i", "s", "n" }, "<Tab>", H.accept_suggestion, { noremap = true, silent = true })
-end
-
-H.del_accept_suggestion_keymap = function()
-  vim.keymap.del({ "i", "s", "n" }, "<Tab>")
-end
-
-H.accept_suggestion = function()
-  local copilot_suggestion = require("copilot.suggestion")
-  local cmp_ok, cmp = pcall(require, "cmp")
-
-  if copilot_suggestion.is_visible() then
-    copilot_suggestion.accept()
-    if cmp_ok and cmp.visible() then
-      cmp.close()
-    end
-  else
-    vim.api.nvim_feedkeys(H.tab, "n", true)
-  end
-end
-
 H.enable_copilot = function()
   local copilot_client = require("copilot.client")
   local copilot_command = require("copilot.command")
@@ -31,7 +7,6 @@ H.enable_copilot = function()
   if copilot_client.is_disabled() then
     copilot_command.enable()
   end
-  H.set_accept_suggestion_keymap()
   copilot_command.attach({ force = true })
 end
 
@@ -40,7 +15,6 @@ H.disable_copilot = function()
   local copilot_command = require("copilot.command")
 
   if not copilot_client.is_disabled() then
-    H.del_accept_suggestion_keymap()
     copilot_command.detach()
     copilot_command.disable()
   end
@@ -49,6 +23,7 @@ end
 return {
   {
     "zbirenbaum/copilot.lua",
+    build = ":Copilot auth",
     cmd = "Copilot",
     cond = function()
       return require("util.command").executable("node")
@@ -60,8 +35,7 @@ return {
     },
     opts = {
       suggestion = {
-        auto_trigger = true,
-        keymap = { accept = false },
+        auto_trigger = false,
       },
       panel = {
         enabled = false,
@@ -84,6 +58,20 @@ return {
       table.insert(current_config.sections.lualine_y, 1, "copilot")
 
       require("lualine").setup(current_config)
+    end,
+  },
+  {
+    "hrsh7th/nvim-cmp",
+    opts = function()
+      local cmp = require("cmp")
+
+      cmp.event:on("menu_opened", function()
+        vim.b.copilot_suggestion_hidden = true
+      end)
+
+      cmp.event:on("menu_closed", function()
+        vim.b.copilot_suggestion_hidden = false
+      end)
     end,
   },
 }
