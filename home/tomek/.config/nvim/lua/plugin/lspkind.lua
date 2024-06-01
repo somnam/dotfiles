@@ -12,7 +12,7 @@ return {
   {
     "hrsh7th/nvim-cmp",
     opts = function(_, opts)
-      return require("util.misc").map_extend(opts, {
+      return require("util.misc").deep_extend(opts, {
         formatting = {
           fields = { "abbr", "kind", "menu" },
           format = require("lspkind").cmp_format({

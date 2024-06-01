@@ -2,7 +2,7 @@ return {
   "echasnovski/mini.nvim",
   event = "VeryLazy",
   init = function()
-    local buffer = require("util.buffer")
+    local buffer = require("core.buffer")
 
     local H = {}
 

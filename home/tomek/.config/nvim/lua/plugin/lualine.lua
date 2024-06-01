@@ -1,7 +1,7 @@
-local buffer = require("util.buffer")
+local buffer = require("core.buffer")
 local config = require("core.config")
-local lsp = require("util.lsp")
-local statusline = require("util.statusline")
+local lsp = require("core.lsp")
+local statusline = require("core.statusline")
 
 local H = {}
 
