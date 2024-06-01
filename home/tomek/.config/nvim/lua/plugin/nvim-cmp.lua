@@ -9,7 +9,7 @@ return {
     },
     opts = function(_, opts)
       local cmp = require("cmp")
-      local buffer = require("util.buffer")
+      local buffer = require("core.buffer")
 
       local H = {}
 
@@ -43,7 +43,7 @@ return {
 
       H.window_option = cmp.config.window.bordered()
 
-      return require("util.misc").map_extend({
+      return require("util.misc").deep_extend({
         sources = {
           { name = "nvim_lsp", group_index = 1 },
           { name = "buffer", group_index = 2, keyword_length = 2, option = H.buffer_option },
@@ -105,7 +105,7 @@ return {
     "neovim/nvim-lspconfig",
     dependencies = { "hrsh7th/cmp-nvim-lsp" },
     opts = function(_, opts)
-      return require("util.misc").map_extend(opts, {
+      return require("util.misc").deep_extend(opts, {
         capabilities = require("cmp_nvim_lsp").default_capabilities(),
       })
     end,

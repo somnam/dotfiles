@@ -1,5 +1,5 @@
-local buffer = require("util.buffer")
-local treesitter = require("util.treesitter")
+local buffer = require("core.buffer")
+local treesitter = require("core.treesitter")
 
 local H = {}
 

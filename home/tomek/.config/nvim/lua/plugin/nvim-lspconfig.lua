@@ -1,5 +1,5 @@
 local command = require("util.command")
-local lsp = require("util.lsp")
+local lsp = require("core.lsp")
 local misc = require("util.misc")
 local python = require("util.python")
 
@@ -8,7 +8,7 @@ return {
   event = { "BufReadPre", "BufNewFile" },
   dependencies = { "williamboman/mason.nvim" },
   opts = function(_, opts)
-    return misc.map_extend({
+    return misc.deep_extend({
       capabilities = vim.lsp.protocol.make_client_capabilities(),
       servers = {
         jedi_language_server = {

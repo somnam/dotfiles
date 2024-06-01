@@ -1,4 +1,4 @@
-local buffer = require("util.buffer")
+local buffer = require("core.buffer")
 local config = require("core.config")
 
 local H = {}
