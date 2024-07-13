@@ -72,25 +72,6 @@ setup-pyenv ()
     pyenv update
 }
 
-
-upgrade-nvm()
-{
-    download-or-update-nvm
-}
-
-
-download-or-update-nvm ()
-{
-    local nvm_dir="$HOME/.nvm"
-
-    [[ $(which curl) ]] || (echo "curl not installed" && exit 1)
-
-    local nvm_install_url="https://raw.githubusercontent.com/nvm-sh/nvm/master/install.sh"
-
-    curl -o- "$nvm_install_url" | PROFILE=/dev/null bash
-}
-
-
 main ()
 {
     while getopts ":afrpn" flag; do
@@ -98,16 +79,12 @@ main ()
             a)
                 upgrade-fzf
                 upgrade-pyenv
-                upgrade-nvm
                 exit 0;;
             f)
                 upgrade-fzf
                 exit 0;;
             p)
                 upgrade-pyenv
-                exit 0;;
-            n)
-                upgrade-nvm
                 exit 0;;
         esac
     done

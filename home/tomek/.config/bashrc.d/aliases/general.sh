@@ -33,7 +33,7 @@ alias cp='cp -v'
 alias mv='mv -v'
 alias mkdir='mkdir -p'
 
-alias less='less -SRXc'
+alias less='less -RXc'
 alias info='info --vi-keys'
 alias wget='wget -c'
 alias sudo='sudo -E'
