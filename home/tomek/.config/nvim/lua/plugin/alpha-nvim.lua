@@ -3,6 +3,25 @@ return {
   event = "VimEnter",
   init = function()
     vim.cmd("autocmd FileType alpha setlocal nofoldenable")
+
+    vim.api.nvim_create_autocmd("User", {
+      pattern = "AlphaReady",
+      group = vim.api.nvim_create_augroup("alpha_dashboard_ready", { clear = true }),
+      callback = function(ctx)
+        vim.api.nvim_create_autocmd({ "BufReadPre", "BufNewFile" }, {
+          pattern = "*",
+          group = vim.api.nvim_create_augroup("alpha_dashboard_close", { clear = true }),
+          callback = function()
+            vim.schedule(function()
+              if vim.api.nvim_buf_is_loaded(ctx.buf) then
+                pcall(vim.api.nvim_buf_delete, ctx.buf, {})
+              end
+            end)
+            return true
+          end,
+        })
+      end,
+    })
   end,
   opts = function()
     local dashboard = require("alpha.themes.dashboard")
