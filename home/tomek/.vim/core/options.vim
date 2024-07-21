@@ -1,6 +1,3 @@
-" Disable intro message
-set shortmess+=I
-
 " Vim5 and later versions support syntax highlighting. Uncommenting the
 " following enables syntax highlighting by default.
 syntax on
@@ -65,7 +62,7 @@ set regexpengine=1                       " Use older regexp engine
 set synmaxcol=512                        " Be forgiving with long lines
 set nomodeline                           " Don't run arbitrary modeline code
 set undofile                             " Enable persistent undo
-set clipboard+=unnamedplus               " Use the "global" buffer for copy and paste
+set clipboard+=unnamed                   " Use the "global" buffer for copy and paste
 
 " Shut off completion messages
 set shortmess+=c
@@ -73,14 +70,8 @@ set shortmess+=c
 set complete-=i
 set complete-=t
 
-" Slows down scroll in vim >= 8.0.
-set nocursorcolumn
-set nocursorline
-set norelativenumber
-
-" Diff settings
-set diffopt+=algorithm:patience
-set diffopt+=indent-heuristic
+" Completion options
+set pumheight=15
 
 " Uncomment the following to have Vim jump to the last position when
 " reopening a file
