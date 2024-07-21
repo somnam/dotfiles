@@ -36,7 +36,7 @@ set smartindent     " Try to be smart with indenting
 set autoindent      " Set global autoindent on
 set wildmenu        " Use wildmenu
 set wildmode=full:longest
-set wildoptions=tagfile
+set wildoptions=pum,tagfile
 set laststatus=2    " Always display statusbar
 set fdm=marker      " Set folding method
 set hidden          " Hide buffer instead of closing it
