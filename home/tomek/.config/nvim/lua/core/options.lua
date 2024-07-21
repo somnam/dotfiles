@@ -13,7 +13,7 @@ vim.opt.showcmd = true -- Show (partial) command in status line.
 vim.opt.laststatus = 3 -- Always display statusbar
 vim.opt.wildmenu = true -- Use wildmenu
 vim.opt.wildmode = "full:longest"
-vim.opt.wildoptions = "tagfile"
+vim.opt.wildoptions = "pum,tagfile"
 
 vim.opt.wrap = true -- Line wrapping
 vim.opt.linebreak = true -- Wrap long lines at a linebreak character
