@@ -1,7 +1,3 @@
-" Key mappings
-
-imap <C-c> <Esc>
-
 " Move between windows
 nmap <C-j> <C-W>j
 nmap <C-k> <C-W>k
