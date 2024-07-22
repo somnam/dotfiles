@@ -75,6 +75,6 @@ return {
     inactive_winbar = {
       lualine_c = H.winbar_c,
     },
-    extensions = { "fzf", "lazy", "nvim-tree", "quickfix" },
+    extensions = { "fzf", "lazy", "mason", "oil", "quickfix" },
   },
 }

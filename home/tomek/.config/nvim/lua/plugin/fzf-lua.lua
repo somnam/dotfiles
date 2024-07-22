@@ -112,6 +112,7 @@ return {
       width = 0.65,
       row = 0.1,
       col = 0.5,
+      backdrop = 100,
       preview = {
         layout = "vertical",
         winopts = {
