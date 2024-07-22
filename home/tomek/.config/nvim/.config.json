@@ -1,6 +1,7 @@
 {
     "colorscheme": "default",
     "background": "dark",
+    "termguicolors": true,
     "treesitter" : {
         "exclude": []
     },
