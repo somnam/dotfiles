@@ -21,7 +21,7 @@ return {
     options = {
       theme = config.plugin.lualine.theme or "auto",
       component_separators = "",
-      section_separators = { left = "", right = "" },
+      section_separators = { left = "", right = "" },
       disabled_filetypes = {
         winbar = buffer.exclude.filetype,
       },
@@ -33,10 +33,13 @@ return {
       lualine_a = { "mode" },
       lualine_b = {
         "branch",
-        "diff",
+        {
+          "diff",
+          colored = false,
+        },
         {
           "diagnostics",
-          symbols = { error = "󰅚 ", warn = "󰀪 ", info = "󰋽 ", hint = "󰌶 " },
+          symbols = { error = "✖ ", warn = "▲ ", info = "● ", hint = "○ " },
         },
       },
       lualine_c = {},
@@ -45,18 +48,25 @@ return {
         {
           lsp.get_clients_count,
           cond = lsp.has_clients,
-          icon = " ",
+          icon = "LSP",
           on_click = lsp.show_info,
         },
         {
           H.get_updated,
           cond = require("lazy.status").has_updates,
-          icon = "󰒲 ",
+          icon = "💤 ",
           color = { fg = "#ff9e64" },
           on_click = require("lazy").home,
         },
         "encoding",
-        "fileformat",
+        {
+          "fileformat",
+          symbols = {
+            unix = "[unix]",
+            dos = "[dos]",
+            mac = "[mac]",
+          },
+        },
         "filetype",
       },
       lualine_z = {

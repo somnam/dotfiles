@@ -50,6 +50,21 @@ H.setup = function()
       colorscheme = { config.colorscheme, "default" },
     },
     ui = {
+      icons = {
+        cmd = "[⌘]",
+        config = "[⚙]",
+        event = "[event]",
+        ft = "[ft]",
+        init = "[init]",
+        keys = "[keys]",
+        plugin = "[plugin]",
+        runtime = "[runtime]",
+        require = "[require]",
+        source = "[source]",
+        start = "[start]",
+        task = "[task]",
+        lazy = "[lazy]",
+      },
       border = "rounded",
     },
   })

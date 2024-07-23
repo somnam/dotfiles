@@ -55,7 +55,20 @@ return {
       })
       local current_config = lualine_config.config_module.get_config()
 
-      table.insert(current_config.sections.lualine_y, 1, "copilot")
+      table.insert(current_config.sections.lualine_y, 1, {
+        "copilot",
+        symbols = {
+          status = {
+            icons = {
+              enabled = "Copilot ✔",
+              sleep = "Copilot ‒",
+              disabled = "Copilot ✖",
+              warning = "Copilot ▲",
+              unknown = "Copilot ?",
+            },
+          },
+        },
+      })
 
       require("lualine").setup(current_config)
     end,
