@@ -20,8 +20,4 @@ return {
       statementStyle = { bold = false },
     },
   },
-  {
-    "EdenEast/nightfox.nvim",
-    event = "ColorSchemePre *fox",
-  },
 }

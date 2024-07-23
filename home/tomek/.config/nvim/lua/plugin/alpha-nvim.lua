@@ -30,12 +30,12 @@ return {
     local H = {}
 
     H.labels = {
-      find_recent = "  Recent files",
-      find_file = "󰈞  Find files",
-      find_word = "󰈬  Find in files",
-      new_file = "  New file",
-      plugins = "󰒲  Plugins",
-      quit = "󰅚  Quit",
+      find_recent = "›  Recent files",
+      find_file = "›  Find files",
+      find_word = "›  Find in files",
+      new_file = "›  New file",
+      plugins = "›  Plugins",
+      quit = "›  Quit",
     }
 
     H.header = function()

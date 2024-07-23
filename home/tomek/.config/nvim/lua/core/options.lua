@@ -58,7 +58,7 @@ vim.opt.ttimeoutlen = 25 -- Set to unnoticeable small value
 vim.opt.updatetime = 2000 -- Longer update time leads to noticeable delays
 vim.opt.synmaxcol = 512 -- Be forgiving with long lines
 
-vim.opt.clipboard = "unnamedplus" -- Use the "global" buffer for copy and paste
+vim.opt.clipboard = "unnamed" -- Use the "global" buffer for copy and paste
 vim.opt.undofile = true -- Enable persistent undo
 vim.opt.inccommand = "nosplit" -- Shows the effects of a command incrementally.
 vim.opt.list = true -- Display whitespace info

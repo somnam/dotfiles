@@ -15,6 +15,8 @@ return {
 
       H.max_size = 1024 * 1024
 
+      H.max_label_width = 50
+
       H.current_buffer_enabled = function()
         return not buffer.excluded(vim.api.nvim_get_current_buf())
       end
@@ -36,12 +38,18 @@ return {
         return valid_buffers
       end
 
+      H.truncate_abbr = function(abbr)
+        if #abbr > H.max_label_width then
+          return vim.fn.strcharpart(abbr, 0, H.max_label_width) .. "…"
+        end
+
+        return abbr
+      end
+
       H.buffer_option = {
         get_bufnrs = H.get_bufnrs,
         indexing_interval = 500,
       }
-
-      H.window_option = cmp.config.window.bordered()
 
       return require("util.misc").deep_extend({
         sources = {
@@ -61,10 +69,6 @@ return {
         },
         performance = {
           debounce = 150,
-        },
-        window = {
-          completion = H.window_option,
-          documentation = H.window_option,
         },
         mapping = cmp.mapping.preset.insert({
           ["<C-b>"] = cmp.mapping.scroll_docs(-4),
@@ -87,6 +91,13 @@ return {
             end
           end, { "i", "s" }),
         }),
+        formatting = {
+          fields = { "abbr", "kind", "menu" },
+          format = function(_, vim_item)
+            vim_item.abbr = H.truncate_abbr(vim_item.abbr)
+            return vim_item
+          end,
+        },
         sorting = {
           comparators = {
             cmp.config.compare.offset,
