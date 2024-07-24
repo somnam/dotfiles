@@ -12,18 +12,15 @@ vim.api.nvim_set_keymap(
   vim.tbl_extend("keep", { desc = "List all buffer diagnostics" }, opts)
 )
 
-local icons = {
-  [vim.diagnostic.severity.ERROR] = { hl = "DiagnosticSignError", glyph = "✖ " },
-  [vim.diagnostic.severity.WARN] = { hl = "DiagnosticSignWarn", glyph = "▲ " },
-  [vim.diagnostic.severity.INFO] = { hl = "DiagnosticSignInfo", glyph = "● " },
-  [vim.diagnostic.severity.HINT] = { hl = "DiagnosticSignHint", glyph = "○ " },
-}
-
-for _, icon in pairs(icons) do
-  vim.fn.sign_define(icon.hl, { text = icon.glyph, texthl = icon.hl, numhl = icon.hl })
-end
-
 local diagnostic_opts = {
+  signs = {
+    text = {
+      [vim.diagnostic.severity.ERROR] = "✖",
+      [vim.diagnostic.severity.WARN] = "▲",
+      [vim.diagnostic.severity.INFO] = "●",
+      [vim.diagnostic.severity.HINT] = "○",
+    },
+  },
   virtual_text = {
     severity = { min = vim.diagnostic.severity.ERROR },
     prefix = "",
