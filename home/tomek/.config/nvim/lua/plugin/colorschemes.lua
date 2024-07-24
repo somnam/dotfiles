@@ -1,15 +1,18 @@
 return {
   {
-    "Mofiqul/vscode.nvim",
-    event = "ColorSchemePre vscode",
-    init = function()
-      vim.api.nvim_create_autocmd("ColorScheme", {
-        pattern = "vscode",
-        group = vim.api.nvim_create_augroup("set_vscode_theme", { clear = true }),
-        callback = function()
-          vim.api.nvim_set_hl(0, "CursorLine", { bg = "#2f2f2f" })
-        end,
-      })
+    "tomasiser/vim-code-dark",
+    event = "ColorSchemePre codedark",
+    config = function()
+      vim.g.codedark_italics = 1
+      vim.cmd.colorscheme("codedark")
+    end,
+  },
+  {
+    "sainnhe/gruvbox-material",
+    event = "ColorSchemePre gruvbox-material",
+    config = function()
+      vim.g.gruvbox_material_background = "hard"
+      vim.cmd.colorscheme("gruvbox-material")
     end,
   },
   {
