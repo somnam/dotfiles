@@ -54,7 +54,7 @@ return {
         {
           H.get_updated,
           cond = require("lazy.status").has_updates,
-          icon = "💤 ",
+          icon = "Updates",
           color = { fg = "#ff9e64" },
           on_click = require("lazy").home,
         },
