@@ -33,13 +33,10 @@ return {
       lualine_a = { "mode" },
       lualine_b = {
         "branch",
-        {
-          "diff",
-          colored = false,
-        },
+        "diff",
         {
           "diagnostics",
-          symbols = { error = "✖ ", warn = "▲ ", info = "● ", hint = "○ " },
+          symbols = { error = "✖ ", warn = "▲ ", info = "● ", hint = "⚑ " },
         },
       },
       lualine_c = {},
@@ -48,13 +45,13 @@ return {
         {
           lsp.get_clients_count,
           cond = lsp.has_clients,
-          icon = "LSP",
+          icon = "λ",
           on_click = lsp.show_info,
         },
         {
           H.get_updated,
           cond = require("lazy.status").has_updates,
-          icon = "Updates",
+          icon = "↑",
           color = { fg = "#ff9e64" },
           on_click = require("lazy").home,
         },

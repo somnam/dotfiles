@@ -110,7 +110,6 @@ return {
   opts = {
     winopts = {
       width = 0.65,
-      row = 0.1,
       col = 0.5,
       backdrop = 100,
       preview = {
@@ -123,21 +122,7 @@ return {
     fzf_opts = {
       ["--history"] = vim.fn.stdpath("data") .. "/fzf_lua_history",
     },
-    fzf_colors = {
-      ["fg"] = { "fg", "Normal" },
-      ["bg"] = { "bg", "Normal" },
-      ["hl"] = { "fg", "Comment" },
-      ["fg+"] = { "fg", "Normal" },
-      ["bg+"] = { "bg", "CursorLine" },
-      ["hl+"] = { "fg", "Statement" },
-      ["info"] = { "fg", "PreProc" },
-      ["prompt"] = { "fg", "Conditional" },
-      ["pointer"] = { "fg", "Exception" },
-      ["marker"] = { "fg", "Keyword" },
-      ["spinner"] = { "fg", "Label" },
-      ["header"] = { "fg", "Comment" },
-      ["gutter"] = { "bg", "Normal" },
-    },
+    fzf_colors = true,
     files = {
       prompt = "Files❯ ",
       cmd = search.find(),

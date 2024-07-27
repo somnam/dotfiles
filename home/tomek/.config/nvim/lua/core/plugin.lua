@@ -66,6 +66,7 @@ H.setup = function()
         lazy = "[~]",
       },
       border = "rounded",
+      backdrop = 100,
     },
   })
 end
