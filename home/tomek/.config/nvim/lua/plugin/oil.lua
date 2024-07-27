@@ -13,6 +13,8 @@ return {
     },
   },
   opts = {
+    -- Removes 'icon' column
+    columns = {},
     view_options = {
       show_hidden = true,
     },
@@ -28,6 +30,7 @@ return {
         desc = "Open the entry in a vertical split",
       },
       ["<C-[>"] = "actions.close",
+      ["q"] = "actions.close",
     },
     float = {
       max_width = 120,
