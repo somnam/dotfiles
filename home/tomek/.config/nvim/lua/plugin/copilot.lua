@@ -46,34 +46,6 @@ return {
     },
   },
   {
-    "AndreM222/copilot-lualine",
-    lazy = true,
-    dependencies = { "nvim-lualine/lualine.nvim" },
-    config = function()
-      local lualine_config = require("lualine_require").lazy_require({
-        config_module = "lualine.config",
-      })
-      local current_config = lualine_config.config_module.get_config()
-
-      table.insert(current_config.sections.lualine_y, 1, {
-        "copilot",
-        symbols = {
-          status = {
-            icons = {
-              enabled = "Copilot ✔",
-              sleep = "Copilot ‒",
-              disabled = "Copilot ✖",
-              warning = "Copilot ▲",
-              unknown = "Copilot ?",
-            },
-          },
-        },
-      })
-
-      require("lualine").setup(current_config)
-    end,
-  },
-  {
     "hrsh7th/nvim-cmp",
     opts = function()
       local cmp = require("cmp")
