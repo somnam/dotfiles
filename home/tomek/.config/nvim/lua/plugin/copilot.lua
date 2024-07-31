@@ -28,7 +28,6 @@ return {
     cond = function()
       return require("util.command").executable("node")
     end,
-    dependencies = { "AndreM222/copilot-lualine" },
     keys = {
       { "<Space>ce", H.enable_copilot, desc = "Enable Copilot for current buffer." },
       { "<Space>cd", H.disable_copilot, desc = "Disable Copilot for all buffers." },
