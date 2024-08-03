@@ -1,7 +1,7 @@
 local M = {}
 
 M.file_exists = function(file)
-  return vim.loop.fs_stat(file) ~= nil
+  return vim.uv.fs_stat(file) ~= nil
 end
 
 M.read_file = function(file)

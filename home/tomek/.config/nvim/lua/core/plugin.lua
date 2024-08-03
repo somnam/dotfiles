@@ -12,7 +12,7 @@ H.lazy_path = vim.fn.stdpath("data") .. "/lazy/lazy.nvim"
 H.lazy_url = "https://github.com/folke/lazy.nvim.git"
 
 H.bootstrap = function()
-  if not vim.loop.fs_stat(H.lazy_path) then
+  if not vim.uv.fs_stat(H.lazy_path) then
     vim.fn.system({
       "git",
       "clone",
