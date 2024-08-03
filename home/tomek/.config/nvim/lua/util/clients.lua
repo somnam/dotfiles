@@ -41,7 +41,7 @@ M.get_linter_names = function()
 end
 
 M.get_clients_string = function()
-  local unique_client_names = {}
+  local client_names_set = {}
 
   for _, client_names in ipairs({
     M.get_lsp_client_names(),
@@ -49,11 +49,13 @@ M.get_clients_string = function()
     M.get_formatter_names(),
   }) do
     for _, client_name in ipairs(client_names) do
-      if not vim.list_contains(unique_client_names, client_name) then
-        table.insert(unique_client_names, client_name)
+      if client_names_set[client_name] == nil then
+        client_names_set[client_name] = true
       end
     end
   end
+
+  local unique_client_names = vim.tbl_keys(client_names_set)
   table.sort(unique_client_names)
 
   return table.concat(unique_client_names, " ")
