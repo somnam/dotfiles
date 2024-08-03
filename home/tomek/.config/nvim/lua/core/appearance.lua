@@ -24,3 +24,12 @@ vim.api.nvim_create_autocmd("ColorScheme", {
     vim.api.nvim_set_hl(0, "SignColumn", { link = "Normal" })
   end,
 })
+
+vim.api.nvim_create_autocmd("ColorScheme", {
+  pattern = "habamax",
+  group = vim.api.nvim_create_augroup("after_colorscheme", { clear = true }),
+  command = [[
+    highlight NonText ctermbg=none
+    highlight VertSplit ctermbg=none
+  ]],
+})

@@ -11,7 +11,7 @@ M.deep_extend = function(dst, src)
     return src
   end
 
-  if vim.tbl_islist(dst) and vim.tbl_islist(src) then
+  if vim.islist(dst) and vim.islist(src) then
     return vim.list_extend(dst, src)
   end
 

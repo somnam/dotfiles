@@ -1,11 +1,11 @@
 local buffer = require("core.buffer")
 local config = require("core.config")
-local lsp = require("core.lsp")
 local statusline = require("core.statusline")
+local clients = require("util.clients")
 
 local H = {}
 
-H.get_updated = function()
+H.get_updates_count = function()
   local checker = require("lazy.manage.checker")
   return #checker.updated
 end
@@ -26,6 +26,8 @@ return {
         winbar = buffer.exclude.filetype,
       },
       refresh = {
+        statusline = 1500,
+        tabline = 1500,
         winbar = 10000,
       },
     },
@@ -43,33 +45,29 @@ return {
       lualine_x = {},
       lualine_y = {
         {
-          lsp.get_clients_count,
-          cond = lsp.has_clients,
-          icon = "λ",
-          on_click = lsp.show_info,
-        },
-        {
-          H.get_updated,
+          H.get_updates_count,
           cond = require("lazy.status").has_updates,
           icon = "↓",
           color = { fg = "#ff9e64" },
-          on_click = require("lazy").home,
         },
-        "encoding",
         {
           "fileformat",
           symbols = {
-            unix = "[unix]",
-            dos = "[dos]",
-            mac = "[mac]",
+            unix = "unix",
+            dos = "dos",
+            mac = "mac",
           },
         },
         "filetype",
+        {
+          clients.get_clients_string,
+          cond = clients.has_clients,
+          icon = "●",
+        },
       },
       lualine_z = {
-        "searchcount",
+        { statusline.location, padding = { left = 1, right = 0 } },
         "progress",
-        { statusline.location, padding = { left = 0, right = 1 } },
       },
     },
     inactive_sections = {
