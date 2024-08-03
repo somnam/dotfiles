@@ -3,7 +3,7 @@
     "background": "dark",
     "termguicolors": true,
     "treesitter" : {
-        "exclude": []
+        "exclude": ["csv"]
     },
     "plugin": {
         "lualine": {
