@@ -12,19 +12,12 @@ return {
       return buffer.excluded(ctx.buf) or buffer.above_max_size(ctx.buf, H.max_size)
     end
 
-    H.maybe_disable_mini_indentscope = function(ctx)
-      return buffer.excluded(ctx.buf)
-    end
-
     vim.api.nvim_create_autocmd("FileType", {
       pattern = "*",
       group = vim.api.nvim_create_augroup("maybe_disable_mini_plugin", { clear = true }),
       callback = function(ctx)
         if H.maybe_disable_mini_cursorword(ctx) then
           vim.b.minicursorword_disable = true
-        end
-        if H.maybe_disable_mini_indentscope(ctx) then
-          vim.b.miniindentscope_disable = true
         end
       end,
     })
@@ -55,7 +48,7 @@ return {
       },
     })
 
-    require("mini.cursorword").setup({ delay = 150 })
+    require("mini.cursorword").setup({ delay = 250 })
 
     local mini_clue = require("mini.clue")
     mini_clue.setup({
@@ -105,17 +98,6 @@ return {
     local mini_notify = require("mini.notify")
     mini_notify.setup({
       lsp_progress = { duration_last = 2000 },
-    })
-
-    require("mini.indentscope").setup({
-      symbol = "│",
-      options = {
-        try_as_border = true,
-      },
-      draw = {
-        delay = 200,
-        animation = require("mini.indentscope").gen_animation.none(),
-      },
     })
   end,
 }
