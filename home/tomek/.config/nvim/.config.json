@@ -16,7 +16,7 @@
         },
         "lint": {
             "python": ["flake8", "mypy", "ruff"],
-            "lua": ["luacheck"]
+            "lua": []
         },
         "mason": {
             "ensure_installed": []

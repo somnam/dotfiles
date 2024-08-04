@@ -46,6 +46,7 @@ return {
   },
   {
     "hrsh7th/nvim-cmp",
+    event = "InsertEnter",
     opts = function()
       local cmp = require("cmp")
 

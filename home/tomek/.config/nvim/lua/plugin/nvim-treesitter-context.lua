@@ -16,6 +16,7 @@ return {
   event = { "BufReadPre", "BufNewFile" },
   opts = {
     line_numbers = false,
+    max_lines = 3,
     multiline_threshold = 3,
     on_attach = function(buf)
       return not H.maybe_disable_treesitter_context(buf)

@@ -26,9 +26,9 @@ return {
         winbar = buffer.exclude.filetype,
       },
       refresh = {
-        statusline = 1500,
-        tabline = 1500,
-        winbar = 10000,
+        statusline = 2000,
+        tabline = 2000,
+        winbar = 20000,
       },
     },
     sections = {
