@@ -31,10 +31,12 @@ M.exclude = {
 }
 
 M.buftype_excluded = function(buffer, exclude_list)
+  exclude_list = (exclude_list or M.exclude.buftype)
   return vim.tbl_contains(exclude_list, vim.api.nvim_get_option_value("buftype", { buf = buffer }))
 end
 
 M.filetype_excluded = function(buffer, exclude_list)
+  exclude_list = (exclude_list or M.exclude.filetype)
   return vim.tbl_contains(exclude_list, vim.api.nvim_get_option_value("filetype", { buf = buffer }))
 end
 

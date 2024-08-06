@@ -40,7 +40,7 @@ M.get_linter_names = function()
   return (lint.linters_by_ft[vim.bo.filetype] or {})
 end
 
-M.get_clients_string = function()
+M.get_clients_set = function()
   local client_names_set = {}
 
   for _, client_names in ipairs({
@@ -55,10 +55,20 @@ M.get_clients_string = function()
     end
   end
 
+  return client_names_set
+end
+
+M.get_clients_string = function()
+  local client_names_set = M.get_clients_set()
   local unique_client_names = vim.tbl_keys(client_names_set)
   table.sort(unique_client_names)
 
   return table.concat(unique_client_names, " ")
+end
+
+M.get_clients_count = function()
+  local client_names_set = M.get_clients_set()
+  return #vim.tbl_keys(client_names_set)
 end
 
 M.has_clients = function()

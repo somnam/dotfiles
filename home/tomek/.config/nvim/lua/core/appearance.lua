@@ -20,16 +20,18 @@ vim.api.nvim_create_autocmd("ColorSchemePre", {
 vim.api.nvim_create_autocmd("ColorScheme", {
   pattern = "*",
   group = vim.api.nvim_create_augroup("after_colorscheme", { clear = true }),
-  callback = function()
-    vim.api.nvim_set_hl(0, "SignColumn", { link = "Normal" })
-  end,
+  command = [[
+    hi! link SignColumn Normal
+    hi! link WinBar StatusLine
+    hi! link WinBarNC StatusLineNC
+  ]],
 })
 
 vim.api.nvim_create_autocmd("ColorScheme", {
   pattern = "habamax",
-  group = vim.api.nvim_create_augroup("after_colorscheme", { clear = true }),
+  group = vim.api.nvim_create_augroup("habamax_colorscheme", { clear = true }),
   command = [[
-    highlight NonText ctermbg=none
-    highlight VertSplit ctermbg=none
+    hi! NonText ctermbg=none
+    hi! VertSplit ctermbg=none
   ]],
 })

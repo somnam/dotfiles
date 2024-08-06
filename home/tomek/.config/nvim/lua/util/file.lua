@@ -25,4 +25,15 @@ M.read_json_file = function(file)
   return json_ok and json_data or nil
 end
 
+M.current_file_size = function()
+  local size = vim.fn.getfsize(vim.fn.getreg("%"))
+  if size < 1024 then
+    return string.format("%dB", size)
+  elseif size < 1048576 then
+    return string.format("%.2fKiB", size / 1024)
+  else
+    return string.format("%.2fMiB", size / 1048576)
+  end
+end
+
 return M
