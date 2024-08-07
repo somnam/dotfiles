@@ -6,7 +6,7 @@ return {
 
     local H = {}
 
-    H.max_size = 1024 * 256
+    H.max_size = 1024 * 512
 
     H.maybe_disable_mini_cursorword = function(ctx)
       return buffer.excluded(ctx.buf) or buffer.above_max_size(ctx.buf, H.max_size)
