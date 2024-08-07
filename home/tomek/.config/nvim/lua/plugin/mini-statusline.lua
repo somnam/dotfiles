@@ -20,17 +20,19 @@ return {
     end
 
     H.section_updates = function(args)
-      if not require("lazy.status").has_updates() then
+      local plugin_updates = require("lazy.status").has_updates()
+      if not plugin_updates then
         return ""
       end
 
-      local checker = require("lazy.manage.checker")
+      local updated_plugins = #require("lazy.manage.checker").updated
 
       if mini_statusline.is_truncated(args.trunc_width) then
-        return string.format("%s %d", args.icon, #checker.updated)
+        return string.format("%s %d", args.icon, updated_plugins)
       end
 
-      return string.format("%s %d plugins", args.icon, #checker.updated)
+      local plugins_suffix = updated_plugins > 1 and "plugins" or "plugin"
+      return string.format("%s %d %s", args.icon, updated_plugins, plugins_suffix)
     end
 
     ---@param args table
@@ -106,21 +108,18 @@ return {
     local winbar = mini_statusline.combine_groups({
       { strings = { H.secion_filepath } },
     })
-    vim.api.nvim_create_autocmd(
-      { "VimEnter", "UIEnter", "BufWinEnter", "BufFilePost" },
-      {
-        pattern = "*",
-        group = vim.api.nvim_create_augroup("maybe_enable_winbar", { clear = true }),
-        callback = function(ctx)
-          if buffer.excluded(ctx.buf) then
-            vim.wo.winbar = nil
-            return
-          end
+    vim.api.nvim_create_autocmd({ "VimEnter", "UIEnter", "BufWinEnter", "BufFilePost" }, {
+      pattern = "*",
+      group = vim.api.nvim_create_augroup("maybe_enable_winbar", { clear = true }),
+      callback = function(ctx)
+        if buffer.excluded(ctx.buf) then
+          vim.wo.winbar = nil
+          return
+        end
 
-          vim.wo.winbar = winbar
-        end,
-      }
-    )
+        vim.wo.winbar = winbar
+      end,
+    })
 
     mini_statusline.setup({
       content = {
