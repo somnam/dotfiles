@@ -14,9 +14,6 @@ return {
         desc = "Open the Package Manager UI",
       },
     },
-    init = function()
-      vim.g.python3_host_prog = python.nvim_virtual_env_prog()
-    end,
     opts = {
       log_level = vim.log.levels.WARN,
       ui = {
@@ -31,10 +28,12 @@ return {
       },
     },
     config = function(_, opts)
+      python.set_nvim_virtual_env_prog()
+
       require("mason").setup(opts)
 
-      vim.env.PATH = python.remove_pyenv_shims_from_path()
-      vim.env.PATH = python.add_virtual_env_bin_to_path()
+      python.remove_pyenv_shims_from_path()
+      python.add_virtual_env_bin_to_path()
     end,
   },
   {

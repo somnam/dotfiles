@@ -23,29 +23,26 @@ M.pyenv_root = vim.env.PYENV_ROOT
 
 M.pyenv_shims = M.pyenv_root and M.pyenv_root .. "/shims" or nil
 
-M.pyenv_versions = M.pyenv_root and M.pyenv_root .. "/versions" or nil
+M.nvim_virtual_env_prog = M.pyenv_root and M.pyenv_root .. "/versions/nvim/bin/python" or nil
 
-M.nvim_virtual_env = M.pyenv_versions and M.pyenv_versions .. "/nvim" or nil
-
-M.nvim_virtual_env_prog = function()
-  local nvim_virtual_env_prog = M.nvim_virtual_env and M.nvim_virtual_env .. "/bin/python" or nil
-  return command.executable(nvim_virtual_env_prog) and nvim_virtual_env_prog or nil
+M.set_nvim_virtual_env_prog = function()
+  vim.g.python3_host_prog = (
+    command.executable(M.nvim_virtual_env_prog) and M.nvim_virtual_env_prog or nil
+  )
 end
 
 M.remove_pyenv_shims_from_path = function()
   -- Shims can lead to commands not working in cwd context.
   if M.pyenv_shims then
     local result, _ = string.gsub(vim.env.PATH, M.pyenv_shims .. misc.path_separator, "")
-    return result
+    vim.env.PATH = result
   end
-  return vim.env.PATH
 end
 
 M.add_virtual_env_bin_to_path = function()
   if M.virtual_env_bin then
-    return M.virtual_env_bin .. misc.path_separator .. vim.env.PATH
+    vim.env.PATH = M.virtual_env_bin .. misc.path_separator .. vim.env.PATH
   end
-  return vim.env.PATH
 end
 
 return M
