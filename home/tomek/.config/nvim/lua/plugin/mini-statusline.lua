@@ -26,7 +26,6 @@ return {
       end
 
       local updated_plugins = #require("lazy.manage.checker").updated
-
       if mini_statusline.is_truncated(args.trunc_width) then
         return string.format("%s %d", args.icon, updated_plugins)
       end
@@ -51,7 +50,6 @@ return {
     ---@param args table
     H.section_fileinfo = function(args)
       local filetype = vim.bo.filetype
-
       if filetype == "" then
         return ""
       end
@@ -61,9 +59,25 @@ return {
       end
 
       local format = vim.bo.fileformat
-      local size = file.current_file_size()
+      return string.format("%s %s %s", args.icon, filetype, format)
+    end
 
-      return string.format("%s %s %s %s", args.icon, filetype, size, format)
+    ---@param args table
+    H.section_filesize = function(args)
+      if vim.bo.filetype == "" then
+        return ""
+      end
+
+      if mini_statusline.is_truncated(args.trunc_width) or vim.bo.buftype ~= "" then
+        return ""
+      end
+
+      local size = file.current_file_size()
+      if not size then
+        return ""
+      end
+
+      return string.format("%s %s", args.icon, size)
     end
 
     ---@param args table
@@ -82,15 +96,17 @@ return {
     -- statusline
     H.content_active = function()
       local mode, mode_hl = mini_statusline.section_mode({})
-      local git = mini_statusline.section_git({ icon = "" })
-      local diff = H.section_diff({ icon = "𝚫" })
+      local git = mini_statusline.section_git({ icon = "", trunc_width = 40 })
+      local diff = H.section_diff({ icon = "𝚫", trunc_width = 40 })
       local diagnostics = mini_statusline.section_diagnostics({
         icon = "",
+        trunc_width = 40,
         signs = { ERROR = "✖ ", WARN = "▲ ", INFO = "● ", HINT = "⚑ " },
       })
       local updates = H.section_updates({ icon = "↓", trunc_width = 120 })
       local clients = H.section_clients({ icon = "●", trunc_width = 120 })
       local fileinfo = H.section_fileinfo({ icon = "𝌆", trunc_width = 75 })
+      local filesize = H.section_filesize({ icon = "◔", trunc_width = 75 })
 
       return mini_statusline.combine_groups({
         { hl = mode_hl, strings = { mode } },
@@ -99,7 +115,7 @@ return {
         { hl = "MiniStatuslineInactive" },
         "%=", -- End left alignment
         { strings = { updates } },
-        { hl = "MiniStatuslineFileinfo", strings = { clients, fileinfo } },
+        { hl = "MiniStatuslineFileinfo", strings = { clients, fileinfo, filesize } },
         { hl = mode_hl, strings = { H.section_location } },
       })
     end
