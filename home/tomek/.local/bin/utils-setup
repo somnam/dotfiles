@@ -10,7 +10,7 @@ upgrade-fzf()
 download-fzf ()
 {
     [[ $(which git) ]] || (echo "git not installed" && exit 1)
-    local FZF_VERSION='0.52.1'
+    local FZF_VERSION='v0.54.3'
     echo "Downloading fzf version ${FZF_VERSION}"
 
     local fzf_url="https://github.com/junegunn/fzf.git"
@@ -74,7 +74,7 @@ setup-pyenv ()
 
 main ()
 {
-    while getopts ":afrpn" flag; do
+    while getopts ":afp" flag; do
         case "${flag}" in
             a)
                 upgrade-fzf
@@ -89,7 +89,7 @@ main ()
         esac
     done
 
-    echo "Usage: $0 [-a][-f][-r][-p][-n]"
+    echo "Usage: $0 [-a][-f][-p]"
 }
 
 main $@
