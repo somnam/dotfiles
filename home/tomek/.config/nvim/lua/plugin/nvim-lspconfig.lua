@@ -1,5 +1,4 @@
 local command = require("util.command")
-local lsp = require("core.lsp")
 local misc = require("util.misc")
 local python = require("util.python")
 
@@ -20,7 +19,6 @@ return {
           on_attach = function(client, bufnr)
             -- Customize trigger characters.
             client.server_capabilities.completionProvider.triggerCharacters = { "." }
-            return lsp.on_attach(client, bufnr)
           end,
         },
         pyright = {
@@ -40,11 +38,8 @@ return {
               pythonPath = python.virtual_env_cmd("python"),
             },
           },
-          on_attach = lsp.on_attach,
         },
-        quick_lint_js = {
-          on_attach = lsp.on_attach,
-        },
+        quick_lint_js = {},
         rust_analyzer = {
           settings = {
             ["rust-analyzer"] = {
@@ -56,13 +51,11 @@ return {
               },
             },
           },
-          on_attach = lsp.on_attach,
         },
         lua_ls = {
           on_attach = function(client, bufnr)
             client.server_capabilities.completionProvider.triggerCharacters =
               { ".", ":", "(", "[", ",", "#", "*", "@", "|", "=", "{", "+", "?" }
-            return lsp.on_attach(client, bufnr)
           end,
         },
       },
