@@ -26,12 +26,3 @@ vim.api.nvim_create_autocmd("ColorScheme", {
     hi! link WinBarNC StatusLineNC
   ]],
 })
-
-vim.api.nvim_create_autocmd("ColorScheme", {
-  pattern = "habamax",
-  group = vim.api.nvim_create_augroup("habamax_colorscheme", { clear = true }),
-  command = [[
-    hi! NonText ctermbg=none
-    hi! VertSplit ctermbg=none
-  ]],
-})

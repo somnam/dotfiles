@@ -86,7 +86,7 @@ return {
       desc = "Search opened buffers lines",
     },
     {
-      "<C-w>D",
+      "<Space>D",
       ":FzfLua lsp_document_diagnostics<Enter>",
       noremap = true,
       silent = true,
