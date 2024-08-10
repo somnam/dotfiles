@@ -75,15 +75,18 @@ return {
         { mode = "n", keys = '"' },
         { mode = "x", keys = '"' },
 
+        -- Window commands
+        { mode = "n", keys = "<C-w>" },
+
         -- `z` key
         { mode = "n", keys = "z" },
         { mode = "x", keys = "z" },
       },
       clues = {
-        -- Enhance this by adding descriptions for <Leader> mapping groups
         mini_clue.gen_clues.g(),
         mini_clue.gen_clues.marks(),
         mini_clue.gen_clues.registers(),
+        mini_clue.gen_clues.windows(),
         mini_clue.gen_clues.z(),
       },
       window = {
@@ -95,8 +98,7 @@ return {
       },
     })
 
-    local mini_notify = require("mini.notify")
-    mini_notify.setup({
+    require("mini.notify").setup({
       lsp_progress = { duration_last = 2000 },
     })
   end,
