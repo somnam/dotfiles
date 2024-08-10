@@ -25,16 +25,18 @@ M.read_json_file = function(file)
   return json_ok and json_data or nil
 end
 
+---@return string?
 M.current_file_size = function()
   local size = vim.fn.getfsize(vim.fn.getreg("%"))
-  if size < 1 then
-    return
-  elseif size < 1024 then
-    return string.format("%dB", size)
-  elseif size < 1048576 then
-    return string.format("%.2fKiB", size / 1024)
-  else
-    return string.format("%.2fMiB", size / 1048576)
+
+  if size >= 1e9 then
+    return string.format("%.2fG", size / 1e9)
+  elseif size >= 1e6 then
+    return string.format("%.2fM", size / 1e6)
+  elseif size >= 1e3 then
+    return string.format("%.2fk", size / 1e3)
+  elseif size >= 1 then
+    return string.format("%db", size)
   end
 end
 

@@ -24,7 +24,7 @@ vim.opt.foldmarker = { -- Set fold marker
   "# endregion",
 }
 vim.opt.foldenable = false -- No autofold
-vim.opt.cursorline = false -- Don't highlight current line
+vim.opt.cursorline = true -- Highlight current line
 vim.opt.cursorlineopt = "line"
 vim.opt.cursorcolumn = false -- Don't highlight current cursor column
 vim.opt.signcolumn = "yes" -- Show sign column

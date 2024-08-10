@@ -10,6 +10,7 @@ return {
 
     local H = {}
 
+    ---@param args table
     H.section_diff = function(args)
       local summary = vim.b.minidiff_summary_string or vim.b.gitsigns_status or ""
       if #summary == 0 then
@@ -19,6 +20,7 @@ return {
       return mini_statusline.section_diff(args)
     end
 
+    ---@param args table
     H.section_updates = function(args)
       local plugin_updates = require("lazy.status").has_updates()
       if not plugin_updates then
@@ -30,7 +32,7 @@ return {
         return string.format("%s %d", args.icon, updated_plugins)
       end
 
-      local plugins_suffix = updated_plugins > 1 and "plugins" or "plugin"
+      local plugins_suffix = updated_plugins == 1 and "plugin" or "plugins"
       return string.format("%s %d %s", args.icon, updated_plugins, plugins_suffix)
     end
 

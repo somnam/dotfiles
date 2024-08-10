@@ -13,7 +13,6 @@ return {
     },
   },
   opts = {
-    -- Removes 'icon' column
     columns = {},
     view_options = {
       show_hidden = true,

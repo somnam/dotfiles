@@ -11,13 +11,13 @@ return {
         vim.api.nvim_create_autocmd({ "BufReadPre", "BufNewFile" }, {
           pattern = "*",
           group = vim.api.nvim_create_augroup("alpha_dashboard_close", { clear = true }),
+          once = true,
           callback = function()
             vim.schedule(function()
               if vim.api.nvim_buf_is_loaded(ctx.buf) then
                 pcall(vim.api.nvim_buf_delete, ctx.buf, {})
               end
             end)
-            return true
           end,
         })
       end,
