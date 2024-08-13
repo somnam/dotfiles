@@ -21,42 +21,42 @@ H.disable_copilot = function()
 end
 
 return {
-  {
-    "zbirenbaum/copilot.lua",
-    build = ":Copilot auth",
-    cmd = "Copilot",
-    cond = function()
-      return require("util.command").executable("node")
-    end,
-    keys = {
-      { "<Space>ce", H.enable_copilot, desc = "Enable Copilot for current buffer." },
-      { "<Space>cd", H.disable_copilot, desc = "Disable Copilot for all buffers." },
-    },
-    opts = {
-      suggestion = {
-        auto_trigger = false,
-      },
-      panel = {
-        enabled = false,
-      },
-      filetypes = {
-        ["*"] = false,
-      },
+  "zbirenbaum/copilot.lua",
+  build = ":Copilot auth",
+  cmd = "Copilot",
+  cond = function()
+    return require("util.command").executable("node")
+  end,
+  dependencies = {
+    {
+      "hrsh7th/nvim-cmp",
+      event = "InsertEnter",
+      opts = function()
+        local cmp = require("cmp")
+
+        cmp.event:on("menu_opened", function()
+          vim.b.copilot_suggestion_hidden = true
+        end)
+
+        cmp.event:on("menu_closed", function()
+          vim.b.copilot_suggestion_hidden = false
+        end)
+      end,
     },
   },
-  {
-    "hrsh7th/nvim-cmp",
-    event = "InsertEnter",
-    opts = function()
-      local cmp = require("cmp")
-
-      cmp.event:on("menu_opened", function()
-        vim.b.copilot_suggestion_hidden = true
-      end)
-
-      cmp.event:on("menu_closed", function()
-        vim.b.copilot_suggestion_hidden = false
-      end)
-    end,
+  keys = {
+    { "<Space>ce", H.enable_copilot, desc = "Enable Copilot for current buffer." },
+    { "<Space>cd", H.disable_copilot, desc = "Disable Copilot for all buffers." },
+  },
+  opts = {
+    suggestion = {
+      auto_trigger = false,
+    },
+    panel = {
+      enabled = false,
+    },
+    filetypes = {
+      ["*"] = false,
+    },
   },
 }
