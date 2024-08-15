@@ -1,13 +1,7 @@
 local opts = { noremap = true, silent = true }
 vim.api.nvim_set_keymap(
   "n",
-  "<Space>d",
-  ":lua vim.diagnostic.open_float()<Enter>",
-  vim.tbl_extend("keep", { desc = "List cursor line diagnostics" }, opts)
-)
-vim.api.nvim_set_keymap(
-  "n",
-  "<Space>D",
+  "<C-w>D",
   ":lua vim.diagnostic.setloclist()<Enter>",
   vim.tbl_extend("keep", { desc = "List all buffer diagnostics" }, opts)
 )

@@ -20,6 +20,19 @@ return {
 
     local H = {}
 
+    H.linters = function(names)
+      local results = {}
+
+      for _, name in pairs(names) do
+        local linter = linters[name]
+        if linter and command.executable(linter.cmd) then
+          table.insert(results, linter.cmd)
+        end
+      end
+
+      return results
+    end
+
     H.python_linters = function(names)
       if python.in_virtual_env() then
         return H.python_virtual_env_linters(names)
@@ -34,19 +47,6 @@ return {
       for _, name in pairs(names) do
         local linter = linters[name]
         if linter and python.executable_in_virtual_env(linter.cmd) then
-          table.insert(results, linter.cmd)
-        end
-      end
-
-      return results
-    end
-
-    H.linters = function(names)
-      local results = {}
-
-      for _, name in pairs(names) do
-        local linter = linters[name]
-        if linter and command.executable(linter.cmd) then
           table.insert(results, linter.cmd)
         end
       end

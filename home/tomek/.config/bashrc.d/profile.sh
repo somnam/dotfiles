@@ -1,4 +1,4 @@
-BASH_THEME="git-prompt"
+BASH_THEME="default"
 
 plugins=(
     brew
