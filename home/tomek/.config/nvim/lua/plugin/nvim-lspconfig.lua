@@ -1,5 +1,4 @@
 local command = require("util.command")
-local misc = require("util.misc")
 local python = require("util.python")
 
 local servers = {
@@ -9,7 +8,7 @@ local servers = {
         disableSnippets = true,
       },
     },
-    on_attach = function(client, bufnr)
+    on_attach = function(client, _)
       -- Customize trigger characters.
       client.server_capabilities.completionProvider.triggerCharacters = { "." }
     end,
@@ -48,7 +47,7 @@ local servers = {
     },
   },
   lua_ls = {
-    on_attach = function(client, bufnr)
+    on_attach = function(client, _)
       client.server_capabilities.completionProvider.triggerCharacters =
         { ".", ":", "(", "[", ",", "#", "*", "@", "|", "=", "{", "+", "?" }
     end,
