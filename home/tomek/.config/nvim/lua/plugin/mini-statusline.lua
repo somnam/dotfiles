@@ -1,5 +1,5 @@
 local buffer = require("core.buffer")
-local clients = require("util.clients")
+local client = require("util.client")
 local file = require("util.file")
 
 return {
@@ -38,15 +38,15 @@ return {
 
     ---@param args table
     H.section_clients = function(args)
-      if not clients.has_clients() then
+      if not client.has_clients() then
         return ""
       end
 
       if mini_statusline.is_truncated(args.trunc_width) then
-        return string.format("%s %d", args.icon, clients.get_clients_count())
+        return string.format("%s %d", args.icon, client.get_clients_count())
       end
 
-      return string.format("%s %s", args.icon, clients.get_clients_string())
+      return string.format("%s %s", args.icon, client.get_clients_string())
     end
 
     ---@param args table
