@@ -18,7 +18,7 @@ download-fzf ()
     local fzf_git_dir="$fzf_dir/.git"
 
     if [[ ! -d "$fzf_dir" ]]; then
-        mkdir -p "$fzf_dir" && git clone --depth 1 "$fzf_url" "$fzf_dir"
+        mkdir -p "$fzf_dir" && git clone "$fzf_url" "$fzf_dir"
     fi
 
     git --git-dir="$fzf_git_dir" --work-tree="$fzf_dir" fetch
