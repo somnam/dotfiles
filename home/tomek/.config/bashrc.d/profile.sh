@@ -1,9 +1,7 @@
 BASH_THEME="default"
 
 plugins=(
-    brew
     cargo
-    colima
     docker
     fzf
     git
@@ -17,12 +15,10 @@ plugins=(
 
 completions=(
     bash
-    brew
     cargo
 )
 
 aliases=(
-    brew
     general
 )
 
