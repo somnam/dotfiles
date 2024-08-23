@@ -14,4 +14,4 @@ if command -v brew >/dev/null; then
     brew-clean() {
         brew autoremove && brew cleanup --prune=all
     }
-+fi
+fi
