@@ -1,5 +1,4 @@
 local command = require("util.command")
-local search = require("util.search")
 
 return {
   "ibhagwan/fzf-lua",
@@ -8,6 +7,13 @@ return {
     return require("util.command").executable("fzf")
   end,
   keys = {
+    {
+      "<Space><Space>",
+      ":FzfLua resume<Enter>",
+      noremap = true,
+      silent = true,
+      desc = "List opened local files history",
+    },
     {
       "<Space>p",
       ":FzfLua oldfiles cwd_only=true<Enter>",
@@ -58,13 +64,6 @@ return {
       desc = "Show current buffer commit logs",
     },
     {
-      "<Space>gL",
-      ":FzfLua git_commits<Enter>",
-      noremap = true,
-      silent = true,
-      desc = "Show working tree commit logs",
-    },
-    {
       "<Space>w",
       ":FzfLua live_grep_native<Enter>",
       noremap = true,
@@ -72,21 +71,21 @@ return {
       desc = "Live grep the current project",
     },
     {
-      "<Space>W",
-      ":FzfLua live_grep_resume<Enter>",
+      "<Space>s",
+      ":FzfLua grep_cword<Enter>",
       noremap = true,
       silent = true,
-      desc = "Live grep continue last search",
+      desc = "Search cursor string in current project",
     },
     {
-      "<Space>l",
+      "<Space>/",
       ":FzfLua lines<Enter>",
       noremap = true,
       silent = true,
       desc = "Search opened buffers lines",
     },
     {
-      "<C-w>D",
+      "<Space>d",
       ":FzfLua lsp_document_diagnostics<Enter>",
       noremap = true,
       silent = true,
@@ -109,28 +108,39 @@ return {
   },
   opts = {
     winopts = {
+      height = 0.85,
       width = 0.65,
-      col = 0.5,
+      col = 0.50,
       backdrop = 100,
       preview = {
         layout = "vertical",
-        winopts = {
-          number = false,
-        },
+        winopts = { number = false },
       },
     },
     fzf_opts = {
       ["--history"] = vim.fn.stdpath("data") .. "/fzf_lua_history",
     },
     fzf_colors = true,
+    previewers = {
+      builtin = {
+        syntax = false,
+        treesitter = { enable = false },
+      },
+    },
+    defaults = {
+      git_icons = false,
+      file_icons = false,
+    },
     files = {
       prompt = "Files❯ ",
-      cmd = search.find(),
+      cmd = command.find({ into_shell = true }),
     },
     grep = {
       prompt = "Words❯ ",
-      cmd = search.grep(),
+      cmd = command.grep({ into_shell = true, color = true }),
       rg_glob = command.executable("rg"),
     },
+    manpages = { previewer = "man_native" },
+    helptags = { previewer = "help_native" },
   },
 }

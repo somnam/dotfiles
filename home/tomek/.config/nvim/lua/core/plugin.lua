@@ -50,6 +50,7 @@ H.setup = function()
       colorscheme = { config.colorscheme, "default" },
     },
     ui = {
+      size = { width = 0.65 },
       icons = {
         cmd = "⌘",
         config = "⚙",

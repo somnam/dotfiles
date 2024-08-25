@@ -1,5 +1,6 @@
 local buffer = require("core.buffer")
 local client = require("util.client")
+local diagnostic = require("core.diagnostic")
 local file = require("util.file")
 
 return {
@@ -103,7 +104,7 @@ return {
       local diagnostics = mini_statusline.section_diagnostics({
         icon = "",
         trunc_width = 40,
-        signs = { ERROR = "✖ ", WARN = "▲ ", INFO = "● ", HINT = "⚑ " },
+        signs = diagnostic.signs_with_space,
       })
       local updates = H.section_updates({ icon = "↓", trunc_width = 120 })
       local clients = H.section_clients({ icon = "●", trunc_width = 120 })
