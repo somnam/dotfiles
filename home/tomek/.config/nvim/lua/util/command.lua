@@ -1,12 +1,123 @@
 local M = {}
 
-M.into_shell = function(cmd, args)
-  local cmd_and_args = vim.list_extend({ cmd }, args or {})
-  return table.concat(cmd_and_args, " ")
+M.into_shell = function(command)
+  return table.concat(M.into_table(command), " ")
+end
+
+M.into_table = function(command)
+  return vim.list_extend({ command.cmd }, command.args or {})
 end
 
 M.executable = function(cmd)
   return cmd and vim.fn.executable(cmd) == 1 or false
+end
+
+M.command_from_opts = function(command, opts)
+  opts = opts or {}
+
+  if opts.cmd_only then
+    return command.cmd
+  elseif opts.into_shell then
+    return M.into_shell(command)
+  elseif opts.into_table then
+    return M.into_table(command)
+  end
+
+  return command
+end
+
+M.get_find_command = function(_)
+  local fd = {
+    cmd = "fd",
+    args = {
+      "--color=never",
+      "--type=f",
+      "--hidden",
+      "--follow",
+      "--no-require-git",
+      "--exclude=.git",
+    },
+  }
+  if M.executable(fd.cmd) then
+    return fd
+  end
+
+  local rg = {
+    cmd = "rg",
+    args = {
+      "--color=never",
+      "--files",
+      "--hidden",
+      "--follow",
+      "--no-require-git",
+      "--glob=!.git",
+    },
+  }
+  if M.executable(rg.cmd) then
+    return rg
+  end
+
+  return {
+    cmd = "find",
+    args = {
+      "-L",
+      ".",
+      "-type",
+      "f",
+      "-not",
+      "-path",
+      "'*/.git/*'",
+      "-and",
+      "-not",
+      "-path",
+      "'*/__pycache__/*'",
+    },
+  }
+end
+
+M.get_grep_command = function(opts)
+  opts = opts or {}
+  local rg = {
+    cmd = "rg",
+    args = {
+      "--column",
+      "--line-number",
+      "--no-heading",
+      opts.color and "--color=always" or "--color=never",
+      "--smart-case",
+      "--hidden",
+      "--follow",
+      "--no-require-git",
+      "--max-columns=4096",
+      "--glob=!.git",
+    },
+  }
+  if M.executable(rg.cmd) then
+    return rg
+  end
+
+  return {
+    cmd = "grep",
+    args = {
+      "--byte-offset",
+      "--binary-files=without-match",
+      "--line-number",
+      "--recursive",
+      "--extended-regexp",
+      "--ignore-case",
+      "--no-messages",
+      opts.color and "--color=always" or "--color=never",
+      "--exclude-dir=.git",
+    },
+  }
+end
+
+M.find = function(opts)
+  return M.command_from_opts(M.get_find_command(opts), opts)
+end
+
+M.grep = function(opts)
+  return M.command_from_opts(M.get_grep_command(opts), opts)
 end
 
 return M

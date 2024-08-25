@@ -1,24 +1,24 @@
 local opts = { noremap = true, silent = true }
 vim.api.nvim_set_keymap(
   "n",
-  "<C-w>d",
-  ":lua vim.diagnostic.open_float()<Enter>",
-  vim.tbl_extend("keep", { desc = "List cursor line diagnostics" }, opts)
-)
-vim.api.nvim_set_keymap(
-  "n",
-  "<C-w>D",
+  "<Space>d",
   ":lua vim.diagnostic.setloclist()<Enter>",
   vim.tbl_extend("keep", { desc = "List all buffer diagnostics" }, opts)
 )
 
+local signs = { ERROR = "✖", WARN = "▲", INFO = "●", HINT = "⚑" }
+local signs_with_space = {}
+for type, value in pairs(signs) do
+  signs_with_space[type] = value .. " "
+end
+
 local diagnostic_opts = {
   signs = {
     text = {
-      [vim.diagnostic.severity.ERROR] = "✖",
-      [vim.diagnostic.severity.WARN] = "▲",
-      [vim.diagnostic.severity.INFO] = "●",
-      [vim.diagnostic.severity.HINT] = "⚑",
+      [vim.diagnostic.severity.ERROR] = signs.ERROR,
+      [vim.diagnostic.severity.WARN] = signs.WARN,
+      [vim.diagnostic.severity.INFO] = signs.INFO,
+      [vim.diagnostic.severity.HINT] = signs.HINT,
     },
   },
   virtual_text = {
@@ -37,3 +37,8 @@ local diagnostic_opts = {
   },
 }
 vim.diagnostic.config(diagnostic_opts)
+
+return {
+  signs = signs,
+  signs_with_space = signs_with_space,
+}
