@@ -113,6 +113,7 @@ return {
       col = 0.50,
       backdrop = 100,
       preview = {
+        default = command.bat({ cmd_only = true }),
         layout = "vertical",
         winopts = { number = false },
       },
@@ -122,6 +123,9 @@ return {
     },
     fzf_colors = true,
     previewers = {
+      bat = {
+        args = command.bat({ args_only = true, color = true, into_shell = true }),
+      },
       builtin = {
         syntax = false,
         treesitter = { enable = false },

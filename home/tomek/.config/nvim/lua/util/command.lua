@@ -5,7 +5,7 @@ M.into_shell = function(command)
 end
 
 M.into_table = function(command)
-  return vim.list_extend({ command.cmd }, command.args or {})
+  return vim.list_extend((command.cmd and { command.cmd } or {}), command.args or {})
 end
 
 M.executable = function(cmd)
@@ -17,7 +17,13 @@ M.command_from_opts = function(command, opts)
 
   if opts.cmd_only then
     return command.cmd
-  elseif opts.into_shell then
+  end
+
+  if opts.args_only then
+    command.cmd = nil
+  end
+
+  if opts.into_shell then
     return M.into_shell(command)
   elseif opts.into_table then
     return M.into_table(command)
@@ -112,12 +118,27 @@ M.get_grep_command = function(opts)
   }
 end
 
+M.get_bat_command = function(opts)
+  opts = opts or {}
+  return {
+    cmd = M.executable("bat") and "bat" or nil,
+    args = {
+      opts.color and "--color=always" or "--color=never",
+      "--style=changes",
+    },
+  }
+end
+
 M.find = function(opts)
   return M.command_from_opts(M.get_find_command(opts), opts)
 end
 
 M.grep = function(opts)
   return M.command_from_opts(M.get_grep_command(opts), opts)
+end
+
+M.bat = function(opts)
+  return M.command_from_opts(M.get_bat_command(opts), opts)
 end
 
 return M
