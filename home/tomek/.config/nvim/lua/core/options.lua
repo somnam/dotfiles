@@ -78,11 +78,12 @@ vim.g.loaded_getscriptPlugin = 1
 vim.opt.formatoptions:remove("c") -- Disable automatic comment insertion
 vim.opt.formatoptions:remove("r")
 vim.opt.formatoptions:remove("o")
-vim.opt.shortmess:append("c") -- Shut off completion messages
+vim.opt.shortmess:append("C") -- Shut off completion messages
 vim.opt.complete:remove("i") -- Prevent a condition where vim lags due to searching include files and tags
 vim.opt.complete:remove("t")
-vim.opt.completeopt = { "menu", "menuone", "noinsert" } -- Completion behavior
 vim.opt.pumheight = 15 -- Completion window height
+-- Completion behavior
+vim.opt.completeopt = { "menu", "menuone", "preview", "noinsert" }
 
 -- Diff settings
 vim.opt.diffopt:append("algorithm:patience")
