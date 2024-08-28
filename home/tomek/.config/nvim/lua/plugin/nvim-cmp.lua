@@ -19,11 +19,10 @@ return {
     local cmp = require("cmp")
     local buffer = require("core.buffer")
 
-    local H = {}
-
-    H.max_size = 1024 * 1024
-
-    H.max_label_width = 50
+    local H = {
+      max_size = 1024 * 1024,
+      max_label_width = 50,
+    }
 
     H.current_buffer_enabled = function()
       return not buffer.excluded(vim.api.nvim_get_current_buf())

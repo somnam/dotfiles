@@ -12,7 +12,7 @@ for type, value in pairs(signs) do
   signs_with_space[type] = value .. " "
 end
 
-local diagnostic_opts = {
+vim.diagnostic.config({
   signs = {
     text = {
       [vim.diagnostic.severity.ERROR] = signs.ERROR,
@@ -35,8 +35,7 @@ local diagnostic_opts = {
     border = "rounded",
     source = true,
   },
-}
-vim.diagnostic.config(diagnostic_opts)
+})
 
 return {
   signs = signs,

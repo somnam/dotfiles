@@ -4,9 +4,9 @@ return {
   init = function()
     local buffer = require("core.buffer")
 
-    local H = {}
-
-    H.max_size = 1024 * 512
+    local H = {
+      max_size = 1024 * 512,
+    }
 
     H.maybe_disable_mini_cursorword = function(ctx)
       return buffer.excluded(ctx.buf) or buffer.above_max_size(ctx.buf, H.max_size)

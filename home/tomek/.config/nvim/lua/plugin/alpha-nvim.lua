@@ -27,15 +27,15 @@ return {
     local dashboard = require("alpha.themes.dashboard")
     local misc = require("util.misc")
 
-    local H = {}
-
-    H.labels = {
-      find_recent = "›  Recent files",
-      find_file = "›  Find files",
-      find_word = "›  Find in files",
-      new_file = "›  New file",
-      plugins = "›  Plugins",
-      quit = "›  Quit",
+    local H = {
+      labels = {
+        find_recent = "›  Recent files",
+        find_file = "›  Find files",
+        find_word = "›  Find in files",
+        new_file = "›  New file",
+        plugins = "›  Plugins",
+        quit = "›  Quit",
+      },
     }
 
     H.header = function()
