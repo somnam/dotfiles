@@ -16,17 +16,10 @@ return {
     },
     {
       "<Space>p",
-      ":FzfLua oldfiles cwd_only=true<Enter>",
-      noremap = true,
-      silent = true,
-      desc = "List opened local files history",
-    },
-    {
-      "<Space>P",
       ":FzfLua oldfiles<Enter>",
       noremap = true,
       silent = true,
-      desc = "List opened global files history",
+      desc = "List opened files history",
     },
     {
       "<Space>f",

@@ -19,10 +19,6 @@ vim.opt.wrap = true -- Line wrapping
 vim.opt.linebreak = true -- Wrap long lines at a linebreak character
 vim.opt.wrapscan = false -- Search wrapping
 vim.opt.foldmethod = "marker" -- Set folding method
-vim.opt.foldmarker = { -- Set fold marker
-  "# region",
-  "# endregion",
-}
 vim.opt.foldenable = false -- No autofold
 vim.opt.cursorline = true -- Highlight current line
 vim.opt.cursorlineopt = "line"
@@ -66,10 +62,6 @@ vim.opt.list = true -- Display whitespace info
 vim.opt.listchars = "tab:>.,trail:.,extends:#,precedes:#,nbsp:~"
 
 -- Disable unused plugins
-vim.g.loaded_netrw = 1
-vim.g.loaded_netrwPlugin = 1
-vim.g.loaded_netrwSettings = 1
-vim.g.loaded_netrwFileHandlers = 1
 vim.g.loaded_vimball = 1
 vim.g.loaded_vimballPlugin = 1
 vim.g.loaded_getscript = 1
@@ -88,6 +80,23 @@ vim.opt.completeopt = { "menu", "menuone", "preview", "noinsert" }
 -- Diff settings
 vim.opt.diffopt:append("algorithm:patience")
 vim.opt.diffopt:append("indent-heuristic")
+
+-- Netrw
+vim.g.netrw_banner = 0
+vim.g.netrw_liststyle = 3
+vim.g.netrw_altv = 1
+vim.g.netrw_keepdir = 0
+vim.g.netrw_winsize = 25
+vim.api.nvim_create_autocmd("FileType", {
+  pattern = "netrw",
+  command = "hi! link netrwMarkFile Search",
+})
+vim.api.nvim_set_keymap(
+  "n",
+  "<Space>e",
+  ":Lexplore<Enter>",
+  { noremap = true, silent = true, desc = "Open or close the file explorer" }
+)
 
 -- Disable python plugins support
 vim.g.loaded_python3_provider = 0
