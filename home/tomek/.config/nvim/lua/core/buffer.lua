@@ -24,7 +24,6 @@ M.exclude = {
     "man",
     "mason",
     "netrw",
-    "oil",
     "qf",
     "tutor",
   },
