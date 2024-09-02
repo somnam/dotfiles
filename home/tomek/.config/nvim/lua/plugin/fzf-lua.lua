@@ -12,14 +12,21 @@ return {
       ":FzfLua resume<Enter>",
       noremap = true,
       silent = true,
-      desc = "List opened local files history",
+      desc = "Continue last search",
     },
     {
       "<Space>p",
+      ":FzfLua oldfiles cwd_only=true<Enter>",
+      noremap = true,
+      silent = true,
+      desc = "List opened local files history",
+    },
+    {
+      "<Space>P",
       ":FzfLua oldfiles<Enter>",
       noremap = true,
       silent = true,
-      desc = "List opened files history",
+      desc = "List opened global files history",
     },
     {
       "<Space>f",
