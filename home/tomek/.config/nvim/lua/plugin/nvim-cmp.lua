@@ -83,17 +83,17 @@ return {
       mapping = cmp.mapping.preset.insert({
         ["<C-b>"] = cmp.mapping.scroll_docs(-4),
         ["<C-f>"] = cmp.mapping.scroll_docs(4),
-        ["<C-Space>"] = cmp.mapping.complete(),
+        ["<C-s>"] = cmp.mapping.complete(),
         ["<C-e>"] = cmp.mapping.abort(),
         ["<CR>"] = cmp.mapping.confirm({ select = true }),
-        ["<Tab>"] = cmp.mapping(function(fallback)
+        ["<M-l>"] = cmp.mapping(function(fallback)
           if vim.snippet.active({ direction = 1 }) then
             vim.snippet.jump(1)
           else
             fallback()
           end
         end, { "i", "s" }),
-        ["<S-Tab>"] = cmp.mapping(function(fallback)
+        ["<M-h>"] = cmp.mapping(function(fallback)
           if vim.snippet.active({ direction = -1 }) then
             vim.snippet.jump(-1)
           else
