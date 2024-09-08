@@ -91,13 +91,11 @@ vim.g.netrw_keepdir = 0
 vim.g.netrw_winsize = 25
 vim.api.nvim_create_autocmd("FileType", {
   pattern = "netrw",
-  group = vim.api.nvim_create_augroup("netrw_filetype_highlight", { clear = true }),
-  command = "hi! link netrwMarkFile Search",
-})
-vim.api.nvim_create_autocmd("FileType", {
-  pattern = "netrw",
-  group = vim.api.nvim_create_augroup("netrw_filetype_mapping", { clear = true }),
-  command = "silent! unmap <buffer> <C-L>"
+  group = vim.api.nvim_create_augroup("netrw_filetype", { clear = true }),
+  command = [[
+    hi! link netrwMarkFile Search
+    silent! unmap <buffer> <C-L>
+  ]],
 })
 vim.api.nvim_set_keymap(
   "n",
