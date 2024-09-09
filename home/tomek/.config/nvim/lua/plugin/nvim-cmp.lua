@@ -67,6 +67,9 @@ return {
         },
         { name = "path", group_index = 3 },
       },
+      view = {
+        entries = { name = "native" },
+      },
       enabled = H.current_buffer_enabled,
       confirm_opts = {
         behavior = cmp.ConfirmBehavior.Replace,
@@ -83,7 +86,6 @@ return {
       mapping = cmp.mapping.preset.insert({
         ["<C-b>"] = cmp.mapping.scroll_docs(-4),
         ["<C-f>"] = cmp.mapping.scroll_docs(4),
-        ["<C-s>"] = cmp.mapping.complete(),
         ["<C-e>"] = cmp.mapping.abort(),
         ["<CR>"] = cmp.mapping.confirm({ select = true }),
         ["<M-l>"] = cmp.mapping(function(fallback)

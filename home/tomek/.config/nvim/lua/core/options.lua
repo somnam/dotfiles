@@ -49,9 +49,9 @@ vim.api.nvim_create_autocmd("FileType", {
 vim.opt.ttyfast = true -- Faster scrolling
 vim.opt.timeout = true -- Setting for mappings
 vim.opt.ttimeout = true -- Time waited for key press(es) to complete, faster key response
-vim.opt.timeoutlen = 2000 -- Set to default value
+vim.opt.timeoutlen = 1000 -- Set to default value
 vim.opt.ttimeoutlen = 25 -- Set to unnoticeable small value
-vim.opt.updatetime = 2000 -- Longer update time leads to noticeable delays
+vim.opt.updatetime = 1000 -- Longer update time leads to noticeable delays
 vim.opt.synmaxcol = 512 -- Be forgiving with long lines
 
 vim.opt.clipboard = "unnamedplus" -- Use the "global" buffer for copy and paste
@@ -61,15 +61,26 @@ vim.opt.list = true -- Display whitespace info
 -- Display tab characters, trailing whitespace, visible spaces and mark lines that extend off-screen
 vim.opt.listchars = "tab:>.,trail:.,extends:#,precedes:#,nbsp:~"
 
+-- Saving options in session and view files causes more problems than it solves
+vim.opt.sessionoptions:remove("options")
+vim.opt.viewoptions:remove("options")
+
 -- Disable unused plugins
 vim.g.loaded_vimball = 1
 vim.g.loaded_vimballPlugin = 1
 vim.g.loaded_getscript = 1
 vim.g.loaded_getscriptPlugin = 1
 
-vim.opt.formatoptions:remove("c") -- Disable automatic comment insertion
-vim.opt.formatoptions:remove("r")
-vim.opt.formatoptions:remove("o")
+-- Delete comment char when joining lines, disable comment insertion
+vim.opt.formatoptions = "tqj"
+vim.api.nvim_create_autocmd("FileType", {
+  pattern = { "vim", "lua" },
+  callback = function()
+    vim.opt_local.formatoptions = "tqj"
+  end,
+})
+
+-- Completion options
 vim.opt.shortmess:append("C") -- Shut off completion messages
 vim.opt.complete:remove("i") -- Prevent a condition where vim lags due to searching include files and tags
 vim.opt.complete:remove("t")

@@ -26,6 +26,7 @@ local servers = {
           diagnosticMode = "openFilesOnly",
           typeCheckingMode = "off",
           useLibraryCodeForTypes = true,
+          logLevel = "Error",
         },
         pythonPath = python.virtual_env_cmd("python"),
       },
