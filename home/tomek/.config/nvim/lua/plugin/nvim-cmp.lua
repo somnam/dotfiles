@@ -67,9 +67,6 @@ return {
         },
         { name = "path", group_index = 3 },
       },
-      view = {
-        entries = { name = "native" },
-      },
       enabled = H.current_buffer_enabled,
       confirm_opts = {
         behavior = cmp.ConfirmBehavior.Replace,
