@@ -16,7 +16,6 @@ vim.opt.wildmode = "full:longest"
 vim.opt.wildoptions = "pum,tagfile"
 
 vim.opt.wrap = true -- Line wrapping
-vim.opt.linebreak = true -- Wrap long lines at a linebreak character
 vim.opt.wrapscan = false -- Search wrapping
 vim.opt.foldmethod = "marker" -- Set folding method
 vim.opt.foldenable = false -- No autofold
