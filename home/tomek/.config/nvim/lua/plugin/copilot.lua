@@ -1,62 +1,21 @@
 local H = {}
 
 H.enable_copilot = function()
-  local copilot_client = require("copilot.client")
-  local copilot_command = require("copilot.command")
-
-  if copilot_client.is_disabled() then
-    copilot_command.enable()
-  end
-  copilot_command.attach({ force = true })
-end
-
-H.disable_copilot = function()
-  local copilot_client = require("copilot.client")
-  local copilot_command = require("copilot.command")
-
-  if not copilot_client.is_disabled() then
-    copilot_command.detach()
-    copilot_command.disable()
+  -- Lazy load copilot server
+  if vim.fn.exists("*copilot#RunningClient") == 0 then
+    require("lazy.core.loader").load("copilot.vim", {}, {})
+    vim.cmd("runtime autoload/copilot.vim | call copilot#Init()")
   end
 end
 
 return {
-  "zbirenbaum/copilot.lua",
+  "github/copilot.vim",
   build = ":Copilot auth",
   cmd = "Copilot",
   cond = function()
     return require("util.command").executable("node")
   end,
-  dependencies = {
-    {
-      "hrsh7th/nvim-cmp",
-      event = "InsertEnter",
-      opts = function()
-        local cmp = require("cmp")
-
-        cmp.event:on("menu_opened", function()
-          vim.b.copilot_suggestion_hidden = true
-        end)
-
-        cmp.event:on("menu_closed", function()
-          vim.b.copilot_suggestion_hidden = false
-        end)
-      end,
-    },
-  },
   keys = {
-    { "<Space>ce", H.enable_copilot, desc = "Enable Copilot for current buffer." },
-    { "<Space>cd", H.disable_copilot, desc = "Disable Copilot for all buffers." },
-  },
-  opts = {
-    suggestion = {
-      auto_trigger = false,
-    },
-    panel = {
-      enabled = false,
-    },
-    filetypes = {
-      ["*"] = false,
-    },
+    { "<Space>c", H.enable_copilot, noremap = true, silent = true, desc = "Enable Copilot" },
   },
 }

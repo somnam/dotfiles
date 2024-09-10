@@ -6,7 +6,7 @@ vim.api.nvim_set_keymap(
   vim.tbl_extend("keep", { desc = "Rename all symbol references" }, opts)
 )
 vim.api.nvim_set_keymap(
-  "o",
+  "n",
   "<Space>o",
   ":lua vim.lsp.buf.document_symbol()<Enter>",
   vim.tbl_extend("keep", { desc = "List all current buffer symbols" }, opts)
@@ -16,6 +16,12 @@ vim.api.nvim_set_keymap(
   "<Space>a",
   ":lua vim.lsp.buf.references()<Enter>",
   vim.tbl_extend("keep", { desc = "List all symbol references" }, opts)
+)
+vim.api.nvim_set_keymap(
+  "i",
+  "<C-S>",
+  "<cmd>lua vim.lsp.buf.signature_help()<Enter>",
+  vim.tbl_extend("keep", { desc = "Display signature of the symbol" }, opts)
 )
 
 local handlers = {
