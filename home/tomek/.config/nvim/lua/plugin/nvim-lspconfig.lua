@@ -7,6 +7,9 @@ local servers = {
       completion = {
         disableSnippets = true,
       },
+      workspace = {
+        environmentPath = python.virtual_env,
+      }
     },
     on_attach = function(client, _)
       -- Customize trigger characters.
