@@ -85,7 +85,7 @@ vim.opt.complete:remove("i") -- Prevent a condition where vim lags due to search
 vim.opt.complete:remove("t")
 vim.opt.pumheight = 15 -- Completion window height
 -- Completion behavior
-vim.opt.completeopt = { "menu", "menuone", "preview", "noinsert" }
+vim.opt.completeopt = { "menu", "menuone", "popup", "noinsert" }
 
 -- Diff settings
 vim.opt.diffopt:append("algorithm:patience")
@@ -98,7 +98,7 @@ vim.g.netrw_browse_split = 4
 vim.g.netrw_altv = 1
 vim.g.netrw_clipboard = 0
 vim.g.netrw_keepdir = 0
-vim.g.netrw_winsize = 25
+vim.g.netrw_winsize = 30
 vim.api.nvim_create_autocmd("FileType", {
   pattern = "netrw",
   group = vim.api.nvim_create_augroup("netrw_filetype", { clear = true }),

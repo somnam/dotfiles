@@ -16,6 +16,6 @@ return {
     return require("util.command").executable("node")
   end,
   keys = {
-    { "<Space>c", H.enable_copilot, noremap = true, silent = true, desc = "Enable Copilot" },
+    { "<Space>ce", H.enable_copilot, noremap = true, silent = true, desc = "Enable Copilot" },
   },
 }
