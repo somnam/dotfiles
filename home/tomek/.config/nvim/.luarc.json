@@ -8,6 +8,7 @@
       "lua",
       "$VIMRUNTIME"
     ],
+    "maxPreload": 1000,
     "checkThirdParty": false
   },
   "completion": {
