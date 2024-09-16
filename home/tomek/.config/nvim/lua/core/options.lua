@@ -65,10 +65,17 @@ vim.opt.sessionoptions:remove("options")
 vim.opt.viewoptions:remove("options")
 
 -- Disable unused plugins
+vim.g.loaded_netrw = 1
+vim.g.loaded_netrwPlugin = 1
+vim.g.loaded_netrwSettings = 1
+vim.g.loaded_netrwFileHandlers = 1
 vim.g.loaded_vimball = 1
 vim.g.loaded_vimballPlugin = 1
 vim.g.loaded_getscript = 1
 vim.g.loaded_getscriptPlugin = 1
+
+-- Disable python plugins support
+vim.g.loaded_python3_provider = 0
 
 -- Delete comment char when joining lines, disable comment insertion
 vim.opt.formatoptions = "tqj"
@@ -90,29 +97,3 @@ vim.opt.completeopt = { "menu", "menuone", "popup", "noinsert" }
 -- Diff settings
 vim.opt.diffopt:append("algorithm:patience")
 vim.opt.diffopt:append("indent-heuristic")
-
--- Netrw
-vim.g.netrw_banner = 0
-vim.g.netrw_liststyle = 3
-vim.g.netrw_browse_split = 4
-vim.g.netrw_altv = 1
-vim.g.netrw_clipboard = 0
-vim.g.netrw_keepdir = 0
-vim.g.netrw_winsize = 30
-vim.api.nvim_create_autocmd("FileType", {
-  pattern = "netrw",
-  group = vim.api.nvim_create_augroup("netrw_filetype", { clear = true }),
-  command = [[
-    hi! link netrwMarkFile Search
-    silent! unmap <buffer> <C-L>
-  ]],
-})
-vim.api.nvim_set_keymap(
-  "n",
-  "<Space>e",
-  ":Lexplore<Enter>",
-  { noremap = true, silent = true, desc = "Open or close the file explorer" }
-)
-
--- Disable python plugins support
-vim.g.loaded_python3_provider = 0
