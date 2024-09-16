@@ -24,6 +24,7 @@ M.exclude = {
     "man",
     "mason",
     "netrw",
+    "NvimTree",
     "qf",
     "tutor",
   },

@@ -1,7 +1,7 @@
 return {
   "echasnovski/mini.nvim",
   event = "VeryLazy",
-  init = function()
+  config = function()
     local buffer = require("core.buffer")
 
     local H = {
@@ -21,8 +21,7 @@ return {
         end
       end,
     })
-  end,
-  config = function()
+
     vim.api.nvim_cmd({
       cmd = "command",
       args = { "BD lua MiniBufremove.delete(0, true)" },
