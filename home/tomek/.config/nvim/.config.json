@@ -5,10 +5,11 @@
         "exclude": ["csv"]
     },
     "plugin": {
-        "formatter": {
-            "python": ["black", "isort", "ruff", "ruff_check"],
+        "conform": {
+            "python": ["black", "isort", "ruff_format", "ruff_fix", "ruff_organize_imports"],
             "lua": ["stylua"],
-            "rust": ["rustfmt"]
+            "rust": ["rustfmt"],
+            "*": ["trim_whitespace"]
         },
         "lint": {
             "python": ["flake8", "mypy", "ruff"],
