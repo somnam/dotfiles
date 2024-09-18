@@ -34,6 +34,7 @@ H.setup = function()
 
   require("lazy").setup({
     spec = {
+      { "folke/lazy.nvim", version = "*" },
       { import = "plugin" },
     },
     checker = {

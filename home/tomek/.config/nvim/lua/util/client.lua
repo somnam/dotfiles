@@ -16,15 +16,17 @@ M.get_formatter_names = function()
     return M.formatter_names_by_ft[filetype]
   end
 
-  local formatter_ok, formatter_util = pcall(require, "formatter.util")
+  local formatter_ok, format = pcall(require, "conform")
   if not formatter_ok then
     return {}
   end
 
-  local formatters = formatter_util.get_available_formatters_for_ft(filetype)
+  local formatters = format.list_formatters()
   local formatter_names = {}
   for _, formatter in ipairs(formatters) do
-    table.insert(formatter_names, formatter.exe)
+    if formatter.available then
+      table.insert(formatter_names, formatter.command)
+    end
   end
   M.formatter_names_by_ft[filetype] = formatter_names
 
@@ -76,9 +78,12 @@ M.has_clients = function()
     return true
   end
 
-  local formatter_ok, formatter_util = pcall(require, "formatter.util")
-  if formatter_ok and #formatter_util.get_available_formatters_for_ft(vim.bo.filetype) > 0 then
-    return true
+  local formatter_ok, format = pcall(require, "conform")
+  if formatter_ok then
+    local filetype = vim.bo.filetype ~= "" and vim.bo.filetype or "_"
+    local has_ft_formatters = #(format.formatters_by_ft[filetype] or {}) > 0
+    local has_any_formatters = #(format.formatters_by_ft["*"] or {}) > 0
+    return has_ft_formatters or has_any_formatters
   end
 
   local lint_ok, lint = pcall(require, "lint")
