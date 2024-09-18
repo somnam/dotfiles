@@ -3,6 +3,7 @@ return {
     "Mofiqul/vscode.nvim",
     event = "ColorSchemePre vscode",
     opts = {
+      disable_nvimtree_bg = true,
       group_overrides = {
         MiniStatuslineModeNormal = { link = "Cursor" },
         MiniStatuslineModeInsert = { link = "DiffChange" },
