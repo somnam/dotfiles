@@ -36,3 +36,17 @@ vim.api.nvim_set_keymap(
   ":qall<Enter>",
   vim.tbl_extend("keep", { desc = "Exit Neovim" }, opts)
 )
+
+-- Snippet mappings
+vim.keymap.set({ "i", "s" }, "<C-l>", function()
+  if vim.snippet.active({ direction = 1 }) then
+    return "<cmd>lua vim.snippet.jump(1)<Enter>"
+  end
+  return "<C-l>"
+end, { expr = true })
+vim.keymap.set({ "i", "s" }, "<C-h>", function()
+  if vim.snippet.active({ direction = -1 }) then
+    return "<cmd>lua vim.snippet.jump(-1)<Enter>"
+  end
+  return "<C-h>"
+end, { expr = true })

@@ -88,20 +88,6 @@ return {
         ["<C-f>"] = cmp.mapping.scroll_docs(4),
         ["<C-e>"] = cmp.mapping.abort(),
         ["<CR>"] = cmp.mapping.confirm({ select = true }),
-        ["<M-l>"] = cmp.mapping(function(fallback)
-          if vim.snippet.active({ direction = 1 }) then
-            vim.snippet.jump(1)
-          else
-            fallback()
-          end
-        end, { "i", "s" }),
-        ["<M-h>"] = cmp.mapping(function(fallback)
-          if vim.snippet.active({ direction = -1 }) then
-            vim.snippet.jump(-1)
-          else
-            fallback()
-          end
-        end, { "i", "s" }),
       }),
       formatting = {
         fields = { "abbr", "kind", "menu" },
