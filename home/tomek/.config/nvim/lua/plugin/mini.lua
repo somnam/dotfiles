@@ -2,26 +2,6 @@ return {
   "echasnovski/mini.nvim",
   event = "VeryLazy",
   config = function()
-    local buffer = require("core.buffer")
-
-    local H = {
-      max_size = 1024 * 512,
-    }
-
-    H.maybe_disable_mini_cursorword = function(ctx)
-      return buffer.excluded(ctx.buf) or buffer.above_max_size(ctx.buf, H.max_size)
-    end
-
-    vim.api.nvim_create_autocmd("FileType", {
-      pattern = "*",
-      group = vim.api.nvim_create_augroup("maybe_disable_mini_plugin", { clear = true }),
-      callback = function(ctx)
-        if H.maybe_disable_mini_cursorword(ctx) then
-          vim.b.minicursorword_disable = true
-        end
-      end,
-    })
-
     vim.api.nvim_cmd({
       cmd = "command",
       args = { "BD lua MiniBufremove.delete(0, true)" },
@@ -46,8 +26,6 @@ return {
         ["`"] = { action = "open", neigh_pattern = quote_neigh_pattern },
       },
     })
-
-    require("mini.cursorword").setup({ delay = 250 })
 
     local mini_clue = require("mini.clue")
     mini_clue.setup({
