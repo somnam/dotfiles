@@ -12,8 +12,7 @@
             "*": ["trim_whitespace"]
         },
         "lint": {
-            "python": ["flake8", "mypy", "ruff"],
-            "lua": []
+            "python": ["flake8", "mypy", "ruff"]
         },
         "mason": {
             "ensure_installed": []

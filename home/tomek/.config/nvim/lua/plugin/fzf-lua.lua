@@ -71,7 +71,7 @@ return {
       desc = "Live grep the current project",
     },
     {
-      "<Space>s",
+      "<Space>W",
       ":FzfLua grep_cword<Enter>",
       noremap = true,
       silent = true,
@@ -92,18 +92,25 @@ return {
       desc = "List all buffer diagnostics",
     },
     {
-      "<Space>o",
+      "grs",
       ":FzfLua lsp_document_symbols<Enter>",
       noremap = true,
       silent = true,
-      desc = "List all buffer symbols",
+      desc = "List all current buffer symbols",
     },
     {
-      "<Space>a",
+      "grr",
       ":FzfLua lsp_references<Enter>",
       noremap = true,
       silent = true,
       desc = "List all symbol references",
+    },
+    {
+      "gra",
+      ":FzfLua lsp_code_actions<Enter>",
+      noremap = true,
+      silent = true,
+      desc = "Select code action at cursor position",
     },
   },
   opts = {
