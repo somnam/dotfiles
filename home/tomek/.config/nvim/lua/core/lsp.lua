@@ -47,10 +47,17 @@ H.set_lsp_options = function()
   vim.lsp.set_log_level("ERROR")
 end
 
-H.setup_lsp_highlight_symbol = function()
+H.get_lsp_client_from_event = function(event)
+  local client_id = vim.tbl_get(event, "data", "client_id")
+  return client_id and vim.lsp.get_client_by_id(client_id) or nil
+end
+
+H.setup_lsp_highlight_symbol = function(delay)
+  vim.validate({ delay = { delay, "number", true } })
+  delay = delay or 500
+
   local function setup_lsp_highlight_symbol(event)
-    local client_id = vim.tbl_get(event, "data", "client_id")
-    local client = client_id and vim.lsp.get_client_by_id(client_id)
+    local client = H.get_lsp_client_from_event(event)
     if not (client and client.supports_method("textDocument/documentHighlight")) then
       return
     end
@@ -67,6 +74,10 @@ H.setup_lsp_highlight_symbol = function()
       buffer = event.buf,
       callback = vim.lsp.buf.clear_references,
     })
+
+    if vim.opt.updatetime:get() > delay then
+      vim.opt.updatetime = delay
+    end
   end
 
   vim.api.nvim_create_autocmd("LspAttach", {
@@ -76,6 +87,24 @@ H.setup_lsp_highlight_symbol = function()
   })
 end
 
+H.setup_lsp_inlay_hints = function()
+  local function setup_lsp_inlay_hints(event)
+    local client = H.get_lsp_client_from_event(event)
+    if not (client and client.supports_method("textDocument/inlayHint")) then
+      return
+    end
+
+    vim.lsp.inlay_hint.enable(true, { bufnr = event.buf })
+  end
+
+  vim.api.nvim_create_autocmd("LspAttach", {
+    pattern = "*",
+    group = vim.api.nvim_create_augroup("lsp_setup_inlay_hints", { clear = true }),
+    callback = setup_lsp_inlay_hints,
+  })
+end
+
 H.set_lsp_options()
 H.set_lsp_handlers_style()
 H.setup_lsp_highlight_symbol()
+H.setup_lsp_inlay_hints()
