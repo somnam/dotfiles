@@ -20,7 +20,6 @@ return {
     highlight = {
       enable = true,
       disable = H.maybe_disable_treesitter,
-      additional_vim_regex_highlighting = true,
     },
   },
   config = function(_, opts)

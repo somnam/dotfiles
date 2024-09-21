@@ -1,3 +1,5 @@
+local buffer = require("core.buffer")
+
 return {
   "hrsh7th/nvim-cmp",
   event = "InsertEnter",
@@ -17,7 +19,6 @@ return {
   },
   opts = function()
     local cmp = require("cmp")
-    local buffer = require("core.buffer")
 
     local H = {
       max_size = 1024 * 1024,

@@ -135,6 +135,9 @@ return {
           vim.wo.winbar = nil
           return
         end
+        if vim.fn.empty(vim.wo.winbar) == 0 then
+          return
+        end
 
         vim.wo.winbar = winbar
       end,
