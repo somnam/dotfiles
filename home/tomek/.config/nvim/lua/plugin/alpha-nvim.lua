@@ -1,3 +1,5 @@
+local misc = require("util.misc")
+
 return {
   "goolord/alpha-nvim",
   event = "VimEnter",
@@ -25,7 +27,6 @@ return {
   end,
   opts = function()
     local dashboard = require("alpha.themes.dashboard")
-    local misc = require("util.misc")
 
     local H = {
       labels = {
