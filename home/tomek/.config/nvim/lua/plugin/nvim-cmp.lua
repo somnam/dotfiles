@@ -82,7 +82,9 @@ return {
         end,
       },
       performance = {
-        debounce = 150,
+        debounce = 100,
+        fetching_timeout = 250,
+        max_view_entries = 50,
       },
       mapping = cmp.mapping.preset.insert({
         ["<C-b>"] = cmp.mapping.scroll_docs(-4),
@@ -104,9 +106,10 @@ return {
           cmp.config.compare.recently_used,
           cmp.config.compare.exact,
           cmp.config.compare.score,
-          cmp.config.compare.kind,
-          cmp.config.compare.order,
         },
+      },
+      matching = {
+        disallow_fullfuzzy_matching = true,
       },
     }
   end,
