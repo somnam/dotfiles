@@ -3,6 +3,9 @@
   "runtime": {
     "version": "LuaJIT"
   },
+  "semantic": {
+    "enable": false
+  },
   "workspace": {
     "library": [
       "lua",
