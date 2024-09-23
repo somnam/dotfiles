@@ -9,7 +9,7 @@ local servers = {
       },
       workspace = {
         environmentPath = python.virtual_env,
-      }
+      },
     },
     on_attach = function(client, _)
       -- Customize trigger characters.
@@ -64,7 +64,6 @@ return {
   opts = function(_, opts)
     return vim.tbl_deep_extend("force", {
       capabilities = vim.lsp.protocol.make_client_capabilities(),
-      servers = servers,
     }, opts)
   end,
   config = function(_, opts)
