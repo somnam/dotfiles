@@ -38,15 +38,15 @@ vim.api.nvim_set_keymap(
 )
 
 -- Snippet mappings
-vim.keymap.set({ "i", "s" }, "<C-l>", function()
+vim.keymap.set({ "i", "s" }, "<Tab>", function()
   if vim.snippet.active({ direction = 1 }) then
     return "<cmd>lua vim.snippet.jump(1)<Enter>"
   end
-  return "<C-l>"
+  return "<Tab>"
 end, { expr = true })
-vim.keymap.set({ "i", "s" }, "<C-h>", function()
+vim.keymap.set({ "i", "s" }, "<S-Tab>", function()
   if vim.snippet.active({ direction = -1 }) then
     return "<cmd>lua vim.snippet.jump(-1)<Enter>"
   end
-  return "<C-h>"
+  return "<S-Tab>"
 end, { expr = true })
