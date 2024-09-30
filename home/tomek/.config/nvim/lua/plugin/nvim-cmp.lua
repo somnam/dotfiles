@@ -82,8 +82,8 @@ return {
         end,
       },
       performance = {
-        debounce = 100,
-        fetching_timeout = 250,
+        debounce = 50,
+        fetching_timeout = 200,
         max_view_entries = 50,
       },
       mapping = cmp.mapping.preset.insert({
@@ -103,10 +103,10 @@ return {
       sorting = {
         comparators = {
           cmp.config.compare.offset,
-          cmp.config.compare.locality,
-          cmp.config.compare.recently_used,
           cmp.config.compare.exact,
           cmp.config.compare.score,
+          cmp.config.compare.locality,
+          cmp.config.compare.recently_used,
         },
       },
       matching = {

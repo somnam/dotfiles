@@ -52,59 +52,50 @@ H.get_lsp_client_from_event = function(event)
   return client_id and vim.lsp.get_client_by_id(client_id) or nil
 end
 
-H.setup_lsp_highlight_symbol = function(delay)
+H.setup_lsp_highlight_symbol = function(event, delay)
   vim.validate({ delay = { delay, "number", true } })
   delay = delay or 500
 
-  local function setup_lsp_highlight_symbol(event)
-    local client = H.get_lsp_client_from_event(event)
-    if not (client and client.supports_method("textDocument/documentHighlight")) then
-      return
-    end
-
-    local group = vim.api.nvim_create_augroup("lsp_highlight_symbol", { clear = false })
-    vim.api.nvim_clear_autocmds({ buffer = event.buf, group = group })
-    vim.api.nvim_create_autocmd({ "CursorHold", "CursorHoldI" }, {
-      group = group,
-      buffer = event.buf,
-      callback = vim.lsp.buf.document_highlight,
-    })
-    vim.api.nvim_create_autocmd({ "CursorMoved", "CursorMovedI" }, {
-      group = group,
-      buffer = event.buf,
-      callback = vim.lsp.buf.clear_references,
-    })
-
-    if vim.opt.updatetime:get() > delay then
-      vim.opt.updatetime = delay
-    end
+  local client = H.get_lsp_client_from_event(event)
+  if not (client and client.supports_method("textDocument/documentHighlight")) then
+    return
   end
 
-  vim.api.nvim_create_autocmd("LspAttach", {
-    pattern = "*",
-    group = vim.api.nvim_create_augroup("lsp_setup_highlight_symbol", { clear = true }),
-    callback = setup_lsp_highlight_symbol,
+  local group = vim.api.nvim_create_augroup("lsp_highlight_symbol", { clear = false })
+  vim.api.nvim_clear_autocmds({ buffer = event.buf, group = group })
+  vim.api.nvim_create_autocmd({ "CursorHold", "CursorHoldI" }, {
+    group = group,
+    buffer = event.buf,
+    callback = vim.lsp.buf.document_highlight,
   })
+  vim.api.nvim_create_autocmd({ "CursorMoved", "CursorMovedI" }, {
+    group = group,
+    buffer = event.buf,
+    callback = vim.lsp.buf.clear_references,
+  })
+
+  if vim.opt.updatetime:get() > delay then
+    vim.opt.updatetime = delay
+  end
 end
 
-H.setup_lsp_inlay_hints = function()
-  local function setup_lsp_inlay_hints(event)
-    local client = H.get_lsp_client_from_event(event)
-    if not (client and client.supports_method("textDocument/inlayHint")) then
-      return
-    end
-
-    vim.lsp.inlay_hint.enable(true, { bufnr = event.buf })
+H.setup_lsp_inlay_hints = function(event)
+  local client = H.get_lsp_client_from_event(event)
+  if not (client and client.supports_method("textDocument/inlayHint")) then
+    return
   end
 
-  vim.api.nvim_create_autocmd("LspAttach", {
-    pattern = "*",
-    group = vim.api.nvim_create_augroup("lsp_setup_inlay_hints", { clear = true }),
-    callback = setup_lsp_inlay_hints,
-  })
+  vim.lsp.inlay_hint.enable(true, { bufnr = event.buf })
 end
 
 H.set_lsp_options()
 H.set_lsp_handlers_style()
-H.setup_lsp_highlight_symbol()
-H.setup_lsp_inlay_hints()
+
+vim.api.nvim_create_autocmd("LspAttach", {
+  pattern = "*",
+  group = vim.api.nvim_create_augroup("lsp_setup", { clear = true }),
+  callback = function(event)
+    H.setup_lsp_highlight_symbol(event)
+    H.setup_lsp_inlay_hints(event)
+  end,
+})
