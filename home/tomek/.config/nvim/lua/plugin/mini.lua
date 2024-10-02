@@ -2,28 +2,23 @@ return {
   "echasnovski/mini.nvim",
   event = "VeryLazy",
   config = function()
-    vim.api.nvim_cmd({
-      cmd = "command",
-      args = { "BD lua MiniBufremove.delete(0, true)" },
-      bang = true,
-    }, {})
-    vim.api.nvim_cmd({
-      cmd = "command",
-      args = { "BW lua MiniBufremove.wipeout(0, true)" },
-      bang = true,
-    }, {})
-    require("mini.bufremove").setup()
+    local mini_bufremove = require("mini.bufremove")
+    mini_bufremove.setup()
+    vim.api.nvim_create_user_command("BD", function()
+      mini_bufremove.delete(0, true)
+    end, {})
+    vim.api.nvim_create_user_command("BW", function()
+      mini_bufremove.wipeout(0, true)
+    end, {})
 
-    local neigh_pattern = ".[%s%)%]%}]"
-    local quote_neigh_pattern = "[%{%[%(%=%s][%s%)%]%}]"
     require("mini.pairs").setup({
       mappings = {
-        ["("] = { neigh_pattern = neigh_pattern },
-        ["["] = { neigh_pattern = neigh_pattern },
-        ["{"] = { neigh_pattern = neigh_pattern },
-        ['"'] = { action = "open", neigh_pattern = quote_neigh_pattern },
-        ["'"] = { action = "open", neigh_pattern = quote_neigh_pattern },
-        ["`"] = { action = "open", neigh_pattern = quote_neigh_pattern },
+        ["("] = { neigh_pattern = "[^\\][%s%)%]%}]" },
+        ["["] = { neigh_pattern = "[^\\][%s%)%]%}]" },
+        ["{"] = { neigh_pattern = "[^\\][%s%)%]%}]" },
+        ['"'] = { neigh_pattern = "[^A-Za-eg-z0-9%p][^%w%p]" },
+        ["'"] = { neigh_pattern = "[^%w%p][^%w%p]" },
+        ["`"] = { neigh_pattern = "[^%w%p][^%w%p]" },
       },
     })
 
