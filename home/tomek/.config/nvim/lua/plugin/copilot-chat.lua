@@ -1,0 +1,35 @@
+return {
+  "CopilotC-Nvim/CopilotChat.nvim",
+  branch = "canary",
+  build = "make tiktoken",
+  cmd = {
+    "CopilotChat",
+    "CopilotChatOpen",
+    "CopilotChatClose",
+    "CopilotChatToggle",
+    "CopilotChatStop",
+    "CopilotChatReset",
+    "CopilotChatSave",
+    "CopilotChatLoad",
+    "CopilotChatDebugInfo",
+    "CopilotChatModels",
+    "CopilotChatModel",
+    "CopilotChatExplain",
+    "CopilotChatReview",
+    "CopilotChatFix",
+    "CopilotChatOptimize",
+    "CopilotChatDocs",
+    "CopilotChatTests",
+    "CopilotChatFixDiagnostic",
+    "CopilotChatCommit",
+    "CopilotChatCommitStaged",
+  },
+  cond = function()
+    return require("util.command").executable("curl")
+  end,
+  dependencies = {
+    "github/copilot.vim",
+    "nvim-lua/plenary.nvim",
+  },
+  opts = {},
+}
