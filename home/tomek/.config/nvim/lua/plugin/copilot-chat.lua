@@ -1,10 +1,10 @@
 local H = {
-  config_paths = { "$XDG_CONFIG_HOME", "~/.config", "~/AppData/Local" },
+  config_paths = { vim.env.XDG_CONFIG_HOME, "$HOME/.config", "$HOME/AppData/Local" },
 }
 
 H.hosts_file_exists = function()
   for _, path in ipairs(H.config_paths) do
-    local config_path = vim.fn.expand(path)
+    local config_path = path and vim.fn.expand(path)
     if config_path and vim.fn.isdirectory(config_path) > 0 then
       local file_path = string.format("%s/github-copilot/hosts.json", config_path)
       if vim.fn.filereadable(file_path) == 1 then
