@@ -9,9 +9,11 @@ H.enable_copilot = function()
 end
 
 H.set_completion_events = function()
-  local cmp = require("cmp")
-  cmp.event:on("menu_opened", H.maybe_disable_copilot_suggestions)
-  cmp.event:on("menu_closed", H.maybe_enable_copilot_suggestions)
+  local cmp_ok, cmp = pcall(require, "cmp")
+  if cmp_ok then
+    cmp.event:on("menu_opened", H.maybe_disable_copilot_suggestions)
+    cmp.event:on("menu_closed", H.maybe_enable_copilot_suggestions)
+  end
 end
 
 H.maybe_disable_copilot_suggestions = function()
