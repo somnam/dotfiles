@@ -51,6 +51,13 @@ return {
     end
 
     return {
+      formatters = {
+        trim_whitespace = {
+          condition = function(_, ctx)
+            return vim.bo[ctx.buf].modifiable
+          end,
+        },
+      },
       formatters_by_ft = H.formatters_by_ft(),
       format_on_save = { timeout_ms = 500 },
     }

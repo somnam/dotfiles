@@ -78,17 +78,16 @@ M.has_clients = function()
     return true
   end
 
-  local formatter_ok, format = pcall(require, "conform")
-  if formatter_ok then
-    local filetype = vim.bo.filetype ~= "" and vim.bo.filetype or "_"
-    local has_ft_formatters = #(format.formatters_by_ft[filetype] or {}) > 0
-    local has_any_formatters = #(format.formatters_by_ft["*"] or {}) > 0
-    return has_ft_formatters or has_any_formatters
-  end
-
   local lint_ok, lint = pcall(require, "lint")
   if lint_ok and #(lint.linters_by_ft[vim.bo.filetype] or {}) > 0 then
     return true
+  end
+
+  local formatter_ok, format = pcall(require, "conform")
+  if formatter_ok then
+    local bufnr = vim.api.nvim_get_current_buf()
+    local formatters = format.list_formatters_for_buffer(bufnr)
+    return #format.resolve_formatters(formatters, bufnr, false, true) > 0
   end
 
   return false
