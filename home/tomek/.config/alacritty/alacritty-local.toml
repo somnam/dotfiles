@@ -1,0 +1,21 @@
+# [font]
+# size = 14.0
+#
+# [font.normal]
+# family = "JetBrains Mono"
+# style = "Light"
+#
+# [font.italic]
+# family = "JetBrains Mono"
+# style = "Light Italic"
+#
+# [font.bold]
+# family = "JetBrains Mono"
+# style = "Regular"
+#
+# [font.bold_italic]
+# family = "JetBrains Mono"
+# style = "Italic"
+#
+# [general]
+# import = ["/Users/tomek/.config/alacritty/codedark.toml"]
