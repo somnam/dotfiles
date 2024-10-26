@@ -1,0 +1,21 @@
+[env]
+TERM = "xterm-256color"
+
+[mouse]
+hide_when_typing = true
+
+[scrolling]
+history = 20000
+
+[window]
+option_as_alt = "Both"
+
+[window.padding]
+x = 2
+y = 2
+
+[colors]
+draw_bold_text_with_bright_colors = true
+
+[general]
+import = ["/Users/tomek/.config/alacritty/alacritty-local.toml"]
