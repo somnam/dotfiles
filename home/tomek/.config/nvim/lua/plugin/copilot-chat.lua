@@ -21,16 +21,8 @@ return {
   build = "make tiktoken",
   cmd = {
     "CopilotChat",
-    "CopilotChatOpen",
-    "CopilotChatClose",
     "CopilotChatToggle",
-    "CopilotChatStop",
-    "CopilotChatReset",
-    "CopilotChatSave",
     "CopilotChatLoad",
-    "CopilotChatDebugInfo",
-    "CopilotChatModels",
-    "CopilotChatModel",
     "CopilotChatExplain",
     "CopilotChatReview",
     "CopilotChatFix",
@@ -39,12 +31,21 @@ return {
     "CopilotChatTests",
     "CopilotChatFixDiagnostic",
     "CopilotChatCommit",
-    "CopilotChatCommitStaged",
   },
   cond = function()
     return require("util.command").executable("curl") and H.hosts_file_exists()
   end,
   dependencies = { "nvim-lua/plenary.nvim" },
+  keys = {
+    {
+      "<Space>a",
+      ":CopilotChat<Enter>",
+      mode = { "n", "v" },
+      noremap = true,
+      silent = true,
+      desc = "Open or close the chat window",
+    },
+  },
   opts = {
     mappings = {
       close = {

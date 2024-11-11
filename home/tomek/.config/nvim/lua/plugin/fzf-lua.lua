@@ -119,7 +119,6 @@ return {
       width = 0.65,
       col = 0.50,
       backdrop = 100,
-      border = "none",
       preview = {
         default = command.bat({ cmd_only = true }),
         layout = "vertical",
@@ -127,7 +126,6 @@ return {
       },
     },
     fzf_opts = {
-      ["--border"] = "rounded",
       ["--history"] = vim.fn.stdpath("data") .. "/fzf_lua_history",
     },
     fzf_colors = true,
@@ -136,7 +134,6 @@ return {
         args = command.bat({ args_only = true, color = true, into_shell = true }),
       },
       builtin = {
-        syntax = false,
         treesitter = { enable = false },
       },
     },
