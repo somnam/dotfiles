@@ -26,3 +26,12 @@ vim.api.nvim_create_autocmd("ColorScheme", {
     hi! link WinBarNC StatusLineNC
   ]],
 })
+
+vim.api.nvim_create_autocmd("ColorScheme", {
+  pattern = "default",
+  group = vim.api.nvim_create_augroup("after_default_colorscheme", { clear = true }),
+  command = [[
+    hi! link MiniStatuslineModeNormal StatusLine
+    hi! link MiniStatuslineModeInsert Search
+  ]],
+})
