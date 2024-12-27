@@ -137,10 +137,7 @@ return {
         treesitter = { enable = false },
       },
     },
-    defaults = {
-      git_icons = false,
-      file_icons = false,
-    },
+    defaults = { git_icons = false, file_icons = false },
     files = {
       prompt = "Files❯ ",
       cmd = command.find({ into_shell = true }),
@@ -152,5 +149,8 @@ return {
     },
     manpages = { previewer = "man_native" },
     helptags = { previewer = "help_native" },
+    lsp = { code_actions = { previewer = "codeaction_native" } },
+    tags = { previewer = "bat" },
+    btags = { previewer = "bat" },
   },
 }

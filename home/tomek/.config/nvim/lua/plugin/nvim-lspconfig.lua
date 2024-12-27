@@ -1,7 +1,9 @@
 local command = require("util.command")
 local python = require("util.python")
 
-local servers = {
+local H = {}
+
+H.servers = {
   jedi_language_server = {
     init_options = {
       completion = {
@@ -58,23 +60,26 @@ local servers = {
   },
 }
 
+H.capabilities = vim.lsp.protocol.make_client_capabilities()
+
+---@param name string
+---@return boolean
+H.lsp_server_available = function(name)
+  local cmd = require("lspconfig")[name].document_config.default_config.cmd
+  return type(cmd) == "table" and command.executable(cmd[1])
+end
+
 return {
   "neovim/nvim-lspconfig",
   event = { "BufReadPre", "BufNewFile" },
-  opts = function(_, opts)
-    return vim.tbl_deep_extend("force", {
-      capabilities = vim.lsp.protocol.make_client_capabilities(),
-    }, opts)
-  end,
   config = function(_, opts)
     local lspconfig = require("lspconfig")
+    local capabilities = vim.tbl_deep_extend("force", H.capabilities, opts.capabilities or {})
 
-    for server, server_config in pairs(servers) do
-      local cmd = lspconfig[server].document_config.default_config.cmd
-      if type(cmd) == "table" and command.executable(cmd[1]) then
-        lspconfig[server].setup(
-          vim.tbl_deep_extend("force", { capabilities = opts.capabilities }, server_config)
-        )
+    for name, config in pairs(H.servers) do
+      if H.lsp_server_available(name) then
+        config = vim.tbl_deep_extend("force", { capabilities = capabilities }, config)
+        lspconfig[name].setup(config)
       end
     end
 
