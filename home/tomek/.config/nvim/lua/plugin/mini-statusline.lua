@@ -92,13 +92,19 @@ return {
       return mini_statusline.section_filename(args)
     end
 
-    H.section_location = "%3l:%-2c %P"
+    H.section_location = function(args)
+      if mini_statusline.is_truncated(args.trunc_width) then
+        return "%3l:%-2c"
+      end
+
+      return "%3l:%-2c %P"
+    end
 
     H.secion_filepath = "%f %m %r"
 
     -- statusline
     H.content_active = function()
-      local mode, mode_hl = mini_statusline.section_mode({})
+      local mode, mode_hl = mini_statusline.section_mode({ trunc_width = 75 })
       local git = mini_statusline.section_git({ icon = "", trunc_width = 40 })
       local diff = H.section_diff({ icon = "𝚫", trunc_width = 40 })
       local diagnostics = mini_statusline.section_diagnostics({
@@ -110,6 +116,7 @@ return {
       local clients = H.section_clients({ icon = "●", trunc_width = 120 })
       local fileinfo = H.section_fileinfo({ icon = "𝌆", trunc_width = 75 })
       local filesize = H.section_filesize({ icon = "◔", trunc_width = 75 })
+      local location = H.section_location({ trunc_width = 75 })
 
       return mini_statusline.combine_groups({
         { hl = mode_hl, strings = { mode } },
@@ -119,7 +126,7 @@ return {
         "%=", -- End left alignment
         { strings = { updates } },
         { hl = "MiniStatuslineFileinfo", strings = { clients, fileinfo, filesize } },
-        { hl = mode_hl, strings = { H.section_location } },
+        { hl = mode_hl, strings = { location } },
       })
     end
 
