@@ -6,7 +6,6 @@ return {
   cond = function()
     return require("util.command").executable("fzf")
   end,
-  commit = "dbc5bd14e72ba680df44906e957b0a821121726b",
   keys = {
     {
       "<Space><Space>",
