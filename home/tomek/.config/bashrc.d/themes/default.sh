@@ -26,5 +26,5 @@ set_prompt_theme()
 
 if [[ ! "${PROMPT_COMMAND}" =~ set_prompt_theme ]]; then
     PROMPT_DIRTRIM=4
-    PROMPT_COMMAND="${PROMPT_COMMAND:-} set_prompt_theme;"
+    PROMPT_COMMAND="set_prompt_theme${PROMPT_COMMAND:+; $PROMPT_COMMAND}"
 fi

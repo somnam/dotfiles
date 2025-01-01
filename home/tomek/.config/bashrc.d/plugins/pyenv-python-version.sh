@@ -24,7 +24,7 @@ pyenv_python_version_hook()
 
 if command -v pyenv >/dev/null; then
     if [[ ! "${PROMPT_COMMAND-}" =~ pyenv_python_version_hook ]]; then
-        PROMPT_COMMAND="${PROMPT_COMMAND:-} pyenv_python_version_hook;"
+        PROMPT_COMMAND="pyenv_python_version_hook${PROMPT_COMMAND:+; $PROMPT_COMMAND}"
     fi
 else
     unset -f pyenv_python_version_hook
