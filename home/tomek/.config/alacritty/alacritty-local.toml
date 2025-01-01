@@ -11,11 +11,11 @@
 #
 # [font.bold]
 # family = "JetBrains Mono"
-# style = "Regular"
+# style = "Bold"
 #
 # [font.bold_italic]
 # family = "JetBrains Mono"
-# style = "Italic"
+# style = "Bold Italic"
 #
 # [general]
 # import = ["/Users/tomek/.config/alacritty/codedark.toml"]
