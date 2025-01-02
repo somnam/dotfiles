@@ -8,6 +8,10 @@ source-rc-files()
         source "$rc_file"
     done
 
+    # theme
+    rc_file="$rc_path/themes/${BASH_THEME}.sh"
+    [[ -f "$rc_file" ]] && source "$rc_file"
+
     # plugins
     for plugin in ${plugins[@]}; do
         rc_file="$rc_path/plugins/${plugin}.sh"
@@ -25,10 +29,6 @@ source-rc-files()
         rc_file="$rc_path/aliases/${alias}.sh"
         [[ -f "$rc_file" ]] && source "$rc_file"
     done
-
-    # theme
-    rc_file="$rc_path/themes/${BASH_THEME}.sh"
-    [[ -f "$rc_file" ]] && source "$rc_file"
 
     unset -v completions aliases plugins BASH_THEME
     unset -f source-rc-files
