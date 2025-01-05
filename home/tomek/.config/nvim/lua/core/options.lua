@@ -58,6 +58,7 @@ vim.opt.inccommand = "nosplit" -- Shows the effects of a command incrementally.
 vim.opt.list = true -- Display whitespace info
 -- Display tab characters, trailing whitespace, visible spaces and mark lines that extend off-screen
 vim.opt.listchars = "tab:>.,trail:.,extends:#,precedes:#,nbsp:~"
+vim.opt.fillchars = { eob = " " }
 
 -- Saving options in session and view files causes more problems than it solves
 vim.opt.sessionoptions:remove("options")
