@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+    <key>Label</key>
+    <string>org.custom.UserKeyMapping</string>
+    <key>LaunchEvents</key>
+    <dict>
+        <key>com.apple.iokit.matching</key>
+        <dict>
+            <key>com.apple.usb.device</key>
+            <dict>
+                <key>IOProviderClass</key>
+                <string>IOUSBDevice</string>
+                <key>idProduct</key>
+                <string>*</string>
+                <key>idVendor</key>
+                <string>*</string>
+                <key>IOMatchLaunchStream</key>
+                <true/>
+            </dict>
+            <key>com.apple.bluetooth.hostController</key>
+            <dict>
+                <key>IOProviderClass</key>
+                <string>IOBluetoothHCIController</string>
+                <key>idProduct</key>
+                <integer>*</integer>
+                <key>idVendor</key>
+                <integer>*</integer>
+                <key>IOMatchLaunchStream</key>
+                <true/>
+            </dict>
+        </dict>
+    </dict>
+    <key>ProgramArguments</key>
+    <array>
+        <string>/usr/bin/hidutil</string>
+        <string>property</string>
+        <string>--set</string>
+        <string>{"UserKeyMapping": [
+            {
+                "HIDKeyboardModifierMappingSrc":0x700000035,
+                "HIDKeyboardModifierMappingDst":0x700000064
+            },
+            {
+                "HIDKeyboardModifierMappingSrc":0x700000064,
+                "HIDKeyboardModifierMappingDst":0x700000035
+            }
+        ]}</string>
+    </array>
+    <key>RunAtLoad</key>
+    <true/>
+</dict>
+</plist>

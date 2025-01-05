@@ -31,7 +31,8 @@ vim.api.nvim_create_autocmd("ColorScheme", {
   pattern = "default",
   group = vim.api.nvim_create_augroup("after_default_colorscheme", { clear = true }),
   command = [[
-    hi! link MiniStatuslineModeNormal StatusLine
+    hi! StatusLine cterm=bold,reverse
+    hi! StatusLineNC cterm=reverse
     hi! link MiniStatuslineModeInsert Search
   ]],
 })

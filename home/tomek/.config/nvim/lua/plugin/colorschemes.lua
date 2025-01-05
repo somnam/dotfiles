@@ -40,4 +40,15 @@ return {
     name = "catppuccin",
     event = "ColorSchemePre catppuccin",
   },
+  {
+    "sainnhe/gruvbox-material",
+    event = "ColorSchemePre gruvbox-material",
+    config = function()
+      vim.g.gruvbox_material_background = "hard"
+      vim.g.gruvbox_material_show_eob = 0
+      vim.g.gruvbox_material_diagnostic_virtual_text = "colored"
+      vim.g.gruvbox_material_float_style = "dim"
+      vim.cmd.colorscheme("gruvbox-material")
+    end,
+  },
 }
