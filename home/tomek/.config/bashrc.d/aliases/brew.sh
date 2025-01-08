@@ -4,11 +4,11 @@ if command -v brew >/dev/null; then
     }
 
     brew-up() {
-        brew update && brew upgrade --greedy --no-quarantine && brew-clean
+        brew update && brew upgrade --greedy --no-quarantine && brew autoremove
     }
 
     brew-prune() {
-        brew uninstall --zap $@ && brew-clean
+        brew uninstall --zap $@ && brew autoremove
     }
 
     brew-clean() {
