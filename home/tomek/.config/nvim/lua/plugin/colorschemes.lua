@@ -57,6 +57,7 @@ return {
     event = "ColorSchemePre everforest",
     config = function()
       vim.g.everforest_background = "hard"
+      vim.g.everforest_colors_override = { ["bg0"] = { "#272e33", "234" } }
       vim.g.everforest_show_eob = 0
       vim.g.everforest_diagnostic_virtual_text = "colored"
       vim.g.everforest_float_style = "dim"
