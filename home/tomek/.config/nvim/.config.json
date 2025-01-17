@@ -2,7 +2,7 @@
     "colorscheme": "default",
     "background": "dark",
     "treesitter" : {
-        "exclude": ["csv", "yaml"]
+        "exclude": ["csv"]
     },
     "plugin": {
         "conform": {

@@ -6,7 +6,7 @@ local config = {
 	bold_brightens_ansi_colors = true,
 	cursor_blink_rate = 0,
 	enable_scroll_bar = false,
-	font = wezterm.font("JetBrains Mono"),
+	font = wezterm.font("JetBrains Mono Regular"),
 	font_rules = {
 		{
 			intensity = "Bold",
