@@ -1,10 +1,10 @@
 if command -v brew >/dev/null; then
     brew-out() {
-        brew update && brew outdated
+        brew update && brew outdated $@
     }
 
     brew-up() {
-        brew update && brew upgrade && brew autoremove
+        brew update && brew upgrade $@ && brew autoremove
     }
 
     brew-prune() {
