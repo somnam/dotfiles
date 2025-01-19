@@ -126,6 +126,7 @@ return {
       },
     },
     fzf_opts = {
+      ["--tiebreak"] = "begin",
       ["--history"] = vim.fn.stdpath("data") .. "/fzf_lua_history",
     },
     fzf_colors = true,
