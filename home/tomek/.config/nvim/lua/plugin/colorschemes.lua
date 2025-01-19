@@ -49,6 +49,7 @@ return {
       vim.g.gruvbox_material_diagnostic_virtual_text = "colored"
       vim.g.gruvbox_material_float_style = "dim"
       vim.g.gruvbox_material_current_word = "high contrast background"
+      vim.g.gruvbox_material_better_performance = 1
       vim.cmd.colorscheme("gruvbox-material")
     end,
   },
