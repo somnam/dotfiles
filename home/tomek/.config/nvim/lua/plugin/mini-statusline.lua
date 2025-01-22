@@ -114,7 +114,7 @@ return {
       })
       local updates = H.section_updates({ icon = "↓", trunc_width = 120 })
       local clients = H.section_clients({ icon = "●", trunc_width = 120 })
-      local fileinfo = H.section_fileinfo({ icon = "𝌆", trunc_width = 75 })
+      local fileinfo = H.section_fileinfo({ icon = "≋", trunc_width = 75 })
       local filesize = H.section_filesize({ icon = "◔", trunc_width = 75 })
       local location = H.section_location({ trunc_width = 75 })
 
