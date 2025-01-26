@@ -2,7 +2,7 @@
     "colorscheme": "default",
     "background": "dark",
     "treesitter" : {
-        "exclude": ["csv"]
+        "exclude": []
     },
     "plugin": {
         "conform": {

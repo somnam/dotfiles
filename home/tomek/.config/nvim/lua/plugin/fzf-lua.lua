@@ -134,9 +134,6 @@ return {
       bat = {
         args = command.bat({ args_only = true, color = true, into_shell = true }),
       },
-      builtin = {
-        treesitter = { enable = false },
-      },
     },
     defaults = { git_icons = false, file_icons = false },
     files = {
