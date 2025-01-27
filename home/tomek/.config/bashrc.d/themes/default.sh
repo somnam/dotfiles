@@ -7,9 +7,9 @@ set_prompt_theme()
     local lblue='\[\e[1;34m\]'
     local lred='\[\e[1;31m\]'
 
-    local prompt="➜"
+    local prompt="$"
     if [[ "${_exit}" -ne "0" ]]; then
-        prompt="${lred}➜${blank}"
+        prompt="${lred}\$${blank}"
     fi
 
     local venv="${VIRTUAL_ENV_PROMPT:-}"
