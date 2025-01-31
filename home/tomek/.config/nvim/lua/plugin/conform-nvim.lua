@@ -45,8 +45,8 @@ return {
     H.formatters_by_ft = function()
       return vim.tbl_extend(
         "force",
-        config.plugin.conform,
-        { python = H.python_formatters(config.plugin.conform.python) }
+        config.get("plugin.conform", {}),
+        { python = H.python_formatters(config.get("plugin.conform.python", {})) }
       )
     end
 

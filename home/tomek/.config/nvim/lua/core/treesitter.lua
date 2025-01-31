@@ -3,5 +3,5 @@ local config = require("core.config")
 
 return {
   max_size = 1024 * 512,
-  exclude_filetype = vim.list_extend(config.treesitter.exclude or {}, buffer.exclude.filetype),
+  exclude_filetype = vim.list_extend(config.get("treesitter.exclude", {}), buffer.exclude.filetype),
 }

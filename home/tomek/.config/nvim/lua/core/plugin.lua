@@ -46,7 +46,7 @@ H.setup = function()
       notify = false,
     },
     install = {
-      colorscheme = { config.colorscheme, "default" },
+      colorscheme = { config.get("colorscheme", "default") },
     },
     ui = {
       size = { width = 0.65 },

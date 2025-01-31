@@ -1,4 +1,5 @@
 local command = require("util.command")
+local config = require("core.config")
 
 return {
   "ibhagwan/fzf-lua",
@@ -120,8 +121,10 @@ return {
       col = 0.50,
       backdrop = 100,
       preview = {
-        default = command.bat({ cmd_only = true }),
+        default = config.get("plugin.fzf_lua.preview"),
         layout = "vertical",
+        title = false,
+        scrollbar = "float",
         winopts = { number = false },
       },
     },
@@ -133,6 +136,9 @@ return {
     previewers = {
       bat = {
         args = command.bat({ args_only = true, color = true, into_shell = true }),
+      },
+      builtin = {
+        treesitter = { enabled = false },
       },
     },
     defaults = { git_icons = false, file_icons = false },
