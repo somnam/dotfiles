@@ -8,7 +8,7 @@ return {
       "WhoIsSethDaniel/mason-tool-installer.nvim",
       lazy = false,
       opts = {
-        ensure_installed = config.plugin.mason.ensure_installed,
+        ensure_installed = config.get("plugin.mason.ensure_installed") or {},
       },
     },
   },

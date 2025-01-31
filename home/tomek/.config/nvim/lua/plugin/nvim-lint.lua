@@ -56,10 +56,10 @@ return {
 
     H.linters_by_filetype = function()
       local results = {
-        python = H.python_linters(config.plugin.lint.python),
+        python = H.python_linters(config.get("plugin.lint.python", {})),
       }
 
-      for filetype, value in pairs(config.plugin.lint) do
+      for filetype, value in pairs(config.get("plugin.lint", {})) do
         if results[filetype] == nil then
           results[filetype] = H.linters(value)
         end

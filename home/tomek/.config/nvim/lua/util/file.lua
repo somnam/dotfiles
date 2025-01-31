@@ -1,9 +1,11 @@
 local M = {}
 
+--- @return boolean
 M.file_exists = function(file)
   return vim.uv.fs_stat(file) ~= nil
 end
 
+--- @return string?
 M.read_file = function(file)
   if not M.file_exists(file) then
     return
@@ -15,13 +17,15 @@ M.read_file = function(file)
   return content
 end
 
+--- @return table
 M.read_json_file = function(file)
   local content = M.read_file(file)
   if not content then
-    return
+    return {}
   end
 
-  local json_ok, json_data = pcall(vim.json.decode, content)
+  local opts = { luanil = { object = true, array = true } }
+  local json_ok, json_data = pcall(vim.json.decode, content, opts)
   return json_ok and json_data or nil
 end
 

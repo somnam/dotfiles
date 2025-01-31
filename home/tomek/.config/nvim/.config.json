@@ -11,6 +11,9 @@
             "rust": ["rustfmt"],
             "*": ["trim_whitespace"]
         },
+        "fzf_lua": {
+            "preview": null
+        },
         "lint": {
             "python": ["flake8", "mypy", "ruff"]
         },
