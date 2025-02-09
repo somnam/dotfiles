@@ -1,3 +1,5 @@
+local config = require("core.config")
+
 local H = {
   config_paths = { "$XDG_CONFIG_HOME", "$HOME/.config", "$HOME/AppData/Local" },
 }
@@ -46,7 +48,18 @@ return {
       desc = "Open or close the chat window",
     },
   },
+  init = function()
+    vim.api.nvim_create_autocmd("FileType", {
+      pattern = "copilot-chat",
+      callback = function()
+        vim.schedule(function()
+          vim.cmd("wincmd =")
+        end)
+      end,
+    })
+  end,
   opts = {
+    model = config.get("plugin.copilot_chat.model"),
     mappings = {
       close = {
         insert = "",

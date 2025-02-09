@@ -8,11 +8,9 @@ return {
 
     vim.api.nvim_create_autocmd("User", {
       pattern = "AlphaReady",
-      group = vim.api.nvim_create_augroup("alpha_dashboard_ready", { clear = true }),
       callback = function(ctx)
-        vim.api.nvim_create_autocmd({ "BufReadPre", "BufNewFile" }, {
+        vim.api.nvim_create_autocmd("BufEnter", {
           pattern = "*",
-          group = vim.api.nvim_create_augroup("alpha_dashboard_close", { clear = true }),
           once = true,
           callback = function()
             vim.schedule(function()
