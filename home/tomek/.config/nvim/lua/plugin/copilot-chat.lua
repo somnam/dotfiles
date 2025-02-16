@@ -51,6 +51,7 @@ return {
   init = function()
     vim.api.nvim_create_autocmd("FileType", {
       pattern = "copilot-chat",
+      group = vim.api.nvim_create_augroup("copilot_chat_open", { clear = true }),
       callback = function()
         vim.schedule(function()
           vim.cmd("wincmd =")
