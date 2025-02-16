@@ -119,7 +119,6 @@ return {
       height = 0.85,
       width = 0.65,
       col = 0.50,
-      backdrop = 100,
       preview = {
         default = config.get("plugin.fzf_lua.preview"),
         layout = "vertical",
