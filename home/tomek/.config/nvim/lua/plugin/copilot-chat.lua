@@ -1,41 +1,25 @@
 local config = require("core.config")
 
-local H = {
-  config_paths = { "$XDG_CONFIG_HOME", "$HOME/.config", "$HOME/AppData/Local" },
-}
-
-H.hosts_file_exists = function()
-  for _, path in ipairs(H.config_paths) do
-    local config_path = vim.fn.expand(path)
-    if vim.fn.isdirectory(config_path) > 0 then
-      local file_path = string.format("%s/github-copilot/hosts.json", config_path)
-      if vim.fn.filereadable(file_path) == 1 then
-        return true
-      end
-    end
-  end
-  return false
-end
-
 return {
   "CopilotC-Nvim/CopilotChat.nvim",
   branch = "main",
   build = "make tiktoken",
   cmd = {
     "CopilotChat",
-    "CopilotChatToggle",
-    "CopilotChatLoad",
-    "CopilotChatExplain",
-    "CopilotChatReview",
-    "CopilotChatFix",
-    "CopilotChatOptimize",
-    "CopilotChatDocs",
-    "CopilotChatTests",
-    "CopilotChatFixDiagnostic",
     "CopilotChatCommit",
+    "CopilotChatDocs",
+    "CopilotChatExplain",
+    "CopilotChatFix",
+    "CopilotChatFixDiagnostic",
+    "CopilotChatLoad",
+    "CopilotChatModels",
+    "CopilotChatOptimize",
+    "CopilotChatReview",
+    "CopilotChatTests",
+    "CopilotChatToggle",
   },
   cond = function()
-    return require("util.command").executable("curl") and H.hosts_file_exists()
+    return require("util.command").executable("curl")
   end,
   dependencies = { "nvim-lua/plenary.nvim" },
   keys = {

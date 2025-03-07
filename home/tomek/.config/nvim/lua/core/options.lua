@@ -13,6 +13,13 @@ vim.opt.laststatus = 3 -- Always display statusbar
 vim.opt.wildmenu = true -- Use wildmenu
 vim.opt.wildmode = "full:longest"
 vim.opt.wildoptions = "pum,tagfile"
+pcall(function()
+  vim.opt.wildoptions = "pum,tagfile,fuzzy"
+end)
+
+vim.opt.autowrite = true -- Automatically save before commands like :next and :make
+vim.opt.ruler = true -- Show cursor position all the time
+vim.opt.history = 10000 -- Keep n lines of command line history
 
 vim.opt.wrap = true -- Line wrapping
 vim.opt.wrapscan = false -- Search wrapping
