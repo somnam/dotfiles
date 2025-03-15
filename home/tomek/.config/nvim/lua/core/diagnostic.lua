@@ -7,10 +7,6 @@ vim.api.nvim_set_keymap(
 )
 
 local signs = { ERROR = "✖", WARN = "▲", INFO = "●", HINT = "⚑" }
-local signs_with_space = {}
-for type, value in pairs(signs) do
-  signs_with_space[type] = value .. " "
-end
 
 vim.diagnostic.config({
   signs = {
@@ -37,7 +33,4 @@ vim.diagnostic.config({
   },
 })
 
-return {
-  signs = signs,
-  signs_with_space = signs_with_space,
-}
+return { signs = signs }

@@ -25,7 +25,7 @@ return {
   keys = {
     {
       "<Space>a",
-      ":CopilotChat<Enter>",
+      ":CopilotChatToggle<Enter>",
       mode = { "n", "v" },
       noremap = true,
       silent = true,
