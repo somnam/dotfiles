@@ -28,7 +28,7 @@ return {
           right_arrow = "",
         },
         duration = 0,
-        max_file_size = 1024 * 512,
+        max_file_size = 1024 * 1024,
         exclude_filetypes = H.exclude_filetypes(),
       },
       indent = { enable = false },

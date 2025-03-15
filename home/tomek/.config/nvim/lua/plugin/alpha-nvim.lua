@@ -4,23 +4,30 @@ return {
   "goolord/alpha-nvim",
   event = "VimEnter",
   init = function()
-    vim.cmd("autocmd FileType alpha setlocal nofoldenable")
+    local H = {}
+
+    H.trigger_close_on_new_buffer = function(ctx)
+      vim.api.nvim_create_autocmd("BufAdd", {
+        pattern = "*",
+        once = true,
+        callback = function()
+          vim.schedule(function()
+            if vim.api.nvim_buf_is_loaded(ctx.buf) then
+              pcall(vim.api.nvim_buf_delete, ctx.buf, {})
+            end
+          end)
+        end,
+      })
+    end
+
+    vim.api.nvim_create_autocmd("FileType", {
+      pattern = "alpha",
+      command = "setlocal nofoldenable",
+    })
 
     vim.api.nvim_create_autocmd("User", {
       pattern = "AlphaReady",
-      callback = function(ctx)
-        vim.api.nvim_create_autocmd("BufEnter", {
-          pattern = "*",
-          once = true,
-          callback = function()
-            vim.schedule(function()
-              if vim.api.nvim_buf_is_loaded(ctx.buf) then
-                pcall(vim.api.nvim_buf_delete, ctx.buf, {})
-              end
-            end)
-          end,
-        })
-      end,
+      callback = H.trigger_close_on_new_buffer,
     })
   end,
   opts = function()
@@ -39,7 +46,7 @@ return {
 
     H.header = function()
       local blank = ""
-      return { blank, misc.nvim_version(), blank }
+      return { blank, string.format("NVIM %s", misc.nvim_version()), blank }
     end
 
     dashboard.section.header.val = H.header()

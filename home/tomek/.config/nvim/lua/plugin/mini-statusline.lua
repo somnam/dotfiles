@@ -92,15 +92,22 @@ return {
       return mini_statusline.section_filename(args)
     end
 
+    H.section_location_truncated = "%3l:%-2c"
+    H.section_location_full = "%3l:%-2c %P"
     H.section_location = function(args)
       if mini_statusline.is_truncated(args.trunc_width) then
-        return "%3l:%-2c"
+        return H.section_location_truncated
       end
 
-      return "%3l:%-2c %P"
+      return H.section_location_full
     end
 
     H.secion_filepath = "%f %m %r"
+
+    H.signs_with_space = {}
+    for type, value in pairs(diagnostic.signs) do
+      H.signs_with_space[type] = value .. " "
+    end
 
     -- statusline
     H.content_active = function()
@@ -110,7 +117,7 @@ return {
       local diagnostics = mini_statusline.section_diagnostics({
         icon = "",
         trunc_width = 40,
-        signs = diagnostic.signs_with_space,
+        signs = H.signs_with_space,
       })
       local updates = H.section_updates({ icon = "↓", trunc_width = 120 })
       local clients = H.section_clients({ icon = "●", trunc_width = 120 })
