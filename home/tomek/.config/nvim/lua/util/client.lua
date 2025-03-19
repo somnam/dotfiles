@@ -15,13 +15,11 @@ M.get_formatter_names = function()
   if M.formatter_names_by_ft[filetype] ~= nil then
     return M.formatter_names_by_ft[filetype]
   end
-
-  local formatter_ok, format = pcall(require, "conform")
-  if not formatter_ok then
+  if not pcall(require, "conform") then
     return {}
   end
 
-  local formatters = format.list_formatters()
+  local formatters = require("conform").list_formatters()
   local formatter_names = {}
   for _, formatter in ipairs(formatters) do
     if formatter.available then
@@ -34,12 +32,11 @@ M.get_formatter_names = function()
 end
 
 M.get_linter_names = function()
-  local linkt_ok, lint = pcall(require, "lint")
-  if not linkt_ok then
+  if not pcall(require, "lint") then
     return {}
   end
 
-  return (lint.linters_by_ft[vim.bo.filetype] or {})
+  return (require("lint").linters_by_ft[vim.bo.filetype] or {})
 end
 
 M.get_clients_set = function()
@@ -78,16 +75,17 @@ M.has_clients = function()
     return true
   end
 
-  local lint_ok, lint = pcall(require, "lint")
-  if lint_ok and #(lint.linters_by_ft[vim.bo.filetype] or {}) > 0 then
-    return true
+  if pcall(require, "lint") then
+    if #(require("lint").linters_by_ft[vim.bo.filetype] or {}) > 0 then
+      return true
+    end
   end
 
-  local formatter_ok, format = pcall(require, "conform")
-  if formatter_ok then
+  if pcall(require, "conform") then
+    local conform = require("conform")
     local bufnr = vim.api.nvim_get_current_buf()
-    local formatters = format.list_formatters_for_buffer(bufnr)
-    return #format.resolve_formatters(formatters, bufnr, false, true) > 0
+    local formatters = conform.list_formatters_for_buffer(bufnr)
+    return #conform.resolve_formatters(formatters, bufnr, false, true) > 0
   end
 
   return false
