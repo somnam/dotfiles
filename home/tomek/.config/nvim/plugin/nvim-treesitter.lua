@@ -1,4 +1,5 @@
 local buffer = require("core.buffer")
+local config = require("core.config")
 local treesitter = require("core.treesitter")
 local add = require("mini.deps").add
 local later = require("mini.deps").later
@@ -23,6 +24,7 @@ later(function()
   })
   require("nvim-treesitter.configs").setup({
     auto_install = true,
+    ensure_installed = config.get("treesitter.ensure_installed", {}),
     ignore_install = treesitter.exclude_filetype,
     highlight = {
       enable = true,
