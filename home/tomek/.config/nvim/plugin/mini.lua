@@ -2,8 +2,58 @@ local buffer = require("core.buffer")
 local client = require("util.client")
 local diagnostic = require("core.diagnostic")
 local file = require("util.file")
+local misc = require("util.misc")
 local later = require("mini.deps").later
 local now = require("mini.deps").now
+
+now(function()
+  local mini_starter = require("mini.starter")
+  local blank = { action = "", name = "", section = "" }
+  mini_starter.setup({
+    header = string.format("NVIM %s", misc.nvim_version()),
+    items = {
+      { action = "FzfLua oldfiles cwd_only=true", name = "Previous files", section = "" },
+      blank,
+      { action = "FzfLua files", name = "Files search", section = "" },
+      blank,
+      { action = "FzfLua live_grep", name = "Words search", section = "" },
+      blank,
+      { action = "DepsUpdate", name = "Update plugins", section = "" },
+      blank,
+      { action = "enew", name = "New file", section = "" },
+      blank,
+      { action = "qall", name = "Quit", section = "" },
+    },
+    footer = "",
+    evaluate_single = true,
+    content_hooks = {
+      mini_starter.gen_hook.adding_bullet(),
+      mini_starter.gen_hook.aligning("center", "center"),
+    },
+  })
+
+  vim.api.nvim_create_autocmd("User", {
+    pattern = "MiniStarterOpened",
+    group = vim.api.nvim_create_augroup("mini_starter_opened", { clear = true }),
+    callback = function(ctx)
+      local opts = { silent = true, buffer = ctx.buf }
+      vim.keymap.set("n", "k", "<Cmd>lua MiniStarter.update_current_item('prev')<Enter>", opts)
+      vim.keymap.set("n", "j", "<Cmd>lua MiniStarter.update_current_item('next')<Enter>", opts)
+
+      vim.api.nvim_create_autocmd("BufAdd", {
+        pattern = "*",
+        once = true,
+        callback = function()
+          vim.schedule(function()
+            if vim.api.nvim_buf_is_loaded(ctx.buf) then
+              pcall(vim.api.nvim_buf_delete, ctx.buf, {})
+            end
+          end)
+        end,
+      })
+    end,
+  })
+end)
 
 later(function()
   local mini_bufremove = require("mini.bufremove")

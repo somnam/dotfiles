@@ -30,7 +30,7 @@ H.setup = function()
   require("mini.deps").setup({ path = { package = H.mini_site_path } })
   vim.keymap.set(
     "n",
-    "<Space>z",
+    "<Space>u",
     ":DepsUpdate<Enter>",
     { noremap = true, silent = true, desc = "Update plugins" }
   )
