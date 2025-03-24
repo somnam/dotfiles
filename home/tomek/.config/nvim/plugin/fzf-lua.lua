@@ -5,9 +5,9 @@ end
 
 local config = require("core.config")
 local add = require("mini.deps").add
-local later = require("mini.deps").later
+local now = require("mini.deps").now
 
-later(function()
+now(function()
   add({ source = "ibhagwan/fzf-lua" })
 
   require("fzf-lua").setup({
