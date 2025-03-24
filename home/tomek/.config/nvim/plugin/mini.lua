@@ -8,27 +8,21 @@ local now = require("mini.deps").now
 
 now(function()
   local mini_starter = require("mini.starter")
-  local blank = { action = "", name = "", section = "" }
   mini_starter.setup({
     header = string.format("NVIM %s", misc.nvim_version()),
     items = {
       { action = "FzfLua oldfiles cwd_only=true", name = "Previous files", section = "" },
-      blank,
       { action = "FzfLua files", name = "Files search", section = "" },
-      blank,
       { action = "FzfLua live_grep", name = "Words search", section = "" },
-      blank,
       { action = "DepsUpdate", name = "Update plugins", section = "" },
-      blank,
       { action = "enew", name = "New file", section = "" },
-      blank,
       { action = "qall", name = "Quit", section = "" },
     },
     footer = "",
     evaluate_single = true,
     content_hooks = {
       mini_starter.gen_hook.adding_bullet(),
-      mini_starter.gen_hook.aligning("center", "center"),
+      mini_starter.gen_hook.padding(3, 2),
     },
   })
 
