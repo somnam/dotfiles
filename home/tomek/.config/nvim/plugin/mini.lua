@@ -22,7 +22,7 @@ now(function()
     evaluate_single = true,
     content_hooks = {
       mini_starter.gen_hook.adding_bullet(),
-      mini_starter.gen_hook.padding(3, 2),
+      mini_starter.gen_hook.aligning("center", "center"),
     },
   })
 
