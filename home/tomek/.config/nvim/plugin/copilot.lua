@@ -10,7 +10,7 @@ later(function()
     source = "github/copilot.vim",
     hooks = {
       post_checkout = function()
-        vim.cmd("Copilot auth")
+        vim.cmd("Copilot setup")
       end,
     },
   }, { bang = true })
