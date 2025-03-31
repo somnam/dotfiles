@@ -1,26 +1,20 @@
-local opts = { noremap = true, silent = true }
-vim.api.nvim_set_keymap(
-  "n",
-  "<Space>d",
-  ":lua vim.diagnostic.setloclist()<Enter>",
-  vim.tbl_extend("keep", { desc = "List all buffer diagnostics" }, opts)
-)
-
-local signs = { ERROR = "✖", WARN = "▲", INFO = "●", HINT = "⚑" }
+local M = {
+  signs = { ERROR = "✖", WARN = "▲", INFO = "●", HINT = "⚑" },
+}
 
 vim.diagnostic.config({
   signs = {
     text = {
-      [vim.diagnostic.severity.ERROR] = signs.ERROR,
-      [vim.diagnostic.severity.WARN] = signs.WARN,
-      [vim.diagnostic.severity.INFO] = signs.INFO,
-      [vim.diagnostic.severity.HINT] = signs.HINT,
+      [vim.diagnostic.severity.ERROR] = M.signs.ERROR,
+      [vim.diagnostic.severity.WARN] = M.signs.WARN,
+      [vim.diagnostic.severity.INFO] = M.signs.INFO,
+      [vim.diagnostic.severity.HINT] = M.signs.HINT,
     },
   },
   virtual_text = {
-    severity = { min = vim.diagnostic.severity.ERROR },
     prefix = "",
     source = true,
+    current_line = true,
   },
   underline = false,
   update_in_insert = false,
@@ -28,9 +22,16 @@ vim.diagnostic.config({
   float = {
     focusable = true,
     style = "minimal",
-    border = "rounded",
+    border = "single",
     source = true,
   },
 })
 
-return { signs = signs }
+vim.api.nvim_set_keymap(
+  "n",
+  "<Space>d",
+  ":lua vim.diagnostic.setloclist()<Enter>",
+  { noremap = true, silent = true, desc = "List all buffer diagnostics" }
+)
+
+return M

@@ -11,6 +11,8 @@ now(function()
       require("vscode").setup({
         disable_nvimtree_bg = true,
         group_overrides = {
+          PmenuMatch = { fg = "#c586c0" },
+          PmenuMatchSel = { fg = "#c586c0" },
           MiniStatuslineModeNormal = { link = "Cursor" },
           MiniStatuslineModeInsert = { link = "DiffChange" },
           MiniStatuslineModeVisual = { link = "DiffAdd" },
@@ -46,6 +48,13 @@ now(function()
             all = { ui = { bg_gutter = "none" } },
           },
         },
+        overrides = function(colors)
+          local palette = colors.palette
+          return {
+            PmenuMatch = { fg = palette.roninYellow },
+            PmenuMatchSel = { fg = palette.roninYellow },
+          }
+        end,
       })
     end,
   })
@@ -63,6 +72,12 @@ now(function()
           comments = { "italic" },
           conditionals = {},
         },
+        custom_highlights = function(colors)
+          return {
+            PmenuMatch = { fg = colors.blue },
+            PmenuMatchSel = { fg = colors.blue },
+          }
+        end,
       })
     end,
   })

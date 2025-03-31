@@ -50,6 +50,26 @@ now(function()
 end)
 
 later(function()
+  local mini_completion = require("mini.completion")
+  mini_completion.setup({
+    set_vim_settings = false,
+    delay = { info = 150, signature = -1 },
+    window = {
+      info = { border = "none" },
+      signature = { border = "none" },
+    },
+    lsp_completion = {
+      process_items = function(items, base)
+        return mini_completion.default_process_items(items, base, { filtersort = "fuzzy" })
+      end,
+    },
+    mappings = {
+      force_twostep = "<C-n>",
+    },
+  })
+end)
+
+later(function()
   local mini_bufremove = require("mini.bufremove")
   mini_bufremove.setup()
   vim.api.nvim_create_user_command("BD", function()

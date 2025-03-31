@@ -1,63 +1,24 @@
-local opts = { noremap = true, silent = true }
-vim.api.nvim_set_keymap(
-  "n",
-  "grn",
-  ":lua vim.lsp.buf.rename()<Enter>",
-  vim.tbl_extend("keep", { desc = "Rename all symbol references" }, opts)
-)
-vim.api.nvim_set_keymap(
-  "n",
-  "grs",
-  ":lua vim.lsp.buf.document_symbol()<Enter>",
-  vim.tbl_extend("keep", { desc = "List all current buffer symbols" }, opts)
-)
-vim.api.nvim_set_keymap(
-  "n",
-  "grr",
-  ":lua vim.lsp.buf.references()<Enter>",
-  vim.tbl_extend("keep", { desc = "List all symbol references" }, opts)
-)
-vim.api.nvim_set_keymap(
-  "n",
-  "gra",
-  ":lua vim.lsp.buf.code_action()<Enter>",
-  vim.tbl_extend("keep", { desc = "Select code action at cursor position" }, opts)
-)
-vim.api.nvim_set_keymap(
-  "i",
-  "<C-S>",
-  "<cmd>lua vim.lsp.buf.signature_help()<Enter>",
-  vim.tbl_extend("keep", { desc = "Display signature of the symbol" }, opts)
-)
-
 local H = {}
-
-H.set_lsp_handlers_style = function()
-  local handlers = {
-    ["textDocument/hover"] = vim.lsp.handlers.hover,
-    ["textDocument/signatureHelp"] = vim.lsp.handlers.signature_help,
-  }
-  local handlers_style = { focusable = true, style = "minimal", border = "rounded" }
-  for name, handler in pairs(handlers) do
-    vim.lsp.handlers[name] = vim.lsp.with(handler, handlers_style)
-  end
-end
 
 H.set_lsp_options = function()
   vim.lsp.set_log_level("ERROR")
 end
 
+---@param event table
+---@return vim.lsp.Client?
 H.get_lsp_client_from_event = function(event)
   local client_id = vim.tbl_get(event, "data", "client_id")
   return client_id and vim.lsp.get_client_by_id(client_id) or nil
 end
 
+---@param event table
+---@param delay integer?
 H.setup_lsp_highlight_symbol = function(event, delay)
   vim.validate({ delay = { delay, "number", true } })
   delay = delay or 500
 
   local client = H.get_lsp_client_from_event(event)
-  if not (client and client.supports_method("textDocument/documentHighlight")) then
+  if not (client and client:supports_method("textDocument/documentHighlight", event.buf)) then
     return
   end
 
@@ -74,14 +35,15 @@ H.setup_lsp_highlight_symbol = function(event, delay)
     callback = vim.lsp.buf.clear_references,
   })
 
-  if vim.opt.updatetime:get() > delay then
+  if vim.api.nvim_get_option_value("updatetime", { scope = "global" }) > delay then
     vim.opt.updatetime = delay
   end
 end
 
+---@param event table
 H.setup_lsp_inlay_hints = function(event)
   local client = H.get_lsp_client_from_event(event)
-  if not (client and client.supports_method("textDocument/inlayHint")) then
+  if not (client and client:supports_method("textDocument/inlayHint")) then
     return
   end
 
@@ -89,7 +51,6 @@ H.setup_lsp_inlay_hints = function(event)
 end
 
 H.set_lsp_options()
-H.set_lsp_handlers_style()
 
 vim.api.nvim_create_autocmd("LspAttach", {
   pattern = "*",

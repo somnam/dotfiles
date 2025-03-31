@@ -1,5 +1,6 @@
 local M = {}
 
+---@type table
 M.config = require("util.file").read_json_file(vim.fn.stdpath("config") .. "/.config.json")
 
 ---@param location string

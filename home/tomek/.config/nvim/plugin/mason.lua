@@ -15,9 +15,9 @@ now(function()
   require("mason").setup({
     log_level = vim.log.levels.WARN,
     ui = {
-      border = "rounded",
       width = 0.65,
       height = 0.85,
+      border = "single",
       icons = {
         package_installed = "✓",
         package_uninstalled = "✗",

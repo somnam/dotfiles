@@ -61,11 +61,11 @@ vim.opt.synmaxcol = 512 -- Be forgiving with long lines
 
 vim.opt.clipboard = "unnamedplus" -- Use the "global" buffer for copy and paste
 vim.opt.undofile = true -- Enable persistent undo
+
 vim.opt.inccommand = "nosplit" -- Shows the effects of a command incrementally.
 vim.opt.list = true -- Display whitespace info
--- Display tab characters, trailing whitespace, visible spaces and mark lines that extend off-screen
-vim.opt.listchars = "tab:>.,trail:.,extends:#,precedes:#,nbsp:~"
-vim.opt.fillchars = { eob = " " }
+vim.opt.listchars = "tab:>.,trail:.,extends:#,precedes:#,nbsp:~" -- Display specific characters
+vim.opt.fillchars = { eob = " " } -- Display empty fill characters
 
 -- Saving options in session and view files causes more problems than it solves
 vim.opt.sessionoptions:remove("options")
@@ -95,11 +95,15 @@ vim.api.nvim_create_autocmd("FileType", {
 
 -- Completion options
 vim.opt.shortmess:append("C") -- Shut off completion messages
-vim.opt.complete:remove("i") -- Prevent a condition where vim lags due to searching include files and tags
+vim.opt.shortmess:append("c")
+vim.opt.complete:remove("i") -- Prevent vim lag due to searching include files and tags
 vim.opt.complete:remove("t")
 vim.opt.pumheight = 15 -- Completion window height
 -- Completion behavior
 vim.opt.completeopt = { "menu", "menuone", "popup", "noinsert" }
+pcall(function()
+  vim.opt.completeopt = { "menu", "menuone", "popup", "noinsert", "fuzzy" }
+end)
 
 -- Diff settings
 vim.opt.diffopt:append("algorithm:patience")

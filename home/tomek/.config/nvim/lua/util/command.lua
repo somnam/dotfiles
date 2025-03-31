@@ -12,6 +12,9 @@ M.executable = function(cmd)
   return cmd and vim.fn.executable(cmd) == 1 or false
 end
 
+---@param command table
+---@param opts table
+---@return (string|table)
 M.command_from_opts = function(command, opts)
   opts = opts or {}
 
@@ -32,6 +35,7 @@ M.command_from_opts = function(command, opts)
   return command
 end
 
+---@return table
 M.get_find_command = function(_)
   local fd = {
     cmd = "fd",
@@ -81,6 +85,8 @@ M.get_find_command = function(_)
   }
 end
 
+---@param opts table
+---@return table
 M.get_grep_command = function(opts)
   opts = opts or {}
   local rg = {
@@ -118,6 +124,8 @@ M.get_grep_command = function(opts)
   }
 end
 
+---@param opts table
+---@return table
 M.get_bat_command = function(opts)
   opts = opts or {}
   return {
@@ -129,14 +137,20 @@ M.get_bat_command = function(opts)
   }
 end
 
+---@param opts table
+---@return (string|table)
 M.find = function(opts)
   return M.command_from_opts(M.get_find_command(opts), opts)
 end
 
+---@param opts table
+---@return (string|table)
 M.grep = function(opts)
   return M.command_from_opts(M.get_grep_command(opts), opts)
 end
 
+---@param opts table
+---@return (string|table)
 M.bat = function(opts)
   return M.command_from_opts(M.get_bat_command(opts), opts)
 end

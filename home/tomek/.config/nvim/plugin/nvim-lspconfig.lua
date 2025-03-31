@@ -18,7 +18,7 @@ later(function()
           environmentPath = python.virtual_env,
         },
       },
-      on_attach = function(client, _)
+      on_attach = function(client, bufnr)
         -- Customize trigger characters.
         client.server_capabilities.completionProvider.triggerCharacters = { "." }
       end,
@@ -58,22 +58,16 @@ later(function()
       },
     },
     lua_ls = {
-      on_attach = function(client, _)
+      on_attach = function(client, bufnr)
+        -- Customize trigger characters.
         client.server_capabilities.completionProvider.triggerCharacters =
-          { ".", ":", "(", "[", ",", "#", "*", "@", "|", "=", "{", "+", "?" }
+          { ".", ":", "(", ",", "#", "*", "@", "|", "?" }
       end,
     },
   }
 
   H.get_capabilities = function()
-    local capabilities = vim.lsp.protocol.make_client_capabilities()
-    local additional_capabilities = {}
-
-    if pcall(require, "cmp_nvim_lsp") then
-      additional_capabilities = require("cmp_nvim_lsp").default_capabilities()
-    end
-
-    return vim.tbl_deep_extend("force", capabilities, additional_capabilities)
+    return vim.lsp.protocol.make_client_capabilities()
   end
 
   ---@param name string
@@ -92,5 +86,5 @@ later(function()
     end
   end
 
-  require("lspconfig.ui.windows").default_options.border = "rounded"
+  require("lspconfig.ui.windows").default_options.border = "single"
 end)

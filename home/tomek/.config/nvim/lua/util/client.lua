@@ -2,6 +2,7 @@ local M = {
   formatter_names_by_ft = {},
 }
 
+---@return string[]
 M.get_lsp_client_names = function()
   local client_names = {}
   for _, client in ipairs(vim.lsp.get_clients({ bufnr = 0 })) do
@@ -10,6 +11,7 @@ M.get_lsp_client_names = function()
   return client_names
 end
 
+---@return string[]
 M.get_formatter_names = function()
   local filetype = vim.bo.filetype
   if M.formatter_names_by_ft[filetype] ~= nil then
@@ -31,6 +33,7 @@ M.get_formatter_names = function()
   return formatter_names
 end
 
+---@return string[]
 M.get_linter_names = function()
   if not pcall(require, "lint") then
     return {}
@@ -39,6 +42,7 @@ M.get_linter_names = function()
   return (require("lint").linters_by_ft[vim.bo.filetype] or {})
 end
 
+---@return { [string]: string[] }
 M.get_clients_set = function()
   local client_names_set = {}
 
@@ -57,6 +61,7 @@ M.get_clients_set = function()
   return client_names_set
 end
 
+---@return string
 M.get_clients_string = function()
   local client_names_set = M.get_clients_set()
   local unique_client_names = vim.tbl_keys(client_names_set)
@@ -65,11 +70,13 @@ M.get_clients_string = function()
   return table.concat(unique_client_names, " ")
 end
 
+---@return integer
 M.get_clients_count = function()
   local client_names_set = M.get_clients_set()
   return #vim.tbl_keys(client_names_set)
 end
 
+---@return boolean
 M.has_clients = function()
   if #vim.lsp.get_clients({ bufnr = 0 }) > 0 then
     return true

@@ -37,16 +37,7 @@ vim.api.nvim_set_keymap(
   vim.tbl_extend("keep", { desc = "Exit Neovim" }, opts)
 )
 
--- Snippet mappings
-vim.keymap.set({ "i", "s" }, "<Tab>", function()
-  if vim.snippet.active({ direction = 1 }) then
-    return "<cmd>lua vim.snippet.jump(1)<Enter>"
-  end
-  return "<Tab>"
-end, { expr = true })
-vim.keymap.set({ "i", "s" }, "<S-Tab>", function()
-  if vim.snippet.active({ direction = -1 }) then
-    return "<cmd>lua vim.snippet.jump(-1)<Enter>"
-  end
-  return "<S-Tab>"
+--- Popup menu mappings
+vim.keymap.set("i", "<CR>", function()
+  return vim.fn.pumvisible() == 1 and "<C-y>" or "<CR>"
 end, { expr = true })

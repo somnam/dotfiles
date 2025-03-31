@@ -9,14 +9,18 @@ M.virtual_env = vim.env.VIRTUAL_ENV
 
 M.virtual_env_bin = M.virtual_env and M.virtual_env .. "/bin" or nil
 
+---@return boolean
 M.in_virtual_env = function()
   return M.virtual_env ~= nil
 end
 
+---@param cmd string
+---@return string?
 M.virtual_env_cmd = function(cmd)
   return M.virtual_env_bin and M.virtual_env_bin .. "/" .. cmd or nil
 end
 
+--@return boolean
 M.executable_in_virtual_env = function(cmd)
   return command.executable(M.virtual_env_cmd(cmd))
 end

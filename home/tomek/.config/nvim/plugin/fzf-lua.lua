@@ -15,8 +15,10 @@ now(function()
       height = 0.85,
       width = 0.65,
       col = 0.50,
+      border = "single",
       preview = {
         default = config.get("plugin.fzf_lua.preview"),
+        border = "single",
         layout = "vertical",
         title = false,
         scrollbar = "float",
