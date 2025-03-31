@@ -53,7 +53,7 @@ later(function()
   local mini_completion = require("mini.completion")
   mini_completion.setup({
     set_vim_settings = false,
-    delay = { info = 150, signature = -1 },
+    delay = { completion = 100, info = 150, signature = -1 },
     window = {
       info = { border = "none" },
       signature = { border = "none" },
@@ -208,15 +208,6 @@ now(function()
     end
 
     return string.format("%s %s", args.icon, size)
-  end
-
-  ---@param args table
-  H.section_filename = function(args)
-    if buffer.filetype_excluded() then
-      return ""
-    end
-
-    return mini_statusline.section_filename(args)
   end
 
   H.section_location_truncated = "%3l:%-2c"

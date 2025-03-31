@@ -41,6 +41,10 @@ later(function()
           pythonPath = python.virtual_env_cmd("python"),
         },
       },
+      on_attach = function(client, bufnr)
+        -- Customize trigger characters.
+        client.server_capabilities.completionProvider.triggerCharacters = { "." }
+      end,
     },
     quick_lint_js = {
       filetypes = { "javascript", "javascriptreact", "typescript", "typescriptreact" },
