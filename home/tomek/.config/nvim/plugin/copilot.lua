@@ -25,7 +25,27 @@ later(function()
     end
   end
 
+  H.set_completion_events = function()
+    if pcall(require, "cmp") then
+      local cmp = require("cmp")
+      cmp.event:on("menu_opened", H.maybe_disable_suggestions)
+      cmp.event:on("menu_closed", H.maybe_enable_suggestions)
+    end
+  end
+
+  H.maybe_disable_suggestions = function()
+    if #vim.lsp.get_clients({ bufnr = 0, name = "GitHub Copilot" }) > 0 then
+      vim.cmd("call copilot#Dismiss()")
+      vim.b.copilot_enabled = false
+    end
+  end
+
+  H.maybe_enable_suggestions = function()
+    vim.b.copilot_enabled = nil
+  end
+
   vim.keymap.set("n", "<Space>ce", function()
     H.lazy_load_copilot()
+    H.set_completion_events()
   end, { noremap = true, silent = true, desc = "Enable Copilot" })
 end)

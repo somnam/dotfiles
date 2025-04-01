@@ -14,7 +14,7 @@ now(function()
       { action = "FzfLua oldfiles cwd_only=true", name = "Previous files", section = "" },
       { action = "FzfLua files", name = "Files search", section = "" },
       { action = "FzfLua live_grep", name = "Words search", section = "" },
-      { action = "DepsUpdate", name = "Update plugins", section = "" },
+      { action = "DepsSync", name = "Sync plugins", section = "" },
       { action = "enew", name = "New file", section = "" },
       { action = "qall", name = "Quit", section = "" },
     },
@@ -46,26 +46,6 @@ now(function()
         end,
       })
     end,
-  })
-end)
-
-later(function()
-  local mini_completion = require("mini.completion")
-  mini_completion.setup({
-    set_vim_settings = false,
-    delay = { completion = 100, info = 150, signature = -1 },
-    window = {
-      info = { border = "none" },
-      signature = { border = "none" },
-    },
-    lsp_completion = {
-      process_items = function(items, base)
-        return mini_completion.default_process_items(items, base, { filtersort = "fuzzy" })
-      end,
-    },
-    mappings = {
-      force_twostep = "<C-n>",
-    },
   })
 end)
 

@@ -8,11 +8,17 @@ now(function()
     pattern = "vscode",
     group = vim.api.nvim_create_augroup("vscode", { clear = true }),
     callback = function()
+      local colors = require("vscode.colors").get_colors()
+      local popup_menu_match = {
+        fg = vim.o.background == "dark" and colors.vscMediumBlue or colors.vscDarkBlue,
+        bg = "NONE",
+        bold = true,
+      }
       require("vscode").setup({
         disable_nvimtree_bg = true,
         group_overrides = {
-          PmenuMatch = { fg = "#c586c0" },
-          PmenuMatchSel = { fg = "#c586c0" },
+          PmenuMatch = popup_menu_match,
+          PmenuMatchSel = popup_menu_match,
           MiniStatuslineModeNormal = { link = "Cursor" },
           MiniStatuslineModeInsert = { link = "DiffChange" },
           MiniStatuslineModeVisual = { link = "DiffAdd" },
@@ -49,10 +55,10 @@ now(function()
           },
         },
         overrides = function(colors)
-          local palette = colors.palette
+          local theme = colors.theme
           return {
-            PmenuMatch = { fg = palette.roninYellow },
-            PmenuMatchSel = { fg = palette.roninYellow },
+            PmenuMatch = { fg = theme.syn.fun },
+            PmenuMatchSel = { fg = theme.syn.fun },
           }
         end,
       })
@@ -74,8 +80,8 @@ now(function()
         },
         custom_highlights = function(colors)
           return {
-            PmenuMatch = { fg = colors.blue },
-            PmenuMatchSel = { fg = colors.blue },
+            PmenuMatch = { fg = colors.text, style = { "bold" } },
+            PmenuMatchSel = { fg = colors.text, style = { "bold" } },
           }
         end,
       })

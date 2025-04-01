@@ -71,7 +71,18 @@ later(function()
   }
 
   H.get_capabilities = function()
-    return vim.lsp.protocol.make_client_capabilities()
+    local capabilities = vim.lsp.protocol.make_client_capabilities()
+
+    local additional_capabilities = {}
+    if pcall(require, "cmp_nvim_lsp") then
+      additional_capabilities = vim.tbl_deep_extend(
+        "force",
+        additional_capabilities,
+        require("cmp_nvim_lsp").default_capabilities()
+      )
+    end
+
+    return vim.tbl_deep_extend("force", capabilities, additional_capabilities)
   end
 
   ---@param name string
