@@ -10,4 +10,10 @@ end
 ---@type string
 M.path_separator = vim.fn.has("win32") == 1 and ";" or ":"
 
+---@param keys string
+---@param mode string
+M.feedkeys = function(keys, mode)
+  vim.api.nvim_feedkeys(vim.api.nvim_replace_termcodes(keys, true, false, true), mode, true)
+end
+
 return M

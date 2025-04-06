@@ -1,3 +1,7 @@
+if true then -- disabled
+  return
+end
+
 local buffer = require("core.buffer")
 local add = require("mini.deps").add
 local later = require("mini.deps").later

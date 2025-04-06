@@ -65,7 +65,7 @@ later(function()
       on_attach = function(client, bufnr)
         -- Customize trigger characters.
         client.server_capabilities.completionProvider.triggerCharacters =
-          { ".", ":", "(", ",", "#", "*", "@", "|", "?" }
+          { ".", ":", ",", "#", "*", "@", "|", "?" }
       end,
     },
   }
