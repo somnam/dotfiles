@@ -100,9 +100,9 @@ vim.opt.complete:remove("i") -- Prevent vim lag due to searching include files a
 vim.opt.complete:remove("t")
 vim.opt.pumheight = 15 -- Completion window height
 -- Completion behavior
-vim.opt.completeopt = { "menu", "menuone", "popup", "noinsert" }
+vim.opt.completeopt = { "menu", "menuone", "popup", "noinsert", "noselect" }
 pcall(function()
-  vim.opt.completeopt = { "menu", "menuone", "popup", "noinsert", "fuzzy" }
+  vim.opt.completeopt = { "menu", "menuone", "popup", "noinsert", "noselect", "fuzzy" }
 end)
 
 -- Diff settings

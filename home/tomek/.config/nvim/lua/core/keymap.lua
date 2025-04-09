@@ -39,5 +39,11 @@ vim.api.nvim_set_keymap(
 
 --- Popup menu mappings
 vim.keymap.set("i", "<CR>", function()
-  return vim.fn.pumvisible() == 1 and "<C-y>" or "<CR>"
+  if vim.fn.pumvisible() ~= 0 then
+    -- Select first item if none selected.
+    local item_selected = vim.fn.complete_info()["selected"] ~= -1
+    return item_selected and "<C-y>" or "<C-n><C-y>"
+  end
+
+  return "<CR>"
 end, { expr = true })
