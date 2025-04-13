@@ -70,25 +70,20 @@ later(function()
     },
   }
 
-  H.get_capabilities = function()
-    return vim.lsp.protocol.make_client_capabilities()
-  end
-
-  ---@param name string
+  ---@param server string
   ---@return boolean
-  H.lsp_server_available = function(name)
-    local cmd = require("lspconfig")[name].document_config.default_config.cmd
-    return type(cmd) == "table" and command.executable(cmd[1])
+  H.lsp_server_available = function(server)
+    local cmd = vim.lsp.config[server].cmd
+    if type(cmd) == "table" then
+      return command.executable(cmd[1])
+    end
+    return type(cmd) == "function"
   end
 
-  local lspconfig = require("lspconfig")
-  local capabilities = H.get_capabilities()
-  for name, config in pairs(H.servers) do
-    if H.lsp_server_available(name) then
-      config = vim.tbl_deep_extend("force", { capabilities = capabilities }, config)
-      lspconfig[name].setup(config)
+  for server, config in pairs(H.servers) do
+    vim.lsp.config(server, config)
+    if H.lsp_server_available(server) then
+      vim.lsp.enable(server)
     end
   end
-
-  require("lspconfig.ui.windows").default_options.border = "single"
 end)
