@@ -1,0 +1,37 @@
+[core]
+    editor = nvim
+[color]
+    ui = auto
+[color "branch"]
+    current = green reverse
+    local = green
+    remote = yellow
+[color "status"]
+    added = green
+    changed = yellow
+    untracked = red
+[diff]
+    tool = nvimdiff2
+[difftool]
+    prompt = no
+[merge]
+    tool = nvimdiff2
+[mergetool]
+    keepBackup = false
+    prompt = no
+[push]
+    default = current
+[alias]
+    fe = fetch
+    co = checkout
+    st = status
+    di = diff -b
+    dt = difftool
+    ds = diff --staged -b
+    url = !git config -l | grep -E '^remote.origin.url=' | cut -d= -f2
+    lg = log --graph --pretty=format:'%Cred%h%Creset %C(green)(%ci) %C(blue)%an%Creset: %s'
+    ll = log --name-only
+    ci = commit -a
+    au = add -u .
+    purr = pull --rebase
+    merge = merge --no-ff
