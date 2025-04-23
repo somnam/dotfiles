@@ -72,13 +72,54 @@ setup-pyenv ()
     pyenv update
 }
 
+upgrade-uv ()
+{
+    download-uv
+    setup-uv
+}
+
+download-uv ()
+{
+    local uv_bin="$HOME/.local/bin/uv"
+
+    if [[ -f "$uv_bin" ]]; then
+        return
+    fi
+
+    [[ $(which curl) ]] || (echo "curl not installed" && exit 1)
+
+    local uv_install_url="https://astral.sh/uv/install.sh"
+
+    curl -LsSf "$uv_install_url" | env INSTALLER_NO_MODIFY_PATH=1 sh
+}
+
+setup-uv ()
+{
+    local uv_bin="$HOME/.local/bin/uv"
+
+    if [[ ! -f "$uv_bin" ]]; then
+        echo "uv not installed"
+        return
+    fi
+
+    $uv_bin self update
+
+    local completions_dir="$HOME/.config/bashrc.d/completions"
+
+    if [[ -d "$completions_dir" ]]; then
+        uv generate-shell-completion bash > "$completions_dir/uv.sh"
+        uvx --generate-shell-completion bash > "$completions_dir/uvx.sh"
+    fi
+}
+
 main ()
 {
-    while getopts ":afp" flag; do
+    while getopts ":afpu" flag; do
         case "${flag}" in
             a)
                 upgrade-fzf
                 upgrade-pyenv
+                upgrade-uv
                 exit 0;;
             f)
                 upgrade-fzf
@@ -86,10 +127,13 @@ main ()
             p)
                 upgrade-pyenv
                 exit 0;;
+            u)
+                upgrade-uv
+                exit 0;;
         esac
     done
 
-    echo "Usage: $0 [-a][-f][-p]"
+    echo "Usage: $0 [-a][-f][-p][-u]"
 }
 
 main $@

@@ -16,6 +16,9 @@ later(function()
   require("CopilotChat").setup({
     model = config.get("plugin.copilot_chat.model"),
     mappings = {
+      complete = {
+        insert = "",
+      },
       close = {
         insert = "",
       },

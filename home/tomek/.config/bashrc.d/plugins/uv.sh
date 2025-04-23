@@ -1,0 +1,1 @@
+export UV_MANAGED_PYTHON=1

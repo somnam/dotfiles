@@ -12,6 +12,9 @@
             "rust": ["rustfmt"],
             "*": ["trim_whitespace"]
         },
+        "copilot": {
+            "autostart": false
+        },
         "copilot_chat": {
             "model": null
         },
