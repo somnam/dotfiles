@@ -12,7 +12,7 @@ python_venv_hook()
     fi
 
     if [[ ! ${venv_dir} ]]; then
-        if [[ -n "$VIRTUAL_ENV" ]]; then
+        if [[ -n "$VIRTUAL_ENV" ]] && type deactivate &>/dev/null; then
             deactivate
         fi
         return $retval
@@ -22,7 +22,7 @@ python_venv_hook()
         return $retval
     fi
 
-    if [[ -n "$VIRTUAL_ENV" ]]; then
+    if [[ -n "$VIRTUAL_ENV" ]] && type deactivate &>/dev/null; then
         deactivate
     fi
 
