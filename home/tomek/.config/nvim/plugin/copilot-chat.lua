@@ -17,7 +17,7 @@ later(function()
     model = config.get("plugin.copilot_chat.model"),
     mappings = {
       complete = {
-        insert = "<C-/>",
+        insert = "<C-Space>",
       },
       close = {
         normal = "",

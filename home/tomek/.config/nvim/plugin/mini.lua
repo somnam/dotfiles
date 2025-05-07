@@ -50,6 +50,16 @@ now(function()
 end)
 
 later(function()
+  vim.api.nvim_create_autocmd("FileType", {
+    pattern = "*",
+    group = vim.api.nvim_create_augroup("maybe_disable_mini_completion", { clear = true }),
+    callback = function(ctx)
+      if buffer.excluded(ctx.buf) then
+        vim.b.minicompletion_disable = true
+      end
+    end,
+  })
+
   local mini_completion = require("mini.completion")
   mini_completion.setup({
     set_vim_settings = false,
