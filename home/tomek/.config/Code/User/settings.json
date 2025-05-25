@@ -1,70 +1,24 @@
 {
-    "telemetry.telemetryLevel": "off",
+    "workbench.startupEditor": "none",
+    "telemetry.feedback.enabled": false,
     "editor.cursorBlinking": "solid",
     "editor.minimap.enabled": false,
     "editor.minimap.renderCharacters": false,
-    "editor.lineHeight": 18,
-    "editor.fontSize": 14,
     "editor.quickSuggestions": {
-        "other": true,
-        "comments": false,
-        "strings": true
+        "strings": "on"
     },
     "editor.suggest.localityBonus": true,
-    "editor.fontFamily": "'JetBrains Mono NL', 'Droid Sans Mono', 'monospace', monospace, 'Droid Sans Fallback'",
     "editor.wordWrap": "on",
-    "editor.scrollBeyondLastLine": false,
-    "editor.rulers": [120],
-    "editor.cursorSurroundingLines": 2,
     "editor.find.autoFindInSelection": "multiline",
-    "editor.accessibilitySupport": "off",
-    "python.formatting.provider": "autopep8",
-    "python.formatting.autopep8Path": "/home/tomek/.vscode/python/bin/autopep8",
-    "python.linting.flake8Enabled": true,
-    "python.linting.flake8Path": "/home/tomek/.vscode/python/bin/flake8",
-    "python.linting.flake8Args": ["--max-line-length", "120"],
-    "python.linting.pylintEnabled": false,
-    "python.linting.mypyEnabled": true,
-    "python.linting.enabled": true,
-    "python.sortImports.path": "/home/tomek/.vscode/python/bin/isort",
-    "python.linting.mypyPath": "/home/tomek/.vscode/python/bin/mypy",
-    "typescript.disableAutomaticTypeAcquisition": true,
-    "window.titleBarStyle": "custom",
-    "window.newWindowDimensions": "maximized",
     "workbench.enableExperiments": false,
-    "workbench.editor.revealIfOpen": true,
-    "workbench.editor.enablePreview": false,
-    "workbench.colorCustomizations": {
-        "[Default Dark+]": {
-            "editor.foreground": "#eeeeee",
-            "editor.background": "#282828",
-            "editor.lineHighlightBackground": "#1e1e1e"
-        },
-        "[Default Light+]": {
-            "editor.foreground": "#282828",
-            "editor.background": "#eeeeee",
-            "editor.lineHighlightBackground": "#e1e1e1",
-            "editorGroup.border": "#aeaeae",
-            "editorGroupHeader.border": "#aeaeae",
-        },
-    },
-    "workbench.startupEditor": "none",
+    "telemetry.telemetryLevel": "off",
+    "python.experiments.enabled": false,
+    "editor.lineNumbers": "off",
+    "security.workspace.trust.untrustedFiles": "open",
+    "terminal.integrated.lineHeight": 1,
+    "workbench.colorTheme": "Catppuccin Mocha",
+    "workbench.activityBar.location": "hidden",
+    "editor.cursorSurroundingLines": 2,
     "files.trimTrailingWhitespace": true,
-    "extensions.ignoreRecommendations": true,
-    "files.watcherExclude": {
-        "**/.venv/**": true,
-    },
-    "search.exclude": {
-        "**/.venv/**": true,
-    },
-    "workbench.editorAssociations": {
-        "*.ipynb": "jupyter-notebook"
-    },
-    "editor.suggestSelection": "first",
-    "notebook.cellToolbarLocation": {
-        "default": "right",
-        "jupyter-notebook": "left"
-    },
-    "workbench.editor.showTabs": false,
-    "workbench.activityBar.visible": false,
+    "extensions.ignoreRecommendations": true
 }
