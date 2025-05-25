@@ -3,11 +3,14 @@ if not require("util.command").executable("node") then
 end
 
 local config = require("core.config")
+if not config.get("plugin.copilot.enable", false) then
+  return
+end
+
 local add = require("mini.deps").add
 local later = require("mini.deps").later
 
 later(function()
-  local opts = config.get("plugin.copilot.autostart", false) and {} or { bang = true }
   add({
     source = "github/copilot.vim",
     hooks = {
@@ -15,7 +18,7 @@ later(function()
         vim.cmd("Copilot setup")
       end,
     },
-  }, opts)
+  })
 
   local H = {}
 

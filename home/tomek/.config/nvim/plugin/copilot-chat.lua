@@ -3,6 +3,10 @@ if not require("util.command").executable("curl") then
 end
 
 local config = require("core.config")
+if not config.get("plugin.copilot.enable", false) then
+  return
+end
+
 local add = require("mini.deps").add
 local later = require("mini.deps").later
 
