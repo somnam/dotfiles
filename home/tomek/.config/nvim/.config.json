@@ -13,7 +13,7 @@
             "*": ["trim_whitespace"]
         },
         "copilot": {
-            "autostart": false
+            "enable": false
         },
         "copilot_chat": {
             "model": null
