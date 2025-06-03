@@ -16,6 +16,7 @@
             "enable": false
         },
         "copilot_chat": {
+            "enable": false,
             "model": null
         },
         "fzf_lua": {

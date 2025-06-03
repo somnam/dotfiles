@@ -1,12 +1,26 @@
 // Place your key bindings in this file to override the defaults
 [
     {
-        "key": "ctrl+alt+`",
-        "command": "workbench.action.createTerminalEditorSide"
-    },
-    {
         "key": "ctrl+alt+j",
         "command": "editor.action.joinLines",
         "when": "editorTextFocus && !editorReadonly"
+    },
+    {
+        "key": "ctrl+shift+alt+`",
+        "command": "workbench.action.createTerminalEditorSide",
+        "when": "terminalProcessSupported"
+    },
+    {
+        "key": "ctrl+alt+`",
+        "command": "workbench.action.createTerminalEditor",
+        "when": "terminalProcessSupported"
+    },
+    {
+        "key": "ctrl+k ctrl+shift+left",
+        "command": "workbench.action.moveEditorToLeftGroup"
+    },
+    {
+        "key": "ctrl+k ctrl+shift+right",
+        "command": "workbench.action.moveEditorToRightGroup"
     }
 ]

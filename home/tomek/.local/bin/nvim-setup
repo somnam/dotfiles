@@ -34,7 +34,7 @@ upgrade-nvim ()
 
 main ()
 {
-    while getopts ":aup" flag; do
+    while getopts ":a" flag; do
         case "${flag}" in
             a)
                 upgrade-nvim

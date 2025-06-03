@@ -3,19 +3,23 @@ if not require("util.command").executable("curl") then
 end
 
 local config = require("core.config")
-if not config.get("plugin.copilot.enable", false) then
-  return
-end
-
 local add = require("mini.deps").add
 local later = require("mini.deps").later
 
 later(function()
-  add({
+  local enable = config.get("plugin.copilot_chat.enable", false)
+  local spec = {
     source = "CopilotC-Nvim/CopilotChat.nvim",
     checkout = "main",
     depends = { "nvim-lua/plenary.nvim" },
-  })
+  }
+
+  if not enable then
+    add(spec, { bang = true })
+    return
+  end
+
+  add(spec)
 
   require("CopilotChat").setup({
     model = config.get("plugin.copilot_chat.model"),
@@ -24,8 +28,8 @@ later(function()
         insert = "<C-Space>",
       },
       close = {
-        normal = "",
-        insert = "",
+        normal = "<C-x>",
+        insert = "<C-x>",
       },
       reset = {
         normal = "<C-e>",

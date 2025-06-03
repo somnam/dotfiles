@@ -3,22 +3,26 @@ if not require("util.command").executable("node") then
 end
 
 local config = require("core.config")
-if not config.get("plugin.copilot.enable", false) then
-  return
-end
-
 local add = require("mini.deps").add
-local later = require("mini.deps").later
+local now = require("mini.deps").now
 
-later(function()
-  add({
+now(function()
+  local enable = config.get("plugin.copilot.enable", false)
+  local spec = {
     source = "github/copilot.vim",
     hooks = {
       post_checkout = function()
         vim.cmd("Copilot setup")
       end,
     },
-  })
+  }
+
+  if not enable then
+    add(spec, { bang = true })
+    return
+  end
+
+  add(spec)
 
   local H = {}
 

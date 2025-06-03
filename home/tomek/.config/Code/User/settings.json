@@ -13,6 +13,7 @@
     "workbench.enableExperiments": false,
     "telemetry.telemetryLevel": "off",
     "python.experiments.enabled": false,
+    "python.analysis.autoImportCompletions": true,
     "editor.lineNumbers": "off",
     "security.workspace.trust.untrustedFiles": "open",
     "terminal.integrated.lineHeight": 1,
@@ -21,5 +22,6 @@
     "editor.cursorSurroundingLines": 2,
     "files.trimTrailingWhitespace": true,
     "extensions.ignoreRecommendations": true,
-    "python.analysis.typeCheckingMode": "standard"
+    "editor.formatOnSave": true,
+    "editor.formatOnSaveMode": "modificationsIfAvailable",
 }

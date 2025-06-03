@@ -1,9 +1,9 @@
 local command = require("util.command")
 local python = require("util.python")
 local add = require("mini.deps").add
-local later = require("mini.deps").later
+local now = require("mini.deps").now
 
-later(function()
+now(function()
   add({ source = "neovim/nvim-lspconfig" })
 
   local H = {}

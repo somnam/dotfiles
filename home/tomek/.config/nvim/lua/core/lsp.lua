@@ -14,7 +14,7 @@ end
 ---@param event table
 ---@param delay integer?
 H.setup_lsp_highlight_symbol = function(event, delay)
-  vim.validate({ delay = { delay, "number", true } })
+  vim.validate("delay", delay, "number", true)
   delay = delay or 500
 
   local client = H.get_lsp_client_from_event(event)
