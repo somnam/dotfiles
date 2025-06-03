@@ -25,7 +25,7 @@ if command -v fd >/dev/null; then
     alias fd='fd --hidden --follow --no-require-git'
 fi
 
-alias ll='ls -ahlF'
+alias ll='ls -ahlF --group-directories-first'
 alias la='ls -A'
 alias l='ls -CF'
 
