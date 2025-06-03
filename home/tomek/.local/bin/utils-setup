@@ -94,7 +94,7 @@ main ()
         esac
     done
 
-    echo "Usage: $0 [-a][-f][-p][-u]"
+    echo "Usage: $0 [-a][-p][-u]"
 }
 
 main $@
