@@ -3,19 +3,11 @@ if [ -x /usr/bin/dircolors ]; then
     test -r ~/.dircolors && eval "$(dircolors -b ~/.dircolors)" || eval "$(dircolors -b)"
 fi
 
-if command ls --color -d . > /dev/null; then
-    alias ls='ls --color=always'
-fi
+alias ls='ls --color=auto'
 
-if [[ $(echo | grep --color=always "" > /dev/null 2>&1) -ne "0" ]]; then
-    alias grep='grep --color=always'
-    alias fgrep='fgrep --color=always'
-    alias egrep='egrep --color=always'
-fi
-
-if command -v ack >/dev/null; then
-    alias ack-python='ack --python --ignore-dir={.env,.venv}'
-fi
+alias grep='grep --color=auto'
+alias fgrep='fgrep --color=auto'
+alias egrep='egrep --color=auto'
 
 if command -v rg >/dev/null; then
     alias rg='rg --hidden --follow --no-require-git'
@@ -25,7 +17,11 @@ if command -v fd >/dev/null; then
     alias fd='fd --hidden --follow --no-require-git'
 fi
 
-alias ll='ls -ahlF --group-directories-first'
+if command ls --group-directories-first /dev/null >/dev/null 2>&1; then
+    alias ll='ls -ahlF --group-directories-first'
+else
+    alias ll='ls -ahlF'
+fi
 alias la='ls -A'
 alias l='ls -CF'
 
