@@ -8,6 +8,7 @@ setup_fzf()
 {
     # Key bindings
     local locations=(
+        "/opt/homebrew/Cellar/fzf/*/shell/key-bindings.bash"
         "/usr/share/fzf/shell/key-bindings.bash"
         "$HOME/.fzf/shell/key-bindings.bash"
     )

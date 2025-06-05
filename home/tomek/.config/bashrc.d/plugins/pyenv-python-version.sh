@@ -28,7 +28,7 @@ pyenv_python_version_hook()
     if [[ -n ${venv_path} ]]; then
         export VIRTUAL_ENV=${venv_path};
         export PYENV_VIRTUAL_ENV=${VIRTUAL_ENV}
-        export VIRTUAL_ENV_PROMPT="(${venv}) "
+        export VIRTUAL_ENV_PROMPT="${venv}"
     fi
 
     return $retval

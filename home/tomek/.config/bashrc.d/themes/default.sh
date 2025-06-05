@@ -12,7 +12,7 @@ set_prompt_theme()
         prompt="${lred}\$${blank}"
     fi
 
-    local venv="${VIRTUAL_ENV_PROMPT:-}"
+    local venv="${VIRTUAL_ENV_PROMPT:+(${VIRTUAL_ENV_PROMPT}) }"
 
     local line_one="${venv}${lgreen}\u${green}@\h ${lblue}\w${blank} "
     local line_two="\n${prompt} "
