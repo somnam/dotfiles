@@ -28,8 +28,8 @@ later(function()
         insert = "<C-Space>",
       },
       close = {
-        normal = "<C-x>",
-        insert = "<C-x>",
+        normal = "<A-x>",
+        insert = "<A-x>",
       },
       reset = {
         normal = "<C-e>",

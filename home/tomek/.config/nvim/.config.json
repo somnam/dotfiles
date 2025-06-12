@@ -12,6 +12,10 @@
             "rust": ["rustfmt"],
             "*": ["trim_whitespace"]
         },
+        "codecompanion": {
+            "enable": false,
+            "model": null
+        },
         "copilot": {
             "enable": false
         },
