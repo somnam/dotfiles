@@ -37,13 +37,6 @@ now(function()
       vim.api.nvim_create_autocmd("WinNew", {
         buffer = ctx.buf,
         callback = function()
-          mini_starter.refresh()
-        end,
-      })
-
-      vim.api.nvim_create_autocmd("BufAdd", {
-        buffer = ctx.buf,
-        callback = function()
           vim.schedule(function()
             if vim.api.nvim_buf_is_loaded(ctx.buf) then
               pcall(vim.api.nvim_buf_delete, ctx.buf, {})
