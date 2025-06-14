@@ -24,6 +24,8 @@ now(function()
 
   add(spec)
 
+  vim.g.copilot_workspace_folders = config.get("plugin.copilot.workspace_folders", {})
+
   local H = {}
 
   H.lazy_load_copilot = function()

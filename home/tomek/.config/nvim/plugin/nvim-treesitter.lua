@@ -2,7 +2,7 @@ local buffer = require("core.buffer")
 local config = require("core.config")
 local treesitter = require("core.treesitter")
 local add = require("mini.deps").add
-local later = require("mini.deps").later
+local now = require("mini.deps").now
 
 local H = {}
 
@@ -13,7 +13,7 @@ H.maybe_disable_treesitter = function(filetype, bufnr)
   )
 end
 
-later(function()
+now(function()
   add({
     source = "nvim-treesitter/nvim-treesitter",
     hooks = {

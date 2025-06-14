@@ -58,6 +58,18 @@ later(function()
         adapter = "copilot",
       },
     },
+    display = {
+      chat = {
+        icons = {
+          pinned_buffer = "📌 ",
+          watched_buffer = "👀 ",
+        },
+      },
+    },
+    icons = {
+      loading = "🔄 ",
+      warning = "⚠️ ",
+    },
   })
 
   vim.keymap.set(

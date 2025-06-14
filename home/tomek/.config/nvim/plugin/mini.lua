@@ -49,7 +49,7 @@ now(function()
   })
 end)
 
-later(function()
+now(function()
   vim.api.nvim_create_autocmd("FileType", {
     pattern = "*",
     group = vim.api.nvim_create_augroup("maybe_disable_mini_completion", { clear = true }),

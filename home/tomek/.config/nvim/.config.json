@@ -17,7 +17,8 @@
             "model": null
         },
         "copilot": {
-            "enable": false
+            "enable": false,
+            "workspace_folders": []
         },
         "copilot_chat": {
             "enable": false,
