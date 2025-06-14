@@ -34,9 +34,15 @@ now(function()
       vim.keymap.set("n", "k", "<Cmd>lua MiniStarter.update_current_item('prev')<Enter>", opts)
       vim.keymap.set("n", "j", "<Cmd>lua MiniStarter.update_current_item('next')<Enter>", opts)
 
+      vim.api.nvim_create_autocmd("WinNew", {
+        buffer = ctx.buf,
+        callback = function()
+          mini_starter.refresh()
+        end,
+      })
+
       vim.api.nvim_create_autocmd("BufAdd", {
-        pattern = "*",
-        once = true,
+        buffer = ctx.buf,
         callback = function()
           vim.schedule(function()
             if vim.api.nvim_buf_is_loaded(ctx.buf) then
