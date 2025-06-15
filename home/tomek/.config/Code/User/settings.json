@@ -21,7 +21,6 @@
     "workbench.activityBar.location": "hidden",
     "editor.cursorSurroundingLines": 2,
     "files.trimTrailingWhitespace": true,
-    "extensions.ignoreRecommendations": true,
     "editor.formatOnSave": true,
     "editor.formatOnSaveMode": "modificationsIfAvailable",
 }
