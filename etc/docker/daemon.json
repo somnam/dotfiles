@@ -2,7 +2,7 @@
   "data-root": "/home/docker",
   "builder": {
     "gc": {
-      "defaultKeepStorage": "20GB",
+      "defaultKeepStorage": "120GB",
       "enabled": true
     }
   },
