@@ -61,8 +61,8 @@ later(function()
     display = {
       chat = {
         icons = {
-          pinned_buffer = "📌 ",
-          watched_buffer = "👀 ",
+          buffer_pin = "📌 ",
+          buffer_watch = "👀 ",
         },
       },
     },
