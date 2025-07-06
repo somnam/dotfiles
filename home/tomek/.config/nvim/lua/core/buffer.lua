@@ -24,6 +24,7 @@ M.exclude = {
   filetype = {
     "alpha",
     "checkhealth",
+    "codecompanion",
     "help",
     "lazy",
     "man",

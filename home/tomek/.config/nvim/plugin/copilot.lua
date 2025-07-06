@@ -2,6 +2,7 @@ if not require("util.command").executable("node") then
   return
 end
 
+local buffer = require("core.buffer")
 local config = require("core.config")
 local add = require("mini.deps").add
 local now = require("mini.deps").now
@@ -24,19 +25,15 @@ now(function()
 
   add(spec)
 
+  vim.api.nvim_create_autocmd("FileType", {
+    pattern = "*",
+    group = vim.api.nvim_create_augroup("maybe_disable_github_copilot", { clear = true }),
+    callback = function(ctx)
+      if buffer.excluded(ctx.buf) then
+        vim.b.copilot_enabled = false
+      end
+    end,
+  })
+
   vim.g.copilot_workspace_folders = config.get("plugin.copilot.workspace_folders", {})
-
-  local H = {}
-
-  H.lazy_load_copilot = function()
-    -- Lazy load copilot server
-    if vim.fn.exists("*copilot#RunningClient") == 0 then
-      add({ source = "github/copilot.vim" })
-      vim.cmd("runtime autoload/copilot.vim | call copilot#Init()")
-    end
-  end
-
-  vim.keymap.set("n", "<Space>ce", function()
-    H.lazy_load_copilot()
-  end, { noremap = true, silent = true, desc = "Enable Copilot" })
 end)
