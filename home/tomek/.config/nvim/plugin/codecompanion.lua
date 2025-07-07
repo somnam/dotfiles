@@ -9,8 +9,8 @@ local later = require("mini.deps").later
 later(function()
   local enable = config.get("plugin.codecompanion.enable", false)
   local spec = {
-    source = "somnam/codecompanion.nvim",
-    checkout = "fix/copilot-adapter-unauthorized-token-expired",
+    source = "olimorris/codecompanion.nvim",
+    checkout = "main",
     depends = { "nvim-lua/plenary.nvim" },
   }
 
