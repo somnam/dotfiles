@@ -49,6 +49,43 @@ now(function()
     quick_lint_js = {
       filetypes = { "javascript", "javascriptreact", "typescript", "typescriptreact" },
     },
+    vtsls = {
+      settings = {
+        complete_function_calls = true,
+        vtsls = {
+          enableMoveToFileCodeAction = true,
+          autoUseWorkspaceTsdk = true,
+          experimental = {
+            completion = {
+              enableServerSideFuzzyMatch = true,
+            },
+          },
+        },
+        javascript = {
+          updateImportsOnFileMove = { enabled = "always" },
+          inlayHints = {
+            enumMemberValues = { enabled = true },
+            functionLikeReturnTypes = { enabled = true },
+            parameterNames = { enabled = "literals" },
+            parameterTypes = { enabled = true },
+            propertyDeclarationTypes = { enabled = true },
+            variableTypes = { enabled = true },
+          },
+        },
+        typescript = {
+          updateImportsOnFileMove = { enabled = "always" },
+          suggest = { completeFunctionCalls = true },
+          inlayHints = {
+            enumMemberValues = { enabled = true },
+            functionLikeReturnTypes = { enabled = true },
+            parameterNames = { enabled = "literals" },
+            parameterTypes = { enabled = true },
+            propertyDeclarationTypes = { enabled = true },
+            variableTypes = { enabled = false },
+          },
+        },
+      },
+    },
     rust_analyzer = {
       settings = {
         ["rust-analyzer"] = {
@@ -62,6 +99,28 @@ now(function()
       },
     },
     lua_ls = {
+      settings = {
+        Lua = {
+          completion = {
+            showWord = "Disable",
+          },
+          diagnostics = {
+            enable = true,
+            -- Only diagnose opened files
+            workspaceDelay = -1,
+            workspaceEvent = "None",
+          },
+          runtime = {
+            version = "LuaJIT",
+            path = vim.split(package.path, ";"),
+          },
+          telemetry = { enable = false },
+          workspace = {
+            maxPreload = 1000,
+            checkThirdParty = false,
+          },
+        },
+      },
       on_attach = function(client, bufnr)
         -- Customize trigger characters.
         client.server_capabilities.completionProvider.triggerCharacters =

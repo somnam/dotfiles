@@ -3,22 +3,14 @@
   "runtime": {
     "version": "LuaJIT"
   },
-  "semantic": {
-    "enable": false
-  },
   "workspace": {
     "library": [
       "lua",
       "$VIMRUNTIME"
     ],
-    "maxPreload": 1000,
     "checkThirdParty": false
-  },
-  "completion": {
-    "showWord": "Disable"
   },
   "diagnostics": {
     "unusedLocalExclude": [ "_*" ]
-  },
-  "telemetry.enable": false
+  }
 }

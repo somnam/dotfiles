@@ -43,7 +43,7 @@ now(function()
   add({ source = "rebelot/kanagawa.nvim" }, { bang = true })
 
   vim.api.nvim_create_autocmd("ColorSchemePre", {
-    pattern = "kanagawa",
+    pattern = "kanagawa*",
     group = vim.api.nvim_create_augroup("kanagawa", { clear = true }),
     callback = function()
       require("kanagawa").setup({
@@ -57,8 +57,8 @@ now(function()
         overrides = function(colors)
           local theme = colors.theme
           return {
-            PmenuMatch = { fg = theme.syn.fun },
-            PmenuMatchSel = { fg = theme.syn.fun },
+            PmenuMatch = { fg = theme.syn.fun, bold = true },
+            PmenuMatchSel = { fg = theme.syn.fun, bold = true },
           }
         end,
       })
@@ -70,7 +70,7 @@ now(function()
   add({ source = "catppuccin/nvim", name = "catppuccin" }, { bang = true })
 
   vim.api.nvim_create_autocmd("ColorSchemePre", {
-    pattern = "catppuccin",
+    pattern = "catppuccin*",
     group = vim.api.nvim_create_augroup("catppuccin", { clear = true }),
     callback = function()
       require("catppuccin").setup({
@@ -80,8 +80,8 @@ now(function()
         },
         custom_highlights = function(colors)
           return {
-            PmenuMatch = { fg = colors.text, style = { "bold" } },
-            PmenuMatchSel = { fg = colors.text, style = { "bold" } },
+            PmenuMatch = { fg = colors.blue, style = { "bold" } },
+            PmenuMatchSel = { fg = colors.blue, style = { "bold" } },
           }
         end,
       })
