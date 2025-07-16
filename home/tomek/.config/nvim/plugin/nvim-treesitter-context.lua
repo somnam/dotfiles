@@ -3,20 +3,21 @@ local treesitter = require("core.treesitter")
 local add = require("mini.deps").add
 local later = require("mini.deps").later
 
-local H = {}
-
-H.maybe_disable_treesitter_context = function(buf)
-  return (
-    buffer.excluded(buf, treesitter.exclude_filetype)
-    or buffer.above_max_size(buf, treesitter.max_size)
-  )
-end
-
 later(function()
   add({
     source = "nvim-treesitter/nvim-treesitter-context",
     depends = { "nvim-treesitter/nvim-treesitter" },
   })
+
+  local H = {}
+
+  H.maybe_disable_treesitter_context = function(buf)
+    return (
+      buffer.excluded(buf, treesitter.exclude_filetype)
+      or buffer.above_max_size(buf, treesitter.max_size)
+    )
+  end
+
   require("treesitter-context").setup({
     line_numbers = false,
     max_lines = 3,

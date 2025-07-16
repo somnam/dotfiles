@@ -3,7 +3,6 @@ if not require("util.command").executable("git") then
 end
 
 local H = {
-  mini_site_path = vim.fn.stdpath("data") .. "/site/",
   mini_path = vim.fn.stdpath("data") .. "/site/pack/deps/start/mini.nvim",
   mini_url = "https://github.com/echasnovski/mini.nvim.git",
 }
@@ -27,7 +26,7 @@ H.bootstrap = function()
 end
 
 H.setup = function()
-  require("mini.deps").setup({ path = { package = H.mini_site_path } })
+  require("mini.deps").setup()
 
   vim.api.nvim_create_user_command("DepsSync", function()
     vim.cmd("DepsClean!")

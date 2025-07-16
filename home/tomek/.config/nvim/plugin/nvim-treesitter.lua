@@ -4,15 +4,6 @@ local treesitter = require("core.treesitter")
 local add = require("mini.deps").add
 local now = require("mini.deps").now
 
-local H = {}
-
-H.maybe_disable_treesitter = function(filetype, bufnr)
-  return (
-    vim.tbl_contains(treesitter.exclude_filetype, filetype)
-    or buffer.above_max_size(bufnr, treesitter.max_size)
-  )
-end
-
 now(function()
   add({
     source = "nvim-treesitter/nvim-treesitter",
@@ -22,6 +13,16 @@ now(function()
       end,
     },
   })
+
+  local H = {}
+
+  H.maybe_disable_treesitter = function(filetype, bufnr)
+    return (
+      vim.tbl_contains(treesitter.exclude_filetype, filetype)
+      or buffer.above_max_size(bufnr, treesitter.max_size)
+    )
+  end
+
   require("nvim-treesitter.configs").setup({
     auto_install = true,
     ensure_installed = config.get("treesitter.ensure_installed", {}),

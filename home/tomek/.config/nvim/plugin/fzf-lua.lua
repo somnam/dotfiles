@@ -31,9 +31,6 @@ now(function()
     },
     fzf_colors = true,
     previewers = {
-      bat = {
-        args = command.bat({ args_only = true, color = true, into_shell = true }),
-      },
       builtin = {
         treesitter = { enabled = false },
       },
@@ -127,15 +124,15 @@ now(function()
   )
   vim.keymap.set(
     "n",
-    "grs",
-    ":FzfLua lsp_document_symbols<Enter>",
-    { noremap = true, silent = true, desc = "List all current buffer symbols" }
-  )
-  vim.keymap.set(
-    "n",
     "grr",
     ":FzfLua lsp_references<Enter>",
     { noremap = true, silent = true, desc = "List all symbol references" }
+  )
+  vim.keymap.set(
+    "n",
+    "gri",
+    ":FzfLua lsp_implementations<Enter>",
+    { noremap = true, silent = true, desc = "List all symbol implementations" }
   )
   vim.keymap.set(
     "n",

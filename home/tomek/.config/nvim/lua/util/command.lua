@@ -149,10 +149,4 @@ M.grep = function(opts)
   return M.command_from_opts(M.get_grep_command(opts), opts)
 end
 
----@param opts table
----@return (string|table)
-M.bat = function(opts)
-  return M.command_from_opts(M.get_bat_command(opts), opts)
-end
-
 return M
