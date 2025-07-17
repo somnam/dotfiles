@@ -37,7 +37,7 @@ vim.api.nvim_set_keymap(
   vim.tbl_extend("keep", { desc = "Exit Neovim" }, opts)
 )
 
---- Popup menu mappings
+-- Popup menu mappings
 vim.keymap.set("i", "<CR>", function()
   if vim.fn.pumvisible() ~= 0 then
     -- Select first item if none selected.
@@ -47,3 +47,15 @@ vim.keymap.set("i", "<CR>", function()
 
   return "<CR>"
 end, { expr = true })
+
+-- Terminal mappings
+vim.keymap.set("t", [[<C-\><Esc>]], [[<C-\><C-n>]], opts)
+vim.keymap.set("t", [[<C-\><C-w>]], [[<C-\><C-n><C-w>w]], opts)
+vim.keymap.set("t", [[<C-\><C-h>]], [[<C-\><C-n><C-w>h]], opts)
+vim.keymap.set("t", [[<C-\><C-j>]], [[<C-\><C-n><C-w>j]], opts)
+vim.keymap.set("t", [[<C-\><C-k>]], [[<C-\><C-n><C-w>k]], opts)
+vim.keymap.set("t", [[<C-\><C-l>]], [[<C-\><C-n><C-w>l]], opts)
+
+vim.api.nvim_create_user_command("VTerminal", function()
+  vim.cmd("vsplit | term")
+end, {})
