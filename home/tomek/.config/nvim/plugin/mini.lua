@@ -49,11 +49,16 @@ now(function()
 end)
 
 now(function()
-  vim.api.nvim_create_autocmd("FileType", {
-    pattern = "*",
+  local H = {}
+
+  H.maybe_disable_mini_completion = function(buf)
+    return (buffer.excluded(buf) or buffer.above_max_size(buf, 1024 * 1024))
+  end
+
+  vim.api.nvim_create_autocmd({ "BufReadPost", "BufNewFile" }, {
     group = vim.api.nvim_create_augroup("maybe_disable_mini_completion", { clear = true }),
     callback = function(ctx)
-      if buffer.excluded(ctx.buf) then
+      if H.maybe_disable_mini_completion(ctx.buf) then
         vim.b.minicompletion_disable = true
       end
     end,
