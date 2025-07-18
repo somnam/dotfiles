@@ -6,6 +6,9 @@ now(function()
   add({
     source = "williamboman/mason.nvim",
     hooks = {
+      post_install = function()
+        vim.cmd("MasonUpdate")
+      end,
       post_checkout = function()
         vim.cmd("MasonUpdate")
       end,
@@ -28,7 +31,7 @@ now(function()
 
   vim.keymap.set(
     "n",
-    "<Space>t",
+    "<leader>t",
     ":Mason<Enter>",
     { noremap = true, silent = true, desc = "Open the Package Manager UI" }
   )

@@ -74,7 +74,7 @@ later(function()
 
   vim.keymap.set(
     { "n", "v" },
-    "<Space>a",
+    "<leader>a",
     ":CodeCompanionActions<Enter>",
     { noremap = true, silent = true, desc = "Open the action palette" }
   )

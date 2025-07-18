@@ -114,8 +114,8 @@ later(function()
   mini_clue.setup({
     triggers = {
       -- Leader triggers
-      { mode = "n", keys = "<Space>" },
-      { mode = "x", keys = "<Space>" },
+      { mode = "n", keys = "<leader>" },
+      { mode = "x", keys = "<leader>" },
 
       -- `g` key
       { mode = "n", keys = "g" },

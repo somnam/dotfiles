@@ -28,7 +28,7 @@ vim.diagnostic.config({
 
 vim.api.nvim_set_keymap(
   "n",
-  "<Space>d",
+  "<leader>d",
   ":lua vim.diagnostic.setloclist()<Enter>",
   { noremap = true, silent = true, desc = "List all buffer diagnostics" }
 )

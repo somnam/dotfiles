@@ -15,14 +15,14 @@ later(function()
     vim.api.nvim_buf_set_keymap(
       bufnr,
       "n",
-      "<Space>gd",
+      "<leader>gd",
       ":Gitsigns diffthis<Enter>",
       vim.tbl_extend("keep", { desc = "Show buffer diff against the git index" }, bufopts)
     )
     vim.api.nvim_buf_set_keymap(
       bufnr,
       "n",
-      "<Space>gb",
+      "<leader>gb",
       ":Gitsigns blame_line<Enter>",
       vim.tbl_extend(
         "keep",

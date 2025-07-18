@@ -44,7 +44,7 @@ later(function()
 
   vim.keymap.set(
     { "n", "v" },
-    "<Space>a",
+    "<leader>a",
     ":CopilotChat<Enter>",
     { noremap = true, silent = true, desc = "Open or close the chat window" }
   )

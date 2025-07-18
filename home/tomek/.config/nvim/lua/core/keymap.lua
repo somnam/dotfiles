@@ -1,3 +1,5 @@
+vim.g.mapleader = " "
+
 local opts = { noremap = true, silent = true }
 
 -- Move between windows
@@ -26,13 +28,13 @@ vim.keymap.set("n", "<Esc>", ":nohlsearch | diffupdate<Enter>", opts)
 -- Leader mappings
 vim.keymap.set(
   "n",
-  "<Space>n",
+  "<leader>n",
   ":enew<Enter>",
   vim.tbl_extend("keep", { desc = "Edit a new buffer" }, opts)
 )
 vim.keymap.set(
   "n",
-  "<Space>q",
+  "<leader>q",
   ":qall<Enter>",
   vim.tbl_extend("keep", { desc = "Exit Neovim" }, opts)
 )

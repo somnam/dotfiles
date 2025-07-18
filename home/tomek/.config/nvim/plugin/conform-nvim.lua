@@ -51,7 +51,7 @@ later(function()
     format_on_save = { timeout_ms = 500 },
   })
 
-  vim.keymap.set("n", "<Space>=", function()
+  vim.keymap.set("n", "<leader>=", function()
     require("conform").format({ async = true })
   end, { noremap = true, silent = true, desc = "Format current buffer" })
 end)

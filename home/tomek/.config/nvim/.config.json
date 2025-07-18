@@ -1,6 +1,9 @@
 {
     "colorscheme": "default",
     "background": "dark",
+    "lsp": {
+        "log_level": "OFF"
+    },
     "treesitter" : {
         "ensure_installed": ["diff", "lua", "markdown", "query", "vim", "vimdoc"],
         "exclude": []

@@ -34,7 +34,7 @@ H.setup = function()
   end, { desc = "Sync plugins" })
   vim.keymap.set(
     "n",
-    "<Space>s",
+    "<leader>s",
     ":DepsSync<Enter>",
     { noremap = true, silent = true, desc = "Sync plugins" }
   )

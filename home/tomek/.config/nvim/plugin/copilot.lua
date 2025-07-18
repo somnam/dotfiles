@@ -12,6 +12,9 @@ now(function()
   local spec = {
     source = "github/copilot.vim",
     hooks = {
+      post_install = function()
+        vim.cmd("Copilot setup")
+      end,
       post_checkout = function()
         vim.cmd("Copilot setup")
       end,

@@ -52,73 +52,73 @@ now(function()
 
   vim.keymap.set(
     "n",
-    "<Space><Space>",
+    "<leader><leader>",
     ":FzfLua resume<Enter>",
     { noremap = true, silent = true, desc = "Continue last search" }
   )
   vim.keymap.set(
     "n",
-    "<Space>p",
+    "<leader>p",
     ":FzfLua oldfiles cwd_only=true<Enter>",
     { noremap = true, silent = true, desc = "List opened local files history" }
   )
   vim.keymap.set(
     "n",
-    "<Space>P",
+    "<leader>P",
     ":FzfLua oldfiles<Enter>",
     { noremap = true, silent = true, desc = "List opened global files history" }
   )
   vim.keymap.set(
     "n",
-    "<Space>f",
+    "<leader>f",
     ":FzfLua files<Enter>",
     { noremap = true, silent = true, desc = "Find files on a path" }
   )
   vim.keymap.set(
     "n",
-    "<Space>b",
+    "<leader>b",
     ":FzfLua buffers<Enter>",
     { noremap = true, silent = true, desc = "List opened buffers" }
   )
   vim.keymap.set(
     "n",
-    "<Space>:",
+    "<leader>:",
     ":FzfLua command_history<Enter>",
     { noremap = true, silent = true, desc = "List command history" }
   )
   vim.keymap.set(
     "n",
-    "<Space>gs",
+    "<leader>gs",
     ":FzfLua git_status<Enter>",
     { noremap = true, silent = true, desc = "Show working tree status" }
   )
   vim.keymap.set(
     "n",
-    "<Space>gl",
+    "<leader>gl",
     ":FzfLua git_bcommits<Enter>",
     { noremap = true, silent = true, desc = "Show current buffer commit logs" }
   )
   vim.keymap.set(
     "n",
-    "<Space>w",
+    "<leader>w",
     ":FzfLua live_grep_native<Enter>",
     { noremap = true, silent = true, desc = "Live grep the current project" }
   )
   vim.keymap.set(
     "n",
-    "<Space>W",
+    "<leader>W",
     ":FzfLua grep_cword<Enter>",
     { noremap = true, silent = true, desc = "Search cursor string in current project" }
   )
   vim.keymap.set(
     "n",
-    "<Space>/",
+    "<leader>/",
     ":FzfLua lines<Enter>",
     { noremap = true, silent = true, desc = "Search opened buffers lines" }
   )
   vim.keymap.set(
     "n",
-    "<Space>d",
+    "<leader>d",
     ":FzfLua lsp_document_diagnostics<Enter>",
     { noremap = true, silent = true, desc = "List all buffer diagnostics" }
   )

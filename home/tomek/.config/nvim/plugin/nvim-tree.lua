@@ -62,7 +62,7 @@ now(function()
 
   vim.keymap.set(
     "n",
-    "<Space>e",
+    "<leader>e",
     ":NvimTreeToggle<Enter>",
     { noremap = true, silent = true, desc = "Open or close the file explorer" }
   )

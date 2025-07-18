@@ -1,7 +1,9 @@
+local config = require("core.config")
+
 local H = {}
 
 H.set_lsp_options = function()
-  vim.lsp.set_log_level("ERROR")
+  vim.lsp.set_log_level(config.get("lsp.log_level", "OFF"))
 end
 
 ---@param event table
