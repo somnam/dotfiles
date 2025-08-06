@@ -2,7 +2,7 @@
     "colorscheme": "default",
     "background": "dark",
     "lsp": {
-        "log_level": "OFF"
+        "log_level": "ERROR"
     },
     "treesitter" : {
         "ensure_installed": ["diff", "lua", "markdown", "query", "vim", "vimdoc"],
