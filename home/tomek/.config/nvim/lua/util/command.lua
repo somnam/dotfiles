@@ -125,19 +125,6 @@ M.get_grep_command = function(opts)
 end
 
 ---@param opts table
----@return table
-M.get_bat_command = function(opts)
-  opts = opts or {}
-  return {
-    cmd = M.executable("bat") and "bat" or nil,
-    args = {
-      opts.color and "--color=always" or "--color=never",
-      "--style=changes",
-    },
-  }
-end
-
----@param opts table
 ---@return (string|table)
 M.find = function(opts)
   return M.command_from_opts(M.get_find_command(opts), opts)
