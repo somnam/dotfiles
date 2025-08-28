@@ -4,7 +4,7 @@ end
 
 local H = {
   mini_path = vim.fn.stdpath("data") .. "/site/pack/deps/start/mini.nvim",
-  mini_url = "https://github.com/echasnovski/mini.nvim.git",
+  mini_url = "https://github.com/nvim-mini/mini.nvim",
 }
 
 H.bootstrap = function()
