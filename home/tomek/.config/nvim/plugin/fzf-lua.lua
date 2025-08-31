@@ -10,45 +10,35 @@ local now = require("mini.deps").now
 now(function()
   add({ source = "ibhagwan/fzf-lua" })
 
-  require("fzf-lua").setup({
+  local overrides = config.get("plugin.fzf_lua.overrides", {})
+
+  require("fzf-lua").setup(vim.tbl_deep_extend("keep", overrides, {
     winopts = {
       height = 0.85,
       width = 0.65,
       col = 0.50,
-      border = "single",
-      preview = {
-        default = config.get("plugin.fzf_lua.preview"),
-        border = "single",
-        layout = "vertical",
-        title = false,
-        scrollbar = "float",
-        winopts = { number = false },
-      },
+      preview = { layout = "vertical", winopts = { number = false } },
+      treesitter = { enabled = false },
     },
     fzf_opts = {
       ["--tiebreak"] = "begin",
       ["--history"] = vim.fn.stdpath("data") .. "/fzf_lua_history",
     },
-    fzf_colors = true,
     previewers = {
-      builtin = {
-        treesitter = { enabled = false },
-      },
+      builtin = { treesitter = { enabled = false } },
     },
     defaults = { git_icons = false, file_icons = false },
     files = {
-      prompt = "Files❯ ",
       cmd = command.find({ into_shell = true }),
     },
     grep = {
-      prompt = "Words❯ ",
       cmd = command.grep({ into_shell = true, color = true }),
       rg_glob = command.executable("rg"),
     },
     manpages = { previewer = "man_native" },
     helptags = { previewer = "help_native" },
     lsp = { code_actions = { previewer = "codeaction_native" } },
-  })
+  }))
 
   vim.keymap.set(
     "n",
