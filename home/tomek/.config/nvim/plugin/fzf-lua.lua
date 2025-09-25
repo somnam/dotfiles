@@ -1,5 +1,4 @@
-local command = require("util.command")
-if not command.executable("fzf") then
+if not require("util.misc").executable("fzf") then
   return
 end
 
@@ -28,13 +27,6 @@ now(function()
       builtin = { treesitter = { enabled = false } },
     },
     defaults = { git_icons = false, file_icons = false },
-    files = {
-      cmd = command.find({ into_shell = true }),
-    },
-    grep = {
-      cmd = command.grep({ into_shell = true, color = true }),
-      rg_glob = command.executable("rg"),
-    },
     manpages = { previewer = "man_native" },
     helptags = { previewer = "help_native" },
     lsp = { code_actions = { previewer = "codeaction_native" } },

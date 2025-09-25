@@ -1,4 +1,4 @@
-if not require("util.command").executable("curl") then
+if not require("util.misc").executable("curl") then
   return
 end
 

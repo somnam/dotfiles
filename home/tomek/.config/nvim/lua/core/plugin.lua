@@ -1,4 +1,4 @@
-if not require("util.command").executable("git") then
+if not require("util.misc").executable("git") then
   return
 end
 

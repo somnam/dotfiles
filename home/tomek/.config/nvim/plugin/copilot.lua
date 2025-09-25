@@ -1,4 +1,4 @@
-if not require("util.command").executable("node") then
+if not require("util.misc").executable("node") then
   return
 end
 

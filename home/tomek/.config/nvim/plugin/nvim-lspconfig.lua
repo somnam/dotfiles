@@ -1,4 +1,4 @@
-local command = require("util.command")
+local misc = require("util.misc")
 local add = require("mini.deps").add
 local now = require("mini.deps").now
 
@@ -21,7 +21,7 @@ now(function()
   H.lsp_server_available = function(server)
     local cmd = vim.lsp.config[server].cmd
     if type(cmd) == "table" then
-      return command.executable(cmd[1])
+      return misc.executable(cmd[1])
     end
     return type(cmd) == "function"
   end

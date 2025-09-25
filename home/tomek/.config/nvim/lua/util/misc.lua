@@ -16,4 +16,9 @@ M.feedkeys = function(keys, mode)
   vim.api.nvim_feedkeys(vim.api.nvim_replace_termcodes(keys, true, false, true), mode, true)
 end
 
+---@param cmd string
+M.executable = function(cmd)
+  return vim.fn.executable(cmd) == 1
+end
+
 return M

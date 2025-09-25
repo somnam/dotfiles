@@ -1,5 +1,5 @@
-local command = require("util.command")
 local config = require("core.config")
+local misc = require("util.misc")
 local python = require("util.python")
 local add = require("mini.deps").add
 local later = require("mini.deps").later
@@ -17,7 +17,7 @@ later(function()
 
     for _, name in pairs(names) do
       local linter = linters[name]
-      if linter and command.executable(linter.cmd) then
+      if linter and misc.executable(linter.cmd) then
         table.insert(results, linter.cmd)
       end
     end

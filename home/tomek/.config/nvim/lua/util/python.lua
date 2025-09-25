@@ -1,4 +1,3 @@
-local command = require("util.command")
 local misc = require("util.misc")
 
 local M = {}
@@ -22,7 +21,7 @@ end
 
 --@return boolean
 M.executable_in_virtual_env = function(cmd)
-  return command.executable(M.virtual_env_cmd(cmd))
+  return misc.executable(M.virtual_env_cmd(cmd))
 end
 
 M.remove_pyenv_shims_from_path = function()
