@@ -2,7 +2,7 @@ if not require("util.misc").executable("curl") then
   return
 end
 
-local config = require("core.config")
+local config = require("util.config")
 local add = require("mini.deps").add
 local later = require("mini.deps").later
 

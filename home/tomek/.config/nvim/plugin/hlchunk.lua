@@ -1,4 +1,4 @@
-local treesitter = require("core.treesitter")
+local treesitter = require("util.treesitter")
 local add = require("mini.deps").add
 local later = require("mini.deps").later
 

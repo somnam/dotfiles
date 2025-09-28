@@ -1,4 +1,4 @@
-local config = require("core.config")
+local config = require("util.config")
 
 local H = {}
 

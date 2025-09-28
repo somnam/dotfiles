@@ -1,14 +1,10 @@
-local M = {
-  signs = { ERROR = "✖", WARN = "▲", INFO = "●", HINT = "⚑" },
-}
-
 vim.diagnostic.config({
   signs = {
     text = {
-      [vim.diagnostic.severity.ERROR] = M.signs.ERROR,
-      [vim.diagnostic.severity.WARN] = M.signs.WARN,
-      [vim.diagnostic.severity.INFO] = M.signs.INFO,
-      [vim.diagnostic.severity.HINT] = M.signs.HINT,
+      [vim.diagnostic.severity.ERROR] = "✖",
+      [vim.diagnostic.severity.WARN] = "▲",
+      [vim.diagnostic.severity.INFO] = "●",
+      [vim.diagnostic.severity.HINT] = "⚑",
     },
   },
   virtual_text = {
@@ -32,5 +28,3 @@ vim.api.nvim_set_keymap(
   ":lua vim.diagnostic.setloclist()<Enter>",
   { noremap = true, silent = true, desc = "List all buffer diagnostics" }
 )
-
-return M

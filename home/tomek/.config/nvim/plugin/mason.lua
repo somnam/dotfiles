@@ -1,4 +1,4 @@
-local config = require("core.config")
+local config = require("util.config")
 local add = require("mini.deps").add
 local now = require("mini.deps").now
 

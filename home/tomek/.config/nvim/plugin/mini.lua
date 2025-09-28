@@ -1,6 +1,5 @@
-local buffer = require("core.buffer")
+local buffer = require("util.buffer")
 local client = require("util.client")
-local diagnostic = require("core.diagnostic")
 local file = require("util.file")
 local misc = require("util.misc")
 local later = require("mini.deps").later
@@ -238,11 +237,6 @@ now(function()
 
   H.secion_filepath = "%f %m %r"
 
-  H.signs_with_space = {}
-  for type, value in pairs(diagnostic.signs) do
-    H.signs_with_space[type] = value .. " "
-  end
-
   H.section_codecompanion_wrapper = function()
     local state = {
       processing = false,
@@ -309,7 +303,7 @@ now(function()
     local diagnostics = mini_statusline.section_diagnostics({
       icon = "",
       trunc_width = 40,
-      signs = H.signs_with_space,
+      signs = { ERROR = "✖ ", WARN = "▲ ", INFO = "● ", HINT = "⚑ " },
     })
     local clients = H.section_clients({ icon = "●", trunc_width = 120 })
     local fileinfo = H.section_fileinfo({ icon = "≋", trunc_width = 75 })

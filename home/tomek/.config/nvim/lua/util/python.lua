@@ -19,9 +19,11 @@ M.virtual_env_cmd = function(cmd)
   return M.virtual_env_bin and M.virtual_env_bin .. "/" .. cmd or nil
 end
 
---@return boolean
+---@param cmd string
+---@return boolean
 M.executable_in_virtual_env = function(cmd)
-  return misc.executable(M.virtual_env_cmd(cmd))
+  local virtual_env_cmd = M.virtual_env_cmd(cmd)
+  return virtual_env_cmd and misc.executable(virtual_env_cmd) or false
 end
 
 M.remove_pyenv_shims_from_path = function()

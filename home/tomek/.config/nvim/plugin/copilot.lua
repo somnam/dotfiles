@@ -2,8 +2,8 @@ if not require("util.misc").executable("node") then
   return
 end
 
-local buffer = require("core.buffer")
-local config = require("core.config")
+local buffer = require("util.buffer")
+local config = require("util.config")
 local add = require("mini.deps").add
 local now = require("mini.deps").now
 

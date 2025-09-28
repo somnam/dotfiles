@@ -1,4 +1,4 @@
-local config = require("core.config")
+local config = require("util.config")
 local misc = require("util.misc")
 local python = require("util.python")
 local add = require("mini.deps").add
