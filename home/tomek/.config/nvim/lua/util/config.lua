@@ -14,4 +14,9 @@ M.get = function(location, default)
   return default
 end
 
+M.setup = function()
+  vim.cmd(string.format([[set background=%s]], M.get("background", "dark")))
+  vim.cmd(string.format([[silent! colorscheme %s]], M.get("colorscheme", "default")))
+end
+
 return M
