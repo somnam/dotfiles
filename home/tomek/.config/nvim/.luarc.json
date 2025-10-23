@@ -11,6 +11,7 @@
     "checkThirdParty": false
   },
   "diagnostics": {
+    "globals": ["vim"],
     "unusedLocalExclude": [ "_*" ]
   }
 }
