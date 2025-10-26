@@ -1,5 +1,5 @@
+local buffer = require("util.buffer")
 local config = require("util.config")
-local treesitter = require("util.treesitter")
 local add = require("mini.deps").add
 local now = require("mini.deps").now
 
@@ -19,11 +19,11 @@ now(function()
   require("nvim-treesitter.configs").setup({
     auto_install = true,
     ensure_installed = config.get("treesitter.ensure_installed", {}),
-    ignore_install = treesitter.exclude_filetype,
+    ignore_install = config.get("treesitter.exclude", {}),
     highlight = {
       enable = true,
       disable = function(_, bufnr)
-        return treesitter.maybe_disable_treesitter(bufnr)
+        return buffer.excluded_or_above_max_size(bufnr, config.get("treesitter.exclude", {}))
       end,
     },
   })

@@ -1,4 +1,5 @@
-local treesitter = require("util.treesitter")
+local buffer = require("util.buffer")
+local config = require("util.config")
 local add = require("mini.deps").add
 local later = require("mini.deps").later
 
@@ -12,8 +13,8 @@ later(function()
     line_numbers = false,
     max_lines = 3,
     multiline_threshold = 3,
-    on_attach = function(buf)
-      return not treesitter.maybe_disable_treesitter(buf)
+    on_attach = function(bufnr)
+      return not buffer.excluded_or_above_max_size(bufnr, config.get("treesitter.exclude", {}))
     end,
   })
 end)

@@ -48,16 +48,10 @@ now(function()
 end)
 
 now(function()
-  local H = {}
-
-  H.maybe_disable_mini_completion = function(buf)
-    return (buffer.excluded(buf) or buffer.above_max_size(buf, 1024 * 1024))
-  end
-
   vim.api.nvim_create_autocmd({ "BufReadPost", "BufNewFile" }, {
     group = vim.api.nvim_create_augroup("maybe_disable_mini_completion", { clear = true }),
     callback = function(ctx)
-      if H.maybe_disable_mini_completion(ctx.buf) then
+      if buffer.excluded_or_above_max_size(ctx.buf) then
         vim.b.minicompletion_disable = true
       end
     end,
@@ -71,17 +65,7 @@ now(function()
       info = { border = "none" },
       signature = { border = "none" },
     },
-    lsp_completion = {
-      process_items = function(items, base)
-        return mini_completion.default_process_items(items, base, { filtersort = "fuzzy" })
-      end,
-    },
   })
-
-  vim.keymap.set("i", "<C-c>", function()
-    pcall(mini_completion.stop)
-    misc.feedkeys("<C-c>", "n")
-  end)
 end)
 
 later(function()
@@ -235,7 +219,12 @@ now(function()
     return H.section_location_full
   end
 
-  H.secion_filepath = "%f %m %r"
+  H.section_filename = function(args)
+    if vim.tbl_contains({ "nofile", "prompt" }, vim.bo.buftype) then
+      return ""
+    end
+    return mini_statusline.section_filename(args)
+  end
 
   H.section_codecompanion_wrapper = function()
     local state = {
@@ -297,50 +286,31 @@ now(function()
 
   -- statusline
   H.content_active = function()
-    local mode, mode_hl = mini_statusline.section_mode({ trunc_width = 75 })
-    local git = mini_statusline.section_git({ icon = "", trunc_width = 40 })
-    local diff = H.section_diff({ icon = "𝚫", trunc_width = 40 })
+    local mode, mode_hl = mini_statusline.section_mode({ trunc_width = 120 })
+    local git = mini_statusline.section_git({ icon = "", trunc_width = 120 })
+    local diff = H.section_diff({ icon = "𝚫", trunc_width = 75 })
     local diagnostics = mini_statusline.section_diagnostics({
       icon = "",
-      trunc_width = 40,
+      trunc_width = 75,
       signs = { ERROR = "✖ ", WARN = "▲ ", INFO = "● ", HINT = "⚑ " },
     })
+    local filename = H.section_filename({ trunc_width = 140 })
+    local codecompanion = H.section_codecompanion({ trunc_width = 120 })
     local clients = H.section_clients({ icon = "●", trunc_width = 120 })
-    local fileinfo = H.section_fileinfo({ icon = "≋", trunc_width = 75 })
-    local filesize = H.section_filesize({ icon = "◔", trunc_width = 75 })
+    local fileinfo = H.section_fileinfo({ icon = "≋", trunc_width = 120 })
+    local filesize = H.section_filesize({ icon = "◔", trunc_width = 120 })
     local location = H.section_location({ trunc_width = 75 })
-    local codecompanion = H.section_codecompanion({ trunc_width = 75 })
 
     return mini_statusline.combine_groups({
       { hl = mode_hl, strings = { mode } },
       { hl = "MiniStatuslineDevinfo", strings = { git, diff, diagnostics } },
       "%<", -- Mark general truncate point
-      { hl = "MiniStatuslineInactive" },
+      { hl = "MiniStatuslineFilename", strings = { filename } },
       "%=", -- End left alignment
       { hl = "MiniStatuslineFileinfo", strings = { codecompanion, clients, fileinfo, filesize } },
       { hl = mode_hl, strings = { location } },
     })
   end
-
-  -- winbar
-  local winbar = mini_statusline.combine_groups({
-    { strings = { H.secion_filepath } },
-  })
-  vim.api.nvim_create_autocmd({ "VimEnter", "UIEnter", "BufWinEnter", "BufFilePost" }, {
-    pattern = "*",
-    group = vim.api.nvim_create_augroup("maybe_enable_winbar", { clear = true }),
-    callback = function(ctx)
-      if buffer.excluded(ctx.buf) then
-        vim.wo.winbar = nil
-        return
-      end
-      if vim.fn.empty(vim.wo.winbar) == 0 then
-        return
-      end
-
-      vim.wo.winbar = winbar
-    end,
-  })
 
   mini_statusline.setup({
     content = {

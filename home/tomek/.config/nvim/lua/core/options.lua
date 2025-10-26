@@ -9,7 +9,7 @@ vim.opt.smartcase = true -- Do smart case matching
 vim.opt.iskeyword:append("-") -- Treat dash separated words as a word text object
 
 vim.opt.showcmd = true -- Show (partial) command in status line.
-vim.opt.laststatus = 3 -- Always display statusbar
+vim.opt.laststatus = 2 -- Always display statusbar
 vim.opt.wildmenu = true -- Use wildmenu
 vim.opt.wildmode = "full:longest"
 vim.opt.wildoptions = "pum,tagfile"
@@ -22,6 +22,12 @@ vim.opt.ruler = true -- Show cursor position all the time
 vim.opt.history = 10000 -- Keep n lines of command line history
 
 vim.opt.wrap = true -- Line wrapping
+vim.api.nvim_create_autocmd("FileType", {
+  pattern = "csv",
+  callback = function()
+    vim.opt_local.wrap = false
+  end,
+})
 vim.opt.wrapscan = false -- Search wrapping
 vim.opt.foldmethod = "marker" -- Set folding method
 vim.opt.foldenable = false -- No autofold
@@ -61,7 +67,7 @@ vim.opt.synmaxcol = 512 -- Be forgiving with long lines
 
 vim.opt.clipboard = "unnamedplus" -- Use the "global" buffer for copy and paste
 vim.opt.undofile = true -- Enable persistent undo
-
+vim.opt.autoread = true -- Read file when modified outside Vim
 vim.opt.inccommand = "nosplit" -- Shows the effects of a command incrementally.
 vim.opt.list = true -- Display whitespace info
 vim.opt.listchars = "tab:>.,trail:.,extends:#,precedes:#,nbsp:~" -- Display specific characters
@@ -98,7 +104,7 @@ vim.opt.shortmess:append("C") -- Shut off completion messages
 vim.opt.shortmess:append("c")
 vim.opt.complete:remove("i") -- Prevent vim lag due to searching include files and tags
 vim.opt.complete:remove("t")
-vim.opt.pumheight = 15 -- Completion window height
+vim.opt.pumheight = 20 -- Completion window height
 -- Completion behavior
 vim.opt.completeopt = { "menu", "menuone", "popup", "noinsert", "noselect" }
 pcall(function()

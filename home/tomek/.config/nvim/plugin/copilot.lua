@@ -28,15 +28,11 @@ now(function()
 
   add(spec)
 
-  vim.api.nvim_create_autocmd("FileType", {
-    pattern = "*",
-    group = vim.api.nvim_create_augroup("maybe_disable_github_copilot", { clear = true }),
-    callback = function(ctx)
-      if buffer.excluded(ctx.buf) then
-        vim.b.copilot_enabled = false
-      end
-    end,
-  })
+  local copilot_filetypes = {}
+  for _, filetype in ipairs(buffer.exclude_filetype) do
+    copilot_filetypes[filetype] = false
+  end
+  vim.g.copilot_filetypes = copilot_filetypes
 
   vim.g.copilot_workspace_folders = config.get("plugin.copilot.workspace_folders", {})
 end)

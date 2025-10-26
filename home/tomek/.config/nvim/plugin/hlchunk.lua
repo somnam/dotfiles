@@ -1,4 +1,5 @@
-local treesitter = require("util.treesitter")
+local buffer = require("util.buffer")
+local config = require("util.config")
 local add = require("mini.deps").add
 local later = require("mini.deps").later
 
@@ -12,7 +13,7 @@ later(function()
 
   H.exclude_filetypes = function()
     local exclude_filetypes = {}
-    for _, filetype in ipairs(treesitter.exclude_filetype) do
+    for _, filetype in ipairs(config.get("treesitter.exclude", {})) do
       exclude_filetypes[filetype] = true
     end
     return exclude_filetypes
@@ -31,7 +32,7 @@ later(function()
         right_arrow = "",
       },
       duration = 0,
-      max_file_size = 1024 * 1024,
+      max_file_size = buffer.max_size,
       exclude_filetypes = H.exclude_filetypes(),
     },
     indent = { enable = false },
