@@ -311,10 +311,14 @@ now(function()
       { hl = mode_hl, strings = { location } },
     })
   end
+  H.content_inactive = function()
+    return "%#MiniStatuslineInactive#%f %m %r%="
+  end
 
   mini_statusline.setup({
     content = {
       active = H.content_active,
+      inactive = H.content_inactive,
     },
     set_vim_settings = false,
   })
