@@ -154,16 +154,6 @@ now(function()
   local H = {}
 
   ---@param args table
-  H.section_diff = function(args)
-    local summary = vim.b.minidiff_summary_string or vim.b.gitsigns_status or ""
-    if #summary == 0 then
-      return ""
-    end
-
-    return mini_statusline.section_diff(args)
-  end
-
-  ---@param args table
   H.section_clients = function(args)
     if not client.has_clients() then
       return ""
@@ -287,16 +277,16 @@ now(function()
   -- statusline
   H.content_active = function()
     local mode, mode_hl = mini_statusline.section_mode({ trunc_width = 120 })
-    local git = mini_statusline.section_git({ icon = "", trunc_width = 120 })
-    local diff = H.section_diff({ icon = "𝚫", trunc_width = 75 })
+    local git = mini_statusline.section_git({ icon = "", trunc_width = 140 })
+    local diff = mini_statusline.section_diff({ icon = "𝚫", trunc_width = 75 })
     local diagnostics = mini_statusline.section_diagnostics({
-      icon = "",
+      icon = "⚑",
       trunc_width = 75,
-      signs = { ERROR = "✖ ", WARN = "▲ ", INFO = "● ", HINT = "⚑ " },
+      signs = { ERROR = "✖ ", WARN = "▲ ", INFO = "ℹ ", HINT = "● " },
     })
-    local filename = H.section_filename({ trunc_width = 140 })
-    local codecompanion = H.section_codecompanion({ trunc_width = 120 })
-    local clients = H.section_clients({ icon = "●", trunc_width = 120 })
+    local filename = H.section_filename({ trunc_width = 240 })
+    local codecompanion = H.section_codecompanion({ trunc_width = 220 })
+    local clients = H.section_clients({ icon = "●", trunc_width = 220 })
     local fileinfo = H.section_fileinfo({ icon = "≋", trunc_width = 120 })
     local filesize = H.section_filesize({ icon = "◔", trunc_width = 120 })
     local location = H.section_location({ trunc_width = 75 })
