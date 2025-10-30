@@ -55,10 +55,9 @@ now(function()
           },
         },
         overrides = function(colors)
-          local theme = colors.theme
           return {
-            PmenuMatch = { fg = theme.syn.fun, bold = true },
-            PmenuMatchSel = { fg = theme.syn.fun, bold = true },
+            PmenuMatch = { fg = colors.palette.springBlue, bold = true },
+            PmenuMatchSel = { fg = colors.palette.springBlue, bold = true },
           }
         end,
       })
