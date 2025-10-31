@@ -277,7 +277,7 @@ now(function()
   -- statusline
   H.content_active = function()
     local mode, mode_hl = mini_statusline.section_mode({ trunc_width = 120 })
-    local git = mini_statusline.section_git({ icon = "", trunc_width = 140 })
+    local git = mini_statusline.section_git({ icon = "", trunc_width = 160 })
     local diff = mini_statusline.section_diff({ icon = "𝚫", trunc_width = 75 })
     local diagnostics = mini_statusline.section_diagnostics({
       icon = "⚑",
