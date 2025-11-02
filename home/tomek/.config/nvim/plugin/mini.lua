@@ -48,10 +48,24 @@ now(function()
 end)
 
 now(function()
-  vim.api.nvim_create_autocmd({ "BufReadPost", "FileType" }, {
-    group = vim.api.nvim_create_augroup("maybe_disable_mini_completion", { clear = true }),
+  vim.api.nvim_create_autocmd("BufReadPost", {
+    group = vim.api.nvim_create_augroup(
+      "maybe_disable_mini_completion_buffer_size",
+      { clear = true }
+    ),
     callback = function(ctx)
-      if buffer.excluded_or_above_max_size(ctx.buf) then
+      if buffer.above_max_size(ctx.buf) then
+        vim.b.minicompletion_disable = true
+      end
+    end,
+  })
+  vim.api.nvim_create_autocmd("FileType", {
+    group = vim.api.nvim_create_augroup(
+      "maybe_disable_mini_completion_buffer_excluded",
+      { clear = true }
+    ),
+    callback = function(ctx)
+      if buffer.excluded(ctx.buf) then
         vim.b.minicompletion_disable = true
       end
     end,
@@ -247,7 +261,7 @@ now(function()
 
     vim.api.nvim_create_autocmd("User", {
       pattern = "CodeCompanionRequest*",
-      group = vim.api.nvim_create_augroup("CodeCompanionStatusline", { clear = true }),
+      group = vim.api.nvim_create_augroup("code_companion_status_line", { clear = true }),
       callback = function(event)
         if event.match == "CodeCompanionRequestStarted" then
           state.processing = true
