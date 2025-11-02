@@ -48,7 +48,7 @@ now(function()
 end)
 
 now(function()
-  vim.api.nvim_create_autocmd("FileType", {
+  vim.api.nvim_create_autocmd({ "BufReadPost", "FileType" }, {
     group = vim.api.nvim_create_augroup("maybe_disable_mini_completion", { clear = true }),
     callback = function(ctx)
       if buffer.excluded_or_above_max_size(ctx.buf) then
