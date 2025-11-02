@@ -37,7 +37,7 @@ vim.opt.cursorcolumn = false -- Don't highlight current cursor column
 vim.opt.signcolumn = "yes" -- Show sign column
 vim.opt.number = false -- Don't display line numbers
 vim.opt.hidden = true -- Hide buffer instead of closing it
-vim.opt.mouse = "vi" -- Mouse modes
+vim.opt.mouse = "nvi" -- Mouse modes
 vim.opt.scrolloff = 5 -- Minimal number of lines around the cursor
 
 vim.opt.smartindent = true -- Try to be smart with indenting

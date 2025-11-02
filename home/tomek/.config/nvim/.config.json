@@ -1,6 +1,20 @@
 {
     "colorscheme": "default",
     "background": "dark",
+    "buffer": {
+        "exclude_filetype": [
+          "checkhealth",
+          "codecompanion",
+          "copilot-chat",
+          "help",
+          "man",
+          "mason",
+          "netrw",
+          "NvimTree",
+          "qf",
+          "tutor"
+        ]
+    },
     "lsp": {
         "log_level": "ERROR"
     },

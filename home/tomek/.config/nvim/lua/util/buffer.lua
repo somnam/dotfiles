@@ -1,3 +1,5 @@
+local config = require("util.config")
+
 local M = {}
 
 ---@type integer
@@ -12,17 +14,14 @@ M.above_max_size = function(bufnr, max_size)
 end
 
 ---@type string[]
-M.exclude_filetype = {
+M.exclude_filetype = config.get("buffer.exclude_filetype", {
   "checkhealth",
-  "codecompanion",
   "help",
   "man",
-  "mason",
   "netrw",
-  "NvimTree",
   "qf",
   "tutor",
-}
+})
 
 ---@param bufnr integer
 ---@param exclude_filetype string[]?
