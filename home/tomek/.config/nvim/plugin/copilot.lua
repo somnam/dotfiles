@@ -8,7 +8,7 @@ local add = require("mini.deps").add
 local now = require("mini.deps").now
 
 now(function()
-  local enable = config.get("plugin.copilot.enable", false)
+  local enable = config.get("plugin.copilot.enable")
   local spec = {
     source = "github/copilot.vim",
     hooks = {

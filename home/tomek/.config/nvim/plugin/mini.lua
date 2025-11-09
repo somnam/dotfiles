@@ -296,7 +296,7 @@ now(function()
     local diagnostics = mini_statusline.section_diagnostics({
       icon = "⚑",
       trunc_width = 75,
-      signs = { ERROR = "✖ ", WARN = "▲ ", INFO = "ℹ ", HINT = "● " },
+      signs = { ERROR = "E:", WARN = "W:", INFO = "I:", HINT = "H:" },
     })
     local filename = H.section_filename({ trunc_width = 240 })
     local codecompanion = H.section_codecompanion({ trunc_width = 220 })

@@ -7,7 +7,7 @@ local add = require("mini.deps").add
 local later = require("mini.deps").later
 
 later(function()
-  local enable = config.get("plugin.codecompanion.enable", false)
+  local enable = config.get("plugin.codecompanion.enable")
   local spec = {
     source = "olimorris/codecompanion.nvim",
     checkout = "main",

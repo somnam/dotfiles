@@ -6,18 +6,24 @@ return {
       },
       diagnostics = {
         enable = true,
-        -- Only diagnose opened files
+        unusedLocalExclude = { "_*" },
+        -- Disable workspace diagnostics
         workspaceDelay = -1,
         workspaceEvent = "None",
       },
+      hint = {
+        arrayIndex = "Disable",
+        enable = true,
+        setType = true,
+      },
       runtime = {
-        version = "LuaJIT",
         path = vim.split(package.path, ";"),
+        version = "LuaJIT",
       },
       telemetry = { enable = false },
       workspace = {
-        maxPreload = 1000,
         checkThirdParty = false,
+        maxPreload = 1000,
       },
     },
   },

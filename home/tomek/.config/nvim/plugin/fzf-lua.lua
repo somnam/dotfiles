@@ -83,20 +83,8 @@ now(function()
   vim.keymap.set(
     "n",
     "<leader>w",
-    ":FzfLua live_grep_native<Enter>",
+    ":FzfLua live_grep<Enter>",
     { noremap = true, silent = true, desc = "Live grep the current project" }
-  )
-  vim.keymap.set(
-    "n",
-    "<leader>W",
-    ":FzfLua grep_cword<Enter>",
-    { noremap = true, silent = true, desc = "Search cursor string in current project" }
-  )
-  vim.keymap.set(
-    "n",
-    "<leader>/",
-    ":FzfLua lines<Enter>",
-    { noremap = true, silent = true, desc = "Search opened buffers lines" }
   )
   vim.keymap.set(
     "n",

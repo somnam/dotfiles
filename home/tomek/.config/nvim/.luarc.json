@@ -1,17 +1,25 @@
 {
   "$schema": "https://raw.githubusercontent.com/LuaLS/vscode-lua/master/setting/schema.json",
+  "diagnostics": {
+    "enable": true,
+    "globals": ["vim"],
+    "unusedLocalExclude": [ "_*" ]
+  },
+  "hint": {
+    "arrayIndex": "Disable",
+    "enable": true,
+    "setType": true
+  },
   "runtime": {
     "version": "LuaJIT"
   },
+  "telemetry.enable": false,
   "workspace": {
+    "checkThirdParty": false,
+    "maxPreload": 1000,
     "library": [
       "lua",
       "$VIMRUNTIME"
-    ],
-    "checkThirdParty": false
-  },
-  "diagnostics": {
-    "globals": ["vim"],
-    "unusedLocalExclude": [ "_*" ]
+    ]
   }
 }

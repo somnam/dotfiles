@@ -7,7 +7,7 @@ local add = require("mini.deps").add
 local later = require("mini.deps").later
 
 later(function()
-  local enable = config.get("plugin.copilot_chat.enable", false)
+  local enable = config.get("plugin.copilot_chat.enable")
   local spec = {
     source = "CopilotC-Nvim/CopilotChat.nvim",
     checkout = "main",

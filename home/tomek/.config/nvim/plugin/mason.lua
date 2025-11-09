@@ -44,6 +44,6 @@ now(function()
   })
 
   require("mason-tool-installer").setup({
-    ensure_installed = config.get("plugin.mason.ensure_installed") or {},
+    ensure_installed = config.get("plugin.mason.ensure_installed", {}),
   })
 end)
