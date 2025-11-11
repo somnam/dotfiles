@@ -42,7 +42,7 @@
             "model": null
         },
         "fzf_lua": {
-            "overrides": null
+            "overrides": []
         },
         "lint": {
             "python": ["flake8", "mypy", "ruff"]
