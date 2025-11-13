@@ -26,7 +26,7 @@ now(function()
     previewers = {
       builtin = { treesitter = { enabled = false } },
     },
-    defaults = { git_icons = false, file_icons = false },
+    defaults = config.get("plugin.fzf_lua.defaults", {}),
     manpages = { previewer = "man_native" },
     helptags = { previewer = "help_native" },
     lsp = { code_actions = { previewer = "codeaction_native" } },

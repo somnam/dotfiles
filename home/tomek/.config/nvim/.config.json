@@ -42,6 +42,7 @@
             "model": null
         },
         "fzf_lua": {
+            "defaults": { "file_icons": "mini" },
             "overrides": []
         },
         "lint": {
