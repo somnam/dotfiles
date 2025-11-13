@@ -48,6 +48,10 @@ now(function()
 end)
 
 now(function()
+  require("mini.icons").setup({ style = "ascii" })
+end)
+
+now(function()
   vim.api.nvim_create_autocmd("BufReadPost", {
     group = vim.api.nvim_create_augroup(
       "maybe_disable_mini_completion_buffer_size",
