@@ -1,5 +1,6 @@
+local buffer = require("util.buffer")
 local config = require("util.config")
-local python = require("util.python")
+local tool = require("util.tool")
 local add = require("mini.deps").add
 local later = require("mini.deps").later
 
@@ -8,42 +9,38 @@ later(function()
 
   local H = {}
 
-  --- @return string[]
-  H.python_virtual_env_formatters = function(names)
-    local results = {}
+  ---@return { [string]: string[] }
+  H.formatters_by_ft = function()
+    return config.get("plugin.conform", {})
+  end
+
+  H.commands_by_ft = function()
     local conform = require("conform")
 
-    for _, name in pairs(names) do
-      local formatter = conform.get_formatter_config(name)
-      if formatter and python.executable_in_virtual_env(formatter.command) then
-        table.insert(results, name)
+    local commands_by_ft = {}
+    for filetype, formatters in pairs(H.formatters_by_ft()) do
+      commands_by_ft[filetype] = {}
+      for _, formatter in ipairs(formatters) do
+        local formatter_info = conform.get_formatter_info(formatter)
+        if
+          formatter_info.available
+          and not vim.tbl_contains(commands_by_ft[filetype], formatter_info.command)
+        then
+          table.insert(commands_by_ft[filetype], formatter_info.command)
+        end
       end
     end
-
-    return results
+    return commands_by_ft
   end
 
-  --- @return string[]
-  H.python_formatters = function(names)
-    if python.in_virtual_env() then
-      return H.python_virtual_env_formatters(names)
-    end
-    return names
-  end
+  tool.set_formatters_by_ft(H.commands_by_ft())
 
-  H.formatters_by_ft = function()
-    return vim.tbl_extend(
-      "force",
-      config.get("plugin.conform", {}),
-      { python = H.python_formatters(config.get("plugin.conform.python", {})) }
-    )
-  end
-
-  require("conform").setup({
+  local conform = require("conform")
+  conform.setup({
     formatters = {
       trim_whitespace = {
         condition = function(_, ctx)
-          return vim.bo[ctx.buf].modifiable
+          return vim.bo[ctx.buf].modifiable and not buffer.above_max_size(ctx.buf)
         end,
       },
     },
@@ -52,6 +49,6 @@ later(function()
   })
 
   vim.keymap.set("n", "<leader>=", function()
-    require("conform").format({ async = true })
+    conform.format({ async = true })
   end, { noremap = true, silent = true, desc = "Format current buffer" })
 end)

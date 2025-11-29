@@ -1,4 +1,4 @@
-if not require("util.misc").executable("git") then
+if vim.fn.executable("git") ~= 1 then
   return
 end
 

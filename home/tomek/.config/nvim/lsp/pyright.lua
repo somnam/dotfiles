@@ -1,5 +1,3 @@
-local python = require("util.python")
-
 return {
   settings = {
     pyright = {
@@ -15,7 +13,6 @@ return {
         useLibraryCodeForTypes = true,
         logLevel = "Error",
       },
-      pythonPath = python.virtual_env_cmd("python"),
     },
   },
   on_attach = function(client, bufnr)

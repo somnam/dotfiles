@@ -1,4 +1,4 @@
-if not require("util.misc").executable("curl") then
+if vim.fn.executable("curl") ~= 1 then
   return
 end
 

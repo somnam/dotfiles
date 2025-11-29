@@ -1,4 +1,4 @@
-if not require("util.misc").executable("curl") then
+if vim.fn.executable("curl") ~= 1 then
   return
 end
 
@@ -10,7 +10,7 @@ later(function()
   local enable = config.get("plugin.codecompanion.enable")
   local spec = {
     source = "olimorris/codecompanion.nvim",
-    checkout = "main",
+    checkout = "v17.33.0",
     depends = { "nvim-lua/plenary.nvim" },
   }
 

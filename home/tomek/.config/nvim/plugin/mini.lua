@@ -1,14 +1,15 @@
 local buffer = require("util.buffer")
-local client = require("util.client")
 local file = require("util.file")
-local misc = require("util.misc")
+local tool = require("util.tool")
 local later = require("mini.deps").later
 local now = require("mini.deps").now
 
 now(function()
   local mini_starter = require("mini.starter")
+  local version = vim.version()
+
   mini_starter.setup({
-    header = string.format("NVIM %s", misc.nvim_version()),
+    header = string.format("NVIM v%d.%d.%d", version.major, version.minor, version.patch),
     items = {
       { action = "FzfLua oldfiles cwd_only=true", name = "Previous files", section = "" },
       { action = "FzfLua files", name = "Files search", section = "" },
@@ -19,10 +20,6 @@ now(function()
     },
     footer = "",
     evaluate_single = true,
-    content_hooks = {
-      mini_starter.gen_hook.adding_bullet(),
-      mini_starter.gen_hook.aligning("center", "center"),
-    },
   })
 
   vim.api.nvim_create_autocmd("User", {
@@ -32,17 +29,6 @@ now(function()
       local opts = { silent = true, buffer = ctx.buf }
       vim.keymap.set("n", "k", "<Cmd>lua MiniStarter.update_current_item('prev')<Enter>", opts)
       vim.keymap.set("n", "j", "<Cmd>lua MiniStarter.update_current_item('next')<Enter>", opts)
-
-      vim.api.nvim_create_autocmd("WinNew", {
-        buffer = ctx.buf,
-        callback = function()
-          vim.schedule(function()
-            if vim.api.nvim_buf_is_loaded(ctx.buf) then
-              pcall(vim.api.nvim_buf_delete, ctx.buf, {})
-            end
-          end)
-        end,
-      })
     end,
   })
 end)
@@ -172,16 +158,17 @@ now(function()
   local H = {}
 
   ---@param args table
-  H.section_clients = function(args)
-    if not client.has_clients() then
+  H.section_tools = function(args)
+    local tools_count = tool.get_count()
+    if tools_count == 0 then
       return ""
     end
 
     if mini_statusline.is_truncated(args.trunc_width) then
-      return string.format("%s %d", args.icon, client.get_clients_count())
+      return string.format("%s %s", args.icon, tools_count)
     end
 
-    return string.format("%s %s", args.icon, client.get_clients_string())
+    return string.format("%s %s", args.icon, table.concat(tool.get_names(), " "))
   end
 
   ---@param args table
@@ -227,6 +214,7 @@ now(function()
     return H.section_location_full
   end
 
+  ---@param args table
   H.section_filename = function(args)
     if vim.tbl_contains({ "nofile", "prompt" }, vim.bo.buftype) then
       return ""
@@ -284,7 +272,7 @@ now(function()
 
       local spinner = state.spinner_symbols[state.spinner_index]
       return mini_statusline.is_truncated(args.trunc_width) and spinner
-        or string.format("%s CodeCompanion", spinner)
+        or string.format("%s waiting", spinner)
     end
 
     return section_codecompanion
@@ -302,9 +290,9 @@ now(function()
       trunc_width = 75,
       signs = { ERROR = "E:", WARN = "W:", INFO = "I:", HINT = "H:" },
     })
-    local filename = H.section_filename({ trunc_width = 240 })
-    local codecompanion = H.section_codecompanion({ trunc_width = 220 })
-    local clients = H.section_clients({ icon = "●", trunc_width = 220 })
+    local filename = H.section_filename({ trunc_width = 200 })
+    local codecompanion = H.section_codecompanion({ trunc_width = 75 })
+    local tools = H.section_tools({ icon = "🛠", trunc_width = 160 })
     local fileinfo = H.section_fileinfo({ icon = "≋", trunc_width = 120 })
     local filesize = H.section_filesize({ icon = "◔", trunc_width = 120 })
     local location = H.section_location({ trunc_width = 75 })
@@ -315,7 +303,7 @@ now(function()
       "%<", -- Mark general truncate point
       { hl = "MiniStatuslineFilename", strings = { filename } },
       "%=", -- End left alignment
-      { hl = "MiniStatuslineFileinfo", strings = { codecompanion, clients, fileinfo, filesize } },
+      { hl = "MiniStatuslineFileinfo", strings = { codecompanion, tools, fileinfo, filesize } },
       { hl = mode_hl, strings = { location } },
     })
   end

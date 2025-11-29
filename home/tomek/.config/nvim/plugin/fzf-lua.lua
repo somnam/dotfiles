@@ -1,4 +1,4 @@
-if not require("util.misc").executable("fzf") then
+if vim.fn.executable("fzf") ~= 1 then
   return
 end
 
@@ -26,7 +26,16 @@ now(function()
     previewers = {
       builtin = { treesitter = { enabled = false } },
     },
-    defaults = config.get("plugin.fzf_lua.defaults", {}),
+    defaults = vim.tbl_extend("keep", config.get("plugin.fzf_lua.defaults", {}), {
+      -- Open first entry from quickfix and center it
+      copen = function()
+        vim.cmd("copen | wincmd p | cfirst | normal! zvzz")
+      end,
+      -- Open first entry from location list and center it
+      lopen = function()
+        vim.cmd("lopen | wincmd p | lfirst | normal! zvzz")
+      end,
+    }),
     manpages = { previewer = "man_native" },
     helptags = { previewer = "help_native" },
     lsp = { code_actions = { previewer = "codeaction_native" } },

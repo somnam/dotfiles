@@ -14,7 +14,8 @@ return {
       hint = {
         arrayIndex = "Disable",
         enable = true,
-        setType = true,
+        paramName = "Literal",
+        semicolon = "Disable",
       },
       runtime = {
         path = vim.split(package.path, ";"),

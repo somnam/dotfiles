@@ -8,7 +8,8 @@
   "hint": {
     "arrayIndex": "Disable",
     "enable": true,
-    "setType": true
+    "paramName": "Literal",
+    "semicolon": "Disable"
   },
   "runtime": {
     "version": "LuaJIT"

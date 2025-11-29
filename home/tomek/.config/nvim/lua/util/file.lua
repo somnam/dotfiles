@@ -1,5 +1,8 @@
 local M = {}
 
+---@type string
+M.path_separator = vim.fn.has("win32") == 1 and ";" or ":"
+
 --- @return boolean
 M.file_exists = function(file)
   return vim.uv.fs_stat(file) ~= nil

@@ -15,19 +15,36 @@ now(function()
     },
   })
 
+  local H = {}
+
+  ---@type string[]
+  H.ensure_installed = config.get("plugin.mason.ensure_installed", {})
+
+  ---@package_name string
+  H.install_package = function(package_name)
+    require("mason-registry").get_package(package_name):install()
+    require("mason-core.notify")(string.format("Installing package %s.", package_name))
+  end
+
+  H.check_installed_packages = function()
+    local installed_packages = require("mason-registry").get_installed_package_names()
+    for _, package_name in ipairs(H.ensure_installed) do
+      if not vim.tbl_contains(installed_packages, package_name) then
+        pcall(H.install_package, package_name)
+      end
+    end
+  end
+
   require("mason").setup({
     log_level = vim.log.levels.WARN,
     ui = {
       width = 0.65,
       height = 0.85,
       border = "single",
-      icons = {
-        package_installed = "✓",
-        package_uninstalled = "✗",
-        package_pending = "➜",
-      },
     },
   })
+
+  H.check_installed_packages()
 
   vim.keymap.set(
     "n",
@@ -35,15 +52,4 @@ now(function()
     ":Mason<Enter>",
     { noremap = true, silent = true, desc = "Open the Package Manager UI" }
   )
-end)
-
-now(function()
-  add({
-    source = "WhoIsSethDaniel/mason-tool-installer.nvim",
-    depends = { "williamboman/mason.nvim" },
-  })
-
-  require("mason-tool-installer").setup({
-    ensure_installed = config.get("plugin.mason.ensure_installed", {}),
-  })
 end)

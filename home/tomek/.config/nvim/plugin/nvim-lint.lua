@@ -1,68 +1,38 @@
 local config = require("util.config")
-local misc = require("util.misc")
-local python = require("util.python")
+local tool = require("util.tool")
 local add = require("mini.deps").add
 local later = require("mini.deps").later
 
 later(function()
   add({ source = "mfussenegger/nvim-lint" })
 
-  local lint = require("lint")
-  local linters = lint.linters
-
   local H = {}
 
-  H.linters = function(names)
-    local results = {}
+  H.linters_by_ft = function()
+    local lint = require("lint")
 
-    for _, name in pairs(names) do
-      local linter = linters[name]
-      if linter and misc.executable(linter.cmd) then
-        table.insert(results, linter.cmd)
+    local linters_by_ft = {}
+    for filetype, names in pairs(config.get("plugin.lint", {})) do
+      local linters = {}
+      for _, name in pairs(names) do
+        local linter = lint.linters[name]
+        if linter and vim.fn.executable(linter.cmd) == 1 then
+          table.insert(linters, name)
+        end
       end
+      linters_by_ft[filetype] = linters
     end
 
-    return results
+    return linters_by_ft
   end
 
-  H.python_linters = function(names)
-    if python.in_virtual_env() then
-      return H.python_virtual_env_linters(names)
-    else
-      return H.linters(names)
-    end
-  end
+  tool.set_linters_by_ft(H.linters_by_ft())
 
-  H.python_virtual_env_linters = function(names)
-    local results = {}
+  local lint = require("lint")
 
-    for _, name in pairs(names) do
-      local linter = linters[name]
-      if linter and python.executable_in_virtual_env(linter.cmd) then
-        table.insert(results, linter.cmd)
-      end
-    end
+  lint.linters.mypy.args = vim.list_extend(lint.linters.mypy.args, { "--namespace-packages" })
 
-    return results
-  end
-
-  H.linters_by_filetype = function()
-    local results = {
-      python = H.python_linters(config.get("plugin.lint.python", {})),
-    }
-
-    for filetype, value in pairs(config.get("plugin.lint", {})) do
-      if results[filetype] == nil then
-        results[filetype] = H.linters(value)
-      end
-    end
-
-    return results
-  end
-
-  linters.mypy.args = vim.list_extend(linters.mypy.args, { "--namespace-packages" })
-
-  lint.linters_by_ft = H.linters_by_filetype()
+  lint.linters_by_ft = H.linters_by_ft()
 
   vim.api.nvim_create_autocmd({ "BufWinEnter", "BufWritePost" }, {
     group = vim.api.nvim_create_augroup("nvim_lint_trigger", { clear = true }),

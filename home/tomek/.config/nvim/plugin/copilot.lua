@@ -1,4 +1,4 @@
-if not require("util.misc").executable("node") then
+if vim.fn.executable("node") ~= 1 then
   return
 end
 
@@ -35,4 +35,5 @@ now(function()
   vim.g.copilot_filetypes = copilot_filetypes
 
   vim.g.copilot_workspace_folders = config.get("plugin.copilot.workspace_folders", {})
+  vim.g.copilot_idle_delay = config.get("plugin.copilot.idle_delay", 150)
 end)
