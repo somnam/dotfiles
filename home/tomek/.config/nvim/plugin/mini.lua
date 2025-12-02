@@ -290,7 +290,7 @@ now(function()
       trunc_width = 75,
       signs = { ERROR = "E:", WARN = "W:", INFO = "I:", HINT = "H:" },
     })
-    local filename = H.section_filename({ trunc_width = 200 })
+    local filename = H.section_filename({ trunc_width = 220 })
     local codecompanion = H.section_codecompanion({ trunc_width = 75 })
     local tools = H.section_tools({ icon = "🛠", trunc_width = 160 })
     local fileinfo = H.section_fileinfo({ icon = "≋", trunc_width = 120 })
