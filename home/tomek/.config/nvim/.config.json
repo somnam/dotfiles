@@ -16,6 +16,14 @@
         ]
     },
     "lsp": {
+        "servers": [
+            "jedi_language_server",
+            "lua_ls",
+            "pyright",
+            "quick_lint_js",
+            "rust_analyzer",
+            "vtsls"
+        ],
         "log_level": "ERROR"
     },
     "treesitter" : {

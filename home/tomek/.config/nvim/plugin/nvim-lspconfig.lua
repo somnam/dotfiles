@@ -1,3 +1,4 @@
+local config = require("util.config")
 local add = require("mini.deps").add
 local now = require("mini.deps").now
 
@@ -6,14 +7,7 @@ now(function()
 
   local H = {}
 
-  H.servers = {
-    "jedi_language_server",
-    "pyright",
-    "quick_lint_js",
-    "vtsls",
-    "rust_analyzer",
-    "lua_ls",
-  }
+  H.servers = config.get("lsp.servers", {})
 
   ---@param server string
   ---@return boolean
