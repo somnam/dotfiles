@@ -16,6 +16,8 @@ now(function()
     },
   })
 
+  local exclude_filetypes = config.get("treesitter.exclude", {})
+
   require("nvim-treesitter.configs").setup({
     auto_install = true,
     ensure_installed = config.get("treesitter.ensure_installed", {}),
@@ -23,7 +25,7 @@ now(function()
     highlight = {
       enable = true,
       disable = function(_, bufnr)
-        return buffer.excluded_or_above_max_size(bufnr, config.get("treesitter.exclude", {}))
+        return buffer.excluded_or_above_max_size(bufnr, exclude_filetypes)
       end,
     },
   })

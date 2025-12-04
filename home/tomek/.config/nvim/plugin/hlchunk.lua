@@ -9,14 +9,9 @@ later(function()
     depends = { "nvim-treesitter/nvim-treesitter" },
   })
 
-  local H = {}
-
-  H.exclude_filetypes = function()
-    local exclude_filetypes = {}
-    for _, filetype in ipairs(config.get("treesitter.exclude", {})) do
-      exclude_filetypes[filetype] = true
-    end
-    return exclude_filetypes
+  local exclude_filetypes = {}
+  for _, filetype in ipairs(config.get("treesitter.exclude", {})) do
+    exclude_filetypes[filetype] = true
   end
 
   require("hlchunk").setup({
@@ -33,7 +28,7 @@ later(function()
       },
       duration = 0,
       max_file_size = buffer.max_size,
-      exclude_filetypes = H.exclude_filetypes(),
+      exclude_filetypes = exclude_filetypes,
     },
     indent = { enable = false },
     line_num = { enable = false },
