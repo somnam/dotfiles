@@ -155,10 +155,8 @@ end)
 now(function()
   local mini_statusline = require("mini.statusline")
 
-  local H = {}
-
   ---@param args table
-  H.section_tools = function(args)
+  local function section_tools(args)
     local tools_count = tool.get_count()
     if tools_count == 0 then
       return ""
@@ -172,7 +170,7 @@ now(function()
   end
 
   ---@param args table
-  H.section_fileinfo = function(args)
+  local function section_fileinfo(args)
     local filetype = vim.bo.filetype
     if filetype == "" then
       return ""
@@ -187,7 +185,7 @@ now(function()
   end
 
   ---@param args table
-  H.section_filesize = function(args)
+  local function section_filesize(args)
     if vim.bo.filetype == "" then
       return ""
     end
@@ -204,25 +202,23 @@ now(function()
     return string.format("%s %s", args.icon, size)
   end
 
-  H.section_location_truncated = "%3l:%-2c"
-  H.section_location_full = "%3l:%-2c %P"
-  H.section_location = function(args)
+  local function section_location(args)
     if mini_statusline.is_truncated(args.trunc_width) then
-      return H.section_location_truncated
+      return "%3l:%-2c"
     end
 
-    return H.section_location_full
+    return "%3l:%-2c %P"
   end
 
   ---@param args table
-  H.section_filename = function(args)
+  local function section_filename(args)
     if vim.tbl_contains({ "nofile", "prompt" }, vim.bo.buftype) then
       return ""
     end
     return mini_statusline.section_filename(args)
   end
 
-  H.section_codecompanion_wrapper = function()
+  local function section_codecompanion_wrapper()
     local state = {
       processing = false,
       spinner_symbols = { "⠋", "⠙", "⠹", "⠸", "⠼", "⠴", "⠦", "⠧", "⠇", "⠏" },
@@ -278,10 +274,10 @@ now(function()
     return section_codecompanion
   end
 
-  H.section_codecompanion = H.section_codecompanion_wrapper()
+  local section_codecompanion = section_codecompanion_wrapper()
 
   -- statusline
-  H.content_active = function()
+  local function content_active()
     local mode, mode_hl = mini_statusline.section_mode({ trunc_width = 120 })
     local git = mini_statusline.section_git({ icon = "", trunc_width = 160 })
     local diff = mini_statusline.section_diff({ icon = "𝚫", trunc_width = 75 })
@@ -290,12 +286,12 @@ now(function()
       trunc_width = 75,
       signs = { ERROR = "E:", WARN = "W:", INFO = "I:", HINT = "H:" },
     })
-    local filename = H.section_filename({ trunc_width = 220 })
-    local codecompanion = H.section_codecompanion({ trunc_width = 75 })
-    local tools = H.section_tools({ icon = "🛠", trunc_width = 160 })
-    local fileinfo = H.section_fileinfo({ icon = "≋", trunc_width = 120 })
-    local filesize = H.section_filesize({ icon = "◔", trunc_width = 120 })
-    local location = H.section_location({ trunc_width = 75 })
+    local filename = section_filename({ trunc_width = 220 })
+    local codecompanion = section_codecompanion({ trunc_width = 75 })
+    local tools = section_tools({ icon = "🛠", trunc_width = 160 })
+    local fileinfo = section_fileinfo({ icon = "≋", trunc_width = 120 })
+    local filesize = section_filesize({ icon = "◔", trunc_width = 120 })
+    local location = section_location({ trunc_width = 75 })
 
     return mini_statusline.combine_groups({
       { hl = mode_hl, strings = { mode } },
@@ -307,14 +303,15 @@ now(function()
       { hl = mode_hl, strings = { location } },
     })
   end
-  H.content_inactive = function()
+
+  local function content_inactive()
     return "%#MiniStatuslineInactive#%f %m %r%="
   end
 
   mini_statusline.setup({
     content = {
-      active = H.content_active,
-      inactive = H.content_inactive,
+      active = content_active,
+      inactive = content_inactive,
     },
     set_vim_settings = false,
   })

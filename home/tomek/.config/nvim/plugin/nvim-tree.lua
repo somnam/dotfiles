@@ -4,9 +4,7 @@ local now = require("mini.deps").now
 now(function()
   add({ source = "nvim-tree/nvim-tree.lua" })
 
-  local H = {}
-
-  H.on_attach = function(bufnr)
+  local function on_attach(bufnr)
     require("nvim-tree.api").config.mappings.default_on_attach(bufnr)
 
     local bufopts = { noremap = true, silent = true, nowait = true }
@@ -32,7 +30,7 @@ now(function()
     disable_netrw = true,
     sync_root_with_cwd = true,
     view = { width = 30 },
-    on_attach = H.on_attach,
+    on_attach = on_attach,
     renderer = {
       highlight_git = true,
       highlight_opened_files = "name",

@@ -7,33 +7,31 @@ local later = require("mini.deps").later
 later(function()
   add({ source = "stevearc/conform.nvim" })
 
-  local H = {}
-
   ---@return { [string]: string[] }
-  H.formatters_by_ft = function()
+  local function formatters_by_ft()
     return config.get("plugin.conform", {})
   end
 
-  H.commands_by_ft = function()
+  local function commands_by_ft()
     local conform = require("conform")
 
-    local commands_by_ft = {}
-    for filetype, formatters in pairs(H.formatters_by_ft()) do
-      commands_by_ft[filetype] = {}
+    local result = {}
+    for filetype, formatters in pairs(formatters_by_ft()) do
+      result[filetype] = {}
       for _, formatter in ipairs(formatters) do
         local formatter_info = conform.get_formatter_info(formatter)
         if
           formatter_info.available
-          and not vim.tbl_contains(commands_by_ft[filetype], formatter_info.command)
+          and not vim.tbl_contains(result[filetype], formatter_info.command)
         then
-          table.insert(commands_by_ft[filetype], formatter_info.command)
+          table.insert(result[filetype], formatter_info.command)
         end
       end
     end
-    return commands_by_ft
+    return result
   end
 
-  tool.set_formatters_by_ft(H.commands_by_ft())
+  tool.set_formatters_by_ft(commands_by_ft())
 
   local conform = require("conform")
   conform.setup({
@@ -44,7 +42,7 @@ later(function()
         end,
       },
     },
-    formatters_by_ft = H.formatters_by_ft(),
+    formatters_by_ft = formatters_by_ft(),
     format_on_save = { timeout_ms = 500 },
   })
 

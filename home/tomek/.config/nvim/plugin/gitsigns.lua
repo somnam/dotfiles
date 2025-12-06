@@ -8,9 +8,7 @@ local later = require("mini.deps").later
 later(function()
   add({ source = "lewis6991/gitsigns.nvim" })
 
-  local H = {}
-
-  H.on_attach = function(bufnr)
+  local function on_attach(bufnr)
     local bufopts = { noremap = true, silent = true }
     vim.api.nvim_buf_set_keymap(
       bufnr,
@@ -52,7 +50,7 @@ later(function()
       topdelete = { show_count = true },
       changedelete = { show_count = true },
     },
-    on_attach = H.on_attach,
+    on_attach = on_attach,
     current_line_blame_formatter = "<author> (<author_time:%Y-%m-%d>) <abbrev_sha>: <summary>",
     update_debounce = 1000,
   })

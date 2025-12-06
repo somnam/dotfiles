@@ -15,22 +15,20 @@ now(function()
     },
   })
 
-  local H = {}
-
   ---@type string[]
-  H.ensure_installed = config.get("plugin.mason.ensure_installed", {})
+  local ensure_installed = config.get("plugin.mason.ensure_installed", {})
 
   ---@package_name string
-  H.install_package = function(package_name)
+  local function install_package(package_name)
     require("mason-registry").get_package(package_name):install()
     require("mason-core.notify")(string.format("Installing package %s.", package_name))
   end
 
-  H.check_installed_packages = function()
+  local function check_installed_packages()
     local installed_packages = require("mason-registry").get_installed_package_names()
-    for _, package_name in ipairs(H.ensure_installed) do
+    for _, package_name in ipairs(ensure_installed) do
       if not vim.tbl_contains(installed_packages, package_name) then
-        pcall(H.install_package, package_name)
+        pcall(install_package, package_name)
       end
     end
   end
@@ -44,7 +42,7 @@ now(function()
     },
   })
 
-  H.check_installed_packages()
+  check_installed_packages()
 
   vim.keymap.set(
     "n",
