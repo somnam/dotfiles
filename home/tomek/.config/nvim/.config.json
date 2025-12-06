@@ -45,10 +45,6 @@
             "enable": false,
             "workspace_folders": []
         },
-        "copilot_chat": {
-            "enable": false,
-            "model": null
-        },
         "fzf_lua": {
             "defaults": { "file_icons": false },
             "overrides": []
