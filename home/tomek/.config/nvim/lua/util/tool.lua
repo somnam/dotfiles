@@ -33,8 +33,7 @@ M.get_linter_names = function()
   return M.linters_by_ft[vim.bo.filetype] or {}
 end
 
----@return { [string]: string[] }
-M.get_names = function()
+M.get_names_set = function()
   local names_set = {}
 
   for _, names in ipairs({
@@ -43,12 +42,16 @@ M.get_names = function()
     M.get_formatter_names(),
   }) do
     for _, name in ipairs(names) do
-      if names_set[name] == nil then
-        names_set[name] = true
-      end
+      names_set[name] = true
     end
   end
 
+  return names_set
+end
+
+---@return { [string]: string[] }
+M.get_names = function()
+  local names_set = M.get_names_set()
   local names = vim.tbl_keys(names_set)
   table.sort(names)
 
@@ -57,22 +60,8 @@ end
 
 ---@return integer
 M.get_count = function()
-  return M.get_lsp_count() + M.get_linters_count() + M.get_formatters_count()
-end
-
----@return integer
-M.get_lsp_count = function()
-  return #vim.lsp.get_clients({ bufnr = 0 })
-end
-
----@return integer
-M.get_linters_count = function()
-  return #(M.linters_by_ft[vim.bo.filetype] or {})
-end
-
----@return integer
-M.get_formatters_count = function()
-  return #(M.formatters_by_ft[vim.bo.filetype] or {})
+  local names_set = M.get_names_set()
+  return vim.tbl_count(names_set)
 end
 
 return M
