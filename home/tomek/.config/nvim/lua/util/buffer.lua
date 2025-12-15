@@ -20,10 +20,7 @@ M.exclude_filetype = config.get("buffer.exclude_filetype", {})
 ---@param exclude_filetype string[]?
 ---@return boolean
 M.excluded = function(bufnr, exclude_filetype)
-  return vim.tbl_contains(
-    (exclude_filetype or M.exclude_filetype),
-    vim.api.nvim_get_option_value("filetype", { buf = bufnr })
-  )
+  return vim.tbl_contains((exclude_filetype or M.exclude_filetype), vim.bo[bufnr].filetype)
 end
 
 ---@param bufnr integer

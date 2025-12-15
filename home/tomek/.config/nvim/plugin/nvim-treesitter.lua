@@ -53,7 +53,7 @@ now(function()
       return
     end
 
-    local filetype = vim.api.nvim_get_option_value("filetype", { buf = bufnr })
+    local filetype = vim.bo[bufnr].filetype
     local parser = vim.treesitter.language.get_lang(filetype) or filetype
     if not available_parsers[parser] then
       return

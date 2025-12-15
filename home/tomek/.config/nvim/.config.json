@@ -27,7 +27,7 @@
         "log_level": "ERROR"
     },
     "treesitter" : {
-        "ensure_installed": ["diff", "lua", "markdown", "query", "vim", "vimdoc"],
+        "ensure_installed": ["diff", "lua", "markdown", "query", "vim", "vimdoc", "yaml"],
         "exclude": ["csv"]
     },
     "plugin": {

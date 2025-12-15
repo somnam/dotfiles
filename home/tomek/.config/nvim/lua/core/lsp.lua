@@ -38,8 +38,8 @@ local function setup_lsp_highlight_symbol(event, delay)
     callback = vim.lsp.buf.clear_references,
   })
 
-  if vim.api.nvim_get_option_value("updatetime", { scope = "global" }) > delay then
-    vim.opt.updatetime = delay
+  if vim.go["updatetime"] > delay then
+    vim.go.updatetime = delay
   end
 end
 
