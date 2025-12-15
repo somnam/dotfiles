@@ -64,7 +64,7 @@ now(function()
       pcall(treesitter.install, parser)
     end
 
-    vim.treesitter.start(bufnr)
+    pcall(vim.treesitter.start, bufnr)
   end
 
   check_installed_parsers()
