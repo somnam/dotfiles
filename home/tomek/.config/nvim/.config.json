@@ -5,7 +5,7 @@
         "exclude_filetype": [
           "checkhealth",
           "codecompanion",
-          "copilot-chat",
+          "fzf",
           "help",
           "man",
           "mason",
@@ -28,7 +28,7 @@
     },
     "treesitter" : {
         "ensure_installed": ["diff", "lua", "markdown", "query", "vim", "vimdoc"],
-        "exclude": []
+        "exclude": ["csv"]
     },
     "plugin": {
         "conform": {

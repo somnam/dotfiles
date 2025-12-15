@@ -7,14 +7,14 @@ local function set_lsp_options()
   end
 end
 
----@param event table
+---@param event vim.api.keyset.create_autocmd.callback_args
 ---@return vim.lsp.Client?
 local function get_lsp_client_from_event(event)
   local client_id = vim.tbl_get(event, "data", "client_id")
   return client_id and vim.lsp.get_client_by_id(client_id) or nil
 end
 
----@param event table
+---@param event vim.api.keyset.create_autocmd.callback_args
 ---@param delay integer?
 local function setup_lsp_highlight_symbol(event, delay)
   vim.validate("delay", delay, "number", true)
@@ -43,7 +43,7 @@ local function setup_lsp_highlight_symbol(event, delay)
   end
 end
 
----@param event table
+---@param event vim.api.keyset.create_autocmd.callback_args
 local function setup_lsp_inlay_hints(event)
   local client = get_lsp_client_from_event(event)
   if not (client and client:supports_method("textDocument/inlayHint")) then
