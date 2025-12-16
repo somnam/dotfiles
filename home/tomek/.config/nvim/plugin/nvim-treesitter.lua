@@ -48,7 +48,7 @@ now(function()
   end
 
   ---@param bufnr integer
-  local function auto_install_treesitter(bufnr)
+  local function auto_install_parser(bufnr)
     if buffer.excluded_or_above_max_size(bufnr, exclude_filetypes) then
       return
     end
@@ -59,20 +59,20 @@ now(function()
       return
     end
 
+    pcall(vim.treesitter.start, bufnr)
+
     local installed_parsers = get_installed_parsers()
     if not installed_parsers[parser] then
       pcall(treesitter.install, parser)
     end
-
-    pcall(vim.treesitter.start, bufnr)
   end
 
   check_installed_parsers()
 
   vim.api.nvim_create_autocmd("FileType", {
-    group = vim.api.nvim_create_augroup("auto_install_treesitter", { clear = true }),
+    group = vim.api.nvim_create_augroup("auto_install_treesitter_parser", { clear = true }),
     callback = function(event)
-      auto_install_treesitter(event.buf)
+      auto_install_parser(event.buf)
     end,
   })
 end)
