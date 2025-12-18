@@ -1,3 +1,8 @@
+if vim.fn.executable("tree-sitter") ~= 1 then
+  vim.notify("tree-sitter-cli not installed; nvim-treesitter plugin skipped.", vim.log.levels.WARN)
+  return
+end
+
 local buffer = require("util.buffer")
 local config = require("util.config")
 local add = require("mini.deps").add

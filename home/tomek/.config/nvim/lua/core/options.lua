@@ -70,7 +70,7 @@ vim.opt.undofile = true -- Enable persistent undo
 vim.opt.autoread = true -- Read file when modified outside Vim
 vim.opt.inccommand = "nosplit" -- Shows the effects of a command incrementally.
 vim.opt.list = true -- Display whitespace info
-vim.opt.listchars = "tab:>.,trail:.,extends:#,precedes:#,nbsp:~" -- Display specific characters
+vim.opt.listchars = "tab:>.,trail:.,extends:>,precedes:<,nbsp:~" -- Display specific characters
 vim.opt.fillchars = { eob = " " } -- Display empty fill characters
 
 -- Saving options in session and view files causes more problems than it solves

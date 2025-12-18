@@ -1,4 +1,5 @@
 if vim.fn.executable("curl") ~= 1 then
+  vim.notify("curl not installed; codecompanion plugin skipped.", vim.log.levels.WARN)
   return
 end
 

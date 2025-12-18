@@ -1,4 +1,5 @@
 if vim.fn.executable("fzf") ~= 1 then
+  vim.notify("fzf not installed; fzf-lua plugin skipped.", vim.log.levels.WARN)
   return
 end
 

@@ -1,4 +1,5 @@
 if vim.fn.executable("git") ~= 1 then
+  vim.notify("git not installed; plugin bootstrap skipped.", vim.log.levels.WARN)
   return
 end
 

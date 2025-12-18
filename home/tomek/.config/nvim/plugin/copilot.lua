@@ -1,4 +1,5 @@
 if vim.fn.executable("node") ~= 1 then
+  vim.notify("node not installed; copilot plugin skipped.", vim.log.levels.WARN)
   return
 end
 
