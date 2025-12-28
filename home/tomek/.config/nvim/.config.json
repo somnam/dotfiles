@@ -28,7 +28,7 @@
     },
     "treesitter" : {
         "ensure_installed": ["diff", "lua", "markdown", "query", "vim", "vimdoc", "yaml"],
-        "exclude": ["csv"]
+        "exclude": ["csv", "sh"]
     },
     "plugin": {
         "conform": {
@@ -46,7 +46,7 @@
             "workspace_folders": []
         },
         "fzf_lua": {
-            "defaults": { "file_icons": false },
+            "defaults": { "file_icons": "mini" },
             "overrides": []
         },
         "lint": {
@@ -54,7 +54,7 @@
             "systemd": ["systemd-analyze"]
         },
         "mason": {
-            "ensure_installed": []
+            "ensure_installed": ["lua-language-server", "stylua"]
         }
     }
 }

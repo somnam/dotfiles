@@ -23,8 +23,6 @@ now(function()
   })
 
   ---@type string[]
-  local ensure_installed = config.get("treesitter.ensure_installed", {})
-  ---@type string[]
   local exclude_filetypes = config.get("treesitter.exclude", {})
   ---@type table
   local treesitter = require("nvim-treesitter")
@@ -34,22 +32,10 @@ now(function()
     available_parsers[name] = true
   end
 
-  ---@return table<string, boolean>
-  local function get_installed_parsers()
-    local installed_parsers = {}
-    for _, name in ipairs(treesitter.get_installed("parsers")) do
-      installed_parsers[name] = true
-    end
-    return installed_parsers
-  end
-
-  local function check_installed_parsers()
-    local installed_parsers = get_installed_parsers()
-    for _, parser_name in ipairs(ensure_installed) do
-      if not installed_parsers[parser_name] then
-        pcall(treesitter.install, parser_name)
-      end
-    end
+  ---@param bufnr integer
+  local function get_parser(bufnr)
+    local filetype = vim.bo[bufnr].filetype
+    return vim.treesitter.language.get_lang(filetype) or filetype
   end
 
   ---@param bufnr integer
@@ -58,21 +44,16 @@ now(function()
       return
     end
 
-    local filetype = vim.bo[bufnr].filetype
-    local parser = vim.treesitter.language.get_lang(filetype) or filetype
+    local parser = get_parser(bufnr)
     if not available_parsers[parser] then
       return
     end
 
     pcall(vim.treesitter.start, bufnr)
-
-    local installed_parsers = get_installed_parsers()
-    if not installed_parsers[parser] then
-      pcall(treesitter.install, parser)
-    end
+    pcall(treesitter.install, parser)
   end
 
-  check_installed_parsers()
+  pcall(treesitter.install, config.get("treesitter.ensure_installed", {}))
 
   vim.api.nvim_create_autocmd("FileType", {
     group = vim.api.nvim_create_augroup("auto_install_treesitter_parser", { clear = true }),
