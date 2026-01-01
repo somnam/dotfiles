@@ -86,9 +86,7 @@ later(function()
     pattern = "codecompanion",
     group = vim.api.nvim_create_augroup("codecompanion_chat_open", { clear = true }),
     callback = function()
-      vim.schedule(function()
-        vim.cmd("wincmd =")
-      end)
+      vim.schedule(function() vim.cmd("wincmd =") end)
     end,
   })
 end)

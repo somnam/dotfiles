@@ -33,9 +33,7 @@ now(function()
   })
 end)
 
-now(function()
-  require("mini.icons").setup({ style = "ascii" })
-end)
+now(function() require("mini.icons").setup({ style = "ascii" }) end)
 
 now(function()
   vim.api.nvim_create_autocmd("BufReadPost", {
@@ -75,26 +73,24 @@ end)
 later(function()
   local mini_bufremove = require("mini.bufremove")
   mini_bufremove.setup()
-  vim.api.nvim_create_user_command("BD", function()
-    mini_bufremove.delete(0, true)
-  end, {})
-  vim.api.nvim_create_user_command("BW", function()
-    mini_bufremove.wipeout(0, true)
-  end, {})
+  vim.api.nvim_create_user_command("BD", function() mini_bufremove.delete(0, true) end, {})
+  vim.api.nvim_create_user_command("BW", function() mini_bufremove.wipeout(0, true) end, {})
 end)
 
-later(function()
-  require("mini.pairs").setup({
-    mappings = {
-      ["("] = { neigh_pattern = "[^\\][%s%)%]%}]" },
-      ["["] = { neigh_pattern = "[^\\][%s%)%]%}]" },
-      ["{"] = { neigh_pattern = "[^\\][%s%)%]%}]" },
-      ['"'] = { neigh_pattern = "[^A-Za-eg-z0-9%p][^%w%p]" },
-      ["'"] = { neigh_pattern = "[^%w%p][^%w%p]" },
-      ["`"] = { neigh_pattern = "[^%w%p][^%w%p]" },
-    },
-  })
-end)
+later(
+  function()
+    require("mini.pairs").setup({
+      mappings = {
+        ["("] = { neigh_pattern = "[^\\][%s%)%]%}]" },
+        ["["] = { neigh_pattern = "[^\\][%s%)%]%}]" },
+        ["{"] = { neigh_pattern = "[^\\][%s%)%]%}]" },
+        ['"'] = { neigh_pattern = "[^A-Za-eg-z0-9%p][^%w%p]" },
+        ["'"] = { neigh_pattern = "[^%w%p][^%w%p]" },
+        ["`"] = { neigh_pattern = "[^%w%p][^%w%p]" },
+      },
+    })
+  end
+)
 
 later(function()
   local mini_clue = require("mini.clue")
@@ -146,11 +142,13 @@ later(function()
   })
 end)
 
-later(function()
-  require("mini.notify").setup({
-    lsp_progress = { duration_last = 2000 },
-  })
-end)
+later(
+  function()
+    require("mini.notify").setup({
+      lsp_progress = { duration_last = 2000 },
+    })
+  end
+)
 
 now(function()
   local mini_statusline = require("mini.statusline")
@@ -304,9 +302,7 @@ now(function()
     })
   end
 
-  local function content_inactive()
-    return "%#MiniStatuslineInactive#%f %m %r%="
-  end
+  local function content_inactive() return "%#MiniStatuslineInactive#%f %m %r%=" end
 
   mini_statusline.setup({
     content = {

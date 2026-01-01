@@ -8,9 +8,7 @@ later(function()
   add({ source = "stevearc/conform.nvim" })
 
   ---@return { [string]: string[] }
-  local function formatters_by_ft()
-    return config.get("plugin.conform", {})
-  end
+  local function formatters_by_ft() return config.get("plugin.conform", {}) end
 
   local function commands_by_ft()
     local conform = require("conform")
@@ -46,7 +44,10 @@ later(function()
     format_on_save = { timeout_ms = 500 },
   })
 
-  vim.keymap.set("n", "<leader>=", function()
-    conform.format({ async = true })
-  end, { noremap = true, silent = true, desc = "Format current buffer" })
+  vim.keymap.set(
+    "n",
+    "<leader>=",
+    function() conform.format({ async = true }) end,
+    { noremap = true, silent = true, desc = "Format current buffer" }
+  )
 end)

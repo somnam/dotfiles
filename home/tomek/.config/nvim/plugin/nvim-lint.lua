@@ -34,8 +34,6 @@ later(function()
 
   vim.api.nvim_create_autocmd({ "BufWinEnter", "BufWritePost" }, {
     group = vim.api.nvim_create_augroup("nvim_lint_trigger", { clear = true }),
-    callback = function()
-      lint.try_lint()
-    end,
+    callback = function() lint.try_lint() end,
   })
 end)

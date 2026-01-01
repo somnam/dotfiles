@@ -13,12 +13,8 @@ now(function()
     source = "nvim-treesitter/nvim-treesitter",
     checkout = "main",
     hooks = {
-      post_install = function()
-        vim.cmd("TSUpdate")
-      end,
-      post_checkout = function()
-        vim.cmd("TSUpdate")
-      end,
+      post_install = function() vim.cmd("TSUpdate") end,
+      post_checkout = function() vim.cmd("TSUpdate") end,
     },
   })
 
@@ -57,8 +53,6 @@ now(function()
 
   vim.api.nvim_create_autocmd("FileType", {
     group = vim.api.nvim_create_augroup("auto_install_treesitter_parser", { clear = true }),
-    callback = function(event)
-      auto_install_parser(event.buf)
-    end,
+    callback = function(event) auto_install_parser(event.buf) end,
   })
 end)

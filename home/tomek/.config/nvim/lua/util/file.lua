@@ -4,9 +4,7 @@ local M = {}
 M.path_separator = vim.fn.has("win32") == 1 and ";" or ":"
 
 --- @return boolean
-M.file_exists = function(file)
-  return vim.uv.fs_stat(file) ~= nil
-end
+M.file_exists = function(file) return vim.uv.fs_stat(file) ~= nil end
 
 --- @return string?
 M.read_file = function(file)

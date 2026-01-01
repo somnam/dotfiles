@@ -6,12 +6,8 @@ now(function()
   add({
     source = "williamboman/mason.nvim",
     hooks = {
-      post_install = function()
-        vim.cmd("MasonUpdate")
-      end,
-      post_checkout = function()
-        vim.cmd("MasonUpdate")
-      end,
+      post_install = function() vim.cmd("MasonUpdate") end,
+      post_checkout = function() vim.cmd("MasonUpdate") end,
     },
   })
 

@@ -13,9 +13,7 @@ vim.opt.laststatus = 2 -- Always display statusbar
 vim.opt.wildmenu = true -- Use wildmenu
 vim.opt.wildmode = "full:longest"
 vim.opt.wildoptions = "pum,tagfile"
-pcall(function()
-  vim.opt.wildoptions = "pum,tagfile,fuzzy"
-end)
+pcall(function() vim.opt.wildoptions = "pum,tagfile,fuzzy" end)
 
 vim.opt.autowrite = true -- Automatically save before commands like :next and :make
 vim.opt.ruler = true -- Show cursor position all the time
@@ -24,9 +22,7 @@ vim.opt.history = 10000 -- Keep n lines of command line history
 vim.opt.wrap = true -- Line wrapping
 vim.api.nvim_create_autocmd("FileType", {
   pattern = "csv",
-  callback = function()
-    vim.opt_local.wrap = false
-  end,
+  callback = function() vim.opt_local.wrap = false end,
 })
 vim.opt.wrapscan = false -- Search wrapping
 vim.opt.foldmethod = "marker" -- Set folding method
@@ -94,9 +90,7 @@ vim.g.loaded_python3_provider = 0
 vim.opt.formatoptions = "tqj"
 vim.api.nvim_create_autocmd("FileType", {
   pattern = { "vim", "lua" },
-  callback = function()
-    vim.opt_local.formatoptions = "tqj"
-  end,
+  callback = function() vim.opt_local.formatoptions = "tqj" end,
 })
 
 -- Completion options
@@ -107,9 +101,9 @@ vim.opt.complete:remove("t")
 vim.opt.pumheight = 20 -- Completion window height
 -- Completion behavior
 vim.opt.completeopt = { "menu", "menuone", "popup", "noinsert", "noselect" }
-pcall(function()
-  vim.opt.completeopt = { "menu", "menuone", "popup", "noinsert", "noselect", "fuzzy" }
-end)
+pcall(
+  function() vim.opt.completeopt = { "menu", "menuone", "popup", "noinsert", "noselect", "fuzzy" } end
+)
 
 -- Diff settings
 vim.opt.diffopt:append("iwhite")

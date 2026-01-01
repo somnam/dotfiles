@@ -5,14 +5,10 @@ local M = {
 }
 
 ---@param formatters_by_ft { [string]: string[] }
-M.set_formatters_by_ft = function(formatters_by_ft)
-  M.formatters_by_ft = formatters_by_ft
-end
+M.set_formatters_by_ft = function(formatters_by_ft) M.formatters_by_ft = formatters_by_ft end
 
 ---@param linters_by_ft { [string]: string[] }
-M.set_linters_by_ft = function(linters_by_ft)
-  M.linters_by_ft = linters_by_ft
-end
+M.set_linters_by_ft = function(linters_by_ft) M.linters_by_ft = linters_by_ft end
 
 ---@return string[]
 M.get_lsp__names = function()
@@ -24,14 +20,10 @@ M.get_lsp__names = function()
 end
 
 ---@return string[]
-M.get_formatter_names = function()
-  return M.formatters_by_ft[vim.bo.filetype] or {}
-end
+M.get_formatter_names = function() return M.formatters_by_ft[vim.bo.filetype] or {} end
 
 ---@return string[]
-M.get_linter_names = function()
-  return M.linters_by_ft[vim.bo.filetype] or {}
-end
+M.get_linter_names = function() return M.linters_by_ft[vim.bo.filetype] or {} end
 
 M.get_names_set = function()
   local names_set = {}

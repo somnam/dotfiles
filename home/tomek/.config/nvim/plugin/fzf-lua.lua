@@ -29,17 +29,16 @@ now(function()
     },
     defaults = vim.tbl_extend("keep", config.get("plugin.fzf_lua.defaults", {}), {
       -- Open first entry from quickfix and center it
-      copen = function()
-        vim.cmd("copen | wincmd p | cfirst | normal! zvzz")
-      end,
+      copen = function() vim.cmd("copen | wincmd p | cfirst | normal! zvzz") end,
       -- Open first entry from location list and center it
-      lopen = function()
-        vim.cmd("lopen | wincmd p | lfirst | normal! zvzz")
-      end,
+      lopen = function() vim.cmd("lopen | wincmd p | lfirst | normal! zvzz") end,
     }),
     manpages = { previewer = "man_native" },
     helptags = { previewer = "help_native" },
-    lsp = { code_actions = { previewer = "codeaction_native" } },
+    lsp = {
+      code_actions = { previewer = "codeaction_native" },
+      symbols = { symbol_style = 3 },
+    },
   }))
 
   vim.keymap.set(
@@ -95,6 +94,18 @@ now(function()
     "<leader>w",
     ":FzfLua live_grep<Enter>",
     { noremap = true, silent = true, desc = "Live grep the current project" }
+  )
+  vim.keymap.set(
+    "n",
+    "<leader>o",
+    ":FzfLua lsp_live_workspace_symbols<Enter>",
+    { noremap = true, silent = true, desc = "Live grep workspace symbols" }
+  )
+  vim.keymap.set(
+    "n",
+    "<leader>u",
+    ":FzfLua undotree<Enter>",
+    { noremap = true, silent = true, desc = "Show history undo tree" }
   )
   vim.keymap.set(
     "n",
