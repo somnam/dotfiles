@@ -1,0 +1,8 @@
+# Search case insensitively if the pattern is lowercase
+--smart-case
+
+# Search hidden files and directories (e.g. dotfiles)
+--hidden
+
+# Exclude .git directory
+--glob=!.git/*

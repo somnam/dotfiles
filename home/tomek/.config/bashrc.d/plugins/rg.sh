@@ -1,5 +1,7 @@
-if command -v rg > /dev/null 2>&1; then
+if command -v rg > /dev/null; then
+    export RIPGREP_CONFIG_PATH=$HOME/.config/rg/ripgreprc
+
     rgpy() {
-        rg --type py --smart-case "$@"
+        rg --type py "$@"
     }
 fi

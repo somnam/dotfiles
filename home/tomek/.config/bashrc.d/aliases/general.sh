@@ -9,15 +9,11 @@ alias grep='grep --color=auto'
 alias fgrep='fgrep --color=auto'
 alias egrep='egrep --color=auto'
 
-if command -v rg >/dev/null; then
-    alias rg='rg --hidden --follow --no-require-git'
-fi
-
 if command -v fd >/dev/null; then
-    alias fd='fd --hidden --follow --no-require-git'
+    alias fd='fd --hidden'
 fi
 
-if command ls --group-directories-first /dev/null >/dev/null 2>&1; then
+if command ls --group-directories-first /dev/null >/dev/null; then
     alias ll='ls -ahlF --group-directories-first'
 else
     alias ll='ls -ahlF'
