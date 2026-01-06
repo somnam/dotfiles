@@ -5,7 +5,6 @@
         "exclude_filetype": [
           "checkhealth",
           "codecompanion",
-          "fzf",
           "help",
           "man",
           "mason",
@@ -44,10 +43,6 @@
         "copilot": {
             "enable": false,
             "workspace_folders": []
-        },
-        "fzf_lua": {
-            "defaults": { "file_icons": "mini" },
-            "overrides": []
         },
         "lint": {
             "python": ["flake8", "mypy", "ruff"],

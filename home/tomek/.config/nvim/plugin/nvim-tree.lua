@@ -7,7 +7,7 @@ now(function()
   local function on_attach(bufnr)
     require("nvim-tree.api").config.mappings.default_on_attach(bufnr)
 
-    local bufopts = { noremap = true, silent = true, nowait = true }
+    local opts = { noremap = true, silent = true, nowait = true }
     vim.api.nvim_buf_del_keymap(bufnr, "n", "<C-k>")
     vim.api.nvim_buf_del_keymap(bufnr, "n", "<C-x>")
     vim.api.nvim_buf_set_keymap(
@@ -15,14 +15,14 @@ now(function()
       "n",
       "<C-s>",
       ":lua require('nvim-tree.api').node.open.horizontal()<Enter>",
-      vim.tbl_extend("keep", { desc = "Open: Horizontal Split" }, bufopts)
+      vim.tbl_extend("keep", { desc = "Open: Horizontal Split" }, opts)
     )
     vim.api.nvim_buf_set_keymap(
       bufnr,
       "n",
       "<C-f>",
       ":lua require('nvim-tree.api').node.show_info_popup()<Enter>",
-      vim.tbl_extend("keep", { desc = "Info" }, bufopts)
+      vim.tbl_extend("keep", { desc = "Info" }, opts)
     )
   end
 

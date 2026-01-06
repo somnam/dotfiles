@@ -10,38 +10,34 @@ later(function()
   add({ source = "lewis6991/gitsigns.nvim" })
 
   local function on_attach(bufnr)
-    local bufopts = { noremap = true, silent = true }
+    local opts = { noremap = true, silent = true }
     vim.api.nvim_buf_set_keymap(
       bufnr,
       "n",
       "<leader>gd",
       ":Gitsigns diffthis<Enter>",
-      vim.tbl_extend("keep", { desc = "Show buffer diff against the git index" }, bufopts)
+      vim.tbl_extend("keep", { desc = "Show buffer diff against the git index" }, opts)
     )
     vim.api.nvim_buf_set_keymap(
       bufnr,
       "n",
       "<leader>gb",
       ":Gitsigns blame_line<Enter>",
-      vim.tbl_extend(
-        "keep",
-        { desc = "Show blame annotation at the end of current line." },
-        bufopts
-      )
+      vim.tbl_extend("keep", { desc = "Show blame annotation at the end of current line." }, opts)
     )
     vim.api.nvim_buf_set_keymap(
       bufnr,
       "n",
       "[g",
       ":Gitsigns prev_hunk<Enter>",
-      vim.tbl_extend("keep", { desc = "Go to previous git change block" }, bufopts)
+      vim.tbl_extend("keep", { desc = "Go to previous git change block" }, opts)
     )
     vim.api.nvim_buf_set_keymap(
       bufnr,
       "n",
       "]g",
       ":Gitsigns next_hunk<Enter>",
-      vim.tbl_extend("keep", { desc = "Go to next git change block" }, bufopts)
+      vim.tbl_extend("keep", { desc = "Go to next git change block" }, opts)
     )
   end
 
