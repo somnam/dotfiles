@@ -13,7 +13,7 @@ if command -v fd >/dev/null; then
     alias fd='fd --hidden'
 fi
 
-if command ls --group-directories-first /dev/null >/dev/null; then
+if command ls --group-directories-first /dev/null >/dev/null 2>&1; then
     alias ll='ls -ahlF --group-directories-first'
 else
     alias ll='ls -ahlF'
