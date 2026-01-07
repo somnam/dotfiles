@@ -26,6 +26,24 @@ local config = {
 	},
 	hide_mouse_cursor_when_typing = true,
 	hide_tab_bar_if_only_one_tab = true,
+	keys = {
+		-- Unbind the keys so they pass through to tmux
+		{
+			key = "LeftArrow",
+			mods = "CTRL|SHIFT",
+			action = wezterm.action.DisableDefaultAssignment,
+		},
+		{
+			key = "RightArrow",
+			mods = "CTRL|SHIFT",
+			action = wezterm.action.DisableDefaultAssignment,
+		},
+		{
+			key = "Enter",
+			mods = "ALT",
+			action = wezterm.action.DisableDefaultAssignment,
+		},
+	},
 	native_macos_fullscreen_mode = true,
 	scrollback_lines = 20000,
 	use_fancy_tab_bar = false,
