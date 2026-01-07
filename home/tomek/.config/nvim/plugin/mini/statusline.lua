@@ -61,6 +61,25 @@ now(function()
   end
 
   ---@param args table
+  local function section_git(args)
+    local summary = vim.b.minigit_summary_string or vim.b.gitsigns_head
+    if mini_statusline.is_truncated(args.trunc_width) or summary == nil then
+      return ""
+    end
+
+    if summary == "" then
+      summary = " -"
+    elseif args.shorten_width then
+      summary = summary:gsub("^%w+/", "")
+      if vim.fn.strchars(summary) > args.shorten_width then
+        summary = vim.fn.strcharpart(summary, 0, args.shorten_width) .. "…"
+      end
+    end
+
+    return (args.icon or "Git") .. " " .. summary
+  end
+
+  ---@param args table
   local function section_filename(args)
     if vim.tbl_contains({ "nofile", "prompt" }, vim.bo.buftype) then
       return ""
@@ -129,7 +148,7 @@ now(function()
   -- statusline
   local function content_active()
     local mode, mode_hl = mini_statusline.section_mode({ trunc_width = 120 })
-    local git = mini_statusline.section_git({ icon = "", trunc_width = 160 })
+    local git = section_git({ icon = "", trunc_width = 75, shorten_width = 10 })
     local diff = mini_statusline.section_diff({ icon = "𝚫", trunc_width = 75 })
     local diagnostics = mini_statusline.section_diagnostics({
       icon = "⚑",
