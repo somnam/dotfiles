@@ -52,6 +52,7 @@ later(function()
       choose_marked = choose_marked,
     },
     mappings = {
+      choose_marked_alt = { char = "<M-q>", func = function() feedkeys("<M-CR>") end },
       delete_word = "<M-BS>",
       mark = "<M-x>",
       mark_all = "<M-a>",
@@ -167,16 +168,24 @@ later(function()
       return item:match("^R.* %-> (.+)$") or item:sub(4)
     end
 
-    ---@param item string
-    local function preview(buf_id, item) mini_pick.default_preview(buf_id, parse_item(item)) end
+    ---@param items table
+    ---@return table
+    local function parse_items(items)
+      local parsed_items = {}
+      for _, item in ipairs(items) do
+        table.insert(parsed_items, parse_item(item))
+      end
+      return parsed_items
+    end
 
-    ---@param item string
-    local function choose(item) mini_pick.default_choose(parse_item(item)) end
-
-    return mini_pick.builtin.cli(
-      { command = command },
-      { source = { name = "Git Status", preview = preview, choose = choose } }
-    )
+    return mini_pick.builtin.cli({ command = command }, {
+      source = {
+        name = "Git Status",
+        preview = function(buf_id, item) mini_pick.default_preview(buf_id, parse_item(item)) end,
+        choose = function(item) mini_pick.default_choose(parse_item(item)) end,
+        choose_marked = function(items, opts) choose_marked(parse_items(items), opts) end,
+      },
+    })
   end
 
   local mini_extra = require("mini.extra")

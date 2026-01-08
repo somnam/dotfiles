@@ -25,8 +25,7 @@ now(function()
     end,
   })
 
-  local mini_completion = require("mini.completion")
-  mini_completion.setup({
+  require("mini.completion").setup({
     set_vim_settings = false,
     delay = { completion = 100, info = 200, signature = -1 },
     window = {
