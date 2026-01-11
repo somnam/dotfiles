@@ -62,6 +62,8 @@ now(function()
 
   ---@param args table
   local function section_git(args)
+    args = vim.tbl_extend("force", { remove_type = true }, args or {})
+
     local summary = vim.b.minigit_summary_string or vim.b.gitsigns_head
     if mini_statusline.is_truncated(args.trunc_width) or summary == nil then
       return ""
@@ -69,11 +71,14 @@ now(function()
 
     if summary == "" then
       summary = " -"
-    elseif args.shorten_width then
+    end
+
+    if args.remove_type then
       summary = summary:gsub("^%w+/", "")
-      if vim.fn.strchars(summary) > args.shorten_width then
-        summary = vim.fn.strcharpart(summary, 0, args.shorten_width) .. "…"
-      end
+    end
+
+    if args.shorten_width and vim.fn.strchars(summary) > args.shorten_width then
+      summary = vim.fn.strcharpart(summary, 0, args.shorten_width) .. "…"
     end
 
     return (args.icon or "Git") .. " " .. summary
