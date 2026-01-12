@@ -9,26 +9,6 @@ vim.api.nvim_create_autocmd("VimResized", {
   command = "wincmd =",
 })
 
-vim.api.nvim_create_autocmd("WinEnter", {
-  group = vim.api.nvim_create_augroup("auto_show_cursorline", { clear = true }),
-  callback = function()
-    if vim.w.auto_show_cursorline then
-      vim.wo.cursorline = true
-      vim.w.auto_show_cursorline = nil
-    end
-  end,
-})
-
-vim.api.nvim_create_autocmd("WinLeave", {
-  group = vim.api.nvim_create_augroup("auto_hide_cursorline", { clear = true }),
-  callback = function()
-    if vim.wo.cursorline then
-      vim.w.auto_show_cursorline = true
-      vim.wo.cursorline = false
-    end
-  end,
-})
-
 vim.api.nvim_create_autocmd("ColorSchemePre", {
   pattern = "*",
   group = vim.api.nvim_create_augroup("before_colorscheme", { clear = true }),
