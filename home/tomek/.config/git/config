@@ -1,0 +1,40 @@
+[alias]
+    au = add -u .
+    co = checkout
+    di = diff -b
+    ds = diff --staged -b
+    dt = difftool
+    lg = log --graph --pretty=format:'%Cred%h%Creset %C(green)(%ci) %C(blue)%an%Creset: %s'
+    mt = mergetool
+    st = status
+    url = !git config -l | grep -E '^remote.origin.url=' | cut -d= -f2
+[color]
+    ui = auto
+[color "branch"]
+    current = green reverse
+    local = green
+    remote = yellow
+[color "status"]
+    added = green
+    changed = yellow
+    untracked = red
+[diff]
+    ; tool =
+[difftool]
+    prompt = no
+[fetch]
+    prune = true
+[include]
+    path = ~/.config/delta/delta.gitconfig
+[merge]
+    ; tool =
+[mergetool]
+    keepBackup = false
+    prompt = no
+[pull]
+    rebase = true
+[push]
+    default = current
+[user]
+    ; name =
+    ; email =
