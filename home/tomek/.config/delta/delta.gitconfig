@@ -5,9 +5,12 @@
     file-removed-label = diff removed:
     file-renamed-label = diff renamed:
     file-style = blue bold
-    hunk-header-decoration-style = blue
+    file-decoration-style = blue bold ul
+    hunk-header-decoration-style = blue ul
     line-numbers = true
     line-numbers-left-format = "{nm:>4}│"
     line-numbers-right-format = "{np:>4}│"
+    merge-conflict-ours-diff-header-decoration-style = ul
+    merge-conflict-theirs-diff-header-decoration-style = ul
     side-by-side = true
     ; syntax-theme =

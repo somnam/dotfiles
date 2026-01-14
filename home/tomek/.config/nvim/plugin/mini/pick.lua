@@ -1,6 +1,6 @@
-local later = require("mini.deps").later
+local now = require("mini.deps").now
 
-later(function()
+now(function()
   local mini_pick = require("mini.pick")
   local vim_paste = vim.paste
 

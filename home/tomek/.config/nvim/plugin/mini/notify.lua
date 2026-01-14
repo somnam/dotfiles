@@ -1,6 +1,6 @@
-local later = require("mini.deps").later
+local now = require("mini.deps").now
 
-later(
+now(
   function()
     require("mini.notify").setup({
       lsp_progress = { duration_last = 2000 },
