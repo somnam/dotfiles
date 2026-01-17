@@ -7,7 +7,12 @@
     lg = log --graph --pretty=format:'%Cred%h%Creset %C(green)(%ci) %C(blue)%an%Creset: %s'
     mt = mergetool
     st = status
+    pu = pull
+    am = commit --amend
+    re = reset HEAD --
     url = !git config -l | grep -E '^remote.origin.url=' | cut -d= -f2
+[branch]
+    sort = -committerdate
 [color]
     ui = auto
 [color "branch"]
@@ -24,6 +29,8 @@
     prompt = no
 [fetch]
     prune = true
+[help]
+    autocorrect = 10
 [include]
     path = ~/.config/delta/delta.gitconfig
 [merge]
@@ -35,6 +42,9 @@
     rebase = true
 [push]
     default = current
+    autoSetupRemote = true
+[rerere]
+    enabled = true
 [user]
     ; name =
     ; email =

@@ -1,0 +1,26 @@
+[delta "dracula"]
+    blame-palette = "#282a36 #44475a #282a36 #44475a #282a36"
+    commit-decoration-style = bold "#6272a4" box ul
+    dark = true
+    file-decoration-style = bold "#6272a4" ul
+    file-style = bold "#f8f8f2"
+    hunk-header-decoration-style = "#6272a4" ul
+    hunk-header-file-style = bold
+    hunk-header-line-number-style = bold "#bd93f9"
+    hunk-header-style = line-number syntax
+    line-numbers-left-style = "#6272a4"
+    line-numbers-minus-style = bold "#ff5555"
+    line-numbers-plus-style = bold "#50fa7b"
+    line-numbers-right-style = "#6272a4"
+    line-numbers-zero-style = "#6272a4"
+    minus-emph-style = bold syntax "#5e353e"
+    minus-style = syntax "#3d2e39"
+    plus-emph-style = bold syntax "#325e47"
+    plus-style = syntax "#2c3f3d"
+    map-styles = \
+        bold purple => syntax "#bd93f9", \
+        bold blue => syntax "#6272a4", \
+        bold cyan => syntax "#8be9fd", \
+        bold yellow => syntax "#f1fa8c"
+    # Should match the name of the bat theme
+    syntax-theme = Dracula
