@@ -1,16 +1,19 @@
+[include]
+    path = themes/catppuccin.gitconfig
+    path = themes/dracula.gitconfig
+    path = themes/kanagawa.gitconfig
+
 [delta]
+    ; features =
     file-added-label = diff added:
     file-copied-label = diff copied:
     file-modified-label = diff:
     file-removed-label = diff removed:
     file-renamed-label = diff renamed:
-    file-style = blue bold
-    file-decoration-style = blue bold ul
-    hunk-header-decoration-style = blue ul
+    hyperlinks = true
     line-numbers = true
     line-numbers-left-format = "{nm:>4}│"
     line-numbers-right-format = "{np:>4}│"
     merge-conflict-ours-diff-header-decoration-style = ul
     merge-conflict-theirs-diff-header-decoration-style = ul
     side-by-side = true
-    ; syntax-theme =
