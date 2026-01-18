@@ -109,3 +109,10 @@ pcall(
 vim.opt.diffopt:append("iwhite")
 vim.opt.diffopt:append("algorithm:patience")
 vim.opt.diffopt:append("indent-heuristic")
+
+-- Extend filetype detection with custom definitions
+vim.filetype.add({
+  extension = {
+    gitconfig = "gitconfig",
+  },
+})

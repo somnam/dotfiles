@@ -11,7 +11,7 @@ later(function()
   local enable = config.get("plugin.codecompanion.enable")
   local spec = {
     source = "olimorris/codecompanion.nvim",
-    checkout = "v17.33.0",
+    checkout = "main",
     depends = { "nvim-lua/plenary.nvim" },
   }
 
@@ -22,23 +22,27 @@ later(function()
 
   add(spec)
 
+  local adapters = require("codecompanion.adapters")
+
   require("codecompanion").setup({
     adapters = {
       http = {
         copilot = function()
-          return require("codecompanion.adapters").extend("copilot", {
+          return adapters.extend("copilot", {
             schema = {
               model = {
-                default = config.get("plugin.codecompanion.model"),
+                default = config.get(
+                  "plugin.codecompanion.model",
+                  vim.tbl_get(adapters.extend("copilot"), "schema", "model", "default")
+                ),
               },
             },
           })
         end,
       },
     },
-    strategies = {
+    interactions = {
       chat = {
-        adapter = "copilot",
         keymaps = {
           send = {
             modes = {
@@ -54,24 +58,23 @@ later(function()
           },
         },
       },
-      inline = {
-        adapter = "copilot",
-      },
-      agent = {
-        adapter = "copilot",
-      },
     },
     display = {
       chat = {
         icons = {
-          buffer_pin = "📌 ",
-          buffer_watch = "👀 ",
+          buffer_sync_all = "↻ ",
+          buffer_sync_diff = "± ",
+          chat_context = "… ",
+          chat_fold = "▸ ",
+          tool_pending = "○ ",
+          tool_in_progress = "⟳ ",
+          tool_failure = "✖ ",
+          tool_success = "✔ ",
         },
       },
     },
     icons = {
-      loading = "🔄 ",
-      warning = "⚠️ ",
+      warning = "⚠ ",
     },
   })
 

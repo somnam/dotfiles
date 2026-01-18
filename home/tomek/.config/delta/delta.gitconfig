@@ -12,8 +12,8 @@
     file-renamed-label = diff renamed:
     hyperlinks = true
     line-numbers = true
-    line-numbers-left-format = "{nm:>4}│"
-    line-numbers-right-format = "{np:>4}│"
+    line-numbers-left-format = "{nm:>3}│"
+    line-numbers-right-format = "{np:>3}│"
     merge-conflict-ours-diff-header-decoration-style = ul
     merge-conflict-theirs-diff-header-decoration-style = ul
     side-by-side = true
