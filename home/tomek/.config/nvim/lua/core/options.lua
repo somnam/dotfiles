@@ -1,7 +1,5 @@
 -- Default options
 
-vim.opt.encoding = "utf8"
-
 vim.opt.incsearch = true -- Incremental search
 vim.opt.hlsearch = true -- Highlight search results.
 vim.opt.ignorecase = true -- Do case insensitive matching
@@ -37,7 +35,6 @@ vim.opt.hidden = true -- Hide buffer instead of closing it
 vim.opt.mouse = "nvi" -- Mouse modes
 vim.opt.scrolloff = 5 -- Minimal number of lines around the cursor
 
-vim.opt.smartindent = true -- Try to be smart with indenting
 vim.opt.autoindent = true -- Set global autoindent on
 vim.opt.expandtab = true -- Expand tabs to spaces
 vim.opt.smarttab = true -- Smart tab

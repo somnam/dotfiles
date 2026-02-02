@@ -119,6 +119,8 @@ now(function()
     local function buffer_show(buf_id, items, query)
       mini_pick.default_show(buf_id, items, query, { show_icons = true })
 
+      vim.api.nvim_buf_clear_namespace(buf_id, buffer_ns, 0, -1)
+
       local modified_mark = { virt_text = { { "[+]", "DiagnosticHint" } }, virt_text_pos = "eol" }
       local readonly_mark = { virt_text = { { "[RO]", "DiagnosticHint" } }, virt_text_pos = "eol" }
 
