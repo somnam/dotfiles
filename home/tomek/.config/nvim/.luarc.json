@@ -17,6 +17,7 @@
   "telemetry.enable": false,
   "workspace": {
     "checkThirdParty": false,
+    "ignoreSubmodules": true,
     "maxPreload": 1000,
     "library": [
       "lua",

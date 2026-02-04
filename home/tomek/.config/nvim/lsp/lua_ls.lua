@@ -24,6 +24,7 @@ return {
       telemetry = { enable = false },
       workspace = {
         checkThirdParty = false,
+        ignoreSubmodules = true,
         maxPreload = 1000,
       },
     },

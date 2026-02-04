@@ -23,6 +23,7 @@ vim.api.nvim_create_autocmd("FileType", {
   callback = function() vim.opt_local.wrap = false end,
 })
 vim.opt.wrapscan = false -- Search wrapping
+vim.opt.linebreak = true -- Wrap lines at 'breakat' char
 vim.opt.foldmethod = "marker" -- Set folding method
 vim.opt.foldenable = false -- No autofold
 vim.opt.cursorline = true -- Highlight current line
@@ -34,6 +35,7 @@ vim.opt.numberwidth = 2 -- Set min. number column width
 vim.opt.hidden = true -- Hide buffer instead of closing it
 vim.opt.mouse = "nvi" -- Mouse modes
 vim.opt.scrolloff = 5 -- Minimal number of lines around the cursor
+vim.opt.virtualedit = "block" -- Allow cursor to move past EOL in visual block mode
 
 vim.opt.autoindent = true -- Set global autoindent on
 vim.opt.expandtab = true -- Expand tabs to spaces
@@ -64,7 +66,7 @@ vim.opt.undofile = true -- Enable persistent undo
 vim.opt.autoread = true -- Read file when modified outside Vim
 vim.opt.inccommand = "nosplit" -- Shows the effects of a command incrementally.
 vim.opt.list = true -- Display whitespace info
-vim.opt.listchars = "tab:>.,trail:.,extends:>,precedes:<,nbsp:~" -- Display specific characters
+vim.opt.listchars = "tab:>.,trail:.,extends:…,precedes:…,nbsp:␣" -- Display specific characters
 vim.opt.fillchars = { eob = " " } -- Display empty fill characters
 
 -- Saving options in session and view files causes more problems than it solves
@@ -91,12 +93,23 @@ vim.api.nvim_create_autocmd("FileType", {
   callback = function() vim.opt_local.formatoptions = "tqj" end,
 })
 
+-- Have Vim jump to the last position when reopening a file
+vim.api.nvim_create_autocmd("BufReadPost", {
+  callback = function()
+    local mark = vim.api.nvim_buf_get_mark(0, '"')
+    local lnum = mark[1]
+    if lnum > 1 and lnum <= vim.api.nvim_buf_line_count(0) then
+      vim.cmd([[silent! normal! g'"]])
+    end
+  end,
+})
+
 -- Completion options
 vim.opt.shortmess:append("C") -- Shut off completion messages
 vim.opt.shortmess:append("c")
 vim.opt.complete:remove("i") -- Prevent vim lag due to searching include files and tags
 vim.opt.complete:remove("t")
-vim.opt.pumheight = 20 -- Completion window height
+vim.opt.pumheight = 15 -- Completion window height
 -- Completion behavior
 vim.opt.completeopt = { "menu", "menuone", "popup", "noinsert", "noselect" }
 pcall(
