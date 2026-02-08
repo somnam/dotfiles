@@ -53,13 +53,12 @@ vim.api.nvim_create_autocmd("FileType", {
   end,
 })
 
-vim.opt.ttyfast = true -- Faster scrolling
 vim.opt.timeout = true -- Setting for mappings
 vim.opt.ttimeout = true -- Time waited for key press(es) to complete, faster key response
 vim.opt.timeoutlen = 1000 -- Set to default value
 vim.opt.ttimeoutlen = 25 -- Set to unnoticeable small value
-vim.opt.updatetime = 1000 -- Longer update time leads to noticeable delays
-vim.opt.synmaxcol = 512 -- Be forgiving with long lines
+vim.opt.updatetime = 300 -- Longer update time leads to noticeable delays
+vim.opt.synmaxcol = 1024 -- Be forgiving with long lines
 
 vim.opt.clipboard = "unnamedplus" -- Use the "global" buffer for copy and paste
 vim.opt.undofile = true -- Enable persistent undo
@@ -88,10 +87,6 @@ vim.g.loaded_python3_provider = 0
 
 -- Delete comment char when joining lines, disable comment insertion
 vim.opt.formatoptions = "tqj"
-vim.api.nvim_create_autocmd("FileType", {
-  pattern = { "vim", "lua" },
-  callback = function() vim.opt_local.formatoptions = "tqj" end,
-})
 
 -- Have Vim jump to the last position when reopening a file
 vim.api.nvim_create_autocmd("BufReadPost", {

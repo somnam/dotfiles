@@ -16,9 +16,13 @@ now(function()
     vim.schedule(function()
       opts = opts or {}
       if opts.list_type == "location" then
-        vim.cmd("lopen | wincmd p | lfirst | normal! zvzz")
+        if #vim.fn.getloclist(0) > 0 then
+          vim.cmd("lopen | wincmd p | lfirst | normal! zvzz")
+        end
       else
-        vim.cmd("copen | wincmd p | cfirst | normal! zvzz")
+        if #vim.fn.getqflist() > 0 then
+          vim.cmd("copen | wincmd p | cfirst | normal! zvzz")
+        end
       end
     end)
   end
@@ -56,14 +60,14 @@ now(function()
       delete_word = "<M-BS>",
       mark = "<M-x>",
       mark_all = "<M-a>",
-      move_caret_start = { char = "<C-a>", func = function() move_caret(1) end },
-      move_caret_start_nav = { char = "<Home>", func = function() move_caret(1) end },
       move_caret_end = { char = "<C-e>", func = function() move_caret(math.huge) end },
       move_caret_end_nav = { char = "<End>", func = function() move_caret(math.huge) end },
-      move_caret_prev_word = { char = "<C-Left>", func = move_caret_prev_word },
       move_caret_next_word = { char = "<C-Right>", func = move_caret_next_word },
-      move_caret_prev_word_alt = { char = "<M-Left>", func = move_caret_prev_word },
       move_caret_next_word_alt = { char = "<M-Right>", func = move_caret_next_word },
+      move_caret_prev_word = { char = "<C-Left>", func = move_caret_prev_word },
+      move_caret_prev_word_alt = { char = "<M-Left>", func = move_caret_prev_word },
+      move_caret_start = { char = "<C-a>", func = function() move_caret(1) end },
+      move_caret_start_nav = { char = "<Home>", func = function() move_caret(1) end },
       move_start = "<C-k>",
       refine = "<C-g>",
       refine_marked = "<M-g>",
@@ -79,7 +83,7 @@ now(function()
       config = function()
         local height = math.floor(0.618 * vim.o.lines)
         local width = math.floor(0.618 * vim.o.columns)
-        local row = math.floor(0.1 * vim.o.lines)
+        local row = math.floor(0.2 * (vim.o.lines - height))
         local col = math.floor(0.5 * (vim.o.columns - width))
         return { anchor = "NW", height = height, width = width, row = row, col = col }
       end,

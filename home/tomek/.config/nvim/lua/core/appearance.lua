@@ -5,7 +5,7 @@ vim.api.nvim_create_autocmd("TextYankPost", {
 })
 
 vim.api.nvim_create_autocmd("VimResized", {
-  group = vim.api.nvim_create_augroup("auto_resize_widows", { clear = true }),
+  group = vim.api.nvim_create_augroup("auto_resize_windows", { clear = true }),
   command = "wincmd =",
 })
 

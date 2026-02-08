@@ -50,29 +50,11 @@ vim.keymap.set("i", "<CR>", function()
   return "<CR>"
 end, { expr = true })
 
--- Terminal mappings
-vim.keymap.set("t", [[<C-w>w]], "<Cmd>wincmd w<CR>", opts)
-vim.keymap.set("t", [[<C-w>h]], "<Cmd>wincmd h<CR>", opts)
-vim.keymap.set("t", [[<C-w>j]], "<Cmd>wincmd j<CR>", opts)
-vim.keymap.set("t", [[<C-w>k]], "<Cmd>wincmd k<CR>", opts)
-vim.keymap.set("t", [[<C-w>l]], "<Cmd>wincmd l<CR>", opts)
-vim.keymap.set("t", [[<C-w>r]], "<Cmd>wincmd r<CR>", opts)
-vim.keymap.set("t", [[<C-w>W]], "<Cmd>wincmd W<CR>", opts)
-vim.keymap.set("t", [[<C-w>H]], "<Cmd>wincmd H<CR>", opts)
-vim.keymap.set("t", [[<C-w>J]], "<Cmd>wincmd J<CR>", opts)
-vim.keymap.set("t", [[<C-w>K]], "<Cmd>wincmd K<CR>", opts)
-vim.keymap.set("t", [[<C-w>L]], "<Cmd>wincmd L<CR>", opts)
-vim.keymap.set("t", [[<C-w>R]], "<Cmd>wincmd R<CR>", opts)
-vim.keymap.set("t", [[<C-w><C-w>]], "<Cmd>wincmd w<CR>", opts)
-vim.keymap.set("t", [[<C-w><C-h>]], "<Cmd>wincmd h<CR>", opts)
-vim.keymap.set("t", [[<C-w><C-j>]], "<Cmd>wincmd j<CR>", opts)
-vim.keymap.set("t", [[<C-w><C-k>]], "<Cmd>wincmd k<CR>", opts)
-vim.keymap.set("t", [[<C-w><C-l>]], "<Cmd>wincmd l<CR>", opts)
-vim.keymap.set("t", [[<C-w><C-W>]], "<Cmd>wincmd W<CR>", opts)
-vim.keymap.set("t", [[<C-w><C-H>]], "<Cmd>wincmd H<CR>", opts)
-vim.keymap.set("t", [[<C-w><C-J>]], "<Cmd>wincmd J<CR>", opts)
-vim.keymap.set("t", [[<C-w><C-K>]], "<Cmd>wincmd K<CR>", opts)
-vim.keymap.set("t", [[<C-w><C-L>]], "<Cmd>wincmd L<CR>", opts)
+-- Terminal window navigation
+for _, key in ipairs({ "w", "h", "j", "k", "l", "r", "W", "H", "J", "K", "L", "R" }) do
+  vim.keymap.set("t", "<C-w>" .. key, "<Cmd>wincmd " .. key .. "<CR>", opts)
+  vim.keymap.set("t", "<C-w><C-" .. key .. ">", "<Cmd>wincmd " .. key .. "<CR>", opts)
+end
 
 vim.api.nvim_create_user_command("Term", function()
   vim.cmd("split | term")

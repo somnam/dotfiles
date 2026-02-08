@@ -56,7 +56,6 @@ end
 set_lsp_options()
 
 vim.api.nvim_create_autocmd("LspAttach", {
-  pattern = "*",
   group = vim.api.nvim_create_augroup("lsp_setup", { clear = true }),
   callback = function(event)
     setup_lsp_highlight_symbol(event)

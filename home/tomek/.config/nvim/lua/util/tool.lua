@@ -11,7 +11,7 @@ M.set_formatters_by_ft = function(formatters_by_ft) M.formatters_by_ft = formatt
 M.set_linters_by_ft = function(linters_by_ft) M.linters_by_ft = linters_by_ft end
 
 ---@return string[]
-M.get_lsp__names = function()
+M.get_lsp_names = function()
   local lsp_names = {}
   for _, client in ipairs(vim.lsp.get_clients({ bufnr = 0 })) do
     table.insert(lsp_names, M.lsp_names_map[client.name] or client.name)
@@ -29,7 +29,7 @@ M.get_names_set = function()
   local names_set = {}
 
   for _, names in ipairs({
-    M.get_lsp__names(),
+    M.get_lsp_names(),
     M.get_linter_names(),
     M.get_formatter_names(),
   }) do

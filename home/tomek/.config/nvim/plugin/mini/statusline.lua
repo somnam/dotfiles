@@ -107,7 +107,7 @@ now(function()
 
     local function start_spinner()
       if not state.timer then
-        state.timer = vim.loop.new_timer()
+        state.timer = vim.uv.new_timer()
         state.timer:start(0, 100, vim.schedule_wrap(redraw_spinner))
       end
     end
