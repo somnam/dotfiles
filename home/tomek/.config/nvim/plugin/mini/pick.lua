@@ -83,7 +83,7 @@ now(function()
       config = function()
         local height = math.floor(0.618 * vim.o.lines)
         local width = math.floor(0.618 * vim.o.columns)
-        local row = math.floor(0.2 * (vim.o.lines - height))
+        local row = math.floor(0.4 * (vim.o.lines - height))
         local col = math.floor(0.5 * (vim.o.columns - width))
         return { anchor = "NW", height = height, width = width, row = row, col = col }
       end,
