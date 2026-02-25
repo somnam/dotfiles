@@ -147,7 +147,7 @@ local preview = (function()
 
   local function cache_win_config()
     local picker_state = MiniPick.get_picker_state()
-    if not picker_state.windows.main then
+    if not (picker_state.windows and picker_state.windows.main) then
       return
     end
     local window_config = vim.api.nvim_win_get_config(picker_state.windows.main)
@@ -162,7 +162,7 @@ local preview = (function()
       return
     end
     local picker_state = MiniPick.get_picker_state()
-    if not picker_state.windows.main then
+    if not (picker_state.windows and picker_state.windows.main) then
       return
     end
     local main_buffer = vim.api.nvim_win_get_buf(picker_state.windows.main)
@@ -176,10 +176,8 @@ local preview = (function()
 
     vim.api.nvim_win_set_config(picker_state.windows.main, window_config)
 
-    if not has_buf() then
-      create_buf()
-    end
     if not has_win() then
+      create_buf()
       create_win(preview_config)
     else
       vim.api.nvim_win_set_config(state.win_id, preview_config)
@@ -188,8 +186,14 @@ local preview = (function()
     local current_item = MiniPick.get_picker_matches().current
     if current_item ~= state.last_item then
       state.last_item = current_item
-      local preview_func = MiniPick.get_picker_opts().source.preview
-      pcall(preview_func, state.buf_id, current_item)
+      create_buf()
+      vim.api.nvim_win_set_buf(state.win_id, state.buf_id)
+      if current_item ~= nil then
+        local preview_func = MiniPick.get_picker_opts().source.preview
+        pcall(preview_func, state.buf_id, current_item)
+      else
+        vim.api.nvim_buf_set_lines(state.buf_id, 0, -1, false, {})
+      end
     end
   end
 
