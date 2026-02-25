@@ -1,10 +1,7 @@
 local file = require("util.file")
 local tool = require("util.tool")
-local now = require("mini.deps").now
 
-now(function()
-  local mini_statusline = require("mini.statusline")
-
+MiniDeps.now(function()
   ---@param args table
   local function section_tools(args)
     local tools_count = tool.get_count()
@@ -12,7 +9,7 @@ now(function()
       return ""
     end
 
-    if mini_statusline.is_truncated(args.trunc_width) then
+    if MiniStatusline.is_truncated(args.trunc_width) then
       return string.format("%s %s", args.icon, tools_count)
     end
 
@@ -26,7 +23,7 @@ now(function()
       return ""
     end
 
-    if mini_statusline.is_truncated(args.trunc_width) or vim.bo.buftype ~= "" then
+    if MiniStatusline.is_truncated(args.trunc_width) or vim.bo.buftype ~= "" then
       return string.format("%s %s", args.icon, filetype)
     end
 
@@ -40,7 +37,7 @@ now(function()
       return ""
     end
 
-    if mini_statusline.is_truncated(args.trunc_width) or vim.bo.buftype ~= "" then
+    if MiniStatusline.is_truncated(args.trunc_width) or vim.bo.buftype ~= "" then
       return ""
     end
 
@@ -53,7 +50,7 @@ now(function()
   end
 
   local function section_location(args)
-    if mini_statusline.is_truncated(args.trunc_width) then
+    if MiniStatusline.is_truncated(args.trunc_width) then
       return "%3l:%-2c"
     end
 
@@ -65,7 +62,7 @@ now(function()
     args = vim.tbl_extend("force", { remove_type = true }, args or {})
 
     local summary = vim.b.minigit_summary_string or vim.b.gitsigns_head
-    if mini_statusline.is_truncated(args.trunc_width) or summary == nil then
+    if MiniStatusline.is_truncated(args.trunc_width) or summary == nil then
       return ""
     end
 
@@ -89,7 +86,7 @@ now(function()
     if vim.tbl_contains({ "nofile", "prompt" }, vim.bo.buftype) then
       return ""
     end
-    return mini_statusline.section_filename(args)
+    return MiniStatusline.section_filename(args)
   end
 
   local function section_codecompanion_wrapper()
@@ -141,7 +138,7 @@ now(function()
       end
 
       local spinner = state.spinner_symbols[state.spinner_index]
-      return mini_statusline.is_truncated(args.trunc_width) and spinner
+      return MiniStatusline.is_truncated(args.trunc_width) and spinner
         or string.format("%s waiting", spinner)
     end
 
@@ -152,10 +149,10 @@ now(function()
 
   -- statusline
   local function content_active()
-    local mode, mode_hl = mini_statusline.section_mode({ trunc_width = 120 })
+    local mode, mode_hl = MiniStatusline.section_mode({ trunc_width = 120 })
     local git = section_git({ icon = "", trunc_width = 75, shorten_width = 10 })
-    local diff = mini_statusline.section_diff({ icon = "𝚫", trunc_width = 75 })
-    local diagnostics = mini_statusline.section_diagnostics({
+    local diff = MiniStatusline.section_diff({ icon = "𝚫", trunc_width = 75 })
+    local diagnostics = MiniStatusline.section_diagnostics({
       icon = "⚑",
       trunc_width = 75,
       signs = { ERROR = "E:", WARN = "W:", INFO = "I:", HINT = "H:" },
@@ -167,7 +164,7 @@ now(function()
     local filesize = section_filesize({ icon = "◔", trunc_width = 120 })
     local location = section_location({ trunc_width = 75 })
 
-    return mini_statusline.combine_groups({
+    return MiniStatusline.combine_groups({
       { hl = mode_hl, strings = { mode } },
       { hl = "MiniStatuslineDevinfo", strings = { git, diff, diagnostics } },
       "%<", -- Mark general truncate point
@@ -180,7 +177,7 @@ now(function()
 
   local function content_inactive() return "%#MiniStatuslineInactive#%f %m %r%=" end
 
-  mini_statusline.setup({
+  require("mini.statusline").setup({
     content = {
       active = content_active,
       inactive = content_inactive,

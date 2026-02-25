@@ -1,11 +1,9 @@
 local buffer = require("util.buffer")
 local config = require("util.config")
 local tool = require("util.tool")
-local add = require("mini.deps").add
-local later = require("mini.deps").later
 
-later(function()
-  add({ source = "stevearc/conform.nvim" })
+MiniDeps.later(function()
+  MiniDeps.add({ source = "stevearc/conform.nvim" })
 
   ---@return { [string]: string[] }
   local function formatters_by_ft() return config.get("plugin.conform", {}) end

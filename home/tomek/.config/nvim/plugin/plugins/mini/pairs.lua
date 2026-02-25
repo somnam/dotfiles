@@ -1,6 +1,4 @@
-local later = require("mini.deps").later
-
-later(
+MiniDeps.later(
   function()
     require("mini.pairs").setup({
       mappings = {

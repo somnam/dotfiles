@@ -1,9 +1,7 @@
 local config = require("util.config")
-local add = require("mini.deps").add
-local now = require("mini.deps").now
 
-now(function()
-  add({ source = "neovim/nvim-lspconfig" })
+MiniDeps.now(function()
+  MiniDeps.add({ source = "neovim/nvim-lspconfig" })
 
   ---@type string[]
   local servers = config.get("lsp.servers", {})

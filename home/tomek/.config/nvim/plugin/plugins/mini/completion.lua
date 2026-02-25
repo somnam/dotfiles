@@ -1,7 +1,6 @@
 local buffer = require("util.buffer")
-local now = require("mini.deps").now
 
-now(function()
+MiniDeps.now(function()
   vim.api.nvim_create_autocmd("BufReadPost", {
     group = vim.api.nvim_create_augroup(
       "maybe_disable_mini_completion_buffer_size",

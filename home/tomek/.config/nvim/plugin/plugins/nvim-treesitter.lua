@@ -5,11 +5,9 @@ end
 
 local buffer = require("util.buffer")
 local config = require("util.config")
-local add = require("mini.deps").add
-local now = require("mini.deps").now
 
-now(function()
-  add({
+MiniDeps.now(function()
+  MiniDeps.add({
     source = "nvim-treesitter/nvim-treesitter",
     checkout = "main",
     hooks = {

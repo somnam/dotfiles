@@ -1,10 +1,8 @@
 local buffer = require("util.buffer")
 local config = require("util.config")
-local add = require("mini.deps").add
-local later = require("mini.deps").later
 
-later(function()
-  add({
+MiniDeps.later(function()
+  MiniDeps.add({
     source = "shellRaining/hlchunk.nvim",
     depends = { "nvim-treesitter/nvim-treesitter" },
   })

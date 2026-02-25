@@ -1,7 +1,0 @@
-require("core.options")
-require("core.appearance")
-require("core.keymap")
-require("core.diagnostic")
-require("core.lsp")
-require("core.env")
-require("core.plugin")

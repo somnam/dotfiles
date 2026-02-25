@@ -1,8 +1,5 @@
-local add = require("mini.deps").add
-local now = require("mini.deps").now
-
-now(function()
-  add({ source = "nvim-tree/nvim-tree.lua" })
+MiniDeps.now(function()
+  MiniDeps.add({ source = "nvim-tree/nvim-tree.lua" })
 
   local function on_attach(bufnr)
     require("nvim-tree.api").config.mappings.default_on_attach(bufnr)

@@ -1,0 +1,5 @@
+MiniDeps.later(function()
+  require("mini.bufremove").setup()
+  vim.api.nvim_create_user_command("BD", function() MiniBufremove.delete(0, true) end, {})
+  vim.api.nvim_create_user_command("BW", function() MiniBufremove.wipeout(0, true) end, {})
+end)

@@ -1,10 +1,8 @@
 local config = require("util.config")
 local tool = require("util.tool")
-local add = require("mini.deps").add
-local later = require("mini.deps").later
 
-later(function()
-  add({ source = "mfussenegger/nvim-lint" })
+MiniDeps.later(function()
+  MiniDeps.add({ source = "mfussenegger/nvim-lint" })
 
   local function linters_by_ft()
     local lint = require("lint")

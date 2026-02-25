@@ -1,26 +1,22 @@
-local now = require("mini.deps").now
-
-now(function()
+MiniDeps.now(function()
   local mini_starter = require("mini.starter")
-  local mini_pick = require("mini.pick")
-  local mini_extra = require("mini.extra")
   local version = vim.version()
 
   mini_starter.setup({
     header = string.format("NVIM v%d.%d.%d", version.major, version.minor, version.patch),
     items = {
       {
-        action = function() mini_extra.pickers.oldfiles({ current_dir = true }) end,
+        action = function() MiniExtra.pickers.oldfiles({ current_dir = true }) end,
         name = "Previous files",
         section = "",
       },
       {
-        action = function() mini_pick.registry.files() end,
+        action = function() MiniPick.registry.files() end,
         name = "Files search",
         section = "",
       },
       {
-        action = function() mini_pick.registry.grep_live() end,
+        action = function() MiniPick.registry.grep_live() end,
         name = "Words search",
         section = "",
       },

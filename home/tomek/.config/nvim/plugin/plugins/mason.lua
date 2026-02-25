@@ -1,9 +1,7 @@
 local config = require("util.config")
-local add = require("mini.deps").add
-local now = require("mini.deps").now
 
-now(function()
-  add({
+MiniDeps.now(function()
+  MiniDeps.add({
     source = "williamboman/mason.nvim",
     hooks = {
       post_install = function() vim.cmd("MasonUpdate") end,

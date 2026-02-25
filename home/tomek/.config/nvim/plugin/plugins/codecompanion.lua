@@ -4,10 +4,8 @@ if vim.fn.executable("curl") ~= 1 then
 end
 
 local config = require("util.config")
-local add = require("mini.deps").add
-local later = require("mini.deps").later
 
-later(function()
+MiniDeps.later(function()
   local enable = config.get("plugin.codecompanion.enable")
   local spec = {
     source = "olimorris/codecompanion.nvim",
@@ -16,11 +14,11 @@ later(function()
   }
 
   if not enable then
-    add(spec, { bang = true })
+    MiniDeps.add(spec, { bang = true })
     return
   end
 
-  add(spec)
+  MiniDeps.add(spec)
 
   local adapters = require("codecompanion.adapters")
 

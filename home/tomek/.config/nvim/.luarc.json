@@ -2,7 +2,15 @@
   "$schema": "https://raw.githubusercontent.com/LuaLS/vscode-lua/master/setting/schema.json",
   "diagnostics": {
     "enable": true,
-    "globals": ["vim"],
+    "globals": [
+        "MiniBufremove",
+        "MiniClue",
+        "MiniDeps",
+        "MiniExtra",
+        "MiniPick",
+        "MiniStatusline",
+        "vim"
+    ],
     "unusedLocalExclude": [ "_*" ]
   },
   "hint": {

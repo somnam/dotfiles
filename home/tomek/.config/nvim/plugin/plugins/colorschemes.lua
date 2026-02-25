@@ -1,8 +1,5 @@
-local add = require("mini.deps").add
-local now = require("mini.deps").now
-
-now(function()
-  add({ source = "Mofiqul/vscode.nvim" })
+MiniDeps.now(function()
+  MiniDeps.add({ source = "Mofiqul/vscode.nvim" })
 
   vim.api.nvim_create_autocmd("ColorSchemePre", {
     pattern = "vscode",
@@ -39,8 +36,8 @@ now(function()
   })
 end)
 
-now(function()
-  add({ source = "rebelot/kanagawa.nvim" }, { bang = true })
+MiniDeps.now(function()
+  MiniDeps.add({ source = "rebelot/kanagawa.nvim" }, { bang = true })
 
   vim.api.nvim_create_autocmd("ColorSchemePre", {
     pattern = "kanagawa*",
@@ -65,8 +62,8 @@ now(function()
   })
 end)
 
-now(function()
-  add({ source = "catppuccin/nvim", name = "catppuccin" }, { bang = true })
+MiniDeps.now(function()
+  MiniDeps.add({ source = "catppuccin/nvim", name = "catppuccin" }, { bang = true })
 
   vim.api.nvim_create_autocmd("ColorSchemePre", {
     pattern = "catppuccin*",

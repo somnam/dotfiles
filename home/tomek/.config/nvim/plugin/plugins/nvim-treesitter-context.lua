@@ -8,11 +8,9 @@ end
 
 local buffer = require("util.buffer")
 local config = require("util.config")
-local add = require("mini.deps").add
-local later = require("mini.deps").later
 
-later(function()
-  add({
+MiniDeps.later(function()
+  MiniDeps.add({
     source = "nvim-treesitter/nvim-treesitter-context",
     depends = { "nvim-treesitter/nvim-treesitter" },
   })

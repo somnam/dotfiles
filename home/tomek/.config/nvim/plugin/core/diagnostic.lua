@@ -15,5 +15,7 @@ vim.diagnostic.config({
 })
 
 vim.keymap.set("n", "<leader>d", vim.diagnostic.setloclist, {
-  noremap = true, silent = true, desc = "List all buffer diagnostics"
+  noremap = true,
+  silent = true,
+  desc = "List all buffer diagnostics",
 })

@@ -5,10 +5,8 @@ end
 
 local buffer = require("util.buffer")
 local config = require("util.config")
-local add = require("mini.deps").add
-local now = require("mini.deps").now
 
-now(function()
+MiniDeps.now(function()
   local enable = config.get("plugin.copilot.enable")
   local spec = {
     source = "github/copilot.vim",
@@ -19,11 +17,11 @@ now(function()
   }
 
   if not enable then
-    add(spec, { bang = true })
+    MiniDeps.add(spec, { bang = true })
     return
   end
 
-  add(spec)
+  MiniDeps.add(spec)
 
   local copilot_filetypes = {}
   for _, filetype in ipairs(buffer.exclude_filetype) do
