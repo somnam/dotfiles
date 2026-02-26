@@ -98,6 +98,16 @@ local preview = (function()
     state.last_item = nil
   end
 
+  ---@param item table | nil
+  local function show_preview(item)
+    if item ~= nil then
+      local preview_func = MiniPick.get_picker_opts().source.preview
+      pcall(preview_func, state.buf_id, item)
+    else
+      vim.api.nvim_buf_set_lines(state.buf_id, 0, -1, false, {})
+    end
+  end
+
   local function compute_border_size(border)
     local n = type(border) == "table" and #border or 0
     if n == 0 then
@@ -188,12 +198,7 @@ local preview = (function()
       state.last_item = current_item
       create_buf()
       vim.api.nvim_win_set_buf(state.win_id, state.buf_id)
-      if current_item ~= nil then
-        local preview_func = MiniPick.get_picker_opts().source.preview
-        pcall(preview_func, state.buf_id, current_item)
-      else
-        vim.api.nvim_buf_set_lines(state.buf_id, 0, -1, false, {})
-      end
+      show_preview(current_item)
     end
   end
 
