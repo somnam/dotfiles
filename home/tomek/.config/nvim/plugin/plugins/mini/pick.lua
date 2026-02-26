@@ -142,7 +142,6 @@ local preview = (function()
         preview_config.row = window_config.row + (main_height + border_size)
       end
     end
-    return preview_config
   end
 
   local function setup(opts) config = vim.tbl_deep_extend("force", config, opts or {}) end
@@ -213,6 +212,17 @@ local preview = (function()
     reset()
   end
 
+  -- Update preview on picker refresh
+  local mini_pick = require("mini.pick")
+  local mini_pick_refresh = mini_pick.refresh
+  mini_pick.refresh = function()
+    mini_pick_refresh()
+    if mini_pick.is_picker_active() then
+      cache_win_config()
+      vim.schedule(update)
+    end
+  end
+
   return {
     setup = setup,
     scroll = scroll,
@@ -240,16 +250,6 @@ vim.api.nvim_create_autocmd("User", {
   pattern = "MiniPickMatch",
   group = group,
   callback = function() vim.schedule(preview.update) end,
-})
-
-vim.api.nvim_create_autocmd("VimResized", {
-  group = group,
-  callback = function()
-    if MiniPick.is_picker_active() then
-      preview.cache_win_config()
-      vim.schedule(preview.update)
-    end
-  end,
 })
 
 vim.api.nvim_create_autocmd("User", {
