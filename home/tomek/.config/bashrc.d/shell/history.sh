@@ -1,8 +1,7 @@
 
 # command history configuration
-if [ -z "$HISTFILE" ]; then
-  HISTFILE=$HOME/.bash_history
-fi
+mkdir -p "${XDG_STATE_HOME:=$HOME/.local/state}/bash"
+HISTFILE="$XDG_STATE_HOME/bash/bash_history"
 
 # append to the history file, don't overwrite it
 shopt -s histappend
@@ -27,14 +26,14 @@ shopt -s checkwinsize
 PROMPT_COMMAND="history -a;${PROMPT_COMMAND}"
 
 # for setting history length see HISTSIZE and HISTFILESIZE in bash(1)
-HISTSIZE=20000
-HISTFILESIZE=20000
+HISTSIZE=25000
+HISTFILESIZE=100000
 
 # avoid duplicate entries
 HISTCONTROL="erasedups:ignoreboth"
 
 # don't record some commands
-export HISTIGNORE="&:[ ]*:exit:ls:bg:fg:history:clear"
+export HISTIGNORE="&:[ ]*:exit:ls:ll:bg:fg:history:clear:cd:pwd"
 
 # enable incremental history search with up/down arrows (also Readline goodness)
 # learn more about this here: http://codeinthehole.com/writing/the-most-important-command-line-tip-incremental-hi
