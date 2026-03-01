@@ -64,24 +64,30 @@ local preview = (function()
     cache.win_config = {}
   end
 
-  local function has_buf() return state.buf_id ~= nil and vim.api.nvim_buf_is_valid(state.buf_id) end
   local function has_win() return state.win_id ~= nil and vim.api.nvim_win_is_valid(state.win_id) end
 
   local function create_buf()
     state.buf_id = vim.api.nvim_create_buf(false, true)
     vim.api.nvim_buf_set_name(state.buf_id, "minipick://" .. state.buf_id .. "/preview")
     vim.bo[state.buf_id].bufhidden = "wipe"
+    vim.bo[state.buf_id].matchpairs = ""
+    vim.b[state.buf_id].minicursorword_disable = true
+    vim.b[state.buf_id].miniindentscope_disable = true
   end
 
   local function create_win(win_config)
+    win_config.style = "minimal"
     state.win_id = vim.api.nvim_open_win(state.buf_id, false, win_config)
+    vim.wo[state.win_id].foldenable = false
+    vim.wo[state.win_id].foldmethod = "manual"
+    vim.wo[state.win_id].linebreak = true
+    vim.wo[state.win_id].scrolloff = 0
     vim.wo[state.win_id].winhighlight = "NormalFloat:MiniPickNormal,FloatBorder:MiniPickBorder"
+    vim.wo[state.win_id].wrap = true
   end
 
   local function close_buf()
-    if has_buf() then
-      pcall(vim.api.nvim_buf_delete, state.buf_id, { force = true })
-    end
+    pcall(vim.api.nvim_buf_delete, state.buf_id, { force = true })
     state.buf_id = nil
   end
 
@@ -160,7 +166,8 @@ local preview = (function()
       return
     end
     local window_config = vim.api.nvim_win_get_config(picker_state.windows.main)
-    for _, key in ipairs({ "anchor", "border", "col", "height", "relative", "row", "width" }) do
+    local keys = { "anchor", "border", "col", "height", "relative", "row", "width", "zindex" }
+    for _, key in ipairs(keys) do
       cache.win_config[key] = window_config[key]
     end
   end
@@ -170,12 +177,9 @@ local preview = (function()
       close()
       return
     end
+
     local picker_state = MiniPick.get_picker_state()
     if not (picker_state.windows and picker_state.windows.main) then
-      return
-    end
-    local main_buffer = vim.api.nvim_win_get_buf(picker_state.windows.main)
-    if main_buffer == picker_state.buffers.preview then
       return
     end
 
@@ -296,14 +300,14 @@ MiniDeps.now(function()
         func = function() move_caret(1) end,
       },
       move_start = "",
-      move_down_preview = {
+      move_down_side_preview = {
         char = "<Down>",
         func = function()
           feedkeys("<C-n>")
           vim.schedule(preview.update)
         end,
       },
-      move_up_preview = {
+      move_up_side_preview = {
         char = "<Up>",
         func = function()
           feedkeys("<C-p>")
@@ -312,36 +316,35 @@ MiniDeps.now(function()
       },
       refine = "<C-g>",
       refine_marked = "<M-g>",
-      scroll_down_preview = {
+      scroll_down_side_preview = {
         char = "<PageDown>",
         func = function()
           feedkeys("<C-f>")
           vim.schedule(preview.update)
         end,
       },
-      scroll_up_preview = {
+      scroll_side_preview_down = {
+        char = "<S-Down>",
+        func = function() preview.scroll("down") end,
+      },
+      scroll_side_preview_left = {
+        char = "<S-Left>",
+        func = function() preview.scroll("left") end,
+      },
+      scroll_side_preview_right = {
+        char = "<S-Right>",
+        func = function() preview.scroll("right") end,
+      },
+      scroll_side_preview_up = { char = "<S-Up>", func = function() preview.scroll("up") end },
+      scroll_up_side_preview = {
         char = "<PageUp>",
         func = function()
           feedkeys("<C-b>")
           vim.schedule(preview.update)
         end,
       },
-      scroll_preview_down = {
-        char = "<S-Down>",
-        func = function() preview.scroll("down") end,
-      },
-      scroll_preview_left = {
-        char = "<S-Left>",
-        func = function() preview.scroll("left") end,
-      },
-      scroll_preview_right = {
-        char = "<S-Right>",
-        func = function() preview.scroll("right") end,
-      },
-      scroll_preview_up = { char = "<S-Up>", func = function() preview.scroll("up") end },
-      toggle_info = "<F1>",
       toggle_preview = "",
-      toggle_preview_tab = { char = "<Tab>", func = preview.toggle },
+      toggle_side_preview = { char = "<Tab>", func = preview.toggle },
     },
     window = {
       config = function()
