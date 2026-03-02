@@ -272,42 +272,27 @@ MiniDeps.now(function()
       choose_marked = choose_marked,
     },
     mappings = {
-      choose_marked_alt = {
-        char = "<M-q>",
-        func = function() feedkeys("<M-CR>") end,
-      },
+      choose_marked_alt = { char = "<M-q>", func = function() feedkeys("<M-CR>") end },
       delete_word = "<M-BS>",
       mark = "<M-x>",
       mark_all = "<M-a>",
-      move_caret_end = {
-        char = "<C-e>",
-        func = function() move_caret(math.huge) end,
-      },
-      move_caret_end_nav = {
-        char = "<End>",
-        func = function() move_caret(math.huge) end,
-      },
+      move_caret_end = { char = "<C-e>", func = function() move_caret(math.huge) end },
+      move_caret_end_nav = { char = "<End>", func = function() move_caret(math.huge) end },
       move_caret_next_word = { char = "<C-Right>", func = move_caret_next_word },
-      move_caret_next_word_alt = {
-        char = "<M-Right>",
-        func = move_caret_next_word,
-      },
+      move_caret_next_word_alt = { char = "<M-Right>", func = move_caret_next_word },
       move_caret_prev_word = { char = "<C-Left>", func = move_caret_prev_word },
       move_caret_prev_word_alt = { char = "<M-Left>", func = move_caret_prev_word },
       move_caret_start = { char = "<C-a>", func = function() move_caret(1) end },
-      move_caret_start_nav = {
-        char = "<Home>",
-        func = function() move_caret(1) end,
-      },
-      move_start = "",
-      move_down_side_preview = {
+      move_caret_start_nav = { char = "<Home>", func = function() move_caret(1) end },
+      move_down_arrow = {
         char = "<Down>",
         func = function()
           feedkeys("<C-n>")
           vim.schedule(preview.update)
         end,
       },
-      move_up_side_preview = {
+      move_start = "",
+      move_up_arrow = {
         char = "<Up>",
         func = function()
           feedkeys("<C-p>")
@@ -316,7 +301,7 @@ MiniDeps.now(function()
       },
       refine = "<C-g>",
       refine_marked = "<M-g>",
-      scroll_down_side_preview = {
+      scroll_down_nav = {
         char = "<PageDown>",
         func = function()
           feedkeys("<C-f>")
@@ -327,16 +312,8 @@ MiniDeps.now(function()
         char = "<S-Down>",
         func = function() preview.scroll("down") end,
       },
-      scroll_side_preview_left = {
-        char = "<S-Left>",
-        func = function() preview.scroll("left") end,
-      },
-      scroll_side_preview_right = {
-        char = "<S-Right>",
-        func = function() preview.scroll("right") end,
-      },
       scroll_side_preview_up = { char = "<S-Up>", func = function() preview.scroll("up") end },
-      scroll_up_side_preview = {
+      scroll_up_nav = {
         char = "<PageUp>",
         func = function()
           feedkeys("<C-b>")
@@ -354,7 +331,7 @@ MiniDeps.now(function()
         local col = math.floor(0.5 * (vim.o.columns - width))
         return { anchor = "NW", height = height, width = width, row = row, col = col }
       end,
-      prompt_caret = "┃",
+      prompt_caret = "│",
       prompt_prefix = "❯ ",
     },
   })
