@@ -1,9 +1,8 @@
 -- utils
 
 ---@param keys string
-local function feedkeys(keys)
-  keys = vim.api.nvim_replace_termcodes(keys, true, true, true)
-  vim.api.nvim_feedkeys(keys, "n", true)
+local function input(keys)
+  vim.api.nvim_input(vim.api.nvim_replace_termcodes(keys, true, true, true))
 end
 
 ---@param items table
@@ -31,7 +30,7 @@ local function move_caret(caret)
   caret = math.max(1, math.min(caret, query_end))
   local move = caret - current_caret
   local keys = string.rep(move >= 0 and "<Right>" or "<Left>", math.abs(move))
-  feedkeys(keys)
+  input(keys)
 end
 
 local function move_caret_prev_word()
@@ -75,6 +74,7 @@ local preview = (function()
     vim.b[state.buf_id].miniindentscope_disable = true
   end
 
+  ---@param win_config vim.api.keyset.win_config
   local function create_win(win_config)
     win_config.style = "minimal"
     state.win_id = vim.api.nvim_open_win(state.buf_id, false, win_config)
@@ -114,6 +114,7 @@ local preview = (function()
     end
   end
 
+  ---@param border string[] | string
   local function compute_border_size(border)
     local n = type(border) == "table" and #border or 0
     if n == 0 then
@@ -125,6 +126,8 @@ local preview = (function()
     end
   end
 
+  ---@param window_config vim.api.keyset.win_config
+  ---@param preview_config vim.api.keyset.win_config
   local function compute_layout(window_config, preview_config)
     local preview_ratio = config.ratio
     local border_size = compute_border_size(window_config.border)
@@ -150,8 +153,10 @@ local preview = (function()
     end
   end
 
+  ---@param opts table | nil
   local function setup(opts) config = vim.tbl_deep_extend("force", config, opts or {}) end
 
+  ---@param direction "up" | "down" | "left" | "right"
   local function scroll(direction)
     if not has_win() then
       return
@@ -272,7 +277,7 @@ MiniDeps.now(function()
       choose_marked = choose_marked,
     },
     mappings = {
-      choose_marked_alt = { char = "<M-q>", func = function() feedkeys("<M-CR>") end },
+      choose_marked_alt = { char = "<M-q>", func = function() input("<M-CR>") end },
       delete_word = "<M-BS>",
       mark = "<M-x>",
       mark_all = "<M-a>",
@@ -287,7 +292,7 @@ MiniDeps.now(function()
       move_down_arrow = {
         char = "<Down>",
         func = function()
-          feedkeys("<C-n>")
+          input("<C-n>")
           vim.schedule(preview.update)
         end,
       },
@@ -295,7 +300,7 @@ MiniDeps.now(function()
       move_up_arrow = {
         char = "<Up>",
         func = function()
-          feedkeys("<C-p>")
+          input("<C-p>")
           vim.schedule(preview.update)
         end,
       },
@@ -304,7 +309,7 @@ MiniDeps.now(function()
       scroll_down_nav = {
         char = "<PageDown>",
         func = function()
-          feedkeys("<C-f>")
+          input("<C-f>")
           vim.schedule(preview.update)
         end,
       },
@@ -316,7 +321,7 @@ MiniDeps.now(function()
       scroll_up_nav = {
         char = "<PageUp>",
         func = function()
-          feedkeys("<C-b>")
+          input("<C-b>")
           vim.schedule(preview.update)
         end,
       },
@@ -343,7 +348,7 @@ MiniDeps.now(function()
     if MiniPick.is_picker_active() then
       local clip = vim.o.clipboard
       local reg = clip:find("unnamedplus") and "+" or (clip:find("unnamed") and "*" or '"')
-      feedkeys("<C-r>" .. reg)
+      input("<C-r>" .. reg)
       return
     end
     return vim_paste(...)
