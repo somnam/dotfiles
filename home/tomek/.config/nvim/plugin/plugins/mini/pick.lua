@@ -1,8 +1,8 @@
 -- utils
 
 ---@param keys string
-local function input(keys)
-  vim.api.nvim_input(vim.api.nvim_replace_termcodes(keys, true, true, true))
+local function feedkeys(keys)
+  vim.api.nvim_feedkeys(vim.api.nvim_replace_termcodes(keys, true, true, true), "n", true)
 end
 
 ---@param items table
@@ -30,7 +30,7 @@ local function move_caret(caret)
   caret = math.max(1, math.min(caret, query_end))
   local move = caret - current_caret
   local keys = string.rep(move >= 0 and "<Right>" or "<Left>", math.abs(move))
-  input(keys)
+  feedkeys(keys)
 end
 
 local function move_caret_prev_word()
@@ -277,7 +277,7 @@ MiniDeps.now(function()
       choose_marked = choose_marked,
     },
     mappings = {
-      choose_marked_alt = { char = "<M-q>", func = function() input("<M-CR>") end },
+      choose_marked_alt = { char = "<M-q>", func = function() feedkeys("<M-CR>") end },
       delete_word = "<M-BS>",
       mark = "<M-x>",
       mark_all = "<M-a>",
@@ -292,7 +292,7 @@ MiniDeps.now(function()
       move_down_arrow = {
         char = "<Down>",
         func = function()
-          input("<C-n>")
+          feedkeys("<C-n>")
           vim.schedule(preview.update)
         end,
       },
@@ -300,7 +300,7 @@ MiniDeps.now(function()
       move_up_arrow = {
         char = "<Up>",
         func = function()
-          input("<C-p>")
+          feedkeys("<C-p>")
           vim.schedule(preview.update)
         end,
       },
@@ -309,7 +309,7 @@ MiniDeps.now(function()
       scroll_down_nav = {
         char = "<PageDown>",
         func = function()
-          input("<C-f>")
+          feedkeys("<C-f>")
           vim.schedule(preview.update)
         end,
       },
@@ -321,7 +321,7 @@ MiniDeps.now(function()
       scroll_up_nav = {
         char = "<PageUp>",
         func = function()
-          input("<C-b>")
+          feedkeys("<C-b>")
           vim.schedule(preview.update)
         end,
       },
@@ -348,7 +348,7 @@ MiniDeps.now(function()
     if MiniPick.is_picker_active() then
       local clip = vim.o.clipboard
       local reg = clip:find("unnamedplus") and "+" or (clip:find("unnamed") and "*" or '"')
-      input("<C-r>" .. reg)
+      feedkeys("<C-r>" .. reg)
       return
     end
     return vim_paste(...)
