@@ -26,8 +26,14 @@ python_venv_hook()
         deactivate
     fi
 
+    unset -v VIRTUAL_ENV_PROMPT
+
     if [[ -f "$venv_dir/bin/activate" ]]; then
         source "$venv_dir/bin/activate"
+    fi
+
+    if [[ -z "$VIRTUAL_ENV_PROMPT" ]]; then
+        VIRTUAL_ENV_PROMPT="$(basename "$venv_dir")"
     fi
 
     return $retval
