@@ -1,15 +1,14 @@
 vim.diagnostic.config({
-  virtual_text = {
-    prefix = "",
-    source = true,
-    current_line = true,
-  },
-  underline = false,
-  update_in_insert = false,
-  severity_sort = true,
   float = {
-    focusable = true,
     border = "single",
+    focusable = true,
+    source = true,
+  },
+  severity_sort = true,
+  underline = false,
+  virtual_text = {
+    current_line = true,
+    prefix = "",
     source = true,
   },
 })

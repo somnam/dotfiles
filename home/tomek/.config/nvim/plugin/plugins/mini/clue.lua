@@ -39,11 +39,7 @@ MiniDeps.now(function()
       mini_clue.gen_clues.z(),
     },
     window = {
-      config = {
-        width = "auto",
-        row = "auto",
-        col = "auto",
-      },
+      config = { width = "auto" },
     },
   })
 end)

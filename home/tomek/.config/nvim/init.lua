@@ -35,13 +35,6 @@ local function setup()
     vim.cmd("DepsClean!")
     vim.cmd("DepsUpdate")
   end, { desc = "Sync plugins" })
-
-  vim.keymap.set(
-    "n",
-    "<leader>s",
-    ":DepsSync<Enter>",
-    { noremap = true, silent = true, desc = "Sync plugins" }
-  )
 end
 
 bootstrap()

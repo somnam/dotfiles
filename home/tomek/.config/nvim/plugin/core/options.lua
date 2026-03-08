@@ -1,22 +1,13 @@
 -- Default options
 
-vim.opt.incsearch = true -- Incremental search
-vim.opt.hlsearch = true -- Highlight search results.
 vim.opt.ignorecase = true -- Do case insensitive matching
 vim.opt.smartcase = true -- Do smart case matching
 vim.opt.iskeyword:append("-") -- Treat dash separated words as a word text object
 
-vim.opt.showcmd = true -- Show (partial) command in status line.
-vim.opt.laststatus = 2 -- Always display statusbar
-vim.opt.wildmenu = true -- Use wildmenu
 vim.opt.wildmode = "full:longest"
-vim.opt.wildoptions = "pum,tagfile"
 pcall(function() vim.opt.wildoptions = "pum,tagfile,fuzzy" end)
 
 vim.opt.autowrite = true -- Automatically save before commands like :next and :make
-vim.opt.ruler = true -- Show cursor position all the time
-vim.opt.history = 10000 -- Keep n lines of command line history
-
 vim.opt.wrap = true -- Line wrapping
 vim.api.nvim_create_autocmd("FileType", {
   pattern = "csv",
@@ -32,14 +23,11 @@ vim.opt.cursorcolumn = false -- Don't highlight current cursor column
 vim.opt.signcolumn = "yes" -- Show sign column
 vim.opt.number = true -- Display line numbers
 vim.opt.numberwidth = 2 -- Set min. number column width
-vim.opt.hidden = true -- Hide buffer instead of closing it
 vim.opt.mouse = "nvi" -- Mouse modes
 vim.opt.scrolloff = 5 -- Minimal number of lines around the cursor
 vim.opt.virtualedit = "block" -- Allow cursor to move past EOL in visual block mode
 
-vim.opt.autoindent = true -- Set global autoindent on
 vim.opt.expandtab = true -- Expand tabs to spaces
-vim.opt.smarttab = true -- Smart tab
 vim.opt.shiftwidth = 4 -- Set default tabs behavior
 vim.opt.tabstop = 4
 vim.opt.softtabstop = 4
@@ -53,17 +41,12 @@ vim.api.nvim_create_autocmd("FileType", {
   end,
 })
 
-vim.opt.timeout = true -- Setting for mappings
-vim.opt.ttimeout = true -- Time waited for key press(es) to complete, faster key response
-vim.opt.timeoutlen = 1000 -- Set to default value
 vim.opt.ttimeoutlen = 25 -- Set to unnoticeable small value
 vim.opt.updatetime = 300 -- Longer update time leads to noticeable delays
 vim.opt.synmaxcol = 1024 -- Be forgiving with long lines
 
 vim.opt.clipboard = "unnamedplus" -- Use the "global" buffer for copy and paste
 vim.opt.undofile = true -- Enable persistent undo
-vim.opt.autoread = true -- Read file when modified outside Vim
-vim.opt.inccommand = "nosplit" -- Shows the effects of a command incrementally.
 vim.opt.list = true -- Display whitespace info
 vim.opt.listchars = "tab:>.,trail:.,extends:…,precedes:…,nbsp:␣" -- Display specific characters
 vim.opt.fillchars = { eob = " " } -- Display empty fill characters
@@ -100,7 +83,6 @@ vim.api.nvim_create_autocmd("BufReadPost", {
 })
 
 -- Completion options
-vim.opt.shortmess:append("C") -- Shut off completion messages
 vim.opt.shortmess:append("c")
 vim.opt.complete:remove("i") -- Prevent vim lag due to searching include files and tags
 vim.opt.complete:remove("t")

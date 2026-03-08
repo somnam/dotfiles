@@ -33,20 +33,16 @@ MiniDeps.now(function()
 
   ---@param args table
   local function section_filesize(args)
-    if vim.bo.filetype == "" then
-      return ""
-    end
-
-    if MiniStatusline.is_truncated(args.trunc_width) or vim.bo.buftype ~= "" then
+    if
+      MiniStatusline.is_truncated(args.trunc_width)
+      or vim.bo.filetype == ""
+      or vim.bo.buftype ~= ""
+    then
       return ""
     end
 
     local size = file.current_file_size()
-    if not size then
-      return ""
-    end
-
-    return string.format("%s %s", args.icon, size)
+    return size and string.format("%s %s", args.icon, size) or ""
   end
 
   local function section_location(args)
@@ -59,20 +55,12 @@ MiniDeps.now(function()
 
   ---@param args table
   local function section_git(args)
-    args = vim.tbl_extend("force", { remove_type = true }, args or {})
-
     local summary = vim.b.minigit_summary_string or vim.b.gitsigns_head
     if MiniStatusline.is_truncated(args.trunc_width) or summary == nil then
       return ""
     end
 
-    if summary == "" then
-      summary = " -"
-    end
-
-    if args.remove_type then
-      summary = summary:gsub("^%w+/", "")
-    end
+    summary = summary == "" and "-" or summary:gsub("^%w+/", "")
 
     if args.shorten_width and vim.fn.strchars(summary) > args.shorten_width then
       summary = vim.fn.strcharpart(summary, 0, args.shorten_width) .. "…"

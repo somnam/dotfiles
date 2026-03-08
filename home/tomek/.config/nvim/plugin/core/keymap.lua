@@ -25,20 +25,6 @@ vim.keymap.set("", "<S-l>", ":tabn<Enter>", opts)
 -- Clear search and update diff
 vim.keymap.set("n", "<Esc>", ":nohlsearch | diffupdate<Enter>", opts)
 
--- Leader mappings
-vim.keymap.set(
-  "n",
-  "<leader>n",
-  ":enew<Enter>",
-  vim.tbl_extend("keep", { desc = "Edit a new buffer" }, opts)
-)
-vim.keymap.set(
-  "n",
-  "<leader>q",
-  ":qall<Enter>",
-  vim.tbl_extend("keep", { desc = "Exit Neovim" }, opts)
-)
-
 -- Popup menu mappings
 vim.keymap.set("i", "<CR>", function()
   if vim.fn.pumvisible() ~= 0 then
