@@ -35,6 +35,7 @@ MiniDeps.now(function()
       mini_clue.gen_clues.g(),
       mini_clue.gen_clues.marks(),
       mini_clue.gen_clues.registers(),
+      mini_clue.gen_clues.square_brackets(),
       mini_clue.gen_clues.windows(),
       mini_clue.gen_clues.z(),
     },
