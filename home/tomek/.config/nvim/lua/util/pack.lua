@@ -1,3 +1,6 @@
+local config = require("util.config")
+local branch = config.get("plugin.mini.branch", "main")
+
 local function bootstrap()
   local mini_path = vim.fn.stdpath("data") .. "/site/pack/deps/start/mini.nvim"
   if require("util.file").file_exists(mini_path) then
@@ -10,7 +13,7 @@ local function bootstrap()
     "clone",
     "--filter=blob:none",
     "https://github.com/nvim-mini/mini.nvim",
-    "--branch=main",
+    "--branch=" .. branch,
     mini_path,
   })
   if vim.v.shell_error ~= 0 then
@@ -33,6 +36,8 @@ M.init = function()
   bootstrap()
 
   require("mini.deps").setup()
+
+  MiniDeps.add({ source = "nvim-mini/mini.nvim", checkout = branch })
 
   vim.api.nvim_create_user_command("DepsSync", function()
     vim.cmd("DepsClean!")
