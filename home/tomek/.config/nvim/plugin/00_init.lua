@@ -25,9 +25,7 @@ local function bootstrap()
   vim.cmd('echo "Installed `mini.nvim`" | redraw')
 end
 
-local M = {}
-
-M.init = function()
+local function init()
   if vim.fn.executable("git") ~= 1 then
     vim.notify("git not installed; plugins skipped.", vim.log.levels.ERROR)
     return
@@ -45,4 +43,4 @@ M.init = function()
   end, { desc = "Sync plugins" })
 end
 
-return M
+init()
