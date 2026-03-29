@@ -1,5 +1,1 @@
-" Load configuration files.
-runtime!
-    \ core/options.vim
-    \ core/keymap.vim
-    \ core/appearance.vim
+runtime! core/**/*.vim
