@@ -30,7 +30,7 @@ command! -nargs=1 Files call setqflist([], ' ', {
     \ }) | redraw! | copen | if !empty(getqflist()) | cc | endif
 nnoremap <silent> <leader>f :exe 'Files ' . input('Files: ')<Enter>
 
-" Cwd history
+" Working directory history
 command! CwdHistory exe
     \ 'filter #' .
     \ escape(fnamemodify(getcwd(), ':~'), '~') .
@@ -113,9 +113,25 @@ fun! s:git_line_blame() abort
         \ {'moved': 'any', 'padding': [0,1,0,1]})
 endfun
 
+" Git log file commits
+fun! s:git_log_file() abort
+    let l:content = systemlist('git -C ' . shellescape(expand('%:p:h')) .
+        \ ' log -p -- ' . shellescape(expand('%:p')))
+    if v:shell_error
+        echo 'Not in git or file not tracked'
+        return
+    endif
+    vert new
+    setlocal buftype=nofile bufhidden=wipe noswapfile
+    setlocal filetype=diff
+    call setline(1, l:content)
+endfun
+
 command! Gdiff call s:git_diff()
 command! Gstatus call s:git_status()
 command! Gblame call s:git_line_blame()
+command! Glog call s:git_log_file()
 nnoremap <silent> <leader>gd :Gdiff<Enter>
 nnoremap <silent> <leader>gs :Gstatus<Enter>
 nnoremap <silent> <leader>gb :Gblame<Enter>
+nnoremap <silent> <leader>gl :Glog<Enter>
