@@ -25,7 +25,7 @@ if has('patch-9.0.1799')
 endif
 
 if has("patch-9.1.0375")
-    packad comment
+    packadd comment
 endif
 
 if has('patch-9.1.1228')
@@ -37,4 +37,3 @@ if has('patch-9.1.1999')
     packadd osc52
     set clipmethod+=osc52
 endif
-

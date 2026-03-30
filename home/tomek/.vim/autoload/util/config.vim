@@ -6,6 +6,9 @@ fun! util#config#Get(key, ...) abort
 
     let l:value = g:json_config
     for l:k in l:keys
+        if type(l:value) != v:t_dict
+            return l:default
+        endif
         let l:value = get(l:value, l:k, v:null)
         if l:value is v:null
             return l:default

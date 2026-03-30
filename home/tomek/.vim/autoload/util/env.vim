@@ -1,6 +1,3 @@
-let s:virtual_env = $VIRTUAL_ENV
-let s:virtual_env_bin = s:virtual_env != '' ? s:virtual_env . '/bin' : ''
-
 fun! util#env#AddPythonVirtualEnvBinToPath() abort
     if !empty($VIRTUAL_ENV)
         let l:path_sep = util#file#PathSeparator()

@@ -15,8 +15,8 @@ nnoremap <silent> j gj
 nnoremap <silent> k gk
 
 " Switch tabs
-noremap <silent> <S-h> :tabp<Enter>
-noremap <silent> <S-l> :tabn<Enter>
+nnoremap <silent> <S-h> :tabp<Enter>
+nnoremap <silent> <S-l> :tabn<Enter>
 
 " Clear search and update diff
 nnoremap <silent> <Esc> :nohlsearch \| diffupdate<Enter>
@@ -27,11 +27,17 @@ nnoremap <silent> <leader>q :execute
     \ ? "copen"
     \ : "cclose"<Enter>
 
+" Quick fix navigation
+nnoremap <silent> ]q :cnext<Enter>
+nnoremap <silent> [q :cprev<Enter>
+nnoremap <silent> ]Q :clast<Enter>
+nnoremap <silent> [Q :cfirst<Enter>
+
 " Pop up menu mappings
 fun! s:confirm_pum_or_newline() abort
     if pumvisible()
-        let info = complete_info()
-        return get(info, "selected", -1) != -1 ? "\<C-y>" : "\<C-n>\<C-y>"
+        let l:info = complete_info()
+        return get(l:info, "selected", -1) != -1 ? "\<C-y>" : "\<C-n>\<C-y>"
     endif
     return "\<CR>"
 endfun
