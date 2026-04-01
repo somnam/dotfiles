@@ -1,5 +1,3 @@
-vim.g.mapleader = " "
-
 local opts = { noremap = true, silent = true }
 
 -- Move between windows
@@ -35,6 +33,19 @@ vim.keymap.set("i", "<CR>", function()
 
   return "<CR>"
 end, { expr = true })
+
+-- Toggle quickfix window
+vim.keymap.set("n", "<leader>q", function()
+  for _, win in ipairs(vim.api.nvim_list_wins()) do
+    local buf = vim.api.nvim_win_get_buf(win)
+    local buftype = vim.api.nvim_get_option_value("buftype", { buf = buf })
+    if buftype == "quickfix" then
+      vim.cmd("cclose")
+      return
+    end
+  end
+  vim.cmd("copen")
+end, opts)
 
 -- Terminal window navigation
 for _, key in ipairs({ "w", "h", "j", "k", "l", "r", "W", "H", "J", "K", "L", "R" }) do

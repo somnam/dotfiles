@@ -15,10 +15,7 @@ augroup END
 nnoremap <silent> <leader>e :Lexplore<Enter>
 
 " Enable optional packages
-
-if has('patch-7.4.1649')
-    packadd matchit
-endif
+packadd matchit
 
 if has('patch-9.0.1799')
     packadd editorconfig

@@ -1,12 +1,10 @@
-local python = require("util.python")
-
 return {
   init_options = {
     completion = {
       disableSnippets = true,
     },
     workspace = {
-      environmentPath = python.virtual_env,
+      environmentPath = vim.env.VIRTUAL_ENV,
     },
   },
   on_attach = function(client, bufnr)

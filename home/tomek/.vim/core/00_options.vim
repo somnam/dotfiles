@@ -60,6 +60,9 @@ set switchbuf=uselast " Switch to last used buffer
 if exists('+jumpoptions')
     set jumpoptions=stack " Browser-like jumplist behavior
 endif
+set virtualedit=block   " Free cursor movement in visual block mode
+set nrformats-=octal    " Don't treat 007 as octal for <C-a>/<C-x>
+set belloff=all     " Disable all bell sounds
 
 set autoindent      " Set global autoindent on
 set expandtab       " Expand tabs to spaces
@@ -68,8 +71,6 @@ set shiftwidth=4    " Set default tabs behavior
 set tabstop=4
 set softtabstop=4
 set backspace=indent,eol,start " Make backspace work like in most programs
-set virtualedit=block   " Free cursor movement in visual block mode
-set nrformats-=octal    " Don't treat 007 as octal for <C-a>/<C-x>
 " Indentation settings:
 "     tabstop     : n-space tab width
 "     shiftwidth  : shift width with < and > for VISUAL indenting
@@ -82,7 +83,6 @@ set timeoutlen=1000 " Set to default value
 set ttimeoutlen=25  " Set to unnoticeable small value
 set updatetime=300  " Longer update time leads to noticeable delays
 set synmaxcol=1024  " Be forgiving with long lines
-set belloff=all     " Disable all bell sounds
 
 set clipboard=unnamedplus   " Use the system clipboard for copy and paste
 if has('mac')
@@ -172,8 +172,8 @@ augroup filetype_settings
     au FileType qf setlocal nowrap nonumber norelativenumber
         \ | nnoremap <buffer> q :cclose<CR>
         \ | nnoremap <buffer> o <CR>:cclose<CR>
-        \ | nnoremap <buffer> <C-n> :silent! cnewer<CR>
-        \ | nnoremap <buffer> <C-p> :silent! colder<CR>
+        \ | nnoremap <buffer> <C-n> :silent! cnext<CR>
+        \ | nnoremap <buffer> <C-p> :silent! cprevious<CR>
 augroup END
 
 " Jump to last position when reopening a file

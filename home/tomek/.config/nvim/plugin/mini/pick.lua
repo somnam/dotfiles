@@ -54,6 +54,7 @@ local preview = (function()
   local state = { win_id = nil, buf_id = nil, last_item = nil, is_hidden = false }
   local cache = { win_config = {} }
   local scroll_map = { up = "<C-b>", down = "<C-f>", left = "zH", right = "zL" }
+  local redraw_timer = vim.uv.new_timer()
 
   local function reset()
     state.win_id = nil
@@ -165,6 +166,22 @@ local preview = (function()
     vim.api.nvim_win_call(state.win_id, function() vim.cmd("normal! " .. keys) end)
   end
 
+  local function ensure_redraw()
+    redraw_timer:stop()
+    local n = 0
+    redraw_timer:start(
+      0,
+      50,
+      vim.schedule_wrap(function()
+        vim.cmd("redraw")
+        n = n + 1
+        if n >= 5 then
+          redraw_timer:stop()
+        end
+      end)
+    )
+  end
+
   local function cache_win_config()
     local picker_state = MiniPick.get_picker_state()
     if not (picker_state.windows and picker_state.windows.main) then
@@ -208,6 +225,8 @@ local preview = (function()
       vim.api.nvim_win_set_buf(state.win_id, state.buf_id)
       show_preview(current_item)
     end
+
+    ensure_redraw()
   end
 
   local function toggle()
@@ -217,6 +236,7 @@ local preview = (function()
   end
 
   local function stop()
+    redraw_timer:stop()
     close()
     reset()
   end
