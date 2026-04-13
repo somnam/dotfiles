@@ -1,2 +1,0 @@
-# Disable touchscreen
-ACTION=="add|change", KERNEL=="i2c-FTSC1000:00", SUBSYSTEM=="i2c", RUN+="/usr/local/bin/disable_touchscreen"
