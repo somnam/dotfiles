@@ -3,8 +3,8 @@ if vim.fn.executable("git") ~= 1 then
   return
 end
 
-MiniDeps.later(function()
-  MiniDeps.add({ source = "lewis6991/gitsigns.nvim" })
+Config.later(function()
+  vim.pack.add({ "https://github.com/lewis6991/gitsigns.nvim" })
 
   local function on_attach(bufnr)
     local opts = { noremap = true, silent = true }

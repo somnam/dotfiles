@@ -1,6 +1,7 @@
-local buffer = require("util.buffer")
+Config.now(function()
+  vim.pack.add({ "https://github.com/nvim-mini/mini.nvim" })
+  local buffer = require("util.buffer")
 
-MiniDeps.now(function()
   vim.api.nvim_create_autocmd({ "BufReadPost", "FileType" }, {
     group = vim.api.nvim_create_augroup("maybe_disable_mini_completion", { clear = true }),
     callback = function(ctx)

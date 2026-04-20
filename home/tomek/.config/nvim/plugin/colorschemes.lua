@@ -1,5 +1,5 @@
-MiniDeps.now(function()
-  MiniDeps.add({ source = "Mofiqul/vscode.nvim" })
+Config.now(function()
+  vim.pack.add({ "https://github.com/Mofiqul/vscode.nvim" })
 
   vim.api.nvim_create_autocmd("ColorSchemePre", {
     pattern = "vscode",
@@ -36,8 +36,8 @@ MiniDeps.now(function()
   })
 end)
 
-MiniDeps.now(function()
-  MiniDeps.add({ source = "rebelot/kanagawa.nvim" }, { bang = true })
+Config.now(function()
+  vim.pack.add({ "https://github.com/rebelot/kanagawa.nvim" })
 
   vim.api.nvim_create_autocmd("ColorSchemePre", {
     pattern = "kanagawa*",
@@ -62,8 +62,8 @@ MiniDeps.now(function()
   })
 end)
 
-MiniDeps.now(function()
-  MiniDeps.add({ source = "catppuccin/nvim", name = "catppuccin" }, { bang = true })
+Config.now(function()
+  vim.pack.add({ { src = "https://github.com/catppuccin/nvim", name = "catppuccin" } })
 
   vim.api.nvim_create_autocmd("ColorSchemePre", {
     pattern = "catppuccin*",

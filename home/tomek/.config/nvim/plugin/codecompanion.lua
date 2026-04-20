@@ -5,20 +5,15 @@ end
 
 local config = require("util.config")
 
-MiniDeps.later(function()
-  local enable = config.get("plugin.codecompanion.enable")
-  local spec = {
-    source = "olimorris/codecompanion.nvim",
-    checkout = "main",
-    depends = { "nvim-lua/plenary.nvim" },
-  }
+Config.later(function()
+  vim.pack.add({
+    "https://github.com/nvim-lua/plenary.nvim",
+    "https://github.com/olimorris/codecompanion.nvim",
+  })
 
-  if not enable then
-    MiniDeps.add(spec, { bang = true })
+  if not config.get("plugin.codecompanion.enable") then
     return
   end
-
-  MiniDeps.add(spec)
 
   local adapters = require("codecompanion.adapters")
 

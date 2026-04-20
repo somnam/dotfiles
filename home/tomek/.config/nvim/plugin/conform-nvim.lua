@@ -2,8 +2,8 @@ local buffer = require("util.buffer")
 local config = require("util.config")
 local tool = require("util.tool")
 
-MiniDeps.later(function()
-  MiniDeps.add({ source = "stevearc/conform.nvim" })
+Config.on_filetype("*", function()
+  vim.pack.add({ "https://github.com/stevearc/conform.nvim" })
 
   ---@return { [string]: string[] }
   local function formatters_by_ft() return config.get("plugin.conform", {}) end

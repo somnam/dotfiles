@@ -9,10 +9,10 @@ end
 local buffer = require("util.buffer")
 local config = require("util.config")
 
-MiniDeps.later(function()
-  MiniDeps.add({
-    source = "nvim-treesitter/nvim-treesitter-context",
-    depends = { "nvim-treesitter/nvim-treesitter" },
+Config.on_filetype("*", function()
+  vim.pack.add({
+    "https://github.com/nvim-treesitter/nvim-treesitter",
+    "https://github.com/nvim-treesitter/nvim-treesitter-context",
   })
 
   local exclude_filetypes = config.get("treesitter.exclude", {})

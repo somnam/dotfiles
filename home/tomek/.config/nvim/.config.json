@@ -3,13 +3,14 @@
     "background": "dark",
     "buffer": {
         "exclude_filetype": [
+          "NvimTree",
           "checkhealth",
           "codecompanion",
           "help",
           "man",
           "mason",
           "netrw",
-          "NvimTree",
+          "nvim-pack",
           "qf",
           "tutor"
         ]
@@ -21,12 +22,24 @@
             "pyright",
             "quick_lint_js",
             "rust_analyzer",
+            "ty",
             "vtsls"
         ],
         "log_level": "ERROR"
     },
     "treesitter" : {
-        "ensure_installed": ["diff", "lua", "markdown", "query", "vim", "vimdoc", "yaml"],
+        "ensure_installed": [
+            "diff",
+            "json",
+            "lua",
+            "markdown",
+            "python",
+            "query",
+            "toml",
+            "vim",
+            "vimdoc",
+            "yaml"
+        ],
         "exclude": ["csv", "sh"]
     },
     "plugin": {

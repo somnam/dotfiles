@@ -289,7 +289,8 @@ vim.api.nvim_create_autocmd("User", {
 
 -- setup
 
-MiniDeps.now(function()
+Config.now(function()
+  vim.pack.add({ "https://github.com/nvim-mini/mini.nvim" })
   local vim_paste = vim.paste
 
   require("mini.pick").setup({

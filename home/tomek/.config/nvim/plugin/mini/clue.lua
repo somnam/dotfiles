@@ -1,4 +1,5 @@
-MiniDeps.now(function()
+Config.now(function()
+  vim.pack.add({ "https://github.com/nvim-mini/mini.nvim" })
   local mini_clue = require("mini.clue")
   mini_clue.setup({
     triggers = {

@@ -1,7 +1,8 @@
-local file = require("util.file")
-local tool = require("util.tool")
+Config.now(function()
+  vim.pack.add({ "https://github.com/nvim-mini/mini.nvim" })
+  local file = require("util.file")
+  local tool = require("util.tool")
 
-MiniDeps.now(function()
   ---@param args table
   local function section_tools(args)
     local tools_count = tool.get_count()

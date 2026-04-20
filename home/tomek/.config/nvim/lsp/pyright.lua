@@ -1,4 +1,7 @@
 return {
+  handlers = {
+    ["$/progress"] = function() end,
+  },
   settings = {
     pyright = {
       disableLanguageServices = false,

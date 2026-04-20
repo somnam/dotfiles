@@ -3,9 +3,9 @@
   "diagnostics": {
     "enable": true,
     "globals": [
+        "Config",
         "MiniBufremove",
         "MiniClue",
-        "MiniDeps",
         "MiniExtra",
         "MiniPick",
         "MiniStatusline",

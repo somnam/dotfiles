@@ -1,10 +1,10 @@
 local buffer = require("util.buffer")
 local config = require("util.config")
 
-MiniDeps.later(function()
-  MiniDeps.add({
-    source = "shellRaining/hlchunk.nvim",
-    depends = { "nvim-treesitter/nvim-treesitter" },
+Config.on_filetype("*", function()
+  vim.pack.add({
+    "https://github.com/nvim-treesitter/nvim-treesitter",
+    "https://github.com/shellRaining/hlchunk.nvim",
   })
 
   local exclude_filetypes = {}

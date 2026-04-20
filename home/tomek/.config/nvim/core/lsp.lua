@@ -3,7 +3,7 @@ local config = require("util.config")
 local function set_lsp_options()
   local log_level = config.get("lsp.log_level")
   if log_level ~= nil then
-    vim.lsp.set_log_level(log_level)
+    vim.lsp.log.set_level(log_level)
   end
 end
 

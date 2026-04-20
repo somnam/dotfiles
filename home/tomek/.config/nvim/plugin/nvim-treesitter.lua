@@ -6,14 +6,17 @@ end
 local buffer = require("util.buffer")
 local config = require("util.config")
 
-MiniDeps.now(function()
-  MiniDeps.add({
-    source = "nvim-treesitter/nvim-treesitter",
-    checkout = "main",
-    hooks = {
-      post_install = function() vim.cmd("TSUpdate") end,
-      post_checkout = function() vim.cmd("TSUpdate") end,
-    },
+Config.now_if_args(function()
+  vim.api.nvim_create_autocmd("PackChanged", {
+    callback = function(ev)
+      if ev.data.spec.name == "nvim-treesitter" and ev.data.kind == "update" then
+        vim.cmd("silent! TSUpdate")
+      end
+    end,
+  })
+
+  vim.pack.add({
+    { src = "https://github.com/nvim-treesitter/nvim-treesitter", version = "main" },
   })
 
   ---@type string[]

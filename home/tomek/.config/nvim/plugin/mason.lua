@@ -1,13 +1,15 @@
 local config = require("util.config")
 
-MiniDeps.now(function()
-  MiniDeps.add({
-    source = "williamboman/mason.nvim",
-    hooks = {
-      post_install = function() vim.cmd("silent! MasonUpdate") end,
-      post_checkout = function() vim.cmd("silent! MasonUpdate") end,
-    },
-  })
+vim.api.nvim_create_autocmd("PackChanged", {
+  callback = function(ev)
+    if ev.data.spec.name == "mason.nvim" and ev.data.kind == "update" then
+      vim.cmd("silent! MasonUpdate")
+    end
+  end,
+})
+
+Config.now(function()
+  vim.pack.add({ "https://github.com/williamboman/mason.nvim" })
 
   ---@type string[]
   local ensure_installed = config.get("plugin.mason.ensure_installed", {})
