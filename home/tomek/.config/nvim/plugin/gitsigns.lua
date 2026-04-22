@@ -7,30 +7,26 @@ Config.later(function()
   vim.pack.add({ "https://github.com/lewis6991/gitsigns.nvim" })
 
   local function on_attach(bufnr)
-    local opts = { noremap = true, silent = true }
-    vim.api.nvim_buf_set_keymap(
-      bufnr,
+    local opts = { noremap = true, silent = true, buffer = bufnr }
+    vim.keymap.set(
       "n",
       "<leader>gd",
       ":Gitsigns diffthis<Enter>",
       vim.tbl_extend("keep", { desc = "Show buffer diff against the git index" }, opts)
     )
-    vim.api.nvim_buf_set_keymap(
-      bufnr,
+    vim.keymap.set(
       "n",
       "<leader>gb",
       ":Gitsigns blame_line<Enter>",
       vim.tbl_extend("keep", { desc = "Show blame annotation at the end of current line." }, opts)
     )
-    vim.api.nvim_buf_set_keymap(
-      bufnr,
+    vim.keymap.set(
       "n",
       "[g",
       ":Gitsigns prev_hunk<Enter>",
       vim.tbl_extend("keep", { desc = "Go to previous git change block" }, opts)
     )
-    vim.api.nvim_buf_set_keymap(
-      bufnr,
+    vim.keymap.set(
       "n",
       "]g",
       ":Gitsigns next_hunk<Enter>",

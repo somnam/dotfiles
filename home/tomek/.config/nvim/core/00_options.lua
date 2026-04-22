@@ -85,11 +85,11 @@ vim.opt.completeopt = { "menu", "menuone", "popup", "noinsert", "noselect" }
 pcall(
   function() vim.opt.completeopt = { "menu", "menuone", "popup", "noinsert", "noselect", "fuzzy" } end
 )
+pcall(function() vim.opt.completeopt:append("nearest") end)
 
 -- Diff settings
 vim.opt.diffopt:append("iwhite")
 vim.opt.diffopt:append("algorithm:patience")
-vim.opt.diffopt:append("indent-heuristic")
 
 -- Spell settings
 vim.opt.spelloptions = "camel" -- Check CamelCase words
