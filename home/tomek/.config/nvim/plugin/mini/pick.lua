@@ -365,14 +365,16 @@ Config.now(function()
   preview.setup({ orientation = "horizontal" })
 
   -- Override paste
-  vim.paste = function(...)
+  vim.paste = function(lines, phase)
     if MiniPick.is_picker_active() then
-      local clip = vim.o.clipboard
-      local reg = clip:find("unnamedplus") and "+" or (clip:find("unnamed") and "*" or '"')
-      feedkeys("<C-r>" .. reg)
-      return
+      if phase == 1 or phase == -1 then
+        local clip = vim.o.clipboard
+        local reg = clip:find("unnamedplus") and "+" or (clip:find("unnamed") and "*" or '"')
+        feedkeys("<C-r>" .. reg)
+      end
+      return false
     end
-    return vim_paste(...)
+    return vim_paste(lines, phase)
   end
 
   require("mini.extra").setup()
