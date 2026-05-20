@@ -1,10 +1,6 @@
-[include]
-    path = themes/catppuccin.gitconfig
-    path = themes/dracula.gitconfig
-    path = themes/kanagawa.gitconfig
-
 [delta]
-    ; features =
+    # Should match the name of the bat theme
+    ; syntax-theme =
     file-added-label = diff added:
     file-copied-label = diff copied:
     file-modified-label = diff:
