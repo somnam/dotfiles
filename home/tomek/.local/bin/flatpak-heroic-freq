@@ -1,0 +1,114 @@
+#!/usr/bin/env bash
+
+set -euo pipefail
+
+_error() {
+    logger -t "$(basename "$0")" -p user.err -- "$*"
+    echo "$*" >&2
+    exit 1
+}
+
+_warn() {
+    logger -t "$(basename "$0")" -p user.warning -- "$*"
+    echo "$*" >&2
+}
+
+_info() {
+    logger -t "$(basename "$0")" -p user.info -- "$*"
+    echo "$*" >&1
+}
+
+_init() {
+    flatpak override --user --filesystem=$local_user_path "$heroic_app"
+    flatpak override --user --talk-name=$flatpak_dbus_name "$heroic_app"
+    flatpak override --user --show "$heroic_app"
+    _info "Flatpak overrides configured for Heroic"
+    exit 0
+}
+
+_reset() {
+    flatpak override --user --no-filesystem=$local_user_path "$heroic_app"
+    flatpak override --user --no-talk-name=$flatpak_dbus_name "$heroic_app"
+    flatpak override --user --show "$heroic_app"
+    _info "Flatpak overrides removed for Heroic"
+    exit 0
+}
+
+_help() {
+    echo "Usage: ${0##*/} {init|reset|[freq-args [--] command...]}"
+    echo ""
+    echo "  init          One-time Flatpak permission setup for Heroic"
+    echo "  reset         Remove Flatpak overrides for Heroic"
+    echo "  <freq-args>   Arguments passed to freq (e.g. 45, --cpu 45 --gpu 60)"
+    echo "  --            Separator before the game command"
+    echo ""
+    echo "Heroic wrapper examples:"
+    echo "  ${0##*/} 45"
+    echo "  ${0##*/} --cpu 45 --gpu 60 --"
+    exit 0
+}
+
+_run() {
+    local perf_dir="${0%/*}"
+    if command -v flatpak-spawn >/dev/null 2>&1; then
+        flatpak-spawn --host "$perf_dir/freq" "$@"
+    else
+        "$perf_dir/freq" "$@"
+    fi
+}
+
+_parse_args() {
+    local -n _freq_args=$1 _cmd_args=$2
+    shift 2
+    local i
+    for i in "${!_freq_args[@]}"; do
+        if [ "${_freq_args[i]}" = "--" ]; then
+            _cmd_args=("${_freq_args[@]:i+1}")
+            _freq_args=("${_freq_args[@]:0:i}")
+            break
+        fi
+    done
+
+    if [ ${#_cmd_args[@]} -eq 0 ] && [ -n "${1-}" ]; then
+        if [[ "${1-}" == --* ]]; then
+            _error "use -- to separate freq flags from the game command (e.g. '$0 --cpu 45 -- /usr/bin/game')"
+        else
+            _cmd_args=("${@:2}")
+            _freq_args=("${1-}")
+        fi
+    fi
+}
+
+readonly heroic_app="com.heroicgameslauncher.hgl"
+readonly local_user_path="$HOME/.local/bin"
+readonly flatpak_dbus_name="org.freedesktop.Flatpak"
+
+case "${1-}" in
+    init)
+        _init
+        ;;
+    reset)
+        _reset
+        ;;
+    --help|-h)
+        _help
+        ;;
+esac
+
+main() {
+    local freq_args=("$@")
+    local cmd_args=()
+    _parse_args freq_args cmd_args "$@"
+
+    if _run "${freq_args[@]}" 2>/dev/null; then
+        trap '_run normal 2>/dev/null || true' EXIT
+    else
+        _warn "Run '$0 init' from host terminal to enable"
+    fi
+
+    if [ ${#cmd_args[@]} -gt 0 ]; then
+        "${cmd_args[@]}"
+    fi
+}
+
+main "$@"
