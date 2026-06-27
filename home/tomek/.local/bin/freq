@@ -32,6 +32,18 @@ _gpu_driver() {
     fi
 }
 
+_cpu_temp() {
+    local zone temp
+    for zone in /sys/class/thermal/thermal_zone*/type; do
+        if [ "$(cat "$zone" 2>/dev/null)" = "x86_pkg_temp" ]; then
+            temp=$(cat "${zone%/type}/temp" 2>/dev/null)
+            echo "$(( temp / 1000 ))°C"
+            return
+        fi
+    done
+    echo "-"
+}
+
 _apply_cpu() {
     local pct=$1
     case "$(_cpu_driver)" in
@@ -128,7 +140,7 @@ _help() {
 }
 
 _show_cpu_line() {
-    local dir=$1 cpu_max=$2 cpu_cap=$3 driver=$4
+    local dir=$1 cpu_max=$2 cpu_cap=$3 driver=$4 cpu_temp=$5
     local cpu_num cpu_cur governor cpu_cap_disp cpu_pct
     cpu_num=$(basename "$(dirname "$dir")"); cpu_num=${cpu_num#cpu}
     cpu_cur=$(cat "${dir}scaling_cur_freq")
@@ -140,8 +152,8 @@ _show_cpu_line() {
         cpu_cap_disp="$(( cpu_cap / 1000 )) (${cpu_pct}%)"
     fi
 
-    printf "CPU %2d: %-5d  %-12s  %-4d MHz  %s / %s\n" \
-        "$cpu_num" $(( cpu_cur / 1000 )) "$cpu_cap_disp" $(( cpu_max / 1000 )) "$governor" "$driver"
+    printf "CPU %2d: %-5d  %-12s  %-4d MHz %4s  %s / %s\n" \
+        "$cpu_num" $(( cpu_cur / 1000 )) "$cpu_cap_disp" $(( cpu_max / 1000 )) "$cpu_temp" "$governor" "$driver"
 }
 
 _show_gpu_line() {
@@ -164,14 +176,14 @@ _show_gpu_line() {
         gpu_cap_disp="${gpu_cap} (${gpu_pct}%)"
     fi
 
-    printf "GPU %2d: %-5d  %-12s  %-4d MHz  %s / %s\n" \
-        "$(( 10#${gpu_num} ))" "$gpu_cur" "$gpu_cap_disp" "$gpu_max" "$gpu_profile" "xe"
+    printf "GPU %2d: %-5d  %-12s  %-4d MHz %4s  %s / %s\n" \
+        "$(( 10#${gpu_num} ))" "$gpu_cur" "$gpu_cap_disp" "$gpu_max" "-" "$gpu_profile" "xe"
 }
 
 _show_status() {
     local line line_buffer=""
 
-    printf -v line "        %-5s  %-12s  %-6s    %s" cur cap hw_max info
+    printf -v line "        %-5s  %-12s  %-8s %4s  %s" cur cap "hw_max" temp info
     line_buffer+="$line"$'\n'
 
     case "$(_cpu_driver)" in
@@ -180,7 +192,8 @@ _show_status() {
             line_buffer+="$line"$'\n'
             ;;
         intel_pstate)
-            local dir cpu_max cpu_cap cpu_max_perf_pct
+            local dir cpu_max cpu_cap cpu_max_perf_pct cpu_temp
+            cpu_temp=$(_cpu_temp)
             for dir in $cpu_freq_dir_glob; do
                 cpu_max=$(cat "${dir}cpuinfo_max_freq")
                 cpu_cap=$cpu_max
@@ -188,16 +201,17 @@ _show_status() {
                 if [ -n "$cpu_max_perf_pct" ]; then
                     cpu_cap=$(( cpu_max * cpu_max_perf_pct / 100 ))
                 fi
-                line_buffer+="$(_show_cpu_line "$dir" "$cpu_max" "$cpu_cap" "intel_pstate")"$'\n'
+                line_buffer+="$(_show_cpu_line "$dir" "$cpu_max" "$cpu_cap" "intel_pstate" "$cpu_temp")"$'\n'
             done
             ;;
         *)
-            local dir cpu_max cpu_cap driver
+            local dir cpu_max cpu_cap driver cpu_temp
             driver=$(_cpu_driver)
+            cpu_temp=$(_cpu_temp)
             for dir in $cpu_freq_dir_glob; do
                 cpu_max=$(cat "${dir}cpuinfo_max_freq")
                 cpu_cap=$(cat "${dir}scaling_max_freq")
-                line_buffer+="$(_show_cpu_line "$dir" "$cpu_max" "$cpu_cap" "$driver")"$'\n'
+                line_buffer+="$(_show_cpu_line "$dir" "$cpu_max" "$cpu_cap" "$driver" "$cpu_temp")"$'\n'
             done
             ;;
     esac
