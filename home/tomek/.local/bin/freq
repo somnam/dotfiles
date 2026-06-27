@@ -180,54 +180,94 @@ _show_gpu_line() {
         "$(( 10#${gpu_num} ))" "$gpu_cur" "$gpu_cap_disp" "$gpu_max" "-" "$gpu_profile" "xe"
 }
 
-_show_status() {
-    local line line_buffer=""
+_show_gpu_block() {
+    local line
+    case "$(_gpu_driver)" in
+        xe)
+            local dir
+            for dir in $intel_xe_freq_dir_glob; do
+                _show_gpu_line "$dir"
+            done
+            ;;
+        *)
+            printf "GPU   : unsupported\n"
+            ;;
+    esac
+}
 
-    printf -v line "        %-5s  %-12s  %-8s %4s  %s" cur cap "hw_max" temp info
-    line_buffer+="$line"$'\n'
+_show_cpu_block() {
+    declare -A temp_map=()
+    local pkg_temp coretemp_hwmon d label_file core_temp_id core_temp_value label
+
+    for d in /sys/devices/platform/coretemp.*/hwmon/hwmon*/; do
+        if [ -f "${d}temp1_label" ]; then
+            coretemp_hwmon="$d"
+            break
+        fi
+    done
+    if [ -n "$coretemp_hwmon" ]; then
+        for label_file in "${coretemp_hwmon}"temp*_label; do
+            [ -f "$label_file" ] || continue
+            label=$(cat "$label_file" 2>/dev/null) || continue
+            if [[ "$label" =~ ^Core\ ([0-9]+)$ ]]; then
+                core_temp_id="${BASH_REMATCH[1]}"
+                core_temp_value=$(cat "${label_file%_label}_input" 2>/dev/null) || continue
+                temp_map[$core_temp_id]="$(( core_temp_value / 1000 ))°C"
+            fi
+        done
+    fi
+    pkg_temp=$(_cpu_temp)
 
     case "$(_cpu_driver)" in
         "")
-            printf -v line "CPU   : unsupported"
-            line_buffer+="$line"$'\n'
+            printf "CPU   : unsupported\n"
             ;;
         intel_pstate)
-            local dir cpu_max cpu_cap cpu_max_perf_pct cpu_temp
-            cpu_temp=$(_cpu_temp)
+            local dir cpu_num cpu_max cpu_cap cpu_max_perf_pct cpu_temp core_id
             for dir in $cpu_freq_dir_glob; do
+                cpu_num=$(basename "$(dirname "$dir")"); cpu_num=${cpu_num#cpu}
                 cpu_max=$(cat "${dir}cpuinfo_max_freq")
                 cpu_cap=$cpu_max
                 cpu_max_perf_pct=$(cat "$intel_pstate_max_perf_pct_path" 2>/dev/null)
                 if [ -n "$cpu_max_perf_pct" ]; then
                     cpu_cap=$(( cpu_max * cpu_max_perf_pct / 100 ))
                 fi
-                line_buffer+="$(_show_cpu_line "$dir" "$cpu_max" "$cpu_cap" "intel_pstate" "$cpu_temp")"$'\n'
+                core_id=$(cat "/sys/devices/system/cpu/cpu${cpu_num}/topology/core_id" 2>/dev/null)
+                if [ -n "$core_id" ] && [[ -v temp_map[$core_id] ]]; then
+                    cpu_temp="${temp_map[$core_id]}"
+                else
+                    cpu_temp="$pkg_temp"
+                fi
+                _show_cpu_line "$dir" "$cpu_max" "$cpu_cap" "intel_pstate" "$cpu_temp"
             done
             ;;
         *)
-            local dir cpu_max cpu_cap driver cpu_temp
+            local dir cpu_num cpu_max cpu_cap driver cpu_temp core_id
             driver=$(_cpu_driver)
-            cpu_temp=$(_cpu_temp)
             for dir in $cpu_freq_dir_glob; do
+                cpu_num=$(basename "$(dirname "$dir")"); cpu_num=${cpu_num#cpu}
                 cpu_max=$(cat "${dir}cpuinfo_max_freq")
                 cpu_cap=$(cat "${dir}scaling_max_freq")
-                line_buffer+="$(_show_cpu_line "$dir" "$cpu_max" "$cpu_cap" "$driver" "$cpu_temp")"$'\n'
+                core_id=$(cat "/sys/devices/system/cpu/cpu${cpu_num}/topology/core_id" 2>/dev/null)
+                if [ -n "$core_id" ] && [[ -v temp_map[$core_id] ]]; then
+                    cpu_temp="${temp_map[$core_id]}"
+                else
+                    cpu_temp="$pkg_temp"
+                fi
+                _show_cpu_line "$dir" "$cpu_max" "$cpu_cap" "$driver" "$cpu_temp"
             done
             ;;
     esac
+}
 
-    case "$(_gpu_driver)" in
-        xe)
-            local dir
-            for dir in $intel_xe_freq_dir_glob; do
-                line_buffer+="$(_show_gpu_line "$dir")"$'\n'
-            done
-            ;;
-        *)
-            printf -v line "GPU   : unsupported"
-            line_buffer+="$line"$'\n'
-            ;;
-    esac
+_show_status() {
+    local line line_buffer=""
+
+    printf -v line "        %-5s  %-12s  %-8s %4s  %s" cur cap "hw_max" temp info
+    line_buffer+="$line"$'\n'
+
+    line_buffer+="$(_show_cpu_block)"$'\n'
+    line_buffer+="$(_show_gpu_block)"$'\n'
 
     printf '%s' "$line_buffer"
 }
