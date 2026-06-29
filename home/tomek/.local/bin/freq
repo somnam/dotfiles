@@ -4,18 +4,15 @@ set -euo pipefail
 
 _error() {
     logger -t "$(basename "$0")" -p user.err -- "$*"
-    echo "$*" >&2
     exit 1
 }
 
 _warn() {
     logger -t "$(basename "$0")" -p user.warning -- "$*"
-    echo "$*" >&2
 }
 
 _info() {
     logger -t "$(basename "$0")" -p user.info -- "$*"
-    echo "$*" >&1
 }
 
 _cpu_driver() {
@@ -102,6 +99,11 @@ _init() {
             ;;
     esac
 
+    if [ -f "$platform_profile_path" ]; then
+        sudoers_content="$sudoers_content
+%wheel ALL=(root) NOPASSWD: SETENV: /usr/bin/tee $platform_profile_path"
+    fi
+
     sudo mkdir -p /etc/sudoers.d
     echo "$sudoers_content" | sudo tee /etc/sudoers.d/freq > /dev/null
     sudo chmod 0440 /etc/sudoers.d/freq
@@ -116,14 +118,24 @@ _reset() {
     exit 0
 }
 
+_apply_profile() {
+    local profile=$1
+    if [ ! -f "$platform_profile_path" ]; then
+        _warn "Platform profiles not supported; --profile ignored"
+        return
+    fi
+    echo "$profile" | sudo tee "$platform_profile_path" > /dev/null
+}
+
 _help() {
-    echo "Usage: ${0##*/} [normal|init|reset|--help] [--cpu <10-100>] [--gpu <10-100>] [<10-100>]"
+    echo "Usage: ${0##*/} [normal|init|reset|--help] [-c <10-100>] [-g <10-100>] [-p <name>] [<10-100>]"
     echo ""
     echo "  normal        GPU=rp0_freq (max), CPU=unlimited"
     echo "  init          Install sudoers config (sudo tee permissions)"
     echo "  reset         Remove sudoers config"
-    echo "  --cpu <10-100> Set CPU to percentage (overrides positional default)"
-    echo "  --gpu <10-100>  Set GPU to percentage (overrides positional default)"
+    echo "  -c, --cpu <10-100>     Set CPU to percentage (overrides positional default)"
+    echo "  -g, --gpu <10-100>     Set GPU to percentage (overrides positional default)"
+    echo "  -p, --profile <name>   Set ACPI platform profile (quiet, balanced, performance, …)"
     echo "  <10-100>      Both CPU and GPU scaled to percentage (default if no flags)"
     echo ""
     echo "With no arguments, shows current status."
@@ -136,6 +148,8 @@ _help() {
     echo "  ${0##*/} --cpu 45"
     echo "  ${0##*/} --cpu 45 --gpu 60"
     echo "  ${0##*/} 45 --gpu 60"
+    echo "  ${0##*/} --profile performance"
+    echo "  ${0##*/} --profile quiet --cpu 70"
     exit 0
 }
 
@@ -193,6 +207,15 @@ _show_gpu_block() {
             printf "GPU   : unsupported\n"
             ;;
     esac
+}
+
+_show_profile() {
+    local profile
+    if profile=$(cat "$platform_profile_path" 2>/dev/null); then
+        printf "Power profile: %s\n" "$profile"
+    else
+        printf "Power profile: N/A\n"
+    fi
 }
 
 _show_cpu_block() {
@@ -263,6 +286,7 @@ _show_cpu_block() {
 _show_status() {
     local line line_buffer=""
 
+    line_buffer+="$(_show_profile)"$'\n'
     printf -v line "        %-5s  %-12s  %-8s %4s  %s" cur cap "hw_max" temp info
     line_buffer+="$line"$'\n'
 
@@ -281,6 +305,10 @@ readonly intel_pstate_max_perf_pct_path="/sys/devices/system/cpu/intel_pstate/ma
 # intel_xe-specific
 readonly intel_xe_freq_dir_glob="/sys/class/drm/card0/device/tile*/gt*/freq0/"
 
+# platform profile (ACPI)
+readonly platform_profile_path="/sys/firmware/acpi/platform_profile"
+readonly platform_profile_choices_path="/sys/firmware/acpi/platform_profile_choices"
+
 case "${1-}" in
     init)
         _init
@@ -294,7 +322,7 @@ case "${1-}" in
 esac
 
 main() {
-    local positional="" cpu_pct="" gpu_pct=""
+    local positional="" cpu_pct="" gpu_pct="" profile=""
 
     while [[ $# -gt 0 ]]; do
         case "$1" in
@@ -302,15 +330,19 @@ main() {
                 [ -n "$cpu_pct" ] || cpu_pct=100
                 [ -n "$gpu_pct" ] || gpu_pct=100
                 ;;
-            --cpu)
+            --cpu|-c)
                 [ $# -ge 2 ] || _error "--cpu requires a value"
                 [[ "$2" =~ ^[0-9]+$ ]] && [ "$2" -ge 10 ] && [ "$2" -le 100 ] || _error "--cpu: invalid percentage '$2'"
                 cpu_pct="$2"; shift
                 ;;
-            --gpu)
+            --gpu|-g)
                 [ $# -ge 2 ] || _error "--gpu requires a value"
                 [[ "$2" =~ ^[0-9]+$ ]] && [ "$2" -ge 10 ] && [ "$2" -le 100 ] || _error "--gpu: invalid percentage '$2'"
                 gpu_pct="$2"; shift
+                ;;
+            --profile|-p)
+                [ $# -ge 2 ] || _error "--profile requires a value"
+                profile="$2"; shift
                 ;;
             *)
                 if [[ "$1" =~ ^[0-9]+$ ]] && [ "$1" -ge 10 ] && [ "$1" -le 100 ] && [ -z "$positional" ]; then
@@ -326,17 +358,33 @@ main() {
     [ -z "$cpu_pct" ] && [ -n "$positional" ] && cpu_pct="$positional"
     [ -z "$gpu_pct" ] && [ -n "$positional" ] && gpu_pct="$positional"
 
-    if [ -z "$cpu_pct" ] && [ -z "$gpu_pct" ]; then
+    if [ -n "$profile" ]; then
+        if [ ! -f "$platform_profile_choices_path" ]; then
+            _warn "Platform profiles not supported; --profile ignored"
+            profile=""
+        else
+            local choices c valid
+            choices=$(cat "$platform_profile_choices_path")
+            for c in $choices; do
+                [ "$c" = "$profile" ] && valid=1 && break
+            done
+            [ -n "${valid-}" ] || _error "Invalid profile '$profile'. Available: $choices"
+        fi
+    fi
+
+    if [ -z "$cpu_pct" ] && [ -z "$gpu_pct" ] && [ -z "$profile" ]; then
         _show_status
         exit 0
     fi
 
     [ -n "$cpu_pct" ] && _apply_cpu "$cpu_pct"
     [ -n "$gpu_pct" ] && _apply_gpu "$gpu_pct"
+    [ -n "$profile" ] && _apply_profile "$profile"
 
     local log_msg=""
     [ -n "$cpu_pct" ] && log_msg="CPU@${cpu_pct}%"
     [ -n "$gpu_pct" ] && log_msg="${log_msg:+$log_msg, }GPU@${gpu_pct}%"
+    [ -n "$profile" ] && log_msg="${log_msg:+$log_msg, }profile=$profile"
     _info "$log_msg"
 }
 

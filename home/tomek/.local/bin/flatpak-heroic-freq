@@ -4,18 +4,15 @@ set -euo pipefail
 
 _error() {
     logger -t "$(basename "$0")" -p user.err -- "$*"
-    echo "$*" >&2
     exit 1
 }
 
 _warn() {
     logger -t "$(basename "$0")" -p user.warning -- "$*"
-    echo "$*" >&2
 }
 
 _info() {
     logger -t "$(basename "$0")" -p user.info -- "$*"
-    echo "$*" >&1
 }
 
 _init() {
@@ -43,8 +40,8 @@ _help() {
     echo "  --            Separator before the game command"
     echo ""
     echo "Heroic wrapper examples:"
-    echo "  ${0##*/} 45"
-    echo "  ${0##*/} --cpu 45 --gpu 60 --"
+    echo "  ${0##*/} -p performance --"
+    echo "  ${0##*/} -p performance -c 70 -- ./game"
     exit 0
 }
 
@@ -82,6 +79,7 @@ _parse_args() {
 readonly heroic_app="com.heroicgameslauncher.hgl"
 readonly local_user_path="$HOME/.local/bin"
 readonly flatpak_dbus_name="org.freedesktop.Flatpak"
+readonly default_profile="balanced"
 
 case "${1-}" in
     init)
@@ -95,13 +93,27 @@ case "${1-}" in
         ;;
 esac
 
+_has_profile_arg() {
+    local arg
+    for arg in "$@"; do
+        case "$arg" in
+            --profile|-p) true; return ;;
+        esac
+    done
+    false
+}
+
 main() {
     local freq_args=("$@")
     local cmd_args=()
     _parse_args freq_args cmd_args "$@"
 
     if _run "${freq_args[@]}" 2>/dev/null; then
-        trap '_run normal 2>/dev/null || true' EXIT
+        if _has_profile_arg "${freq_args[@]}"; then
+            trap '_run normal -p "$default_profile" 2>/dev/null || true' EXIT
+        else
+            trap '_run normal 2>/dev/null || true' EXIT
+        fi
     else
         _warn "Run '$0 init' from host terminal to enable"
     fi
