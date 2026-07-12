@@ -1,3 +1,3 @@
-if [[ -r "/opt/homebrew/etc/profile.d/bash_completion.sh" ]]; then
-    . "/opt/homebrew/etc/profile.d/bash_completion.sh"
+if command -v brew &>/dev/null && [[ -r "${HOMEBREW_PREFIX}/etc/profile.d/bash_completion.sh" ]]; then
+    . "${HOMEBREW_PREFIX}/etc/profile.d/bash_completion.sh"
 fi

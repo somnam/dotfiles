@@ -11,7 +11,7 @@ python_venv_hook()
         venv_dir=".env"
     fi
 
-    if [[ ! ${venv_dir} ]]; then
+    if [[ -z "${venv_dir}" ]]; then
         if [[ -n "$VIRTUAL_ENV" ]] && type deactivate &>/dev/null; then
             deactivate
         fi
