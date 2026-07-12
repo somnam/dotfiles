@@ -1,7 +1,25 @@
 {
   "$schema": "https://opencode.ai/config.json",
   "default_agent": "plan",
+  "lsp": true,
+  "mcp": {
+    "firefox-devtools": {
+      "type": "local",
+      "command": [
+        "npx",
+        "@mozilla/firefox-devtools-mcp@latest",
+        "--",
+        "--headless",
+        "--viewport",
+        "1280x720"
+      ]
+    }
+  },
   "watcher": {
     "ignore": ["node_modules/**", "dist/**", ".git/**"]
-  }
+  },
+  "plugin": [
+    "superpowers@git+https://github.com/obra/superpowers.git",
+    "@tarquinen/opencode-dcp@latest"
+  ]
 }
