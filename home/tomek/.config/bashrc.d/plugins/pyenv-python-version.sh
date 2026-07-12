@@ -9,25 +9,25 @@ pyenv_python_version_hook()
 
     unset -v VIRTUAL_ENV PYENV_VIRTUAL_ENV VIRTUAL_ENV_PROMPT
 
-    local pyenv_version_file=${PYENV_ROOT}/libexec/pyenv-version-file
-    if [[ ! -f ${pyenv_version_file} ]]; then
+    local pyenv_version_file="${PYENV_ROOT}/libexec/pyenv-version-file"
+    if [[ ! -f "${pyenv_version_file}" ]]; then
         return $retval
     fi
 
-    local version_file="$(${pyenv_version_file} "$PWD")"
+    local version_file="$("${pyenv_version_file}" "$PWD")"
     if [[ ! ${version_file} ]]; then
         return $retval
     fi
 
-    local venv="$(head -n 1 ${version_file})"
+    local venv="$(head -n 1 "${version_file}")"
     if [[ ! ${venv} ]]; then
         return $retval
     fi
 
-    local venv_path=${PYENV_ROOT}/versions/${venv}
-    if [[ -n ${venv_path} ]]; then
-        export VIRTUAL_ENV=${venv_path};
-        export PYENV_VIRTUAL_ENV=${VIRTUAL_ENV}
+    local venv_path="${PYENV_ROOT}/versions/${venv}"
+    if [[ -n "${venv_path}" ]]; then
+        export VIRTUAL_ENV="${venv_path}"
+        export PYENV_VIRTUAL_ENV="${VIRTUAL_ENV}"
         export VIRTUAL_ENV_PROMPT="${venv}"
     fi
 

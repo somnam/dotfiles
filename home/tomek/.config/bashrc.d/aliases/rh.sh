@@ -1,8 +1,8 @@
 if command -v dnf >/dev/null; then
     dnf-up() {
-        sudo dnf upgrade $@
+        sudo dnf upgrade "$@"
     }
     dnf-clean() {
-        sudo dnf autoremove $@
+        sudo dnf autoremove "$@"
     }
 fi

@@ -17,7 +17,7 @@ set_prompt_theme()
     local line_one="${venv}${lgreen}\u${green}@\h ${lblue}\w${blank} "
     local line_two="\n${prompt} "
 
-    if [[ -n $(type -t __git_ps1) ]]; then
+    if type -t __git_ps1 &>/dev/null; then
         __git_ps1 "${line_one}" "${line_two}" '[%s]'
     else
         PS1="${line_one}${line_two}"

@@ -22,7 +22,7 @@ source_git_prompt()
     )
     local git_prompt
 
-    for git_prompt in ${locations[@]}; do
+    for git_prompt in "${locations[@]}"; do
         if [[ -f "${git_prompt}" ]]; then
             source "${git_prompt}" > /dev/null
             break

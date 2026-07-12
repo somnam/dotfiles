@@ -1,11 +1,11 @@
 # make less more friendly for non-text input files, see lesspipe(1)
-if [ -z "${LESSOPEN}" ];then
-  if [ -f /etc/gentoo-release ]; then
+if [[ -z "${LESSOPEN}" ]];then
+  if [[ -f /etc/gentoo-release ]]; then
     export LESSOPEN="|lesspipe %s"
   else
-    if [ -x /usr/bin/lesspipe ]; then
+    if [[ -x /usr/bin/lesspipe ]]; then
       eval "$(SHELL=/bin/sh /usr/bin/lesspipe)"
-    elif [ -x /usr/bin/lesspipe.sh ]; then
+    elif [[ -x /usr/bin/lesspipe.sh ]]; then
       eval "$(SHELL=/bin/sh /usr/bin/lesspipe.sh)"
     fi
   fi
@@ -15,7 +15,7 @@ fi
 export EDITOR='vim'
 
 # set variable identifying the chroot you work in (used in the prompt below)
-if [ -z "${debian_chroot:-}" ] && [ -r /etc/debian_chroot ]; then
+if [[ -z "${debian_chroot:-}" ]] && [[ -r /etc/debian_chroot ]]; then
     debian_chroot=$(cat /etc/debian_chroot)
 fi
 
@@ -29,8 +29,8 @@ esac
 # should be on the output of commands, not on the prompt
 #force_color_prompt=yes
 
-if [ -n "$force_color_prompt" ]; then
-  if [ -x /usr/bin/tput ] && tput setaf 1 >&/dev/null; then
+if [[ -n "$force_color_prompt" ]]; then
+  if [[ -x /usr/bin/tput ]] && tput setaf 1 >&/dev/null; then
     # we have color support; assume it's compliant with Ecma-48
     # (ISO/IEC-6429). (Lack of such support is extremely rare, and such
     # a case would tend to support setf rather than setaf.)
@@ -40,7 +40,7 @@ if [ -n "$force_color_prompt" ]; then
   fi
 fi
 
-if [ "$color_prompt" = yes ]; then
+if [[ "$color_prompt" == "yes" ]]; then
   PS1='${debian_chroot:+($debian_chroot)}\[\033[01;32m\]\u@\h\[\033[00m\]:\[\033[01;34m\]\w\[\033[00m\]\$ '
 else
   PS1='${debian_chroot:+($debian_chroot)}\u@\h:\w\$ '

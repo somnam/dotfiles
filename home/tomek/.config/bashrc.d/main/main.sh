@@ -4,7 +4,7 @@ source-rc-files()
     local rc_file
 
     # shell
-    for rc_file in $rc_path/shell/*.sh; do
+    for rc_file in "$rc_path"/shell/*.sh; do
         source "$rc_file"
     done
 
@@ -13,19 +13,19 @@ source-rc-files()
     [[ -f "$rc_file" ]] && source "$rc_file"
 
     # plugins
-    for plugin in ${plugins[@]}; do
+    for plugin in "${plugins[@]}"; do
         rc_file="$rc_path/plugins/${plugin}.sh"
         [[ -f "$rc_file" ]] && source "$rc_file"
     done
 
     # completions
-    for completion in ${completions[@]}; do
+    for completion in "${completions[@]}"; do
         rc_file="$rc_path/completions/${completion}.sh"
         [[ -f "$rc_file" ]] && source "$rc_file"
     done
 
     # aliases
-    for alias in ${aliases[@]}; do
+    for alias in "${aliases[@]}"; do
         rc_file="$rc_path/aliases/${alias}.sh"
         [[ -f "$rc_file" ]] && source "$rc_file"
     done

@@ -1,4 +1,6 @@
-if [[ -d $HOME/.luarocks/bin ]]; then
+if [[ -d "$HOME/.luarocks/bin" ]]; then
     # Add Lua to path
-    [[ ":$PATH:" != *":${HOME}/.luarocks/bin:"* ]] && PATH="${HOME}/.luarocks/bin:${PATH}"
+    if [[ ":$PATH:" != *":${HOME}/.luarocks/bin:"* ]]; then
+        export PATH="${HOME}/.luarocks/bin${PATH:+:$PATH}"
+    fi
 fi

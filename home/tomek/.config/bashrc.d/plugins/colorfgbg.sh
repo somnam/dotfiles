@@ -1,6 +1,6 @@
 
 guess-colorfgbg () {
-    if [ -n "${COLORFGBG-}" ]; then
+    if [[ -n "${COLORFGBG-}" ]]; then
         return 0
     fi
 
