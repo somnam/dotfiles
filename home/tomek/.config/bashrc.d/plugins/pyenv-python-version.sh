@@ -34,7 +34,7 @@ pyenv_python_version_hook()
     return $retval
 }
 
-if command -v pyenv >/dev/null; then
+if command -v pyenv &>/dev/null; then
     if [[ ! "${PROMPT_COMMAND-}" =~ pyenv_python_version_hook ]]; then
         PROMPT_COMMAND="pyenv_python_version_hook${PROMPT_COMMAND:+; $PROMPT_COMMAND}"
     fi

@@ -13,7 +13,7 @@ alias grep='grep --color=auto'
 alias fgrep='fgrep --color=auto'
 alias egrep='egrep --color=auto'
 
-if command -v fd >/dev/null; then
+if command -v fd &>/dev/null; then
     alias fd='fd --hidden'
 fi
 

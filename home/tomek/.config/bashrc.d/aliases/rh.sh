@@ -1,4 +1,4 @@
-if command -v dnf >/dev/null; then
+if command -v dnf &>/dev/null; then
     dnf-up() {
         sudo dnf upgrade "$@"
     }

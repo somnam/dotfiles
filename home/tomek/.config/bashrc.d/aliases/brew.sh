@@ -1,4 +1,4 @@
-if command -v brew >/dev/null; then
+if command -v brew &>/dev/null; then
     brew-up() {
         brew update && brew outdated && brew upgrade --ask "$@" && brew autoremove
     }
