@@ -1,15 +1,11 @@
 if [[ -d "$HOME/.pyenv" ]]; then
     export PYENV_ROOT="$HOME/.pyenv"
 
-    if [[ ":$PATH:" != *":${PYENV_ROOT}/bin:"* ]]; then
-        export PATH="${PYENV_ROOT}/bin${PATH:+:$PATH}"
-    fi
+    prepend_path "${PYENV_ROOT}/bin"
 
     # Lazy load pyenv
     if command -v pyenv &>/dev/null; then
-        if [[ ":$PATH:" != *":${PYENV_ROOT}/shims:"* ]]; then
-            export PATH="${PYENV_ROOT}/shims${PATH:+:$PATH}"
-        fi
+        prepend_path "${PYENV_ROOT}/shims"
         function pyenv() {
             unset -f pyenv
             if [[ ":$PATH:" != *":$HOME/.pyenv/bin:"* ]]; then
