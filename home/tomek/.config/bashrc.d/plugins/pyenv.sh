@@ -6,7 +6,7 @@ if [[ -d "$HOME/.pyenv" ]]; then
     # Lazy load pyenv
     if command -v pyenv &>/dev/null; then
         prepend_path "${PYENV_ROOT}/shims"
-        function pyenv() {
+        pyenv() {
             unset -f pyenv
             if [[ ":$PATH:" != *":$HOME/.pyenv/bin:"* ]]; then
                 eval -- "$(command pyenv init - bash)"

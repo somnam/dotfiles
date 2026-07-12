@@ -15,12 +15,12 @@ pyenv_python_version_hook()
     fi
 
     local version_file="$("${pyenv_version_file}" "$PWD")"
-    if [[ ! ${version_file} ]]; then
+    if [[ -z "${version_file}" ]]; then
         return $retval
     fi
 
     local venv="$(head -n 1 "${version_file}")"
-    if [[ ! ${venv} ]]; then
+    if [[ -z "${venv}" ]]; then
         return $retval
     fi
 
