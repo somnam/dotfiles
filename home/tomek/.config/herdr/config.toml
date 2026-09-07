@@ -1,0 +1,33 @@
+onboarding = false
+
+[ui]
+pane_gaps = false
+pane_outer_borders = false
+prompt_new_tab_name = false
+show_agent_labels_on_pane_borders = true
+status_indicators = "symbols"
+tab_bar_right = [{ type = "hostname" }, { type = "datetime", format = "%H:%M %d/%m/%Y" }]
+window_title = "{workspace}"
+
+[theme]
+auto_switch = false
+name = "terminal"
+
+[terminal]
+new_cwd = "follow"
+shell_mode = "non_login"
+
+[keys]
+detach = ["prefix+q", "prefix+d"]
+last_pane = "prefix+a"
+move_tab_next = "prefix+shift+period"
+move_tab_previous = "prefix+shift+comma"
+new_tab = "prefix+c"
+next_tab = ["prefix+n", "ctrl+shift+right"]
+prefix = "ctrl+a"
+previous_tab = ["prefix+p", "ctrl+shift+left"]
+resize_pane_down = "ctrl+shift+alt+down"
+resize_pane_left = "ctrl+shift+alt+left"
+resize_pane_right = "ctrl+shift+alt+right"
+resize_pane_up = "ctrl+shift+alt+up"
+switch_workspace = "prefix+shift+1..9"
