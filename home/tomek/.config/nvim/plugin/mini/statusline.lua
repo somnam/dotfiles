@@ -78,64 +78,6 @@ Config.now(function()
     return MiniStatusline.section_filename(args)
   end
 
-  local function section_codecompanion_wrapper()
-    local state = {
-      processing = false,
-      spinner_symbols = { "⠋", "⠙", "⠹", "⠸", "⠼", "⠴", "⠦", "⠧", "⠇", "⠏" },
-      spinner_index = 1,
-      timer = nil,
-    }
-
-    local function redraw_spinner()
-      state.spinner_index = (state.spinner_index % #state.spinner_symbols) + 1
-      vim.cmd("redrawstatus")
-    end
-
-    local function start_spinner()
-      if not state.timer then
-        state.timer = vim.uv.new_timer()
-        state.timer:start(0, 100, vim.schedule_wrap(redraw_spinner))
-      end
-    end
-
-    local function stop_spinner()
-      if state.timer then
-        state.timer:stop()
-        state.timer:close()
-        state.timer = nil
-      end
-      vim.cmd("redrawstatus")
-    end
-
-    vim.api.nvim_create_autocmd("User", {
-      pattern = "CodeCompanionRequest*",
-      group = vim.api.nvim_create_augroup("code_companion_status_line", { clear = true }),
-      callback = function(event)
-        if event.match == "CodeCompanionRequestStarted" then
-          state.processing = true
-          start_spinner()
-        elseif event.match == "CodeCompanionRequestFinished" then
-          state.processing = false
-          stop_spinner()
-        end
-      end,
-    })
-
-    local function section_codecompanion(args)
-      if not state.processing then
-        return ""
-      end
-
-      local spinner = state.spinner_symbols[state.spinner_index]
-      return MiniStatusline.is_truncated(args.trunc_width) and spinner
-        or string.format("%s waiting", spinner)
-    end
-
-    return section_codecompanion
-  end
-
-  local section_codecompanion = section_codecompanion_wrapper()
-
   -- statusline
   local function content_active()
     local mode, mode_hl = MiniStatusline.section_mode({ trunc_width = 120 })
@@ -147,7 +89,6 @@ Config.now(function()
       signs = { ERROR = "E:", WARN = "W:", INFO = "I:", HINT = "H:" },
     })
     local filename = section_filename({ trunc_width = 220 })
-    local codecompanion = section_codecompanion({ trunc_width = 75 })
     local tools = section_tools({ icon = "🛠", trunc_width = 160 })
     local fileinfo = section_fileinfo({ icon = "≋", trunc_width = 120 })
     local filesize = section_filesize({ icon = "◔", trunc_width = 120 })
@@ -159,7 +100,7 @@ Config.now(function()
       "%<", -- Mark general truncate point
       { hl = "MiniStatuslineFilename", strings = { filename } },
       "%=", -- End left alignment
-      { hl = "MiniStatuslineFileinfo", strings = { codecompanion, tools, fileinfo, filesize } },
+      { hl = "MiniStatuslineFileinfo", strings = { tools, fileinfo, filesize } },
       { hl = mode_hl, strings = { location } },
     })
   end

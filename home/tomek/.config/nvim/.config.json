@@ -5,7 +5,6 @@
         "exclude_filetype": [
           "NvimTree",
           "checkhealth",
-          "codecompanion",
           "help",
           "man",
           "mason",
@@ -48,10 +47,6 @@
             "lua": ["stylua"],
             "rust": ["rustfmt"],
             "*": ["trim_whitespace"]
-        },
-        "codecompanion": {
-            "enable": false,
-            "model": null
         },
         "copilot": {
             "enable": false,
