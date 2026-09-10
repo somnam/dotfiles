@@ -1,7 +1,21 @@
 {
   "$schema": "https://opencode.ai/config.json",
+  "compaction": { "auto": true, "prune": true },
   "default_agent": "plan",
   "lsp": true,
+  "permission": {
+    "read": {
+      "**/.env": "allow",
+      "**/.env.*": "allow"
+    },
+    "bash": {
+      "sudo": "deny",
+      "sudo *": "deny",
+      "rm -rf": "deny",
+      "rm -rf *": "deny"
+    },
+    "firefox-devtools_*": "deny"
+  },
   "mcp": {
     "firefox-devtools": {
       "type": "local",
@@ -19,7 +33,6 @@
     "ignore": ["node_modules/**", "dist/**", ".git/**"]
   },
   "plugin": [
-    "superpowers@git+https://github.com/obra/superpowers.git",
     "@tarquinen/opencode-dcp@latest"
   ]
 }
