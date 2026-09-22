@@ -14,6 +14,10 @@
       "rm -rf": "deny",
       "rm -rf *": "deny"
     },
+    "external_directory": {
+      "~/.cache": "deny",
+      "~/.cache/**": "deny"
+    },
     "firefox-devtools_*": "deny"
   },
   "mcp": {
