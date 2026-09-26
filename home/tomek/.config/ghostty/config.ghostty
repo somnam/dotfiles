@@ -1,0 +1,14 @@
+bold-color = bright
+cursor-style = block
+cursor-style-blink = false
+macos-option-as-alt = left
+mouse-hide-while-typing = true
+scrollbar = never
+window-padding-x = 2
+window-padding-y = 2
+
+keybind = ctrl+shift+arrow_left=unbind
+keybind = ctrl+shift+arrow_right=unbind
+keybind = alt+enter=unbind
+
+config-file = ?local
