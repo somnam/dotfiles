@@ -1,42 +1,39 @@
 {
   "$schema": "https://opencode.ai/config.json",
-  "compaction": { "auto": true, "prune": true },
+  "compaction": { "auto": true },
   "default_agent": "plan",
   "lsp": true,
-  "permission": {
-    "read": {
-      "**/.env": "allow",
-      "**/.env.*": "allow"
-    },
-    "bash": {
-      "sudo": "deny",
-      "sudo *": "deny",
-      "rm -rf": "deny",
-      "rm -rf *": "deny"
-    },
-    "external_directory": {
-      "~/.cache": "deny",
-      "~/.cache/**": "deny"
-    },
-    "firefox-devtools_*": "deny"
-  },
+  "permissions": [
+    { "action": "read", "resource": "**/.env", "effect": "allow" },
+    { "action": "read", "resource": "**/.env.*", "effect": "allow" },
+    { "action": "shell", "resource": "sudo", "effect": "deny" },
+    { "action": "shell", "resource": "sudo *", "effect": "deny" },
+    { "action": "shell", "resource": "rm -rf", "effect": "deny" },
+    { "action": "shell", "resource": "rm -rf *", "effect": "deny" },
+    { "action": "external_directory", "resource": "~/.cache", "effect": "deny" },
+    { "action": "external_directory", "resource": "~/.cache/**", "effect": "deny" },
+    { "action": "prune", "resource": "*", "effect": "allow" },
+    { "action": "firefox-devtools_*", "resource": "*", "effect": "deny" }
+  ],
   "mcp": {
-    "firefox-devtools": {
-      "type": "local",
-      "command": [
-        "npx",
-        "@mozilla/firefox-devtools-mcp@latest",
-        "--",
-        "--headless",
-        "--viewport",
-        "1280x720"
-      ]
+    "servers": {
+      "firefox-devtools": {
+        "type": "local",
+        "command": [
+          "npx",
+          "@mozilla/firefox-devtools-mcp@latest",
+          "--",
+          "--headless",
+          "--viewport",
+          "1280x720"
+        ]
+      }
     }
   },
   "watcher": {
     "ignore": ["node_modules/**", "dist/**", ".git/**"]
   },
-  "plugin": [
-    "@tarquinen/opencode-dcp@latest"
+  "plugins": [
+    "opencode-dcp@2.0.0-beta.13"
   ]
 }
