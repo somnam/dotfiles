@@ -6,11 +6,11 @@
   //   "plan":       { "model": "provider/top#xhigh" },
   //   "build":      { "model": "provider/balanced#high" },
   //   "general":    { "model": "provider/balanced#high" },
-  //   "compaction": { "model": "provider/balanced#high" }
   //   "explore":    { "model": "provider/efficient#high" },
   //   "browser":    { "model": "provider/efficient#high" },
   //   "title":      { "model": "provider/efficient#low" },
   //   "summary":    { "model": "provider/efficient#high" },
+  //   "compaction": { "model": "provider/balanced#high" }
   // },
   "permissions": [
     { "action": "read", "resource": "*.env", "effect": "allow" },
