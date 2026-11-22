@@ -65,5 +65,7 @@ the decision needs, never for explanation.
 - Web work: use direct webfetch for textual resources; interactive or DOM work needs a browser-capable subagent if one is configured, otherwise say browser access is unavailable.
 - Require subagent research reports to stay under 1,000 tokens with sources; state the limit in the subagent prompt. Continue follow-up work by passing the returned sessionID.
 - Keep direct tool results bounded: filter JSON and command output at the source; read only relevant file sections (`offset`, `limit` on `read`).
+- Same read over several items, or a small answer from many results: one `execute` program, not one turn per item. Load `codemode` for idioms; find paths with `search`.
+- `execute` for reads only. Writes, and exploration where each step depends on the last result, stay normal calls.
 - Don't write plan files (PLAN.md, TODO.md) unless asked.
 - Keep going until fully resolved. Stop only when blocked or when a rule here requires confirmation.

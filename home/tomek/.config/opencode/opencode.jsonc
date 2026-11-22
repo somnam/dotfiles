@@ -2,17 +2,24 @@
   "$schema": "https://opencode.ai/config.json",
   "compaction": { "auto": true },
   "default_agent": "plan",
+  // "agents": {
+  //   "plan":       { "model": "provider/top#xhigh" },
+  //   "build":      { "model": "provider/balanced#high" },
+  //   "general":    { "model": "provider/balanced#high" },
+  //   "compaction": { "model": "provider/balanced#high" }
+  //   "explore":    { "model": "provider/efficient#high" },
+  //   "browser":    { "model": "provider/efficient#high" },
+  //   "title":      { "model": "provider/efficient#low" },
+  //   "summary":    { "model": "provider/efficient#high" },
+  // },
   "permissions": [
-    { "action": "read", "resource": "**/.env", "effect": "allow" },
-    { "action": "read", "resource": "**/.env.*", "effect": "allow" },
+    { "action": "read", "resource": "*.env", "effect": "allow" },
+    { "action": "read", "resource": "*.env.*", "effect": "allow" },
+    { "action": "external_directory", "resource": "*", "effect": "ask" },
     { "action": "shell", "resource": "git push *", "effect": "ask" },
-    { "action": "shell", "resource": "sudo", "effect": "deny" },
+    { "action": "external_directory", "resource": "~/.cache/*", "effect": "deny" },
     { "action": "shell", "resource": "sudo *", "effect": "deny" },
-    { "action": "shell", "resource": "rm -rf", "effect": "deny" },
     { "action": "shell", "resource": "rm -rf *", "effect": "deny" },
-    { "action": "external_directory", "resource": "~/.cache", "effect": "deny" },
-    { "action": "external_directory", "resource": "~/.cache/**", "effect": "deny" },
-    { "action": "prune", "resource": "*", "effect": "allow" },
     { "action": "firefox-devtools_*", "resource": "*", "effect": "deny" }
   ],
   "mcp": {
@@ -34,6 +41,5 @@
     "ignore": ["node_modules/**", "dist/**", ".git/**"]
   },
   "plugins": [
-    "opencode-dcp@2.0.0-beta.13"
   ]
 }
