@@ -1,9 +1,9 @@
 {
   "$schema": "https://opencode.ai/config.json",
-  "compaction": { "auto": true, "buffer": "50%" },
+  "compaction": { "auto": true, "buffer": "75%" },
   "default_agent": "plan",
   // "agents": {
-  //   "plan":       { "model": "provider/top#xhigh" },
+  //   "plan":       { "model": "provider/top#high" },
   //   "build":      { "model": "provider/balanced#high" },
   //   "general":    { "model": "provider/balanced#high" },
   //   "explore":    { "model": "provider/efficient#high" },
@@ -16,10 +16,14 @@
     { "action": "read", "resource": "*.env", "effect": "allow" },
     { "action": "read", "resource": "*.env.*", "effect": "allow" },
     { "action": "external_directory", "resource": "*", "effect": "ask" },
-    { "action": "shell", "resource": "git push *", "effect": "ask" },
+    { "action": "external_directory", "resource": "/tmp/*", "effect": "allow" },
+    { "action": "external_directory", "resource": "/private/tmp/*", "effect": "allow" },
+    { "action": "external_directory", "resource": "~/workspace/*", "effect": "allow" },
+    { "action": "edit", "resource": "~/workspace/*", "effect": "ask" },
     { "action": "external_directory", "resource": "~/.cache/*", "effect": "deny" },
+    { "action": "shell", "resource": "git push *", "effect": "ask" },
     { "action": "shell", "resource": "sudo *", "effect": "deny" },
-    { "action": "shell", "resource": "rm -rf *", "effect": "deny" },
+    { "action": "shell", "resource": "rm *", "effect": "ask" },
     { "action": "firefox-devtools_*", "resource": "*", "effect": "deny" }
   ],
   "mcp": {
